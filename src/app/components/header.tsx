@@ -10,21 +10,38 @@ export default function Header() {
       <div className='flex w-[160rem] max-w-7xl  items-center ' >
         <Logo viewBox="0 0 152 60" width={152} height={60} />
         <div className='flex justify-center items-center flex-grow font-bold ' >
-          <div className='w-1/4 text-center'>Gói cươc</div>
-          <div className='w-1/4 text-center'>Mua sim</div>
-          <div className='w-1/4 text-center'>Nạp thẻ</div>
-          <div className='w-1/4 text-center' >Khuyến mại</div>
+          <div className='w-1/4 text-center'>
+            <button className='active:opacity-70 select-none'>
+              Gói cươc
+            </button>
+          </div>
+          <div className='w-1/4 text-center select-none'>
+            <button className='active:opacity-70 select-none'>
+              Mua sim
+            </button>
+          </div>
+          <div className='w-1/4 text-center'>
+            <button className='active:opacity-70 select-none'>
+              Nạp thẻ
+            </button>
+          </div>
+          <div className='w-1/4 text-center'>
+            <button className='active:opacity-70 select-none'>
+              Khuyến mại
+            </button>
+          </div>
+
         </div>
         <div className='h-16 w-[1px] bg-gray-700 ml-6 mr-6' />
         <div className=' w-64 h-full flex justify-between items-center'>
-          <div className='border-black border-2 p-1 rounded-md'>
+          <button className='border-black border-2 p-1 rounded-md active:opacity-70'>
             <ShoppingCartOutlined style={{ fontSize: '200%' }} />
 
-          </div>
-          <button className='bg-m_red h-12 text-white font-bold px-2 rounded-xl active:opacity-70'>
+          </button>
+          <button className='bg-m_red h-12 text-white font-bold px-2 rounded-xl active:opacity-70 select-none'>
             Đăng nhập
           </button>
-          <button className='border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70'>
+          <button className='border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70 select-none'>
             Đăng ký
           </button>
 
