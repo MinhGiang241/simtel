@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         m_red: "#ED1E23",
+        m_gray: "#D9D9D9",
         transparent: 'transparent',
         current: 'currentColor',
       },

@@ -12,7 +12,7 @@ export default function Header() {
         <div className='flex justify-center items-center flex-grow font-bold ' >
           <div className='w-1/4 text-center'>
             <button className='active:opacity-70 select-none'>
-              Gói cươc
+              Gói cước
             </button>
           </div>
           <div className='w-1/4 text-center select-none'>

@@ -4,8 +4,18 @@ import { Inter } from 'next/font/google'
 import Header from './components/header'
 import Footer from './components/footer'
 import StyledComponentsRegistry from './components/AntdRegistry'
+import { IntlProvider } from 'react-intl'
+
 
 const inter = Inter({ subsets: ['latin'] })
+const formats = {
+  number: {
+    VND: {
+      style: 'currency',
+      currency: 'VND',
+    }
+  }
+}
 
 export const metadata: Metadata = {
   title: 'Simtel',
