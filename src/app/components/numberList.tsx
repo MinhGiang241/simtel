@@ -5,7 +5,7 @@ import type { ColumnsType } from 'antd/es/table';
 
 
 interface DataType {
-  key: number;
+  id: number;
   number: string;
   branch: string;
   simType: string;
@@ -13,27 +13,33 @@ interface DataType {
   price: Object;
 
 }
+const rowStyle = { style: { background: '#e2e8f0', fontSize: '17px', fontWeight: 700 } }
 
 const columns: ColumnsType<DataType> = [
   {
+
+    onHeaderCell: (_) => rowStyle,
     title: 'Số điện thoại',
     dataIndex: 'number',
     key: 'number',
-    render: (text) => <p key={text} className='font-bold'>{text}</p>,
+    render: (text) => <p key={text} className='font-bold text-md'>{text}</p>,
   },
   {
+    onHeaderCell: (_) => rowStyle,
     title: 'Nhà mạng',
     dataIndex: 'branch',
     key: 'branch',
     render: (text) => <div key={text} className='rounded bg-m_red text-white w-20 text-center'>{text}</div>,
   },
   {
+    onHeaderCell: (_) => rowStyle,
     title: 'Loại sim',
     dataIndex: 'simType',
     key: 'simType',
     render: (text) => <p key={text}>{text}</p>
   },
   {
+    onHeaderCell: (_) => rowStyle,
     title: 'Gói cước',
     key: 'plan',
     dataIndex: 'plan',
@@ -42,6 +48,7 @@ const columns: ColumnsType<DataType> = [
     ),
   },
   {
+    onHeaderCell: (_) => rowStyle,
     title: 'Giá tiền',
     key: 'price',
     dataIndex: 'price',
@@ -61,7 +68,7 @@ const columns: ColumnsType<DataType> = [
 
 const data: DataType[] = [
   {
-    key: 1,
+    id: 1,
     number: "0980352112",
     branch: "Vinaphone",
     simType: "E-SIM",
@@ -69,7 +76,7 @@ const data: DataType[] = [
     plan: 'Được đăng ký Gói cước MAY 77.000đ siêu ưu đãi 4GB/ngày, miễn phí gọi nội mạng VinaPhone & iTel'
   },
   {
-    key: 2,
+    id: 2,
     number: "0980352112",
     branch: "Vinaphone",
     simType: "E-SIM",
@@ -77,7 +84,7 @@ const data: DataType[] = [
     plan: 'Được đăng ký Gói cước MAY 77.000đ siêu ưu đãi 4GB/ngày, miễn phí gọi nội mạng VinaPhone & iTel'
   },
   {
-    key: 3,
+    id: 3,
     number: "0980352112",
     branch: "Vinaphone",
     simType: "E-SIM",
@@ -85,7 +92,7 @@ const data: DataType[] = [
     plan: 'Được đăng ký Gói cước MAY 77.000đ siêu ưu đãi 4GB/ngày, miễn phí gọi nội mạng VinaPhone & iTel'
   },
   {
-    key: 4,
+    id: 4,
     number: "0980352112",
     branch: "Vinaphone",
     simType: "SIM VẬT LÝ",
@@ -98,6 +105,15 @@ const data: DataType[] = [
 
 export default function NumberList() {
   return (
-    <Table columns={columns} dataSource={data} pagination={false} />
+    <Table
+      columns={columns}
+      dataSource={data}
+      pagination={false}
+      rowKey={'id'}
+      onRow={(_, index: any) => ({
+        style: { background: index && index % 2 != 0 && '#e2e8f0', }
+      })}
+    />
+
   )
 }

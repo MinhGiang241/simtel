@@ -1,8 +1,9 @@
 import { Input, Select, Space } from 'antd'
 import React from 'react'
-import { SearchOutlined, DownOutlined } from '@ant-design/icons'
+import { SearchOutlined } from '@ant-design/icons'
 import './component.css'
 import NumberList from './numberList'
+import { RightOutlined } from '@ant-design/icons'
 
 export default function SelectNumber() {
   const num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -35,7 +36,7 @@ export default function SelectNumber() {
           <div className='flex bg-red-700 w-4/5 h-14 ml-auto mr-9 rounded-md justify-between items-center'>
             <h2 className='text-white ml-2'>Loại trừ số:</h2>
             <div className='flex mr-2'>
-              {...num.map((e) => (<button className='active:opacity-70 select-none mx-1 text-white rounded-full border-white border-2 px-2 py-2 h-10 w-10 text-center'>{e}</button>))}
+              {...num.map((i, e) => (<button key={i} className='active:opacity-70 select-none mx-1 text-white rounded-full border-white border-2 px-2 py-2 h-10 w-10 text-center'>{e}</button>))}
             </div>
           </div>
         </div>
@@ -84,6 +85,13 @@ export default function SelectNumber() {
       </div >
 
       <NumberList />
+
+      <div className='w-full flex justify-center mt-5'>
+        <button className='select-none active:opacity-70 bg-m_red text-white rounded-lg px-4 py-2 flex justify-center items-center'>
+          <p className='text-lg text-center pr-1'>Xem Thêm</p>
+          <RightOutlined style={{ color: 'white', fontSize: '110%' }} />
+        </button>
+      </div>
     </>
   )
 }
