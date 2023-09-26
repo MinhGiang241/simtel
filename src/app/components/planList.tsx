@@ -6,7 +6,7 @@ import './component.css'
 import Image from 'next/image'
 import { TagOutlined } from '@ant-design/icons'
 import { FormattedNumber } from 'react-intl';
-import { describe } from 'node:test';
+import Link from 'next/link'
 
 export default function PlanList() {
   const settings = {
@@ -21,9 +21,9 @@ export default function PlanList() {
     <div className='mt-3'>
       <div className='w-full flex justify-self-end font-bold text-m_red '>
         <div className='flex-grow' />
-        <div className='mr-6'>
+        <Link href='/plans' className='mr-6'>
           Xem tất cả
-        </div>
+        </Link>
       </div>
       <Slider {...settings}>
         <Plan urlImage='/images/plan1.jpg' branch='Vietel' name="ST5K" price={5000} describle='500MB/đến 24h ngày đăng ký' />
