@@ -4,6 +4,7 @@ import Discount from "./components/discount";
 import PlanButton from "./components/planButton";
 import PlanList from "./components/planList";
 import SelectNumber from "./components/selectNumber";
+import SelectSimTitle from "./components/selectSimTitle";
 
 export default function Home() {
   return (<div className='w-full flex flex-col items-center'>
@@ -13,6 +14,7 @@ export default function Home() {
       <BannerCarousel />
       <PlanButton />
       <PlanList />
+      <SelectSimTitle />
       <SelectNumber />
       <Discount />
       {/* <div className="w-full h-16" /> */}
