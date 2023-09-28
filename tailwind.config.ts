@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        m_red: "#ED1E23",
+        m_red: "#E50914",
         m_gray: "#e2e8f0",
         transparent: 'transparent',
         current: 'currentColor',
