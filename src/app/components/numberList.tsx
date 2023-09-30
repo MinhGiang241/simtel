@@ -1,6 +1,11 @@
 import React from 'react';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import { FormattedMessage, FormattedNumber } from 'react-intl'
+import { useDispatch } from 'react-redux';
+import { pushPathName } from '@/services/routes';
+import { useRouter } from 'next/navigation';
+import { setPath } from '@/GlobalRedux/path/pathSlice';
 
 
 
@@ -15,56 +20,6 @@ interface DataType {
 }
 const rowStyle = { style: { background: '#e2e8f0', fontSize: '17px', fontWeight: 700 } }
 
-const columns: ColumnsType<DataType> = [
-  {
-
-    onHeaderCell: (_) => rowStyle,
-    title: 'Số điện thoại',
-    dataIndex: 'number',
-    key: 'number',
-    render: (text) => <p key={text} className='font-bold text-md'>{text}</p>,
-  },
-  {
-    onHeaderCell: (_) => rowStyle,
-    title: 'Nhà mạng',
-    dataIndex: 'branch',
-    key: 'branch',
-    render: (text) => <div key={text} className='rounded bg-m_red text-white w-20 text-center'>{text}</div>,
-  },
-  {
-    onHeaderCell: (_) => rowStyle,
-    title: 'Loại sim',
-    dataIndex: 'simType',
-    key: 'simType',
-    render: (text) => <p key={text}>{text}</p>
-  },
-  {
-    onHeaderCell: (_) => rowStyle,
-    title: 'Gói cước',
-    key: 'plan',
-    dataIndex: 'plan',
-    render: (text) => (
-      <p key={text}>{text}</p>
-    ),
-  },
-  {
-    onHeaderCell: (_) => rowStyle,
-    title: 'Giá tiền',
-    key: 'price',
-    dataIndex: 'price',
-    render: ({ current, old }) => (
-      <div key={current} className='flex'>
-        <div className='flex flex-col mr-3'>
-          <p className='text-lg'>{`${current} đ`}</p>
-          <p className='line-through'>{`${old} đ`}</p>
-        </div>
-        <button className='text-lg px-4 rounded-2xl text-m_red bg-white border-m_red border-2 active:opacity-70 select-none'>
-          Mua ngay
-        </button>
-      </div>
-    ),
-  },
-];
 
 const data: DataType[] = [
   {
@@ -103,7 +58,59 @@ const data: DataType[] = [
 ];
 
 
+
+
+
+
 export default function NumberList() {
+
+  const router = useRouter()
+  const dispatch = useDispatch()
+
+  const columns: ColumnsType<DataType> = [
+    {
+
+      onHeaderCell: (_) => rowStyle,
+      title: 'Số điện thoại',
+      dataIndex: 'number',
+      key: 'number',
+      render: (text) => <p key={text} className='font-bold text-md'>{text}</p>,
+    },
+    {
+      onHeaderCell: (_) => rowStyle,
+      title: 'Nhà mạng',
+      dataIndex: 'branch',
+      key: 'branch',
+      render: (text) => <div key={text} className='rounded bg-m_red text-white w-20 text-center'>{text}</div>,
+    },
+    {
+      onHeaderCell: (_) => rowStyle,
+      title: 'Loại sim',
+      dataIndex: 'simType',
+      key: 'simType',
+      render: (text) => <p key={text}>{text}</p>
+    },
+    {
+      onHeaderCell: (_) => rowStyle,
+      title: 'Gói cước',
+      key: 'plan',
+      dataIndex: 'plan',
+      render: (text) => (
+        <p key={text}>{text}</p>
+      ),
+    },
+    {
+      onHeaderCell: (_) => rowStyle,
+      title: 'Giá tiền',
+      key: 'price',
+      dataIndex: 'price',
+      render: ({ current, old }) => {
+        return (<TableAction current={current} old={old} />)
+      },
+    },
+  ];
+
+
   return (
     <Table
       columns={columns}
@@ -111,9 +118,36 @@ export default function NumberList() {
       pagination={false}
       rowKey={'id'}
       onRow={(_, index: any) => ({
-        style: { background: index && index % 2 != 0 && '#e2e8f0', }
+        style: { background: index && index % 2 != 0 && '#e2e8f0', },
       })}
     />
 
   )
+}
+
+
+export function TableAction({ current, old }: { current: number, old: number }) {
+  const router = useRouter()
+  const dispatch = useDispatch()
+
+  return (
+    <div key={current} className='flex'>
+      <div className='flex flex-col mr-3'>
+        <p className='text-lg'>
+          {/* {`${current} đ`} */}
+          <FormattedNumber value={current} style='currency' currency='VND' />
+        </p>
+        <p className='line-through'>
+          {/* {`${old} đ`} */}
+          <FormattedNumber value={old} style='currency' currency='VND' />
+        </p>
+      </div>
+      <button onClick={() => {
+        pushPathName(router, dispatch, '/orders')
+      }} className='text-lg px-4 rounded-2xl text-m_red bg-white border-m_red border-2 active:opacity-70 select-none'>
+        Mua ngay
+      </button>
+    </div>
+  );
+
 }

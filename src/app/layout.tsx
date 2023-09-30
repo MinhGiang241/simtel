@@ -5,6 +5,8 @@ import Header from './components/header'
 import Footer from './components/footer'
 import StyledComponentsRegistry from './components/AntdRegistry'
 import { IntlProvider } from 'react-intl'
+import IntlWrapper from './components/IntlWrapper'
+import { StoreProviders } from '@/GlobalRedux/provider'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -30,13 +32,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <StyledComponentsRegistry>
-          <div className='wrapper'>
-            {children}
-          </div>
-        </StyledComponentsRegistry>
-        <Footer />
+        <StoreProviders>
+          <IntlWrapper >
+            <Header />
+            <StyledComponentsRegistry>
+              <div className='wrapper'>
+                {children}
+              </div>
+            </StyledComponentsRegistry>
+            <Footer />
+          </IntlWrapper>
+        </StoreProviders>
       </body>
     </html>
   )

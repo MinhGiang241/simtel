@@ -7,6 +7,8 @@ import Image from 'next/image'
 import { TagOutlined } from '@ant-design/icons'
 import { FormattedNumber } from 'react-intl';
 import Link from 'next/link'
+import { useDispatch } from 'react-redux';
+import { setPath } from '@/GlobalRedux/path/pathSlice';
 
 export default function PlanList() {
   const settings = {
@@ -17,11 +19,13 @@ export default function PlanList() {
     slidesToScroll: 1,
 
   };
+
+  const dispatch = useDispatch()
   return (
     <div className='mt-3'>
       <div className='w-full flex justify-self-end font-bold text-m_red '>
         <div className='flex-grow' />
-        <Link href='/plans' className='mr-6'>
+        <Link onClick={() => dispatch(setPath('/plans/'))} href='/plans' className='mr-6'>
           Xem tất cả
         </Link>
       </div>

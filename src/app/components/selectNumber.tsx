@@ -5,6 +5,8 @@ import './component.css'
 import NumberList from './numberList'
 import { RightOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/navigation'
+import { setPath } from '@/GlobalRedux/path/pathSlice'
+import { useDispatch } from 'react-redux'
 
 interface Props {
   hideFilter?: boolean
@@ -12,7 +14,7 @@ interface Props {
 
 export default function SelectNumber({ hideFilter }: Props) {
   const router = useRouter()
-
+  const dispatch = useDispatch()
   const num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   const branch = ['Vietel', 'Vinaphone', 'Mobiphone', 'Vietnamobile', 'Gmobile', 'Itelecom', 'Wintel']
   const simTypes = ['Sim vật lý', 'eSim']
@@ -26,7 +28,7 @@ export default function SelectNumber({ hideFilter }: Props) {
         <div className='flex px-6 w-2/5 h-full justify-between items-center'>
           <div className='flex flex-col justify-center items-center w-4/5'>
             <p className='text-white mb-3'>Nhập số thuê bao mong muốn</p>
-            <Input placeholder='*********' className='h-14 w-full input-search' />
+            <Input placeholder='*********' className='h-14 w-full input-search' allowClear />
             <p className='text-white mt-3'>Điền dấu * chữ số mong muốn</p>
           </div>
           <button className='rounded-xl border-white border-2 h-14 w-14 active:opacity-70'>
@@ -50,6 +52,7 @@ export default function SelectNumber({ hideFilter }: Props) {
             <div className='w-80 h-14'>
               <label className='mb-2 font-bold' aria-label='branch'>Nhà mạng</label>
               <Select
+                allowClear
                 aria-label='branch'
                 style={{ width: '100%', height: '3rem' }}
                 placeholder="select one country"
@@ -70,6 +73,7 @@ export default function SelectNumber({ hideFilter }: Props) {
             <div className='w-80 h-14'>
               <label className='mb-2 font-bold' aria-label='sim'>Loại sim</label>
               <Select
+                allowClear
                 aria-label='sim'
                 style={{ width: '100%', height: '3rem' }}
                 placeholder="select one country"
@@ -92,7 +96,10 @@ export default function SelectNumber({ hideFilter }: Props) {
       <NumberList />
 
       <div className='w-full flex justify-center mt-5'>
-        <button onClick={() => router.push('/sims')} className='select-none active:opacity-70 bg-m_red text-white rounded-lg px-4 py-2 flex justify-center items-center'>
+        <button onClick={() => {
+          dispatch(setPath('/sims/'))
+          router.push('/sims')
+        }} className='select-none active:opacity-70 bg-m_red text-white rounded-lg px-4 py-2 flex justify-center items-center'>
           <p className='text-lg text-center pr-1'>Xem Thêm</p>
           <RightOutlined style={{ color: 'white', fontSize: '110%' }} />
         </button>

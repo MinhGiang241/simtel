@@ -1,27 +1,63 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import Logo from './logo/logo.svg'
 import { ShoppingCartOutlined } from '@ant-design/icons'
-import { Button } from 'antd';
+import { usePathname, useRouter } from 'next/navigation';
+import { Button, Modal } from 'antd';
+import Login from './modals/Login';
+import SignUp from './modals/SignUp';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/GlobalRedux/store';
+import { setPath } from '@/GlobalRedux/path/pathSlice';
+import { pushPathName } from '@/services/routes';
 
 
 export default function Header() {
+  const [open, setOpen] = useState(false)
+  const [isLogin, setIslogin] = useState<boolean>()
+  const pathname = useSelector((state: RootState) => state.path.value)
+  const dispatch = useDispatch()
+  const router = useRouter()
+  useEffect(() => {
+    window.onpopstate = () => {
+      console.log('location', location);
+      dispatch(setPath(location.pathname))
+    }
+
+    window.onload = () => {
+      console.log('location-onload', location);
+      dispatch(setPath(location.pathname))
+    }
+  })
+  useEffect(() => { }, [open])
+
   return (
     <div className='w-full h-20 flex justify-center shadow-lg fixed z-50 bg-white'>
       <div className='flex w-[160rem] max-w-7xl  items-center ' >
-        <Logo viewBox="0 0 152 60" width={152} height={60} />
-        <div className='flex justify-center items-center flex-grow font-bold ' >
+        <button onClick={() => {
+          pushPathName(router, dispatch, '/')
+        }}>
+          <Logo viewBox="0 0 152 60" width={152} height={60} />
+        </button>
+        <div className='text-lg flex justify-center items-center flex-grow ' >
           <div className='w-1/4 text-center'>
-            <button className='active:opacity-70 select-none'>
+            <button className={`active:opacity-70 select-none ${pathname === '/plans/' ? 'font-bold' : ''}`} onClick={() => {
+              pushPathName(router, dispatch, '/plans')
+            }}>
               Gói cước
             </button>
           </div>
           <div className='w-1/4 text-center select-none'>
-            <button className='active:opacity-70 select-none'>
+            <button className={`active:opacity-70 select-none ${pathname === '/sims/' ? 'font-bold' : ''}`} onClick={() => {
+              pushPathName(router, dispatch, '/sims')
+            }}>
               Mua sim
             </button>
           </div>
-          <div className='w-1/4 text-center'>
-            <button className='active:opacity-70 select-none'>
+          <div className='w-1/4 text-center' >
+            <button className={`active:opacity-70 select-none ${pathname === '/cards/' ? 'font-bold' : ''}`} onClick={() => {
+              pushPathName(router, dispatch, '/cards')
+            }}>
               Nạp thẻ
             </button>
           </div>
@@ -38,15 +74,28 @@ export default function Header() {
             <ShoppingCartOutlined style={{ fontSize: '200%' }} />
 
           </button>
-          <button className='bg-m_red h-12 text-white font-bold px-2 rounded-xl active:opacity-70 select-none'>
+          <button className='bg-m_red h-12 text-white font-bold px-2 rounded-xl active:opacity-70 select-none'
+            onClick={() => {
+              setOpen(true)
+              setIslogin(true)
+            }}
+          >
             Đăng nhập
           </button>
-          <button className='border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70 select-none'>
+          <button className='border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70 select-none'
+            onClick={() => {
+              setOpen(true)
+              setIslogin(false)
+            }}
+          >
             Đăng ký
           </button>
 
         </div>
       </div>
-    </div>
+      <Modal width={800} open={open} onCancel={() => setOpen(false)} footer={(<div />)}>
+        {isLogin ? (<Login switchSignUp={() => setIslogin(false)} onCancel={() => setOpen(false)} />) : <SignUp onCancel={() => setOpen(false)} switchLogin={() => setIslogin(true)} />}
+      </Modal>
+    </div >
   )
 }

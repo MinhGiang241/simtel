@@ -14,6 +14,7 @@ export default function FilterPlan() {
         <div className='w-80 mx-6 flex flex-col ' >
           <label htmlFor='branch' className='text-lg font-bold'>Nhà mạng</label>
           <Select
+            allowClear
             id='branch'
             style={{ height: '3rem' }}
             placeholder='Nhà mạng'
@@ -32,6 +33,7 @@ export default function FilterPlan() {
         <div className='w-80 mx-6 flex flex-col' >
           <label htmlFor='type' className='text-lg font-bold'>Loại gói cước</label>
           <Select
+            allowClear
             id='type'
             style={{ height: '3rem' }}
             placeholder='Loại gói cước'
@@ -45,6 +47,7 @@ export default function FilterPlan() {
         <div className='w-80 mx-6 flex flex-col' >
           <label htmlFor='price' className='text-lg font-bold'>Sắp xếp theo giá tiền</label>
           <Select
+            allowClear
             id='price'
             style={{ height: '3rem' }}
             placeholder='Sắp xếp theo giá tiền'

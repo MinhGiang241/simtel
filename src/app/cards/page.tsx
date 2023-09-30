@@ -39,7 +39,7 @@ export default function CardPage() {
           <span className='text-lg font-bold underline-offset-2 underline'>Chọn mệnh giá</span><span className='text-m_red'> *</span>
         </div>
         <div className='flex flex-wrap justify-between'>
-          {Array.from({ length: 8 }).map((items, index) => (<CardItem />))}
+          {Array.from({ length: 8 }).map((items, index) => (<CardItem key={index} />))}
         </div>
       </div>
       <PaymentSelect />
