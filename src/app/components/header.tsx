@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import Logo from './logo/logo.svg'
 import { ShoppingCartOutlined } from '@ant-design/icons'
-import { usePathname, useRouter } from 'next/navigation';
-import { Button, Modal } from 'antd';
+import { useRouter } from 'next/navigation';
+import { Modal } from 'antd';
 import Login from './modals/Login';
 import SignUp from './modals/SignUp';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,12 +24,10 @@ export default function Header() {
       dispatch(setPath(location.pathname))
     }
 
-    window.onload = () => {
-      console.log('location-onload', location);
-      dispatch(setPath(location.pathname))
-    }
   })
-  useEffect(() => { }, [open])
+  useEffect(() => {
+    dispatch(setPath(location.pathname))
+  }, [open])
 
   return (
     <div className='w-full h-20 flex justify-center shadow-lg fixed z-50 bg-white'>

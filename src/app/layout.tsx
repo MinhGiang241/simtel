@@ -4,20 +4,12 @@ import { Inter } from 'next/font/google'
 import Header from './components/header'
 import Footer from './components/footer'
 import StyledComponentsRegistry from './components/AntdRegistry'
-import { IntlProvider } from 'react-intl'
 import IntlWrapper from './components/IntlWrapper'
 import { StoreProviders } from '@/GlobalRedux/provider'
+import { Toaster } from 'react-hot-toast'
 
 
 const inter = Inter({ subsets: ['latin'] })
-const formats = {
-  number: {
-    VND: {
-      style: 'currency',
-      currency: 'VND',
-    }
-  }
-}
 
 export const metadata: Metadata = {
   title: 'Simtel',
@@ -43,6 +35,7 @@ export default function RootLayout({
             <Footer />
           </IntlWrapper>
         </StoreProviders>
+        <Toaster />
       </body>
     </html>
   )
