@@ -2,7 +2,6 @@ import React from 'react'
 import PageWrapper from '../components/pageWrapper'
 import { Dropdown, Input, MenuProps, Radio } from 'antd'
 import Image from 'next/image'
-import { CheckCircleOutlined } from '@ant-design/icons'
 import PaymentSelect from './components/paymentSelect'
 import CardItem from './components/cardItem'
 

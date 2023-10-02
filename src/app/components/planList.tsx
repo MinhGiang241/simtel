@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick-theme.css";
 import './component.css'
 import Image from 'next/image'
 import { TagOutlined } from '@ant-design/icons'
-import { FormattedNumber } from 'react-intl';
 import Link from 'next/link'
 import { useDispatch } from 'react-redux';
 import { setPath } from '@/GlobalRedux/path/pathSlice';

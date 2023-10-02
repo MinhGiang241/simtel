@@ -2,7 +2,7 @@ import React from 'react'
 import MobileIcon from './icons/mobile.svg'
 import DatabaseIcon from './icons/database.svg'
 import { RightOutlined } from '@ant-design/icons'
-import Link from 'next/link'
+import MLink from '@/app/components/config/Mlink'
 
 export default function PlanCard() {
   return (
@@ -30,10 +30,10 @@ export default function PlanCard() {
         </div>
 
         <div className='flex justify-start h-14 absolute bottom-0 z-20 bg-white rounded-bl-xl rounded-br-xl w-full'>
-          <Link href={'#'} className='flex items-center'>
+          <MLink link={'/cards'} className='flex items-center'>
 
-            <span className='text-xl font-semibold ml-2 text-m_red'>Xem thêm </span> <RightOutlined style={{ color: "#ED1E23", fontSize: '110%' }} />
-          </Link>
+            <span className='text-xl font-semibold ml-2 text-m_red'>Đăng ký </span> <RightOutlined style={{ color: "#ED1E23", fontSize: '110%' }} />
+          </MLink>
         </div>
       </div>
     </div>

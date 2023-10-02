@@ -47,13 +47,13 @@ export default function Header() {
               Gói cước
             </button>
           </div>
-          <div className='w-1/4 text-center select-none'>
-            <button className={`active:opacity-70 select-none ${pathname === '/sims/' ? 'font-bold' : ''}`} onClick={() => {
-              pushPathName(router, dispatch, '/sims')
-            }}>
-              Mua sim
-            </button>
-          </div>
+          {/* <div className='w-1/4 text-center select-none'> */}
+          {/*   <button className={`active:opacity-70 select-none ${pathname === '/sims/' ? 'font-bold' : ''}`} onClick={() => { */}
+          {/*     pushPathName(router, dispatch, '/sims') */}
+          {/*   }}> */}
+          {/*     Mua sim */}
+          {/*   </button> */}
+          {/* </div> */}
           <div className='w-1/4 text-center' >
             <button className={`active:opacity-70 select-none ${pathname === '/cards/' ? 'font-bold' : ''}`} onClick={() => {
               pushPathName(router, dispatch, '/cards')

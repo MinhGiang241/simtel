@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 export default function BannerCarousel() {
   return (
-    <Carousel autoPlay showThumbs={false}>
+    <Carousel autoPlay showThumbs={false} className='w-full'>
       <div>
         <Image src={'/images/image.jpg'} alt='banner' width={1520} height={480} />
       </div>
