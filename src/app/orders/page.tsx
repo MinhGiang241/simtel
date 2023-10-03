@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { pushPathName } from '@/services/routes'
 import { useRouter } from 'next/navigation'
 import { useDispatch } from 'react-redux'
+import useSWR from 'swr'
 
 export default function OrderPage() {
   const [time, setTime] = useState("8:00")
@@ -15,8 +16,10 @@ export default function OrderPage() {
   const router = useRouter()
   const dispatch = useDispatch()
 
-  useEffect(() => {
+  var { data } = useSWR('https://jsonplaceholder.typicode.com/posts')
+  console.log('data', data);
 
+  useEffect(() => {
     if (moment.duration(time, 'minutes').asMinutes() != 0) {
       setTimeout(() => {
         setTime(moment(time, 'mmss').subtract(1, 'seconds').format('mm:ss'))

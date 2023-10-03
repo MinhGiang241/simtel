@@ -2,7 +2,7 @@ import React from 'react'
 import MobileIcon from './icons/mobile.svg'
 import DatabaseIcon from './icons/database.svg'
 import { RightOutlined } from '@ant-design/icons'
-import MLink from '@/app/components/config/Mlink'
+import MLink from '@/app/components/config/MLink'
 
 export default function PlanCard() {
   return (

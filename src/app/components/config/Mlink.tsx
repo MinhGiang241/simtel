@@ -11,7 +11,7 @@ interface Props {
   link?: string,
 }
 
-export default function Mlink({ children, className, link }: Props) {
+export default function MLink({ children, className, link }: Props) {
   const router = useRouter()
   const dispatch = useDispatch()
   return (
