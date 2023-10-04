@@ -7,6 +7,7 @@ import StyledComponentsRegistry from './components/AntdRegistry'
 import IntlWrapper from './components/IntlWrapper'
 import { StoreProviders } from '@/GlobalRedux/provider'
 import { Toaster } from 'react-hot-toast'
+import SupportWidget from './components/SupportWidget'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -31,6 +32,7 @@ export default function RootLayout({
               <div className='wrapper'>
                 {children}
               </div>
+              <SupportWidget />
             </StyledComponentsRegistry>
             <Footer />
           </IntlWrapper>
