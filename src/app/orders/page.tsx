@@ -9,15 +9,33 @@ import { pushPathName } from '@/services/routes'
 import { useRouter } from 'next/navigation'
 import { useDispatch } from 'react-redux'
 import useSWR from 'swr'
-
+import { request, gql } from 'graphql-request'
+import toast from 'react-hot-toast'
+import { apiGraphql } from '@/constants'
+const getCard = gql`
+mutation {
+    response: product_test  {
+        code
+        message
+        data
+    }
+}
+`
 export default function OrderPage() {
+
+  useEffect(() => {
+    request(apiGraphql, getCard).then((v) => console.log(v))
+
+  }, [])
+
+
+
+
   const [time, setTime] = useState("8:00")
   const [method, setMethod] = useState('1')
   const router = useRouter()
   const dispatch = useDispatch()
 
-  var { data } = useSWR('https://jsonplaceholder.typicode.com/posts')
-  console.log('data', data);
 
   useEffect(() => {
     if (moment.duration(time, 'minutes').asMinutes() != 0) {

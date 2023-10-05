@@ -38,8 +38,12 @@ export default function Login({ onCancel, switchSignUp }: Props) {
       password: ''
     },
     validate,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      try {
+        alert(JSON.stringify(values, null, 2));
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 
@@ -49,7 +53,9 @@ export default function Login({ onCancel, switchSignUp }: Props) {
       e.preventDefault();
       formik.handleSubmit();
     }}>
+
       <h1 className='font-bold text-2xl mb-4 text-center'>Đăng nhập</h1>
+
       <MInput
         required
         title='Số điện thoại'
