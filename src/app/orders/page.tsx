@@ -8,27 +8,8 @@ import Image from 'next/image'
 import { pushPathName } from '@/services/routes'
 import { useRouter } from 'next/navigation'
 import { useDispatch } from 'react-redux'
-import useSWR from 'swr'
-import { request, gql } from 'graphql-request'
-import toast from 'react-hot-toast'
-import { apiGraphql } from '@/constants'
-const getCard = gql`
-mutation {
-    response: product_test  {
-        code
-        message
-        data
-    }
-}
-`
+
 export default function OrderPage() {
-
-  useEffect(() => {
-    request(apiGraphql, getCard).then((v) => console.log(v))
-
-  }, [])
-
-
 
 
   const [time, setTime] = useState("8:00")
@@ -145,7 +126,7 @@ export default function OrderPage() {
             <Divider className='my-4' />
 
             <div className='flex w-full justify-center'>
-              <Button onClick={() => pushPathName(router, dispatch, '/sims')} icon={<PlusOutlined className='text-m_red text-3xl' />} className='rounded-2xl border-m_red flex items-center font-bold text-2xl text-m_red py-6 bg-m_red/10 border-0' >
+              <Button onClick={() => pushPathName(router, dispatch, '#')} icon={<PlusOutlined className='text-m_red text-3xl' />} className='rounded-2xl border-m_red flex items-center font-bold text-2xl text-m_red py-6 bg-m_red/10 border-0' >
                 Mua thêm
               </Button>
             </div>

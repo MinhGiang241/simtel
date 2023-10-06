@@ -2,10 +2,12 @@
 
 import { configureStore } from '@reduxjs/toolkit'
 import pathReducer from './path/pathSlice'
+import simPackReducer from './SimPack/SimPackSlice'
 
 export const store = configureStore({
   reducer: {
-    path: pathReducer
+    path: pathReducer,
+    simPack: simPackReducer,
   }
 })
 

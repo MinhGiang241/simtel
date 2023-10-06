@@ -4,6 +4,7 @@ import { Dropdown, Input, MenuProps, Radio } from 'antd'
 import Image from 'next/image'
 import PaymentSelect from './components/paymentSelect'
 import CardItem from './components/cardItem'
+import CardList from './components/CardList'
 
 const items: MenuProps['items'] = [
   { key: '1', label: (<div className='text-base'>Vietel</div>) },
@@ -37,9 +38,7 @@ export default function CardPage() {
         <div className='mt-10 mb-6'>
           <span className='text-lg font-bold underline-offset-2 underline'>Chọn mệnh giá</span><span className='text-m_red'> *</span>
         </div>
-        <div className='flex flex-wrap justify-between'>
-          {Array.from({ length: 8 }).map((items, index) => (<CardItem key={index} />))}
-        </div>
+        <CardList />
       </div>
       <PaymentSelect />
       <div className='h-96' />
