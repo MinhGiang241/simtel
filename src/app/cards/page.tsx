@@ -8,7 +8,7 @@ import CardList from './components/CardList'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/GlobalRedux/store'
-import { getListCard, setCountCard, setLoadingCard, setTelcoCard } from '@/GlobalRedux/PhoneCard/PhoneCardSlice'
+import { getListCard, setCountCard, setLoadingCard, setPageCard, setTelcoCard } from '@/GlobalRedux/PhoneCard/PhoneCardSlice'
 import { error } from '../components/modals/CustomToast'
 import { getAllPhoneCard } from '@/services/api/simPackApi'
 
@@ -69,6 +69,7 @@ export default function CardPage() {
   }, [telco])
 
   const handleDropdownClick = (e: any) => {
+    dispatch(setPageCard(1))
     dispatch(setTelcoCard(e.key))
     setImage(getImageTelco(e.key))
   }
