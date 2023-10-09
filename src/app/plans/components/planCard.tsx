@@ -10,7 +10,7 @@ export default function PlanCard({ simpack }: { simpack: SimPack }) {
   return (
     <div className='flex justify-center items-center w-[350px] h-[500px] mx-1 my-1 pb-8'>
       <div className='relative bg-m_red w-[350px] h-[460px] rounded-xl shadow-gray-700 shadow-md'>
-        <div className='w-24 h-7 bg-white z-20 rounded-tl-xl rounded-br-xl justify-center flex items-center text-m_red'>
+        <div className='w-28 h-7 bg-white z-20 rounded-tl-xl rounded-br-xl justify-center flex items-center text-m_red'>
           {simpack.telco}
         </div>
         <div className='w-full flex flex-col items-center'>

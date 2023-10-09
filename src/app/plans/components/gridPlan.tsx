@@ -1,47 +1,68 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import PlanCard from './planCard'
 
 import { getAllSimpack } from '@/services/api/simPackApi';
-import toast from 'react-hot-toast';
-import { SimPack } from '@/interfaces/data';
+
 import { Pagination } from 'antd';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/GlobalRedux/store';
+import { getList, setCount, setLoading, setPage } from '@/GlobalRedux/SimPack/SimPackSlice';
+import { useDispatch } from 'react-redux';
+import { error } from '@/app/components/modals/CustomToast';
+import { MoonLoader } from 'react-spinners';
 
 export default function GridPlan() {
-  const [data, setData] = useState<Array<SimPack>>([]);
-  const [count, setCount] = useState(0)
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false)
+  var simPacKList = useSelector((state: RootState) => state.simPack.value)
+  var count = useSelector((state: RootState) => state.simPack.count)
+  var page = useSelector((state: RootState) => state.simPack.page)
+  var loading = useSelector((state: RootState) => state.simPack.loading)
+  var telco = useSelector((state: RootState) => state.simPack.telco)
+  var type = useSelector((state: RootState) => state.simPack.type)
+  var sortBy = useSelector((state: RootState) => state.simPack.sortBy)
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoading(true)
-    getAllSimpack('data_max', 9, (page - 1) * 9).then((v) => {
-      setData([])
-      if (v && v.list.length > 0) {
-        setData(v.list)
-        setCount(v.count)
-      }
-      setLoading(false)
-    }).catch((e) => {
-      toast.error(e);
-      setLoading(false)
-    })
-  }, [page])
-  console.log('data', data);
+    dispatch(setLoading(true))
+    getAllSimpack(9, (!page ? 0 : (page - 1)) * 9, telco, type, sortBy).then((v) => {
+      console.log('vlp', v);
 
+      if (v && v.list.length > 0) {
+        dispatch(getList(v.list))
+        dispatch(setCount(v.count))
+      } else {
+        dispatch(getList([]))
+        dispatch(setCount(0))
+      }
+      dispatch(setLoading(false))
+    }).catch((e) => {
+      error("Lỗi", e);
+      dispatch(setLoading(false))
+    })
+
+    console.log('spl', simPacKList);
+    console.log('count pl', count);
+    console.log('page pl', page);
+
+  }, [page])
 
 
   return (
-    <>
-      <div className='flex flex-wrap mt-4 justify-between'>
-        {data.map((item, index) => <PlanCard key={index} simpack={item} />)}
-      </div>
-      <div className='w-full flex justify-center mb-14'>
-        <Pagination size="default" total={count} showQuickJumper pageSize={9} showSizeChanger={false} onChange={(v) => {
-          setPage(v)
-          console.log(v);
-        }} />
-      </div>
+    <>{loading ? <div className='h-80 w-full flex justify-center items-center'><MoonLoader color='#E50914' /></div> :
+      (<>
+        <div className='flex flex-wrap mt-4 justify-between'>
+          {simPacKList.map((item, index) => <PlanCard key={index} simpack={item} />)}
+        </div>
+        <div className='w-full flex justify-center mb-14'>
+          <Pagination current={page} size="default" total={count} showQuickJumper pageSize={9} showSizeChanger={false} onChange={(v) => {
+            dispatch(setPage(v))
+            console.log(v);
+          }} />
+        </div>
+      </>
+      )
+    }
+
     </>
   )
 }

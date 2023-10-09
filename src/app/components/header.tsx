@@ -40,7 +40,7 @@ export default function Header() {
         </button>
         <div className='text-lg flex justify-center items-center flex-grow ' >
           <div className='w-1/4 text-center'>
-            <button className={`active:opacity-70 select-none ${pathname === '/plans/' ? 'font-bold' : ''}`} onClick={() => {
+            <button className={`active:opacity-70 select-none z-50 ${pathname === '/plans/' ? 'font-bold' : ''}`} onClick={() => {
               pushPathName(router, dispatch, '/plans')
             }}>
               Gói cước
@@ -54,14 +54,14 @@ export default function Header() {
           {/*   </button> */}
           {/* </div> */}
           <div className='w-1/4 text-center' >
-            <button className={`active:opacity-70 select-none ${pathname === '/cards/' ? 'font-bold' : ''}`} onClick={() => {
+            <button className={`active:opacity-70 z-50 select-none ${pathname === '/cards/' ? 'font-bold' : ''}`} onClick={() => {
               pushPathName(router, dispatch, '/cards')
             }}>
               Nạp thẻ
             </button>
           </div>
           <div className='w-1/4 text-center'>
-            <button className='active:opacity-70 select-none'>
+            <button className='active:opacity-70 select-none z-50'>
               Khuyến mại
             </button>
           </div>

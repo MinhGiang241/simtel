@@ -1,8 +1,66 @@
-import React from 'react'
+'use client'
+import React, { useEffect } from 'react'
 import { FilterOutlined } from '@ant-design/icons'
-import { Col, Input, Select } from 'antd'
+import { Select } from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
+import { getList, setCount, setLoading, setPage, setSortBy, setTelco, setType } from '@/GlobalRedux/SimPack/SimPackSlice'
+import { RootState } from '@/GlobalRedux/store'
+import { getAllSimpack } from '@/services/api/simPackApi'
+import { error } from '@/app/components/modals/CustomToast'
+
 
 export default function FilterPlan() {
+  const dispatch = useDispatch()
+  var count = useSelector((state: RootState) => state.simPack.count)
+  var list = useSelector((state: RootState) => state.simPack.value)
+  var page = useSelector((state: RootState) => state.simPack.page)
+  const telco = useSelector((state: RootState) => state.simPack.telco)
+  const type = useSelector((state: RootState) => state.simPack.type)
+  const sortBy = useSelector((state: RootState) => state.simPack.sortBy)
+
+
+  const onChangeTelco = (v: any) => {
+    dispatch(setPage(1))
+    dispatch(setTelco(v));
+
+
+  }
+  const onChangeType = (v: any) => {
+    dispatch(setPage(1))
+    dispatch(setType(v));
+
+  }
+  const onChangeSort = (v: any) => {
+    dispatch(setPage(1))
+    dispatch(setSortBy(v))
+  }
+
+  useEffect(() => {
+    dispatch(setLoading(true))
+    getAllSimpack(9, (!page ? 0 : (page - 1)) * 9, telco, type, sortBy).then((v) => {
+
+      dispatch(setLoading(false))
+      if (v && v.list.length > 0) {
+        dispatch(setCount(v.count))
+        dispatch(getList(v.list))
+      } else {
+        dispatch(setCount(0))
+        dispatch(getList([]))
+      }
+      console.log('list', list);
+
+    }).catch((e) => {
+      error('Lỗi', e)
+      dispatch(setLoading(false))
+    })
+
+    console.log('count f', count);
+    console.log('page f', page);
+
+  }, [
+    telco, type, sortBy, page
+  ])
+
   return (
     <>
       <div className='flex w-full justify-end'>
@@ -14,18 +72,19 @@ export default function FilterPlan() {
         <div className='w-80 mx-6 flex flex-col ' >
           <label htmlFor='branch' className='text-lg font-bold'>Nhà mạng</label>
           <Select
+            onChange={onChangeTelco}
             allowClear
             id='branch'
             style={{ height: '3rem' }}
             placeholder='Nhà mạng'
             options={[
-              { value: 'mobiphone', label: 'Mobiphone' },
-              { value: 'vinaphone', label: 'Vinaphone' },
-              { value: 'vietnamobile', label: 'Vietnamobile' },
-              { value: 'vietel', label: 'Vietel' },
-              { value: 'gmobile', label: 'Gmobile' },
-              { value: 'itelecom', label: 'Itelecom' },
-              { value: 'wintel', label: 'Wintel' },
+              { value: 'Mobiphone', label: 'Mobiphone' },
+              { value: 'Vinaphone', label: 'Vinaphone' },
+              { value: 'Vietnamobile', label: 'Vietnamobile' },
+              { value: 'Vietel', label: 'Vietel' },
+              { value: 'Gmobile', label: 'Gmobile' },
+              { value: 'Itelecom', label: 'Itelecom' },
+              { value: 'Wintel', label: 'Wintel' },
             ]}
           />
         </div>
@@ -33,6 +92,7 @@ export default function FilterPlan() {
         <div className='w-80 mx-6 flex flex-col' >
           <label htmlFor='type' className='text-lg font-bold'>Loại gói cước</label>
           <Select
+            onChange={onChangeType}
             allowClear
             id='type'
             style={{ height: '3rem' }}
@@ -47,13 +107,14 @@ export default function FilterPlan() {
         <div className='w-80 mx-6 flex flex-col' >
           <label htmlFor='price' className='text-lg font-bold'>Sắp xếp theo giá tiền</label>
           <Select
+            onChange={onChangeSort}
             allowClear
             id='price'
             style={{ height: '3rem' }}
             placeholder='Sắp xếp theo giá tiền'
             options={[
-              { value: 'ins', label: 'Từ nhỏ đến lớn' },
-              { value: 'des', label: 'Từ lớn đến nhỏ' },
+              { value: 'inc', label: 'Từ nhỏ đến lớn' },
+              { value: '', label: 'Từ lớn đến nhỏ' },
             ]}
           />
         </div>

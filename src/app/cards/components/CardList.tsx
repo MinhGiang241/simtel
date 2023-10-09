@@ -1,42 +1,57 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, } from 'react'
 import CardItem from './cardItem'
-import { PhoneCard } from '@/interfaces/data'
 import { getAllPhoneCard } from '@/services/api/simPackApi'
-import toast from 'react-hot-toast'
 import { Pagination } from 'antd';
+import { useSelector } from 'react-redux'
+import { RootState } from '@/GlobalRedux/store'
+import { getListCard, setCountCard, setLoadingCard, setPageCard } from '@/GlobalRedux/PhoneCard/PhoneCardSlice'
+import { useDispatch } from 'react-redux'
+import { error } from '@/app/components/modals/CustomToast'
+import { MoonLoader } from 'react-spinners'
 
 export default function CardList() {
-  const [page, setPage] = useState(1)
-  const [loading, setLoading] = useState(false)
-  const [count, setCount] = useState(0)
-  const [data, setData] = useState<Array<PhoneCard>>([])
+  const dispatch = useDispatch()
+  const data = useSelector((state: RootState) => state.phoneCard.value)
+  const page = useSelector((state: RootState) => state.phoneCard.page)
+  const count = useSelector((state: RootState) => state.phoneCard.count)
+  const loading = useSelector((state: RootState) => state.phoneCard.loading)
 
   useEffect(() => {
-    setLoading(true)
-    getAllPhoneCard('createdTime', 8, (page - 1) * 8).then((v) => {
-      setLoading(false)
+    dispatch(setLoadingCard(true))
+    getAllPhoneCard(undefined, 8, (page - 1) * 8).then((v) => {
+      dispatch(setLoadingCard(false))
       if (v && v.list.length > 0) {
-        setData(v.list)
-        setCount(v.count)
+        dispatch(getListCard(v.list))
+        dispatch(setCountCard(v.count))
+      } else {
+        dispatch(getListCard([]))
+        dispatch(setCountCard(0))
       }
     }).catch((e) => {
-      setLoading(false)
-      toast.error(e)
+      dispatch(setLoadingCard(false))
+      error("Lỗi", e)
     })
   }, [page])
 
   return (
     <>
-      <div className='flex flex-wrap justify-between'>
-        {data.map((item, index) => (<CardItem key={index} card={item} />))}
-      </div>
-      <div className='w-full flex justify-center mb-14'>
-        <Pagination size="default" total={count} showQuickJumper pageSize={9} showSizeChanger={false} onChange={(v) => {
-          setPage(v)
-        }} />
-      </div>
 
-    </>
+      {loading ? (<div className='h-80 w-full flex justify-center items-center'><MoonLoader color='#E50914' /></div>) : (
+        <>
+          <div className='flex flex-wrap justify-between'>
+            {data.map((item, index) => (<CardItem key={index} card={item} />))}
+          </div >
+          <div className='w-full flex justify-center mb-14'>
+            <Pagination current={page} size="default" total={count} showQuickJumper pageSize={9} showSizeChanger={false} onChange={(v) => {
+              dispatch(setPageCard(v))
+            }} />
+          </div>
+
+        </ >
+      )
+      }
+
+    </ >
   )
 }
