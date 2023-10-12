@@ -2,7 +2,7 @@ import { Button } from "antd"
 import toast from "react-hot-toast"
 import { CheckCircleOutlined, CloseOutlined, CloseCircleOutlined } from '@ant-design/icons'
 
-export const success = (title: string, content: string) => {
+export const success = (title: string, content: string,) => {
   toast.custom((t) => (
     <div
       className={`${t.visible ? 'animate-enter' : 'animate-leave'
@@ -22,7 +22,9 @@ export const success = (title: string, content: string) => {
         >
           Đồng ý
         </Button>
-        <button className="absolute right-1 -top-1" onClick={() => toast.dismiss((t.id))}>
+        <button className="absolute right-1 -top-1" onClick={() => {
+          toast.dismiss((t.id))
+        }}>
           <CloseOutlined />
         </button>
       </div>

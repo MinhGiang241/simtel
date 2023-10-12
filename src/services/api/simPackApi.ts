@@ -1,3 +1,4 @@
+import { Order } from '@/interfaces/data';
 import { CallApi } from '../helper'
 
 
@@ -31,3 +32,36 @@ mutation ($sortBy:String,$limit:Float,$skip:Float){
   var variables = { limit, skip, sortBy, }
   return await CallApi({ query, variables });
 }
+
+export const getSimPackById = async (id: string | undefined | null) => {
+  var query = `
+mutation(\$id: String){
+    response: simpack_get_simpack_by_id(id: \$id) {
+      code
+      message
+      data
+    }
+  }
+
+`
+  var variables = { id }
+  return await CallApi({ query, variables });
+}
+
+export const createOrder = async (data: Array<Order>) => {
+  var query = `
+mutation (\$data:Dictionary){
+    response: oder_create_oder (data: \$data ) {
+        code
+        message
+        data
+    }
+}
+`
+  var variables = { data }
+  return await CallApi({ query, variables });
+}
+
+
+
+

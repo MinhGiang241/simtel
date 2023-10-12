@@ -34,7 +34,7 @@ export default function PlanCard({ simpack }: { simpack: SimPack }) {
         </div>
 
         <div className='flex justify-start h-14 absolute bottom-0 z-20 bg-white rounded-bl-xl rounded-br-xl w-full'>
-          <MLink link={'/orders'} className='flex items-center'>
+          <MLink link={`/orders/?pack=true&id=${simpack._id}`} className='flex items-center'>
 
             <span className='text-xl font-semibold ml-2 text-m_red'>Đăng ký </span> <RightOutlined style={{ color: "#ED1E23", fontSize: '110%' }} />
           </MLink>

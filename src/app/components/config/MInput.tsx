@@ -4,7 +4,7 @@ import React from 'react'
 interface Props {
   onChange: (e: React.ChangeEvent<any>) => void,
   title?: string,
-  required: Boolean,
+  required?: Boolean,
   id: string,
   name: string,
   error?: string,
@@ -13,6 +13,7 @@ interface Props {
   type?: string,
   action?: React.ReactNode,
   touch?: Boolean,
+  placeholder?: string,
   onBlur?: (e: React.FocusEvent<any, Element>) => void;
 }
 
@@ -28,7 +29,8 @@ export default function MInput({
   action,
   type = 'text',
   touch = false,
-  onBlur
+  onBlur,
+  placeholder,
 }: Props) {
 
 
@@ -38,8 +40,12 @@ export default function MInput({
         <label htmlFor={id}>{title} {required && (<span className='text-m_red'>*</span>)}</label>
         {action}
       </div>
-      <Input onBlur={onBlur} status={(error && touch) ? `error` : ''} type={type} className={className} name={name} id={id} allowClear onChange={onChange} value={value} />
-      {(error && touch) ? (<div className='text-m_red'>{error}</div>) : null}
+
+      <div className='w-full flex flex-col mb-2'>
+
+        <Input onBlur={onBlur} status={(error && touch) ? `error` : ''} type={type} className={className} name={name} id={id} allowClear onChange={onChange} value={value} placeholder={placeholder} />
+        {(error && touch) ? (<div className='text-m_red'>{error}</div>) : null}
+      </div>
     </>
   )
 } 

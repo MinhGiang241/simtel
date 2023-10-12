@@ -26,4 +26,25 @@ export interface PhoneCard {
   status?: string
 }
 
-
+export interface Order {
+  _id?: string,
+  createdTime?: string,
+  updatedTime?: string,
+  code?: string,
+  tel?: string,
+  item?: Object,
+  full_name?: string,
+  address?: string,
+  customerId?: string,
+  voucher_code?: string,
+  discount_amount?: number,
+  payment_method?: string,
+  prod_total_amount?: number,
+  transport_fee?: number,
+  total_amount?: number
+  process_state?: string,
+  payment_state?: string,
+  email?: string,
+  sex?: string,
+  birthday?: string,
+} 
