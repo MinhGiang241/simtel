@@ -2,7 +2,7 @@ import { Order } from '@/interfaces/data';
 import { CallApi } from '../helper'
 
 
-export const getAllSimpack = async (limit: number, skip: number, telco: string | undefined, type: string | undefined, sortBy: string | undefined,) => {
+export const getAllSimpack = async (limit: number, skip: number, telco?: string | undefined, type?: string | undefined, sortBy?: string | undefined,) => {
   // throw "có lỗi xảy ra"
   var query = `
 mutation ($sortBy:String,$limit:Float,$skip:Float,$type:String,$telco:String){

@@ -7,6 +7,12 @@ import { TagOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import { useDispatch } from 'react-redux';
 import { setPath } from '@/GlobalRedux/path/pathSlice';
+import { useState } from "react";
+import useSWR from "swr";
+import { apiGraphql } from "@/constants/apiConstant";
+import { getAllSimpack } from "@/services/api/simPackApi";
+import { SimPack } from "@/interfaces/data";
+import MLink from "./config/MLink";
 
 export default function PlanList() {
   const settings = {
@@ -18,6 +24,14 @@ export default function PlanList() {
 
   };
 
+  const { data, isLoading } = useSWR(
+    apiGraphql,
+    async () => {
+      return await getAllSimpack(10, 0,)
+    }
+  )
+
+
   const dispatch = useDispatch()
   return (
     <div className='mt-3'>
@@ -27,15 +41,32 @@ export default function PlanList() {
           Xem tất cả
         </Link>
       </div>
-      <Slider {...settings}>
-        <Plan urlImage='/images/plan1.jpg' branch='Vietel' name="ST5K" price={5000} describle='500MB/đến 24h ngày đăng ký' />
-        <Plan urlImage='/images/plan2.jpg' branch='Vinaphone' name="ST5K" price={5000} describle='500MB/đến 24h ngày đăng ký' />
-        <Plan urlImage='/images/plan3.jpg' branch='Mobiphone' name="ST5K" price={5000} describle='500MB/đến 24h ngày đăng ký' />
-        <Plan urlImage='/images/plan4.jpg' branch='Vietel' name="ST5K" price={5000} describle='500MB/đến 24h ngày đăng ký' />
-        <Plan urlImage='/images/plan2.jpg' branch='Vinaphone' name="ST5K" price={5000} describle='500MB/đến 24h ngày đăng ký' />
-        <Plan urlImage='/images/plan3.jpg' branch='Mobiphone' name="ST5K" price={5000} describle='500MB/đến 24h ngày đăng ký' />
-        <Plan urlImage='/images/plan4.jpg' branch='Wintel' name="ST5K" price={5000} describle='500MB/đến 24h ngày đăng ký' />
-      </Slider>
+      {
+        isLoading ? (<div>Loading ...</div>) : (
+          <Slider {...settings}>
+
+            {isLoading ? [] : data['list'].map((item: SimPack) => (<Plan
+              key={item._id}
+              id={item._id}
+              urlImage={`/images/plan${Math.floor(Math.random() * 3) + 1}.jpg`}
+              name={item.code ?? ''}
+              branch={item?.telco ?? ''}
+              price={item?.price ?? 0}
+              describle={item?.desciption ?? ''} />))}
+
+            {/* <Plan urlImage='/images/plan1.jpg' branch='Vietel' name="ST5K" price={5000} describle='500MB/đến 24h ngày đăng ký' /> */}
+            {/* <Plan urlImage='/images/plan2.jpg' branch='Vinaphone' name="ST5K" price={5000} describle='500MB/đến 24h ngày đăng ký' /> */}
+            {/* <Plan urlImage='/images/plan3.jpg' branch='Mobiphone' name="ST5K" price={5000} describle='500MB/đến 24h ngày đăng ký' /> */}
+            {/* <Plan urlImage='/images/plan4.jpg' branch='Vietel' name="ST5K" price={5000} describle='500MB/đến 24h ngày đăng ký' /> */}
+            {/* <Plan urlImage='/images/plan2.jpg' branch='Vinaphone' name="ST5K" price={5000} describle='500MB/đến 24h ngày đăng ký' /> */}
+            {/* <Plan urlImage='/images/plan3.jpg' branch='Mobiphone' name="ST5K" price={5000} describle='500MB/đến 24h ngày đăng ký' /> */}
+            {/* <Plan urlImage='/images/plan4.jpg' branch='Wintel' name="ST5K" price={5000} describle='500MB/đến 24h ngày đăng ký' /> */}
+
+          </Slider>
+
+
+        )
+      }
     </div>
   )
 }
@@ -46,9 +77,10 @@ interface Props {
   name: string,
   describle: string,
   price: number,
+  id: string,
 }
 
-function Plan({ urlImage, branch, name, describle, price }: Props) {
+function Plan({ urlImage, branch, name, describle, price, id }: Props) {
   return (
     <div className='w-[430px] h-[525px] '>
       <div className='mx-8 left-4 w-28 h-8 bg-white z-20 translate-y-8 rounded-tl-xl rounded-br-xl justify-center flex items-center text-m_red'>
@@ -68,9 +100,9 @@ function Plan({ urlImage, branch, name, describle, price }: Props) {
 
           <div className='flex justify-between items-center mt-4 rounded-b-xl'>
             <p className='font-bold text-m_red'>Xem chi tiết</p>
-            <button className='bg-m_red text-white font-bold select-none active:opacity-70 px-4 py-2 rounded-md'>
+            <MLink link={`/orders/?pack=true&id=${id}`} className='bg-m_red text-white font-bold select-none active:opacity-70 px-4 py-2 rounded-md'>
               Đăng ký
-            </button>
+            </MLink>
           </div>
         </div>
       </div>
