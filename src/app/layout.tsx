@@ -9,6 +9,7 @@ import { StoreProviders } from '@/GlobalRedux/provider'
 import { Toaster } from 'react-hot-toast'
 import SupportWidget from './components/SupportWidget'
 import ClientProvider from './providers/ClientProvider'
+import AuthProvider from './providers/AuthProvider'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -28,16 +29,18 @@ export default function RootLayout({
       <body className={inter.className}>
         <ClientProvider>
           <StoreProviders>
-            <IntlWrapper >
-              <Header />
-              <StyledComponentsRegistry>
-                <div className='wrapper'>
-                  {children}
-                </div>
-                <SupportWidget />
-              </StyledComponentsRegistry>
-              <Footer />
-            </IntlWrapper>
+            <AuthProvider>
+              <IntlWrapper >
+                <Header />
+                <StyledComponentsRegistry>
+                  <div className='wrapper'>
+                    {children}
+                  </div>
+                  <SupportWidget />
+                </StyledComponentsRegistry>
+                <Footer />
+              </IntlWrapper>
+            </AuthProvider>
           </StoreProviders>
         </ClientProvider>
         <Toaster />

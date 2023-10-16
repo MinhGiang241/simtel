@@ -1,3 +1,16 @@
+export interface User {
+  address?: string,
+  aud?: string,
+  email?: string,
+  exp?: number,
+  full_name?: string,
+  regcode?: string,
+  sex?: string,
+  tel?: string,
+  tenantId?: string,
+  _id?: string,
+}
+
 export interface SimPack {
   _id: string,
   createdTime: string,

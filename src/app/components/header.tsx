@@ -1,22 +1,26 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import Logo from './logo/logo.svg'
-import { ShoppingCartOutlined } from '@ant-design/icons'
+import { ShoppingCartOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/navigation';
-import { Modal } from 'antd';
+import { Button, Modal } from 'antd';
 import Login from './modals/Login';
 import SignUp from './modals/SignUp';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/GlobalRedux/store';
 import { setPath } from '@/GlobalRedux/path/pathSlice';
 import { pushPathName } from '@/services/routes';
+import { AuthState, userLogout } from '@/GlobalRedux/Auth/authSlice';
+import { success } from './modals/CustomToast';
 
 
 export default function Header() {
   const [open, setOpen] = useState(false)
+  const [confimLogOut, setConfirmLogOut] = useState(false)
   const [modalKey, setModalKey] = useState(Date.now())
   const [isLogin, setIslogin] = useState<boolean>()
   const pathname = useSelector((state: RootState) => state.path.value)
+  const isAuth = useSelector((state: RootState) => state.auth.authState)
   const dispatch = useDispatch()
   const router = useRouter()
   useEffect(() => {
@@ -24,11 +28,13 @@ export default function Header() {
       console.log('location', location);
       dispatch(setPath(location.pathname))
     }
-
   })
+
+  console.log('state', isAuth);
+
   useEffect(() => {
     dispatch(setPath(location.pathname))
-  }, [open])
+  }, [open,])
 
   return (
     <div className='w-full h-20 flex justify-center shadow-lg fixed z-50 bg-white'>
@@ -68,32 +74,74 @@ export default function Header() {
 
         </div>
         <div className='h-16 w-[1px] bg-gray-700 ml-6 mr-6' />
-        <div className=' w-64 h-full flex justify-between items-center'>
-          <button className='border-black border-2 p-1 rounded-md active:opacity-70'>
-            <ShoppingCartOutlined style={{ fontSize: '200%' }} />
+        <div className=' w-52 h-full flex justify-end items-center'>
+          {isAuth == AuthState.LOGGED && (
 
-          </button>
-          <button className='bg-m_red h-12 text-white font-bold px-2 rounded-xl active:opacity-70 select-none'
-            onClick={() => {
-              setModalKey(Date.now())
-              setOpen(true)
-              setIslogin(true)
-            }}
-          >
-            Đăng nhập
-          </button>
-          <button className='border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70 select-none'
-            onClick={() => {
-              setModalKey(Date.now())
-              setOpen(true)
-              setIslogin(false)
-            }}
-          >
-            Đăng ký
-          </button>
+            <>
+              <button className='border-black border-2 p-1 rounded-md active:opacity-70'>
+                <ShoppingCartOutlined style={{ fontSize: '200%' }} />
+              </button>
 
+              <button className='mx-auto border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70 select-none'
+                onClick={() => {
+                  setConfirmLogOut(true)
+                }}
+              >
+                Đăng xuất
+              </button>
+
+            </>
+
+          )}
+          {
+            isAuth == AuthState.NOT_LOGGED && (
+              <>
+                <button className='bg-m_red mr-4 h-12 text-white font-bold px-2 rounded-xl active:opacity-70 select-none'
+                  onClick={() => {
+                    setModalKey(Date.now())
+                    setOpen(true)
+                    setIslogin(true)
+                  }}
+                >
+                  Đăng nhập
+                </button>
+                <button className='border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70 select-none'
+                  onClick={() => {
+                    setModalKey(Date.now())
+                    setOpen(true)
+                    setIslogin(false)
+                  }}
+                >
+                  Đăng ký
+                </button>
+
+              </>
+            )
+          }
         </div>
       </div>
+      <Modal width={400} open={confimLogOut} onCancel={() => setConfirmLogOut(false)} footer={(<div />)}>
+        <div className='flex flex-col items-center'>
+          <h4 className='mb-3 font-bold text-xl'>Đăng xuất</h4>
+          <ExclamationCircleOutlined className='text-5xl mb-3' style={{ color: "orange" }} />
+          <h4 className="mb-3 text-center">Bạn có chắc chắn muốn đăng xuất</h4>
+          <div className='flex justify-center'>
+            <Button className='bg-m_red border-m_red text-white rounded-xl px-6' onClick={
+              () => {
+                dispatch(userLogout(undefined))
+                setConfirmLogOut(false)
+                success("Thành công", 'đăng xuất thành công')
+              }
+            }>
+              Đăng xuất
+            </Button>
+            <div className='w-12' />
+            <Button className='bg-white border-m_red rounded-xl px-6 text-m_red' onClick={() => setConfirmLogOut(false)}>
+              Hủy
+            </Button>
+          </div>
+        </div>
+      </Modal>
       <Modal key={modalKey} width={800} open={open} onCancel={() => setOpen(false)} footer={(<div />)} >
         {isLogin ? (
           <Login

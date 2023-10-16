@@ -25,7 +25,6 @@ export default function GridPlan() {
   useEffect(() => {
     dispatch(setLoading(true))
     getAllSimpack(9, (!page ? 0 : (page - 1)) * 9, telco, type, sortBy).then((v) => {
-      console.log('vlp', v);
 
       if (v && v.list.length > 0) {
         dispatch(getList(v.list))
@@ -40,9 +39,6 @@ export default function GridPlan() {
       dispatch(setLoading(false))
     })
 
-    console.log('spl', simPacKList);
-    console.log('count pl', count);
-    console.log('page pl', page);
 
   }, [page])
 
@@ -56,7 +52,6 @@ export default function GridPlan() {
         <div className='w-full flex justify-center mb-14'>
           <Pagination current={page} size="default" total={count} showQuickJumper pageSize={9} showSizeChanger={false} onChange={(v) => {
             dispatch(setPage(v))
-            console.log(v);
           }} />
         </div>
       </>

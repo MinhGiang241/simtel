@@ -11,8 +11,8 @@ import { error } from '@/app/components/modals/CustomToast'
 
 export default function FilterPlan() {
   const dispatch = useDispatch()
-  var count = useSelector((state: RootState) => state.simPack.count)
-  var list = useSelector((state: RootState) => state.simPack.value)
+  // var count = useSelector((state: RootState) => state.simPack.count)
+  // var list = useSelector((state: RootState) => state.simPack.value)
   var page = useSelector((state: RootState) => state.simPack.page)
   const telco = useSelector((state: RootState) => state.simPack.telco)
   const type = useSelector((state: RootState) => state.simPack.type)
@@ -47,15 +47,12 @@ export default function FilterPlan() {
         dispatch(setCount(0))
         dispatch(getList([]))
       }
-      console.log('list', list);
 
     }).catch((e) => {
       error('Lỗi', e)
       dispatch(setLoading(false))
     })
 
-    console.log('count f', count);
-    console.log('page f', page);
 
   }, [
     telco, type, sortBy, page

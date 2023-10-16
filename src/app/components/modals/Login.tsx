@@ -1,9 +1,15 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from 'antd';
 import { error, success } from './CustomToast';
 import { FormikErrors, useFormik } from 'formik';
 import MInput from '../config/MInput';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import { customerLogin, getAccountInfo } from '@/services/api/authApi';
+import { setUserData } from '@/GlobalRedux/Auth/authSlice';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/GlobalRedux/store';
+import { useDispatch } from 'react-redux';
 
 interface Props {
   onCancel: Function
@@ -16,8 +22,8 @@ interface FormValues {
 }
 
 export default function Login({ onCancel, switchSignUp }: Props) {
-
-
+  const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
   const validate = (values: FormValues) => {
     const errors: FormikErrors<FormValues> = {}
     if (!values.phone) {
@@ -40,9 +46,24 @@ export default function Login({ onCancel, switchSignUp }: Props) {
     validate,
     onSubmit: async (values) => {
       try {
-        alert(JSON.stringify(values, null, 2));
-      } catch (error) {
-        console.log(error);
+        // alert(JSON.stringify(values, null, 2));
+        setLoading(true)
+        var token = await customerLogin(values.phone, values.password)
+        var info = await getAccountInfo()
+
+        dispatch(setUserData({
+          user: info?.user,
+          accessToken: token?.data?.access_token,
+          expiredAt: token?.data?.expires_at,
+        }))
+        setLoading(false)
+        success("Đăng nhập thành công", "Bạn đã đăng nhập thành công")
+        onCancel()
+
+      } catch (err: any) {
+        console.log(err);
+        setLoading(false)
+        error('Lỗi', err)
       }
     },
   });
@@ -87,6 +108,7 @@ export default function Login({ onCancel, switchSignUp }: Props) {
 
       <div className='flex w-full justify-center mb-3'>
         <Button
+          loading={loading}
           htmlType="submit"
           className='bg-m_red text-white border-m_red px-5 rounded-xl' >
           Đăng nhập
