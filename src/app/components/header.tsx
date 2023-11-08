@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import Logo from './logo/logo.svg'
+import Cart from './logo/cart.svg'
 import { ShoppingCartOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/navigation';
 import { Button, Modal } from 'antd';
@@ -52,13 +53,13 @@ export default function Header() {
               Gói cước
             </button>
           </div>
-          {/* <div className='w-1/4 text-center select-none'> */}
-          {/*   <button className={`active:opacity-70 select-none ${pathname === '/sims/' ? 'font-bold' : ''}`} onClick={() => { */}
-          {/*     pushPathName(router, dispatch, '/sims') */}
-          {/*   }}> */}
-          {/*     Mua sim */}
-          {/*   </button> */}
-          {/* </div> */}
+          <div className='w-1/4 text-center select-none'>
+            <button className={`active:opacity-70 select-none ${pathname === '/sims/' ? 'font-bold' : ''}`} onClick={() => {
+              pushPathName(router, dispatch, '/sims')
+            }}>
+              Mua sim
+            </button>
+          </div>
           <div className='w-1/4 text-center' >
             <button className={`active:opacity-70 z-50 select-none ${pathname === '/cards/' ? 'font-bold' : ''}`} onClick={() => {
               pushPathName(router, dispatch, '/cards')
@@ -114,7 +115,9 @@ export default function Header() {
                 >
                   Đăng ký
                 </button>
-
+                <button className='border-l-2 ml-4 pl-2.5 border-m_gray'>
+                  <Cart />
+                </button>
               </>
             )
           }
