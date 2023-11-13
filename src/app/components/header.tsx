@@ -96,7 +96,7 @@ export default function Header() {
             <button className={`active:opacity-70 select-none z-50 ${pathname === '/plans/' ? 'font-bold' : ''}`} onClick={() => {
               pushPathName(router, dispatch, '/plans')
             }}>
-              Gói cước
+              Mua gói cước
             </button>
           </div>
           <div className='w-1/4 text-center select-none'>
