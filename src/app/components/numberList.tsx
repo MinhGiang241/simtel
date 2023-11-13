@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import { pushPathName } from '@/services/routes';
 import { useRouter } from 'next/navigation';
 import { setPath } from '@/GlobalRedux/path/pathSlice';
+import { Button, Tooltip, ConfigProvider } from 'antd';
+import { title } from 'process';
 
 
 
@@ -57,11 +59,6 @@ const data: DataType[] = [
 
 ];
 
-
-
-
-
-
 export default function NumberList() {
 
   const router = useRouter()
@@ -96,7 +93,10 @@ export default function NumberList() {
       key: 'plan',
       dataIndex: 'plan',
       render: (text) => (
-        <p key={text}>{text}</p>
+        <Tooltip key={text} placement="bottomLeft">
+          {/* <p key={text}>Gói cước tự do</p> */}
+          <Button title={text}>Gói cước tự do</Button>
+        </Tooltip>
       ),
     },
     {
@@ -131,7 +131,7 @@ export function TableAction({ current, old }: { current: number, old: number }) 
   const dispatch = useDispatch()
 
   return (
-    <div key={current} className='flex'>
+    <div key={current} className='flex justify-between'>
       <div className='flex flex-col mr-3'>
         <p className='text-lg'>
           {/* {`${current} đ`} */}

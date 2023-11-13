@@ -2,7 +2,7 @@ import React from 'react'
 import MobileIcon from './icons/mobile.svg'
 import DatabaseIcon from './icons/database.svg'
 import { RightOutlined } from '@ant-design/icons'
-import MLink from '@/app/components/config/MLink'
+import MLink from '@/app/components/config/Mlink'
 import { SimPack } from '@/interfaces/data'
 import { FormattedNumber } from 'react-intl'
 

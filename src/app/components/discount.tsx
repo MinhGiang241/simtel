@@ -1,4 +1,7 @@
 import React from 'react'
+import Member from './logo/member.svg'
+import Calender from './logo/calender.svg'
+import Down from './logo/down.svg'
 
 export default function Discount() {
   return (
@@ -8,55 +11,34 @@ export default function Discount() {
         <h2 className="px-2 text-m_red font-bold text-4xl">khuyến mại</h2>
       </div>
 
-      <div className='p-11 w-full bg-m_gray h-[500px] mt-5 '>
-        <div className='flex justify-between w-full'>
-          <p className='text-orange-500'>Tin nổi bật </p>
-          <p className='underline-offset-2 underline'>Xem tất cả</p>
-        </div>
-
-        <div className='w-full h-[370px] flex mt-2' >
-          <div className='flex flex-col justify-between py-11 mr-5 bg-white w-1/2 p-5' >
-            <div className='flex justify-between'>
-              <p className='text-orange-500'>Sản phẩm dịch vụ</p>
-              <p>6h 26m | 19/09/2023</p>
+      <div className='w-full h-[500px] pt-6'>
+        <div className="grid grid-cols-3 gap-4">
+          <div className="col-span-1 p-4 m-2">
+            <Member className="w-full h-[221px]" />
+            <div className='flex justify-between mt-4'>
+              <div className='flex items-center text-m_red text-base'><Down className="mr-1" />Khuyến mãi</div>
+              <div className='flex items-center mr-2 text-slate-400 text-base'><Calender className="mr-1" />19/09/2023</div>
             </div>
-            <div className='font-bold'>
-              Simtel điều chỉnh chính sách thời hạn sử dụng thuê bao và thời hạn khôi phục số thường từ 22/09/2023
-            </div>
-            <div>
-              Thuê bao Simtel sẽ được sử dụng trong vòng 35 ngày kể từ ngày kích hoạt thuê bao thành công, hoặc từ ngày cuối cùng phát sinh nạp tiền hoặc phát sinh lưu lượng chiều đi (gọi thoại, tin nhắn, data).
-            </div>
+            <div className='pt-2 font-bold text-base'>Simtel điều chỉnh chính sách thời hạn sử dụng thuê bao và thời hạn khôi phục số thường từ 22/09/2023</div>
           </div>
-          <div className='flex flex-col justify-between ml-5 w-1/2'>
-
-            <div className='w-full h-[110px] py-2 px-4 bg-white flex flex-col justify-between'>
-              <div className='flex justify-between'>
-                <p className='text-orange-500'>Sản phẩm dịch vụ</p>
-                <p>6h 26m | 19/09/2023</p>
-              </div>
-              <p className='font-bold'>Simtel điều chỉnh chính sách thời hạn sử dụng thuê bao và thời hạn khôi phục số thường từ 22/09/2023</p>
+          <div className="col-span-1 p-4 m-2">
+            <Member className="w-full h-[221px]" />
+            <div className='flex justify-between mt-4'>
+              <div className='flex items-center text-m_red text-base'><Down className="mr-1" />Khuyến mãi</div>
+              <div className='flex items-center mr-2 text-slate-400 text-base'><Calender className="mr-1" />19/09/2023</div>
             </div>
-
-            <div className='w-full h-[110px] py-2 px-4 bg-white flex flex-col justify-between'>
-              <div className='flex justify-between'>
-                <p className='text-orange-500'>Sản phẩm dịch vụ</p>
-                <p>6h 26m | 19/09/2023</p>
-              </div>
-              <p className='font-bold'>Simtel điều chỉnh chính sách thời hạn sử dụng thuê bao và thời hạn khôi phục số thường từ 22/09/2023</p>
+            <div className='pt-2 font-bold text-base'>Simtel điều chỉnh chính sách thời hạn sử dụng thuê bao và thời hạn khôi phục số thường từ 22/09/2023</div>
+          </div>
+          <div className="col-span-1 p-4 m-2">
+            <Member className="w-full h-[221px]" />
+            <div className='flex justify-between mt-4'>
+              <div className='flex items-center text-m_red text-base'><Down className="mr-1" />Khuyến mãi</div>
+              <div className='flex items-center mr-2 text-slate-400 text-base'><Calender className="mr-1" />19/09/2023</div>
             </div>
-
-            <div className='w-full h-[110px] py-2 px-4 bg-white flex flex-col justify-between'>
-              <div className='flex justify-between'>
-                <p className='text-orange-500'>Sản phẩm dịch vụ</p>
-                <p>6h 26m | 19/09/2023</p>
-              </div>
-              <p className='font-bold'>Simtel điều chỉnh chính sách thời hạn sử dụng thuê bao và thời hạn khôi phục số thường từ 22/09/2023</p>
-            </div>
-
-
+            <div className='pt-2 font-bold text-base'>Simtel điều chỉnh chính sách thời hạn sử dụng thuê bao và thời hạn khôi phục số thường từ 22/09/2023</div>
           </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   )
 }
