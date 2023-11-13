@@ -29,8 +29,12 @@ body {
   min-height: 70rem;
 }
 
-.slick-slide {
-  margin: 0 0px;
+.slick-slide>div {
+  margin-left: 0 40px;
+}
+
+.slick-list {
+  margin: 0 -40px;
 }
 
 .slick-active {
@@ -38,11 +42,12 @@ body {
 }
 
 .slick-center {
-  transform: scale(1.2)
+  transform: scale(1.2);
+  padding: 30px 50px !important;
 }
 
 .slick-slide:not(.slick-active) {
-  margin: 20px 0;
+  margin: 30px 0;
 }
 
 .child {

@@ -12,14 +12,15 @@ import useSWR from "swr";
 import { apiGraphql } from "@/constants/apiConstant";
 import { getAllSimpack } from "@/services/api/simPackApi";
 import { SimPack } from "@/interfaces/data";
-import MLink from "./config/Mlink";
+import MLink from "./config/MLink";
 import { Button, Modal } from 'antd';
 
 export default function PlanList() {
 
   const settings = {
     centerMode: true,
-    // centerPadding: '10px',
+    className: "center",
+    centerPadding: '30px',
     slidesToShow: 3,
     focusOnSelect: true,
     dots: false,
@@ -107,44 +108,46 @@ function Plan({ urlImage, branch, name, describle, price, id }: Props) {
     setIsModalOpen(false);
   };
   return (
-    <div className='w-[307px] h-[550px] '>
-      <div className='left-4 w-28 h-8 bg-white z-20 translate-y-8 rounded-tl-xl rounded-br-xl justify-center flex items-center text-m_red'>
-        {branch}
-      </div>
-      <div className='top-0 rounded-xl shadow-gray-700 shadow-md w-[307.35px] h-[435.84px] scale-100'>
-        <Image className='rounded-t-xl z-0' alt='plan' src={urlImage} width={398} height={400} />
-        <div className='pt-4 px-4 h-[110px] -translate-y-8 rounded-tl-[40px] z-20 bg-white'>
-          <div className='flex justify-between mb-3' >
-            <div className="flex flex-col">
-              <p className='font-bold text-2xl '>{name}</p>
-              <div className="text-sm">1GB/đến 24h ngày đăng ký...</div>
+    <div className="w-full flex justify-center">
+      <div className='w-[307px] h-[550px]'>
+        <div className='left-4 w-28 h-8 bg-white z-20 translate-y-8 rounded-tl-xl rounded-br-xl justify-center flex items-center text-m_red'>
+          {branch}
+        </div>
+        <div className='top-0 rounded-xl shadow-gray-700 shadow-md w-[307.35px] h-[435.84px] scale-100'>
+          <Image className='rounded-t-xl z-0' alt='plan' src={urlImage} width={398} height={400} />
+          <div className='pt-4 px-4 h-[110px] -translate-y-8 rounded-tl-[40px] z-20 bg-white'>
+            <div className='flex justify-between mb-3' >
+              <div className="flex flex-col">
+                <p className='font-bold text-2xl '>{name}</p>
+                <div className="text-sm">1GB/đến 24h ngày đăng ký...</div>
+              </div>
+              <div className='flex items-center'>
+                <Button className='font-bold text-m_red bg-white border-none p-0' type="primary" onClick={showModal}>
+                  Xem chi tiết
+                </Button>
+                <Modal title="Chi tiết gói cước" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                  <div className="flex justify-center items-center">
+                    <div>VIETTEL99</div>
+                    <div>210 ngày</div>
+                  </div>
+                  <div className="flex justify-center">360.000đ</div>
+                  <div>Some contents...</div>
+                </Modal>
+              </div>
             </div>
-            <div className='flex items-center'>
-              <Button className='font-bold text-m_red bg-white border-none p-0' type="primary" onClick={showModal}>
-                Xem chi tiết
-              </Button>
-              <Modal title="Chi tiết gói cước" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                <div className="flex justify-center items-center">
-                  <div>VIETTEL99</div>
-                  <div>210 ngày</div>
-                </div>
-                <div className="flex justify-center">360.000đ</div>
-                <div>Some contents...</div>
-              </Modal>
-            </div>
-          </div>
-          <div>{describle}</div>
+            <div>{describle}</div>
 
-          <div className='flex justify-between items-center mt-8 rounded-b-xl'>
-            {/* <p className='font-bold text-m_red'></p> */}
-            {/* <TagOutlined style={{ fontSize: "150%" }} /> */}
-            <p className='ml-1 font-bold'>{`${price} đ`}</p>
-            <MLink link={`/orders/?pack=true&id=${id}`} className='bg-m_red text-white font-bold select-none active:opacity-70 px-4 py-2 rounded-md'>
-              Đăng ký
-            </MLink>
+            <div className='flex justify-between items-center mt-8 rounded-b-xl'>
+              {/* <p className='font-bold text-m_red'></p> */}
+              {/* <TagOutlined style={{ fontSize: "150%" }} /> */}
+              <p className='ml-1 font-bold'>{`${price} đ`}</p>
+              <MLink link={`/orders/?pack=true&id=${id}`} className='bg-m_red text-white font-bold select-none active:opacity-70 px-4 py-2 rounded-md'>
+                Đăng ký
+              </MLink>
+            </div>
           </div>
         </div>
-      </div>
-    </div >)
+      </div >
+    </div>)
 
 }
