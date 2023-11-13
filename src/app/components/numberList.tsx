@@ -1,5 +1,5 @@
 import React from 'react';
-import { Space, Table, Tag } from 'antd';
+import { Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { FormattedMessage, FormattedNumber } from 'react-intl'
 import { useDispatch } from 'react-redux';
@@ -8,7 +8,10 @@ import { useRouter } from 'next/navigation';
 import { setPath } from '@/GlobalRedux/path/pathSlice';
 import { Button, Tooltip, ConfigProvider } from 'antd';
 import { title } from 'process';
-
+import { Input, Select, Space } from 'antd'
+interface Props {
+  hideFilter?: boolean
+}
 
 
 interface DataType {
@@ -59,10 +62,17 @@ const data: DataType[] = [
 
 ];
 
-export default function NumberList() {
+export default function NumberList({ hideFilter }: Props) {
 
   const router = useRouter()
   const dispatch = useDispatch()
+  const { Option } = Select
+  const num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  const branch = ['Vietel', 'Vinaphone', 'Mobiphone', 'Vietnamobile', 'Gmobile', 'Itelecom', 'Wintel']
+  const simTypes = ['Sim vật lý', 'eSim']
+  const price = ['50.000đ', '100.000đ', '150.000đ']
+  const handleSelectBranch = (v: string[]) => { }
+
 
   const columns: ColumnsType<DataType> = [
     {
@@ -112,42 +122,186 @@ export default function NumberList() {
 
 
   return (
-    <Table
-      columns={columns}
-      dataSource={data}
-      pagination={false}
-      rowKey={'id'}
-      onRow={(_, index: any) => ({
-        style: { background: index && index % 2 != 0 && '#e2e8f0', },
-      })}
-    />
+    <div>
+      <div className={`flex justify-between align- items-end ${hideFilter ? 'h-10 mb-4' : 'h-24 mb-10'}`}>
+        {!hideFilter && (
+          <>
+            <div className='flex w-6/12'>
+              <div className='w-80 h-14 mr-4'>
+                {/* <label className='mb-2 font-bold' aria-label='branch'>Nhà mạng</label> */}
+                <Select
+                  allowClear
+                  aria-label='branch'
+                  style={{ width: '100%', height: '3rem' }}
+                  placeholder="Chọn nhà mạng"
+                  // defaultValue={['Vietel']}
+                  onChange={handleSelectBranch}
+                  optionLabelProp="branch"
+                >
+                  {...branch.map((v) => (
+                    <Option value={v} key={v} label={v}>
+                      <Space>
+                        {v}
+                      </Space>
+                    </Option>
+                  ))}
+                </Select>
+              </div>
+
+              <div className='w-80 h-14 mr-4'>
+                {/* <label className='mb-2 font-bold' aria-label='sim'>Loại sim</label> */}
+                <Select
+                  allowClear
+                  aria-label='sim'
+                  style={{ width: '100%', height: '3rem' }}
+                  placeholder="Chọn loại sim"
+                  // defaultValue={['Sim vật lý']}
+                  onChange={handleSelectBranch}
+                  optionLabelProp="sim"
+                >
+                  {...simTypes.map((v) => (
+                    <Option value={v} key={v} label={v}>
+                      <Space>
+                        {v}
+                      </Space>
+                    </Option>
+                  ))}
+                </Select>
+              </div>
+
+              <div className='w-80 h-14 mr-4'>
+                {/* <label className='mb-2 font-bold' aria-label='sim'>Loại sim</label> */}
+                <Select
+                  allowClear
+                  aria-label='sim'
+                  style={{ width: '100%', height: '3rem' }}
+                  placeholder="Chọn giá tiền"
+                  // defaultValue={['Sim vật lý']}
+                  onChange={handleSelectBranch}
+                  optionLabelProp="sim"
+                >
+                  {...price.map((v) => (
+                    <Option value={v} key={v} label={v}>
+                      <Space>
+                        {v}
+                      </Space>
+                    </Option>
+                  ))}
+                </Select>
+              </div>
+            </div>
+          </>
+        )}
+        <h4 className='font-bold'>100.000 số hiện có</h4>
+      </div >
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={false}
+        rowKey={'id'}
+        onRow={(_, index: any) => ({
+          style: { background: index && index % 2 != 0 && '#e2e8f0', },
+        })}
+      />
+    </div>
 
   )
 }
 
 
-export function TableAction({ current, old }: { current: number, old: number }) {
+export function TableAction({ current, old }: { current: number, old: number },) {
   const router = useRouter()
   const dispatch = useDispatch()
 
   return (
-    <div key={current} className='flex justify-between'>
-      <div className='flex flex-col mr-3'>
-        <p className='text-lg'>
-          {/* {`${current} đ`} */}
-          <FormattedNumber value={current} style='currency' currency='VND' />
-        </p>
-        <p className='line-through'>
-          {/* {`${old} đ`} */}
-          <FormattedNumber value={old} style='currency' currency='VND' />
-        </p>
+    <>
+      {/* <div>
+        <div className={`flex justify-between align- items-end ${hideFilter ? 'h-10 mb-4' : 'h-24 mb-10'}`}>
+          {!hideFilter && (
+            <>
+              <div className='flex w-6/12'>
+                <div className='w-80 h-14 mr-4'>
+                  <Select
+                    allowClear
+                    aria-label='branch'
+                    style={{ width: '100%', height: '3rem' }}
+                    placeholder="Chọn nhà mạng"
+                    onChange={handleSelectBranch}
+                    optionLabelProp="branch"
+                  >
+                    {...branch.map((v) => (
+                      <Option value={v} key={v} label={v}>
+                        <Space>
+                          {v}
+                        </Space>
+                      </Option>
+                    ))}
+                  </Select>
+                </div>
+
+                <div className='w-80 h-14 mr-4'>
+                  <Select
+                    allowClear
+                    aria-label='sim'
+                    style={{ width: '100%', height: '3rem' }}
+                    placeholder="Chọn loại sim"
+                    onChange={handleSelectBranch}
+                    optionLabelProp="sim"
+                  >
+                    {...simTypes.map((v) => (
+                      <Option value={v} key={v} label={v}>
+                        <Space>
+                          {v}
+                        </Space>
+                      </Option>
+                    ))}
+                  </Select>
+                </div>
+
+                <div className='w-80 h-14 mr-4'>
+                  <Select
+                    allowClear
+                    aria-label='sim'
+                    style={{ width: '100%', height: '3rem' }}
+                    placeholder="Chọn giá tiền"
+                    // defaultValue={['Sim vật lý']}
+                    onChange={handleSelectBranch}
+                    optionLabelProp="sim"
+                  >
+                    {...price.map((v) => (
+                      <Option value={v} key={v} label={v}>
+                        <Space>
+                          {v}
+                        </Space>
+                      </Option>
+                    ))}
+                  </Select>
+                </div>
+              </div>
+            </>
+          )}
+          <h4 className='font-bold'>100.000 số hiện có</h4>
+        </div >
+      </div> */}
+      <div key={current} className='flex justify-between'>
+        <div className='flex flex-col mr-3'>
+          <p className='text-lg'>
+            {/* {`${current} đ`} */}
+            <FormattedNumber value={current} style='currency' currency='VND' />
+          </p>
+          <p className='line-through'>
+            {/* {`${old} đ`} */}
+            <FormattedNumber value={old} style='currency' currency='VND' />
+          </p>
+        </div>
+        <button onClick={() => {
+          pushPathName(router, dispatch, '/orders')
+        }} className='text-lg px-4 rounded-2xl text-m_red bg-white border-m_red border-2 active:opacity-70 select-none'>
+          Mua ngay
+        </button>
       </div>
-      <button onClick={() => {
-        pushPathName(router, dispatch, '/orders')
-      }} className='text-lg px-4 rounded-2xl text-m_red bg-white border-m_red border-2 active:opacity-70 select-none'>
-        Mua ngay
-      </button>
-    </div>
+    </>
+
   );
 
 }
