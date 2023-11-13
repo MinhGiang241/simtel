@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import Logo from './logo/logo.svg'
+import Cart from './logo/cart.svg'
 import { ShoppingCartOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/navigation';
 import { Button, Modal } from 'antd';
@@ -12,6 +13,8 @@ import { setPath } from '@/GlobalRedux/path/pathSlice';
 import { pushPathName } from '@/services/routes';
 import { AuthState, userLogout } from '@/GlobalRedux/Auth/authSlice';
 import { success } from './modals/CustomToast';
+import { DownOutlined } from "@ant-design/icons";
+import { Dropdown, Space } from "antd";
 
 
 export default function Header() {
@@ -23,6 +26,50 @@ export default function Header() {
   const isAuth = useSelector((state: RootState) => state.auth.authState)
   const dispatch = useDispatch()
   const router = useRouter()
+
+  const items = [
+    {
+      label: (
+        <a className='text-base' rel="noopener noreferrer" href="/sims">
+          Viettel
+        </a>
+      ),
+      key: "0"
+    },
+    {
+      label: (
+        <a className='text-base' rel="noopener noreferrer" href="/sims">
+          Vinaphone
+        </a>
+      ),
+      key: "1"
+    },
+    {
+      label: (
+        <a className='text-base' rel="noopener noreferrer" href="/sims">
+          Wintel
+        </a>
+      ),
+      key: "2"
+    },
+    {
+      label: (
+        <a className='text-base' rel="noopener noreferrer" href="/sims">
+          Vietnammobile
+        </a>
+      ),
+      key: "3"
+    },
+    {
+      label: (
+        <a className='text-base' rel="noopener noreferrer" href="/sims">
+          Mobifone
+        </a>
+      ),
+      key: "4"
+    }
+  ];
+
   useEffect(() => {
     window.onpopstate = () => {
       console.log('location', location);
@@ -37,28 +84,40 @@ export default function Header() {
   }, [open,])
 
   return (
-    <div className='w-full h-20 flex justify-center shadow-lg fixed z-50 bg-white'>
+    <div className='w-full h-[88px] flex justify-center shadow-lg fixed z-50 bg-white'>
       <div className='flex w-[160rem] max-w-7xl  items-center ' >
         <button onClick={() => {
           pushPathName(router, dispatch, '/')
         }}>
-          <Logo viewBox="0 0 152 60" width={152} height={60} />
+          <Logo viewBox="0 0 152 60" width={130} height={48} />
         </button>
         <div className='text-lg flex justify-center items-center flex-grow ' >
           <div className='w-1/4 text-center'>
             <button className={`active:opacity-70 select-none z-50 ${pathname === '/plans/' ? 'font-bold' : ''}`} onClick={() => {
               pushPathName(router, dispatch, '/plans')
             }}>
-              Gói cước
+              Mua gói cước
             </button>
           </div>
-          {/* <div className='w-1/4 text-center select-none'> */}
-          {/*   <button className={`active:opacity-70 select-none ${pathname === '/sims/' ? 'font-bold' : ''}`} onClick={() => { */}
-          {/*     pushPathName(router, dispatch, '/sims') */}
-          {/*   }}> */}
-          {/*     Mua sim */}
-          {/*   </button> */}
-          {/* </div> */}
+          <div className='w-1/4 text-center select-none'>
+            {/* <button className={`active:opacity-70 select-none ${pathname === '/sims/' ? 'font-bold' : ''}`} onClick={() => {
+              pushPathName(router, dispatch, '/sims')
+            }}>
+              Mua sim
+            </button> */}
+            <Dropdown
+              menu={{
+                items
+              }}
+            >
+              <button className={`active:opacity-70 select-none ${pathname === '/sims/' ? 'font-bold' : ''}`} onClick={(e) => e.preventDefault()}>
+                <Space>
+                  Mua sim
+                  <DownOutlined />
+                </Space>
+              </button>
+            </Dropdown>
+          </div>
           <div className='w-1/4 text-center' >
             <button className={`active:opacity-70 z-50 select-none ${pathname === '/cards/' ? 'font-bold' : ''}`} onClick={() => {
               pushPathName(router, dispatch, '/cards')
@@ -114,7 +173,9 @@ export default function Header() {
                 >
                   Đăng ký
                 </button>
-
+                <button className='border-l-2 ml-4 pl-2.5 border-m_gray'>
+                  <Cart />
+                </button>
               </>
             )
           }

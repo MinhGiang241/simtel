@@ -17,9 +17,31 @@
 body {
   color: rgb(var(--foreground));
   background: rgb(var(--background));
-  font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";;
+  font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  ;
 }
 
 .wrapper {
   min-height: 70rem;
+}
+
+
+.slick-active {
+  padding: 20px 0;
+}
+
+.slick-center {
+  transform: scale(1.08)
+}
+
+.slick-slide:not(.slick-active) {
+  margin: 20px 0;
+}
+
+.child {
+  width: 100%;
+}
+
+.slide:not(.slick-active) {
+  cursor: pointer;
 }
