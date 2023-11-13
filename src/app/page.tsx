@@ -11,7 +11,7 @@ export default function Home() {
 
     <div className="w-full h-20" />
     <BannerCarousel />
-    <div className="max-w-7xl h-fit">
+    <div className="max-w-[1140px] h-fit">
       <PlanButton />
       <PlanList />
       <SelectSimTitle />
