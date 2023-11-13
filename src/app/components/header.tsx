@@ -85,7 +85,7 @@ export default function Header() {
 
   return (
     <div className='w-full h-[88px] flex justify-center shadow-lg fixed z-50 bg-white'>
-      <div className='flex w-[160rem] max-w-7xl  items-center ' >
+      <div className='flex w-[160rem] max-w-[1140px]  items-center ' >
         <button onClick={() => {
           pushPathName(router, dispatch, '/')
         }}>
