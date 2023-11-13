@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import MobileIcon from './icons/mobile.svg'
 import DatabaseIcon from './icons/database.svg'
@@ -31,7 +32,7 @@ export default function PlanCard({ simpack }: { simpack: SimPack }) {
             <div>3GB tốc độ cao/ngày</div>
           </div>
         </div>
-        <Button className='bg-m_red text-white w-[164px] text-base font-semibold h-[48px] rounded-lg mt-10'>Đăng ký</Button>
+        <Button className='border-m_red bg-m_red text-white w-[164px] text-base font-semibold h-[48px] rounded-lg mt-10'>Đăng ký</Button>
       </div>
     </div>
   )
