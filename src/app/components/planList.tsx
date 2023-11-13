@@ -19,22 +19,23 @@ export default function PlanList() {
 
   const settings = {
     centerMode: true,
-    centerPadding: '0',
+    // centerPadding: '10px',
     slidesToShow: 3,
     focusOnSelect: true,
     dots: false,
     infinite: true,
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: '40px',
-          slidesToShow: 1
-        }
-      },
-    ]
+    arrows: true,
+    // responsive: [
+    //   {
+    //     breakpoint: 768,
+    //     settings: {
+    //       arrows: false,
+    //       centerMode: true,
+    //       centerPadding: '40px',
+    //       slidesToShow: 1
+    //     }
+    //   },
+    // ]
   };
 
   const { data, isLoading } = useSWR(
@@ -47,7 +48,7 @@ export default function PlanList() {
 
   const dispatch = useDispatch()
   return (
-    <div className='mt-3'>
+    <div className='mt-5'>
       <div className='w-full flex justify-self-end font-bold text-m_red '>
         <div className='flex-grow' />
         <Link onClick={() => dispatch(setPath('/plans/'))} href='/plans' className='mr-6'>
@@ -110,13 +111,16 @@ function Plan({ urlImage, branch, name, describle, price, id }: Props) {
       <div className='left-4 w-28 h-8 bg-white z-20 translate-y-8 rounded-tl-xl rounded-br-xl justify-center flex items-center text-m_red'>
         {branch}
       </div>
-      <div className='top-0 rounded-xl shadow-gray-700 shadow-md'>
+      <div className='top-0 rounded-xl shadow-gray-700 shadow-md w-[307.35px] h-[435.84px] scale-100'>
         <Image className='rounded-t-xl z-0' alt='plan' src={urlImage} width={398} height={400} />
         <div className='pt-4 px-4 h-[110px] -translate-y-8 rounded-tl-[40px] z-20 bg-white'>
           <div className='flex justify-between mb-3' >
-            <p className='font-bold text-2xl '>{name}</p>
+            <div className="flex flex-col">
+              <p className='font-bold text-2xl '>{name}</p>
+              <div className="text-sm">1GB/đến 24h ngày đăng ký...</div>
+            </div>
             <div className='flex items-center'>
-              <Button className='font-bold text-m_red bg-white border-none' type="primary" onClick={showModal}>
+              <Button className='font-bold text-m_red bg-white border-none p-0' type="primary" onClick={showModal}>
                 Xem chi tiết
               </Button>
               <Modal title="Chi tiết gói cước" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>

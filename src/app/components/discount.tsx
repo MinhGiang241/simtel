@@ -7,8 +7,8 @@ export default function Discount() {
   return (
     <div className='w-full mt-5'>
       <div className="flex justify-center" >
-        <h2 className="font-bold text-4xl">Tin tức, </h2>
-        <h2 className="px-2 text-m_red font-bold text-4xl">khuyến mại</h2>
+        {/* <h2 className="font-bold text-4xl">, </h2> */}
+        <h2 className="px-2 text-m_red font-bold text-4xl">Tin tức khuyến mại</h2>
       </div>
 
       <div className='w-full h-[500px] pt-6'>

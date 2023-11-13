@@ -10,6 +10,9 @@ import { useDispatch } from 'react-redux'
 import { Pagination } from 'antd';
 import Man from './logo/bro.svg'
 import { FilterOutlined } from '@ant-design/icons';
+import Right from './logo/right_img.svg'
+import Left from './logo/left_img.svg'
+import Shadow from './logo/shadow.svg'
 
 interface Props {
   hideFilter?: boolean
@@ -28,12 +31,15 @@ export default function SelectNumber({ hideFilter }: Props) {
   return (
     <>
       <div className='flex w-full bg-m_red_banner h-96 relative'>
-        <Man className="absolute bottom-0 left-16" />
-        <div className='w-7/12' />
+        <Right className="absolute right-0" />
+        <Left className="absolute left-[-9] bottom-16" />
+        <Shadow className="absolute left-10" />
+        <Man className="absolute bottom-0 left-40 w-[579px] h-[464px]" />
+        <div className='w-[55%]' />
         <div className='flex flex-col pt-10'>
           <div className='mb-1 text-base text-white'>Nhập số thuê bao mong muốn:</div>
           <div className='flex items-center'>
-            <Input placeholder='*********' className='h-14 w-96 input-search' allowClear />
+            <Input placeholder='**** *** ***' className='text-sm h-14 w-96 input-search' allowClear />
             <button className='border border-white h-14 text-white rounded-lg ml-2 p-4'><FilterOutlined className="pr-2" />Bộ lọc</button>
           </div>
           <div className='flex justify-center items-center mt-4 p-4 rounded-lg bg-m_opacity mb-4'>
@@ -57,83 +63,8 @@ export default function SelectNumber({ hideFilter }: Props) {
         </div> */}
         {/* <div className='w-3/5 flex h-full items-center' >
         </div> */}
-
       </div>
-
-      <div className={`flex justify-between align- items-end ${hideFilter ? 'h-10 mb-4' : 'h-24 mb-10'}`}>
-        {!hideFilter && (
-          <>
-            <div className='flex w-6/12'>
-              <div className='w-80 h-14 mr-4'>
-                {/* <label className='mb-2 font-bold' aria-label='branch'>Nhà mạng</label> */}
-                <Select
-                  allowClear
-                  aria-label='branch'
-                  style={{ width: '100%', height: '3rem' }}
-                  placeholder="Chọn nhà mạng"
-                  // defaultValue={['Vietel']}
-                  onChange={handleSelectBranch}
-                  optionLabelProp="branch"
-                >
-                  {...branch.map((v) => (
-                    <Option value={v} key={v} label={v}>
-                      <Space>
-                        {v}
-                      </Space>
-                    </Option>
-                  ))}
-                </Select>
-              </div>
-
-              <div className='w-80 h-14 mr-4'>
-                {/* <label className='mb-2 font-bold' aria-label='sim'>Loại sim</label> */}
-                <Select
-                  allowClear
-                  aria-label='sim'
-                  style={{ width: '100%', height: '3rem' }}
-                  placeholder="Chọn loại sim"
-                  // defaultValue={['Sim vật lý']}
-                  onChange={handleSelectBranch}
-                  optionLabelProp="sim"
-                >
-                  {...simTypes.map((v) => (
-                    <Option value={v} key={v} label={v}>
-                      <Space>
-                        {v}
-                      </Space>
-                    </Option>
-                  ))}
-                </Select>
-              </div>
-
-              <div className='w-80 h-14 mr-4'>
-                {/* <label className='mb-2 font-bold' aria-label='sim'>Loại sim</label> */}
-                <Select
-                  allowClear
-                  aria-label='sim'
-                  style={{ width: '100%', height: '3rem' }}
-                  placeholder="Chọn giá tiền"
-                  // defaultValue={['Sim vật lý']}
-                  onChange={handleSelectBranch}
-                  optionLabelProp="sim"
-                >
-                  {...price.map((v) => (
-                    <Option value={v} key={v} label={v}>
-                      <Space>
-                        {v}
-                      </Space>
-                    </Option>
-                  ))}
-                </Select>
-              </div>
-            </div>
-          </>
-        )}
-        <h4 className='font-bold'>100.000 số hiện có</h4>
-      </div >
-
       <NumberList />
-
       <div className='w-full flex justify-center mt-5'>
         <button onClick={() => {
           dispatch(setPath('/sims/'))

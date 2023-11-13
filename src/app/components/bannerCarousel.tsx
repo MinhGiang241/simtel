@@ -7,13 +7,13 @@ export default function BannerCarousel() {
   return (
     <Carousel autoPlay showThumbs={false} className='w-full'>
       <div>
-        <Image src={'/images/image.jpg'} alt='banner' width={1520} height={480} />
+        <Image src={'/images/image.jpg'} alt='banner' width={1440} height={451} />
       </div>
       <div>
-        <Image src={'/images/image.jpg'} alt='banner' width={1520} height={480} />
+        <Image src={'/images/image.jpg'} alt='banner' width={1440} height={451} />
       </div>
       <div>
-        <Image src={'/images/image.jpg'} alt='banner' width={1520} height={480} />
+        <Image src={'/images/image.jpg'} alt='banner' width={1440} height={451} />
       </div>
     </Carousel>
   )

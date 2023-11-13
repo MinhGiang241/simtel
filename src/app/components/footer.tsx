@@ -8,7 +8,7 @@ export default function Footer() {
     <div className='bg-m_gray h-96  '>
       <div className='footer px-24' >
         <div className="grid grid-cols-5 gap-4">
-          <div className="col-span-1 p-4"><Logo className="mt-6 ml-16" style={{ transform: "scale(2)" }} /></div>
+          <div className="col-span-1 p-4"><Logo className="mt-6 ml-10" style={{ transform: "scale(1.9)" }} /></div>
           <div className="col-span-1 p-4">
             <div className='font-bold text-lg pb-3'>Dịch vụ di động</div>
             <div className='text-sm pb-2 text-slate-500'>Mua sim số</div>

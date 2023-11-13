@@ -133,7 +133,7 @@ export default function Header() {
 
         </div>
         <div className='h-16 w-[1px] bg-gray-700 ml-6 mr-6' />
-        <div className=' w-52 h-full flex justify-end items-center'>
+        <div className='h-full flex justify-end items-center'>
           {isAuth == AuthState.LOGGED && (
 
             <>
@@ -155,7 +155,7 @@ export default function Header() {
           {
             isAuth == AuthState.NOT_LOGGED && (
               <>
-                <button className='bg-m_red mr-4 h-12 text-white font-bold px-2 rounded-xl active:opacity-70 select-none'
+                <button className='bg-m_red mr-4 h-12 w-[135px] text-white font-bold px-2 rounded-xl active:opacity-70 select-none'
                   onClick={() => {
                     setModalKey(Date.now())
                     setOpen(true)
@@ -164,7 +164,7 @@ export default function Header() {
                 >
                   Đăng nhập
                 </button>
-                <button className='border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70 select-none'
+                <button className='text-m_red border-m_red border h-12 font-bold w-[135px] rounded-xl active:opacity-70 select-none'
                   onClick={() => {
                     setModalKey(Date.now())
                     setOpen(true)
