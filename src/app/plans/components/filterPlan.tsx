@@ -66,7 +66,7 @@ export default function FilterPlan() {
       {/*   </button> */}
       {/* </div> */}
       <div className='flex w-full justify-evenly items-center h-28 bg-m_gray mt-20'>
-        <div className='w-[301px] mx-6 flex flex-col ' >
+        <div className='w-[301px] h-[62] mx-6 flex flex-col ' >
           {/* <label htmlFor='branch' className='text-lg font-bold'>Nhà mạng</label> */}
           <Select
             onChange={onChangeTelco}

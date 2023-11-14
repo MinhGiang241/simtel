@@ -28,6 +28,25 @@ export default function Header() {
   const dispatch = useDispatch()
   const router = useRouter()
 
+  const carts = [
+    {
+      label: (
+        <a className='text-base' rel="noopener noreferrer" href="/plans">
+          Gói cước thoại
+        </a>
+      ),
+      key: "0"
+    },
+    {
+      label: (
+        <a className='text-base' rel="noopener noreferrer" href="/plans">
+          Gói cước data
+        </a>
+      ),
+      key: "1"
+    },
+  ]
+
   const items = [
     {
       label: (
@@ -86,32 +105,31 @@ export default function Header() {
 
   return (
     <div className='w-full h-[88px] flex justify-center shadow-lg fixed z-50 bg-white'>
-      <div className='flex w-[160rem] max-w-[1140px]  items-center ' >
+      <div className='flex w-[160rem] max-w-[1140px] items-center ' >
         <button onClick={() => {
           pushPathName(router, dispatch, '/')
         }}>
           <Logo viewBox="0 0 152 60" width={130} height={48} />
         </button>
         <div className='text-lg flex justify-center items-center flex-grow ' >
-          <div className='w-1/4 text-center'>
-            <button className={`active:opacity-70 select-none z-50 ${pathname === '/plans/' ? 'font-bold' : ''}`} onClick={() => {
-              pushPathName(router, dispatch, '/plans')
-            }}>
-              Mua gói cước
-            </button>
+          <div className='w-[143px] h-[40px] flex justify-center items-center text-center'>
+            <Dropdown menu={{ items: carts }}>
+              <button className={`w-[99px] text-base h-[24px] active:opacity-70 select-none flex justify-center text-center ${pathname === '/plans/' ? 'font-bold' : ''}`} onClick={(e) => e.preventDefault()}>
+                <Space>
+                  Gói cước
+                  <DownOutlined />
+                </Space>
+              </button>
+            </Dropdown>
           </div>
-          <div className='w-1/4 text-center select-none'>
+          <div className='w-[143px] h-[40px] flex justify-center items-center text-center select-none'>
             {/* <button className={`active:opacity-70 select-none ${pathname === '/sims/' ? 'font-bold' : ''}`} onClick={() => {
               pushPathName(router, dispatch, '/sims')
             }}>
               Mua sim
             </button> */}
-            <Dropdown
-              menu={{
-                items
-              }}
-            >
-              <button className={`active:opacity-70 select-none ${pathname === '/sims/' ? 'font-bold' : ''}`} onClick={(e) => e.preventDefault()}>
+            <Dropdown menu={{ items }}>
+              <button className={`w-[99px] text-base h-[24px] active:opacity-70 select-none flex justify-center text-center ${pathname === '/sims/' ? 'font-bold' : ''}`} onClick={(e) => e.preventDefault()}>
                 <Space>
                   Mua sim
                   <DownOutlined />
@@ -119,15 +137,17 @@ export default function Header() {
               </button>
             </Dropdown>
           </div>
-          <div className='w-1/4 text-center' >
-            <button className={`active:opacity-70 z-50 select-none ${pathname === '/cards/' ? 'font-bold' : ''}`} onClick={() => {
+          <div className='w-[143px] h-[40px] flex justify-center items-center text-center' >
+            <button className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none ${pathname === '/cards/' ? 'font-bold' : ''}`} onClick={() => {
               pushPathName(router, dispatch, '/cards')
             }}>
               Nạp thẻ
             </button>
           </div>
-          <div className='w-1/4 text-center'>
-            <button className='active:opacity-70 select-none z-50'>
+          <div className='w-[143px] h-[40px] flex justify-center items-center text-center'>
+            <button className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none ${pathname === '/blog/' ? 'font-bold' : ''}`} onClick={() => {
+              pushPathName(router, dispatch, '/blog')
+            }}>
               Khuyến mại
             </button>
           </div>

@@ -2,10 +2,13 @@
 import React from 'react'
 import './component.css'
 import Logo from './logo/logo.svg'
+import Fb_footer from './logo/fb_footer.svg'
+import Twitter_footer from './logo/twitter_footer.svg'
+import Mess_footer from './logo/mess_footer.svg'
 
 export default function Footer() {
   return (
-    <div className='bg-m_gray h-96  '>
+    <div className='bg-m_gray h-72  '>
       <div className='footer px-24' >
         <div className="grid grid-cols-5 gap-4">
           <div className="col-span-1 p-4"><Logo className="mt-6 ml-10" style={{ transform: "scale(1.9)" }} /></div>
@@ -38,58 +41,16 @@ export default function Footer() {
             <div className='text-sm pb-2 text-slate-500'>Giấy phép cung cấp dịch vụ viễn thông</div>
           </div>
         </div>
-        {/* <div className='w-1/5 mt-16' >
-          <ul className='text-white'>
-            <div className='font-bold'>DỊCH VỤ DI ĐỘNG</div>
-            <div>Mua sim số</div>
-            <div>Mua gói cước</div>
-          </ul>
+      </div>
+      <div className='bg-m_red h-[72px] w-full flex justify-center items-center'>
+        <div className='w-[1140px] flex justify-between items-center'>
+          <div className='flex'>
+            <Fb_footer className="mr-2" />
+            <Twitter_footer className="mr-2" />
+            <Mess_footer className="mr-2" />
+          </div>
+          <div className='text-white text-xs'>@Copyright, Masflex 2023. All rights reserved.</div>
         </div>
-        <div className='w-1/5  mt-16'>
-          <ul className='text-white'>
-            <div className='font-bold'>CHÍNH SÁCH</div>
-            <div>Chính sách vận chuyển</div>
-            <div>Thanh toán</div>
-            <div>Điều kiện & Điều khoản giao dịch chung</div>
-            <div>Điều khoản cam kết</div>
-            <div>Đổi trả</div>
-            <div>Chính sách kiểm hàng</div>
-          </ul>
-        </div>
-        <div className='w-1/5 mt-16'>
-          <ul className='text-white'>
-            <div className='font-bold'>HỖ TRỢ</div>
-            <div>Đăng ký TTTB</div>
-            <div>Đổi/cấp lại SIM</div>
-            <div>Đổi/cấp lại eSIM</div>
-            <div>divên hệ</div>
-            <div>FAQs</div>
-          </ul>
-        </div>
-        <div className='w-1/5 mt-16'>
-          <ul className='text-white'>
-            <div className='font-bold'>QUY TRÌNH</div>
-            <div>Mua bán</div>
-            <div>Quản lý chất lượng dịch vụ</div>
-            <div>Giấy phép cung cấp dịch vụ viễn thông</div>
-          </ul>
-        </div> */}
-        {/* <div className=' text-white w-1/5 mt-16'>
-          <h4 className='font-bold pt-[7px] pb-[7px]'>ĐI CÙNG  SIMTELL</h4>
-
-          <divnk href={'https://www.facebook.com'} target='_blank' className='flex items-center'>
-            <FacebookSvg fill='white' viewBox="0 0 65 55" width={40} height={40} />
-            <p>Facebook</p>
-          </divnk>
-          <divnk href={'https://zalo.me'} target='_blank' className='flex items-center'>
-            <ZaloSvg fill='white' viewBox="0 0 65 55" width={40} height={40} />
-            <p>Zalo</p>
-          </divnk>
-          <divnk href={'https://www.instagram.com'} target='_blank' className='flex items-center'>
-            <InstagramSvg fill='white' viewBox="0 0 65 55" width={40} height={40} />
-            <p>Instagram</p>
-          </divnk>
-        </div> */}
       </div>
     </div>
   )
