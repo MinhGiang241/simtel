@@ -75,7 +75,7 @@ export default function FilterPlan() {
             style={{ height: '3rem' }}
             placeholder='Nhà mạng'
             options={[
-              { value: 'Mobiphone', label: 'Mobiphone' },
+              { value: 'Mobifone', label: 'Mobifone' },
               { value: 'Vinaphone', label: 'Vinaphone' },
               { value: 'Vietnamobile', label: 'Vietnamobile' },
               { value: 'Vietel', label: 'Vietel' },

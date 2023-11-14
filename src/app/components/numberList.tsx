@@ -1,100 +1,89 @@
 'use client'
-import React, { useState } from 'react';
-import { Table, Tag } from 'antd';
+import React, { HTMLAttributes, useEffect } from 'react';
+import { Table, } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { FormattedMessage, FormattedNumber } from 'react-intl'
+import { FormattedNumber } from 'react-intl'
 import { useDispatch } from 'react-redux';
 import { pushPathName } from '@/services/routes';
 import { useRouter } from 'next/navigation';
-import { setPath } from '@/GlobalRedux/path/pathSlice';
-import { Button, Tooltip, ConfigProvider } from 'antd';
-import { title } from 'process';
-import { Input, Select, Space } from 'antd'
+import { Button, Tooltip, } from 'antd';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/GlobalRedux/store';
+import { MoonLoader } from 'react-spinners';
+import { getSimFunction } from '../sims/page';
+import FilterSim from '../sims/components/FilterSim';
 interface Props {
   hideFilter?: boolean
+  colorHeader?: string,
+  colorTextHeader?: string
 }
 
+export default function NumberList({ hideFilter, colorHeader, colorTextHeader }: Props) {
+  console.log({ colorTextHeader, colorHeader });
 
-interface DataType {
-  id: number;
-  number: string;
-  branch: string;
-  simType: string;
-  plan: string;
-  price: Object;
-
-}
-const rowStyle = { style: { background: '#e2e8f0', fontSize: '17px', fontWeight: 700 } }
-
-
-const data: DataType[] = [
-  {
-    id: 1,
-    number: "0980352112",
-    branch: "Vinaphone",
-    simType: "E-SIM",
-    price: { 'current': 50000, 'old': 25000 },
-    plan: 'Được đăng ký Gói cước MAY 77.000đ siêu ưu đãi 4GB/ngày, miễn phí gọi nội mạng VinaPhone & iTel'
-  },
-  {
-    id: 2,
-    number: "0980352112",
-    branch: "Vinaphone",
-    simType: "E-SIM",
-    price: { 'current': 50000, 'old': 25000 },
-    plan: 'Được đăng ký Gói cước MAY 77.000đ siêu ưu đãi 4GB/ngày, miễn phí gọi nội mạng VinaPhone & iTel'
-  },
-  {
-    id: 3,
-    number: "0980352112",
-    branch: "Vinaphone",
-    simType: "E-SIM",
-    price: { 'current': 50000, 'old': 25000 },
-    plan: 'Được đăng ký Gói cước MAY 77.000đ siêu ưu đãi 4GB/ngày, miễn phí gọi nội mạng VinaPhone & iTel'
-  },
-  {
-    id: 4,
-    number: "0980352112",
-    branch: "Vinaphone",
-    simType: "SIM VẬT LÝ",
-    price: { 'current': 50000, 'old': 25000 },
-    plan: 'Được đăng ký Gói cước MAY 77.000đ siêu ưu đãi 4GB/ngày, miễn phí gọi nội mạng VinaPhone & iTel'
-  },
-
-];
-
-export default function NumberList({ hideFilter }: Props) {
+  var rowStyle = { style: { background: colorHeader ? colorHeader : '#E50914', fontSize: '17px', fontWeight: 700, color: colorTextHeader ? colorTextHeader : 'white' } }
 
   const router = useRouter()
   const dispatch = useDispatch()
-  const { Option } = Select
-  const num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-  const branch = ['Vietel', 'Vinaphone', 'Mobiphone', 'Vietnamobile', 'Gmobile', 'Itelecom', 'Wintel']
-  const simTypes = ['Sim vật lý', 'eSim']
-  const price = ['50.000đ', '100.000đ', '150.000đ']
-  const handleSelectBranch = (v: string[]) => { }
+
+
+  const page = useSelector((state: RootState) => state.sim.page)
+  const data = useSelector((state: RootState) => state.sim.values)
+  const loading = useSelector((state: RootState) => state.sim.loading)
+  const count = useSelector((state: RootState) => state.sim.count)
+  const type = useSelector((state: RootState) => state.sim.type)
+  const telco = useSelector((state: RootState) => state.sim.telco)
+
+  useEffect(() => {
+    getSimFunction(dispatch, page, type, telco)
+  }, [])
+
+  interface DataType {
+    _id?: string,
+    createdTime?: string,
+    updatedTime?: string,
+    msid?: string,
+    storteId?: string,
+    telco?: string,
+    hiddenCode?: string,
+    money?: {
+      price?: number,
+      compare_price?: number,
+    },
+    seria?: string,
+    status?: string,
+    desciption?: string,
+    highlight?: string[],
+    classify?: string,
+    type?: string,
+  }
+
+
+
+  useEffect(() => { }, [data, page])
+
   const columns: ColumnsType<DataType> = [
     {
 
       onHeaderCell: (_) => rowStyle,
       title: 'Số điện thoại',
-      dataIndex: 'number',
-      key: 'number',
+      dataIndex: 'msid',
+      key: 'msid',
       render: (text) => <p key={text} className='font-bold text-md'>{text}</p>,
     },
     {
       onHeaderCell: (_) => rowStyle,
       title: 'Nhà mạng',
-      dataIndex: 'branch',
-      key: 'branch',
-      render: (text) => <div key={text} className='rounded bg-m_red text-white w-20 text-center'>{text}</div>,
+      dataIndex: 'telco',
+      key: 'telco',
+      render: (text) => <div key={text} className='rounded bg-m_red text-white w-28 text-center'>{text}</div>,
     },
     {
       onHeaderCell: (_) => rowStyle,
       title: 'Loại sim',
-      dataIndex: 'simType',
-      key: 'simType',
-      render: (text) => <p key={text}>{text}</p>
+      dataIndex: 'type',
+      key: 'type',
+      render: (text) => <p key={text}>{text === "Physical" ? "Sim vật lý" : text}</p>
     },
     {
       onHeaderCell: (_) => rowStyle,
@@ -111,10 +100,10 @@ export default function NumberList({ hideFilter }: Props) {
     {
       onHeaderCell: (_) => rowStyle,
       title: 'Giá tiền',
-      key: 'price',
-      dataIndex: 'price',
-      render: ({ current, old }) => {
-        return (<TableAction current={current} old={old} />)
+      key: 'money',
+      dataIndex: 'money',
+      render: ({ price, compare_price }) => {
+        return (<TableAction current={price} old={compare_price} />)
       },
     },
   ];
@@ -123,87 +112,22 @@ export default function NumberList({ hideFilter }: Props) {
   return (
     <div>
       <div className={`flex justify-between align- items-end ${hideFilter ? 'h-10 mb-4' : 'h-24 mb-10'}`}>
-        {!hideFilter && (
-          <>
-            <div className='flex w-6/12'>
-              <div className='w-80 h-14 mr-4'>
-                {/* <label className='mb-2 font-bold' aria-label='branch'>Nhà mạng</label> */}
-                <Select
-                  allowClear
-                  aria-label='branch'
-                  style={{ width: '100%', height: '3rem' }}
-                  placeholder="Chọn nhà mạng"
-                  // defaultValue={['Vietel']}
-                  onChange={handleSelectBranch}
-                  optionLabelProp="branch"
-                >
-                  {...branch.map((v) => (
-                    <Option value={v} key={v} label={v}>
-                      <Space>
-                        {v}
-                      </Space>
-                    </Option>
-                  ))}
-                </Select>
-              </div>
-
-              <div className='w-80 h-14 mr-4'>
-                {/* <label className='mb-2 font-bold' aria-label='sim'>Loại sim</label> */}
-                <Select
-                  allowClear
-                  aria-label='sim'
-                  style={{ width: '100%', height: '3rem' }}
-                  placeholder="Chọn loại sim"
-                  // defaultValue={['Sim vật lý']}
-                  onChange={handleSelectBranch}
-                  optionLabelProp="sim"
-                >
-                  {...simTypes.map((v) => (
-                    <Option value={v} key={v} label={v}>
-                      <Space>
-                        {v}
-                      </Space>
-                    </Option>
-                  ))}
-                </Select>
-              </div>
-
-              <div className='w-80 h-14 mr-4'>
-                {/* <label className='mb-2 font-bold' aria-label='sim'>Loại sim</label> */}
-                <Select
-                  allowClear
-                  aria-label='sim'
-                  style={{ width: '100%', height: '3rem' }}
-                  placeholder="Chọn giá tiền"
-                  // defaultValue={['Sim vật lý']}
-                  onChange={handleSelectBranch}
-                  optionLabelProp="sim"
-                >
-                  {...price.map((v) => (
-                    <Option value={v} key={v} label={v}>
-                      <Space>
-                        {v}
-                      </Space>
-                    </Option>
-                  ))}
-                </Select>
-              </div>
-            </div>
-          </>
+        {!hideFilter && (< FilterSim />
         )}
-        <h4 className='font-bold'>100.000 số hiện có</h4>
+        <h4 className='font-bold'>{count} số hiện có</h4>
       </div >
-      <Table
-        columns={columns}
-        dataSource={data}
-        pagination={false}
-        rowKey={'id'}
-        onRow={(_, index: any) => ({
-          style: { background: index && index % 2 != 0 && '#e2e8f0', },
-        })}
-      />
+      {loading ? <div className='h-80 w-full flex justify-center items-center'><MoonLoader color='#E50914' /></div> :
+        (<Table
+          bordered={false}
+          columns={columns}
+          dataSource={data.map<DataType>(v => ({ ...v, money: { price: v.price, compare_price: v.compare_price } }))}
+          pagination={false}
+          rowKey={'id'}
+          onRow={(_, index: any) => ({
+            style: { background: index % 2 != 0 && '#e2e8f0', },
+          } as HTMLAttributes<any>)}
+        />)}
     </div>
-
   )
 }
 
@@ -214,74 +138,6 @@ export function TableAction({ current, old }: { current: number, old: number },)
 
   return (
     <>
-      {/* <div>
-        <div className={`flex justify-between align- items-end ${hideFilter ? 'h-10 mb-4' : 'h-24 mb-10'}`}>
-          {!hideFilter && (
-            <>
-              <div className='flex w-6/12'>
-                <div className='w-80 h-14 mr-4'>
-                  <Select
-                    allowClear
-                    aria-label='branch'
-                    style={{ width: '100%', height: '3rem' }}
-                    placeholder="Chọn nhà mạng"
-                    onChange={handleSelectBranch}
-                    optionLabelProp="branch"
-                  >
-                    {...branch.map((v) => (
-                      <Option value={v} key={v} label={v}>
-                        <Space>
-                          {v}
-                        </Space>
-                      </Option>
-                    ))}
-                  </Select>
-                </div>
-
-                <div className='w-80 h-14 mr-4'>
-                  <Select
-                    allowClear
-                    aria-label='sim'
-                    style={{ width: '100%', height: '3rem' }}
-                    placeholder="Chọn loại sim"
-                    onChange={handleSelectBranch}
-                    optionLabelProp="sim"
-                  >
-                    {...simTypes.map((v) => (
-                      <Option value={v} key={v} label={v}>
-                        <Space>
-                          {v}
-                        </Space>
-                      </Option>
-                    ))}
-                setPage  </Select>
-                </div>
-
-                <div className='w-80 h-14 mr-4'>
-                  <Select
-                    allowClear
-                    aria-label='sim'
-                    style={{ width: '100%', height: '3rem' }}
-                    placeholder="Chọn giá tiền"
-                    // defaultValue={['Sim vật lý']}
-                    onChange={handleSelectBranch}
-                    optionLabelProp="sim"
-                  >
-                    {...price.map((v) => (
-                      <Option value={v} key={v} label={v}>
-                        <Space>
-                          {v}
-                        </Space>
-                      </Option>
-                    ))}
-                  </Select>
-                </div>
-              </div>
-            </>
-          )}
-          <h4 className='font-bold'>100.000 số hiện có</h4>
-        </div >
-      </div> */}
       <div key={current} className='flex justify-between'>
         <div className='flex flex-col mr-3'>
           <p className='text-lg'>

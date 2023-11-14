@@ -17,7 +17,7 @@ export default function Home() {
       <SelectSimTitle />
       {/* <div className="w-full h-16" /> */}
     </div>
-    <SelectNumber />
+    <SelectNumber isHome />
     <div className="max-w-7xl h-fit">
       <Discount />
     </div>
