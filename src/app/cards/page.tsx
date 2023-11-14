@@ -41,9 +41,10 @@ const getImageTelco = (telco: string) => {
       return ((<Image width={70} height={70} src='/images/wintel.png' alt='wintel' />))
     default:
       return (<div>Tất cả</div>)
-
   }
 }
+
+var telcoImages = ["Vietel", "Vinaphone", "Mobiphone", "Itelecom", "Gmobile", "Vietnamobile", "Wintel", '']
 
 export default function CardPage() {
   const [image, setImage] = useState<any>((<div>Tất cả</div>))
@@ -75,15 +76,21 @@ export default function CardPage() {
   }
   return (
     <PageWrapper>
-      <div className='w-full h-32 bg-m_red mt-12 rounded-tl-2xl rounded-tr-2xl flex justify-center items-center'>
-        <h4 className='text-white  mr-6 text-3xl'>Số  điện thoại nạp thẻ</h4>
-        <div className='w-[30rem]'>
-          <Input placeholder='*********' className='h-14 w-full' style={{ fontSize: '40px' }} allowClear />
-        </div>
-      </div>
-      <div className='flex items-center px-5 w-full h-14 border-black border justify-between'>
-        {image}
-        <Dropdown
+      {/* <div className='pt-4'>
+        <div>Chọn nhà mạng</div>
+        <div></div>
+      </div> */}
+
+      <div className='mt-5 flex items-center px-5 w-full h-14 justify-between'>
+        {telcoImages.map((e: string, i: number) => (
+          <div key={i} className='w-16 h-9'>
+            {getImageTelco(e)}
+          </div>
+
+        ))}
+
+        {/* {image} */}
+        {/* <Dropdown
           onOpenChange={(v) => {
             console.log(v);
 
@@ -91,7 +98,7 @@ export default function CardPage() {
           <button className='h-full w-20 font-semibold'>
             Thay đổi
           </button>
-        </Dropdown>
+        </Dropdown> */}
       </div>
 
       <div className='w-full'>

@@ -1,5 +1,5 @@
-.footer li  {
-  padding: 7px 5px;
+.footer {
+    padding: 7px 5px;
 }
 
 .slick-prev {
@@ -7,19 +7,19 @@
     left: 33px;
 
 }
+
 .slick-next {
     z-index: 2;
     right: 33px;
 }
 
-.success:hover{
-    border:1px solid green;
+.success:hover {
+    border: 1px solid green;
     box-shadow: 0 0 2px green;
 }
 
-.input-search { 
-    font-family:Roboto;
+.input-search {
+    font-family: Roboto;
     font-size: 40px !important;
     color: gray !important;
 }
-
