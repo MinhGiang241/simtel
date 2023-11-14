@@ -11,6 +11,13 @@ import { RootState } from '@/GlobalRedux/store'
 import { getListCard, setCountCard, setLoadingCard, setPageCard, setTelcoCard } from '@/GlobalRedux/PhoneCard/PhoneCardSlice'
 import { error } from '../components/modals/CustomToast'
 import { getAllPhoneCard } from '@/services/api/simPackApi'
+import Viettel from "./logo/viettel.svg"
+import Vinaphone from './logo/vinaphone.svg'
+import Mobifone from './logo/mobifone.svg'
+import Wintel from './logo/wintel.svg'
+import Vietnamobile from './logo/vietnamobile.svg'
+import Mobile from './logo/mobile.svg'
+import Itelecom from './logo/itelecom.png'
 
 const items: MenuProps['items'] = [
   { key: 'Vietel', label: (<div className='text-base'>Vietel</div>) },
@@ -26,19 +33,19 @@ const items: MenuProps['items'] = [
 const getImageTelco = (telco: string) => {
   switch (telco) {
     case 'Vietel':
-      return ((<Image width={70} height={70} src='/images/vietel.png' alt='vietel' />))
+      return ((<Viettel width={119} height={24} />))
     case 'Vinaphone':
-      return ((<Image width={70} height={70} src='/images/vinaphone.png' alt='vinaphone' />))
+      return ((<Vinaphone width={117} height={26} />))
     case 'Mobiphone':
-      return ((<Image width={70} height={70} src='/images/mobiphone.png' alt='mobiphone' />))
+      return ((<Mobifone width={131} height={27} />))
     case 'Itelecom':
-      return ((<Image width={70} height={70} src='/images/itelecom.png' alt='itelecom' />))
+      return ((<img src="/images/itelecom.png" alt="#" width={60} height={20} />))
     case 'Gmobile':
-      return ((<Image width={70} height={70} src='/images/gmobile.png' alt='gmobile' />))
+      return ((<Mobile width={97} height={34} />))
     case 'Vietnamobile':
-      return ((<Image width={70} height={70} src='/images/vietnamobile.png' alt='vietnamobile' />))
+      return ((<Vietnamobile width={89} height={38} />))
     case 'Wintel':
-      return ((<Image width={70} height={70} src='/images/wintel.png' alt='wintel' />))
+      return ((<Wintel width={119} height={24} />))
     default:
       return (<div>Tất cả</div>)
   }
@@ -76,14 +83,9 @@ export default function CardPage() {
   }
   return (
     <PageWrapper>
-      {/* <div className='pt-4'>
-        <div>Chọn nhà mạng</div>
-        <div></div>
-      </div> */}
-
-      <div className='mt-5 flex items-center px-5 w-full h-14 justify-between'>
+      <div className='mt-5 flex items-center justify-center w-full flex-wrap h-[152px] '>
         {telcoImages.map((e: string, i: number) => (
-          <div key={i} className='w-16 h-9'>
+          <div key={i} className='w-[261px] h-[76px] border flex items-center justify-center mr-3 mb-3 rounded-lg'>
             {getImageTelco(e)}
           </div>
 

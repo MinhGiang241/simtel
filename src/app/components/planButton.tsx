@@ -7,7 +7,7 @@ export default function PlanButton() {
     <div className="w-full flex-col items-center">
       <div className="mt-4 flex justify-center" >
         {/* <h2 className="font-bold text-4xl">{'Chọn ngay'}</h2> */}
-        <h2 className="px-2 text-m_red font-bold text-4xl pt-20"> {'Chọn ngay gói cước phù hợp'}</h2>
+        <h2 className="px-2 text-m_red font-bold text-4xl pt-10"> {'Chọn ngay gói cước phù hợp'}</h2>
         {/* <h2 className="font-bold text-4xl"> {' '}</h2> */}
       </div>
       <div className="bg-slate-100 flex justify-center mt-10 border rounded-full py-2 w-[530px] h-[79px] m-auto">

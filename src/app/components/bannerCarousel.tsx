@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 export default function BannerCarousel() {
   return (
-    <Carousel emulateTouch infiniteLoop swipeable autoPlay showThumbs={false} className='w-full'>
+    <Carousel emulateTouch infiniteLoop swipeable autoPlay showThumbs={false} showArrows={false} showStatus={false} className='w-full'>
       <div>
         <Image src={'/images/image.jpg'} alt='banner' width={1440} height={451} />
       </div>

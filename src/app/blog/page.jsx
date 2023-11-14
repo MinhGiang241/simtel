@@ -23,7 +23,7 @@ export default function Page() {
 
                 <div className='w-full h-[500px] pt-2'>
                     <div className="grid grid-cols-3 gap-4">
-                        <div className="col-span-1 p-4 m-2" onClick={() => {
+                        <div className="col-span-1 p-4 m-2 cursor-pointer" onClick={() => {
                             pushPathName(router, dispatch, '/detail')
                         }}>
                             <Member className="w-full h-[221px]" />

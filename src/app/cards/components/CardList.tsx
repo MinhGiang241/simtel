@@ -36,7 +36,6 @@ export default function CardList() {
 
   return (
     <>
-
       {loading ? (<div className='h-80 w-full flex justify-center items-center'><MoonLoader color='#E50914' /></div>) : (
         <>
           <div className='flex flex-wrap justify-between'>
@@ -51,7 +50,6 @@ export default function CardList() {
         </ >
       )
       }
-
     </ >
   )
 }

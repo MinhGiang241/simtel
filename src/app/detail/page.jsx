@@ -16,7 +16,7 @@ export default function Page() {
                 <div className="grid grid-cols-[60fr,40fr] gap-4">
                     <div className="p-4">
                         <Member className="w-[749px] h-[461px] object-cover" />
-                        <div className='text-3xl font-semibold mb-2'>Simtel điều chỉnh chính sách thời hạn sử dụng thuê bao và thời hạn khôi phục số thường từ 22/09/2023</div>
+                        <div className='text-3xl font-semibold mb-2 mt-3'>Simtel điều chỉnh chính sách thời hạn sử dụng thuê bao và thời hạn khôi phục số thường từ 22/09/2023</div>
                         <div className='flex'>
                             <Calender className="mr-2" />
                             <div className='text-slate-400'>19/09/2023</div>

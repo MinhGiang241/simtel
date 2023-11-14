@@ -66,7 +66,7 @@ export default function GridPlan() {
           {simPacKList.map((item, index) => <PlanCard key={index} simpack={item} />)}
         </div>
         <div className='w-full flex justify-center mb-14'>
-          <Pagination itemRender={itemRender} current={page} size="default" total={count} showQuickJumper pageSize={9} showSizeChanger={false} onChange={(v) => {
+          <Pagination itemRender={itemRender} current={page} size="default" total={count} showQuickJumper={false} pageSize={9} showSizeChanger={false} onChange={(v) => {
             dispatch(setPage(v))
           }} />
         </div>
