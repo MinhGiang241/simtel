@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import PlanCard from './planCard'
 
 import { getAllSimpack } from '@/services/api/simPackApi';
-
+import { RightOutlined, LeftOutlined } from "@ant-design/icons"
 import { Pagination } from 'antd';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/GlobalRedux/store';
@@ -42,6 +42,22 @@ export default function GridPlan() {
 
   }, [page])
 
+  const itemRender = (index: number, type: "page" | "next" | "prev" | "jump-prev" | "jump-next", originalElement: React.ReactNode) => {
+    if (type === "next") {
+      return <div>
+        <RightOutlined />
+      </div>;
+    }
+    if (type === "prev") {
+      return <div>
+        <LeftOutlined />
+      </div>;
+    }
+    if (type === 'page') {
+      return (<div className={page === index ? `bg-m_red text-white` : `bg-m_gray text-black`} ><p>{index}</p></div>)
+    }
+    return originalElement;
+  };
 
   return (
     <>{loading ? <div className='h-80 w-full flex justify-center items-center'><MoonLoader color='#E50914' /></div> :
@@ -50,7 +66,7 @@ export default function GridPlan() {
           {simPacKList.map((item, index) => <PlanCard key={index} simpack={item} />)}
         </div>
         <div className='w-full flex justify-center mb-14'>
-          <Pagination current={page} size="default" total={count} showQuickJumper pageSize={9} showSizeChanger={false} onChange={(v) => {
+          <Pagination itemRender={itemRender} current={page} size="default" total={count} showQuickJumper pageSize={9} showSizeChanger={false} onChange={(v) => {
             dispatch(setPage(v))
           }} />
         </div>

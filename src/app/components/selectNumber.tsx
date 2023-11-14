@@ -1,3 +1,4 @@
+'use client'
 import { Input, Select, Space } from 'antd'
 import React from 'react'
 import { SearchOutlined } from '@ant-design/icons'
