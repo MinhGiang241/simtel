@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React, { useState } from 'react';
 import { Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { FormattedMessage, FormattedNumber } from 'react-intl'
@@ -72,8 +73,6 @@ export default function NumberList({ hideFilter }: Props) {
   const simTypes = ['Sim vật lý', 'eSim']
   const price = ['50.000đ', '100.000đ', '150.000đ']
   const handleSelectBranch = (v: string[]) => { }
-
-
   const columns: ColumnsType<DataType> = [
     {
 
@@ -255,7 +254,7 @@ export function TableAction({ current, old }: { current: number, old: number },)
                         </Space>
                       </Option>
                     ))}
-                  </Select>
+                setPage  </Select>
                 </div>
 
                 <div className='w-80 h-14 mr-4'>

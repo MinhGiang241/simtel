@@ -1,10 +1,10 @@
 'use client'
 import { Input, Select, Space } from 'antd'
-import React from 'react'
+import React, { useState } from 'react'
 import { SearchOutlined } from '@ant-design/icons'
 import './component.css'
 import NumberList from './numberList'
-import { RightOutlined } from '@ant-design/icons'
+import { RightOutlined, LeftOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/navigation'
 import { setPath } from '@/GlobalRedux/path/pathSlice'
 import { useDispatch } from 'react-redux'
@@ -14,6 +14,7 @@ import { FilterOutlined } from '@ant-design/icons';
 import Right from './logo/right_img.svg'
 import Left from './logo/left_img.svg'
 import Shadow from './logo/shadow.svg'
+import PageWrapper from './pageWrapper'
 
 interface Props {
   hideFilter?: boolean
@@ -28,6 +29,31 @@ export default function SelectNumber({ hideFilter }: Props) {
   const price = ['50.000đ', '100.000đ', '150.000đ']
   const { Option } = Select
   const handleSelectBranch = (v: string[]) => { }
+
+  const [page, setPage] = useState(1);
+
+  const itemRender = (index: number, type: "page" | "next" | "prev" | "jump-prev" | "jump-next", originalElement: React.ReactNode) => {
+    if (type === "next") {
+      return <div>
+        <RightOutlined />
+      </div>;
+    }
+    if (type === "prev") {
+      return <div>
+        <LeftOutlined />
+      </div>;
+    }
+    if (type === 'page') {
+      return (
+        <div
+          className={page === index ? `bg-m_red text-white rounded-sm` : `bg-m_gray text-black border border-m_gray rounded-sm`} >
+          <p>{index}</p>
+        </div>)
+    }
+    return originalElement;
+  };
+
+
 
   return (
     <>
@@ -65,16 +91,20 @@ export default function SelectNumber({ hideFilter }: Props) {
         {/* <div className='w-3/5 flex h-full items-center' >
         </div> */}
       </div>
-      <NumberList />
+      <PageWrapper isTopPadding={false}>
+        <NumberList />
+      </PageWrapper>
       <div className='w-full flex justify-center mt-5'>
-        <button onClick={() => {
-          dispatch(setPath('/sims/'))
-          router.push('/sims')
-        }} className='select-none active:opacity-70 text-white rounded-lg px-4 py-2 flex justify-center items-center'>
-          {/* <p className='text-lg text-center pr-1'>Xem Thêm</p>
-          <RightOutlined style={{ color: 'white', fontSize: '110%' }} /> */}
-          <Pagination defaultCurrent={1} total={50} />
-        </button>
+        <Pagination
+          itemRender={itemRender}
+          defaultCurrent={1}
+          total={50}
+          size="default"
+          showQuickJumper
+          pageSize={4}
+          showSizeChanger={false}
+          onChange={(i, __) => { setPage(i) }}
+        />
       </div>
     </>
   )

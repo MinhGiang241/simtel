@@ -7,12 +7,15 @@ import SelectSimTitle from '../components/selectSimTitle'
 
 export default function Sim() {
   return (
-    <PageWrapper>
+    <>
+      <div className='w-full h-20' />
       <SelectSimTitle />
-      <FilterPlan />
       <div className='w-full h-6' />
       <SelectNumber hideFilter />
-      <div className='w-full h-10' />
-    </PageWrapper>
+      <PageWrapper>
+        {/* <FilterPlan /> */}
+        <div className='w-full h-10' />
+      </PageWrapper>
+    </>
   )
 }
