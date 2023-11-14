@@ -1,12 +1,10 @@
 'use client'
-import { Input, Select, Space } from 'antd'
-import React, { useState } from 'react'
-import { SearchOutlined } from '@ant-design/icons'
+import { Input, Select, } from 'antd'
+import React from 'react'
 import './component.css'
 import NumberList from './numberList'
 import { RightOutlined, LeftOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/navigation'
-import { setPath } from '@/GlobalRedux/path/pathSlice'
 import { useDispatch } from 'react-redux'
 import { Pagination } from 'antd';
 import Man from './logo/bro.svg'
@@ -15,22 +13,27 @@ import Right from './logo/right_img.svg'
 import Left from './logo/left_img.svg'
 import Shadow from './logo/shadow.svg'
 import PageWrapper from './pageWrapper'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/GlobalRedux/store'
+import { setSimPage } from '@/GlobalRedux/Sim/SimSlice'
+import { getSimFunction } from '../sims/page'
+
 
 interface Props {
-  hideFilter?: boolean
+  hideFilter?: boolean,
+  isHome?: boolean,
 }
 
-export default function SelectNumber({ hideFilter }: Props) {
+export default function SelectNumber({ hideFilter, isHome = false }: Props) {
   const router = useRouter()
   const dispatch = useDispatch()
   const num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-  const branch = ['Vietel', 'Vinaphone', 'Mobiphone', 'Vietnamobile', 'Gmobile', 'Itelecom', 'Wintel']
-  const simTypes = ['Sim vật lý', 'eSim']
-  const price = ['50.000đ', '100.000đ', '150.000đ']
-  const { Option } = Select
-  const handleSelectBranch = (v: string[]) => { }
 
-  const [page, setPage] = useState(1);
+  const page = useSelector((state: RootState) => state.sim.page)
+  const loading = useSelector((state: RootState) => state.sim.loading)
+  const count = useSelector((state: RootState) => state.sim.count)
+  const type = useSelector((state: RootState) => state.sim.type)
+  const telco = useSelector((state: RootState) => state.sim.telco)
 
   const itemRender = (index: number, type: "page" | "next" | "prev" | "jump-prev" | "jump-next", originalElement: React.ReactNode) => {
     if (type === "next") {
@@ -92,18 +95,21 @@ export default function SelectNumber({ hideFilter }: Props) {
         </div> */}
       </div>
       <PageWrapper isTopPadding={false}>
-        <NumberList />
+        <NumberList colorHeader={isHome ? '#FFB85C' : undefined} colorTextHeader={isHome ? 'black' : undefined} />
       </PageWrapper>
       <div className='w-full flex justify-center mt-5'>
         <Pagination
           itemRender={itemRender}
-          defaultCurrent={1}
-          total={50}
+          defaultCurrent={page}
+          total={count}
           size="default"
           showQuickJumper
           pageSize={4}
           showSizeChanger={false}
-          onChange={(i, __) => { setPage(i) }}
+          onChange={(i, __) => {
+            dispatch(setSimPage(i))
+            getSimFunction(dispatch, i, type, telco)
+          }}
         />
       </div>
     </>

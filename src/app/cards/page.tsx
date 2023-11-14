@@ -15,7 +15,7 @@ import { getAllPhoneCard } from '@/services/api/simPackApi'
 const items: MenuProps['items'] = [
   { key: 'Vietel', label: (<div className='text-base'>Vietel</div>) },
   { key: 'Vinaphone', label: (<div className='text-base'>Vinaphone</div>) },
-  { key: 'Mobiphone', label: (<div className='text-base'>Mobiphone</div>) },
+  { key: 'Mobifone', label: (<div className='text-base'>Mobiphone</div>) },
   { key: 'Itelecom', label: (<div className='text-base'>Itelecom</div>) },
   { key: 'Gmobile', label: (<div className='text-base'>Gmobile</div>) },
   { key: 'Vietnamobile', label: (<div className='text-base'>Vietnamobile</div>) },
@@ -29,7 +29,7 @@ const getImageTelco = (telco: string) => {
       return ((<Image width={70} height={70} src='/images/vietel.png' alt='vietel' />))
     case 'Vinaphone':
       return ((<Image width={70} height={70} src='/images/vinaphone.png' alt='vinaphone' />))
-    case 'Mobiphone':
+    case 'Mobifone':
       return ((<Image width={70} height={70} src='/images/mobiphone.png' alt='mobiphone' />))
     case 'Itelecom':
       return ((<Image width={70} height={70} src='/images/itelecom.png' alt='itelecom' />))

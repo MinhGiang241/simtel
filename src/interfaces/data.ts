@@ -60,4 +60,22 @@ export interface Order {
   email?: string,
   sex?: string,
   birthday?: string,
+}
+
+export interface Sim {
+  _id?: string,
+  createdTime?: string,
+  updatedTime?: string,
+  msid?: string,
+  storteId?: string,
+  telco?: string,
+  hiddenCode?: string,
+  price?: number,
+  seria?: string,
+  status?: string,
+  desciption?: string,
+  highlight?: string[],
+  classify?: string,
+  compare_price?: number,
+  type?: string,
 } 

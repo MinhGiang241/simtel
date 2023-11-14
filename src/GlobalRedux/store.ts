@@ -5,6 +5,7 @@ import pathReducer from './path/pathSlice'
 import simPackReducer from './SimPack/SimPackSlice'
 import phoneCardReducer from './PhoneCard/PhoneCardSlice'
 import authReducer from './Auth/authSlice'
+import simReducer from './Sim/SimSlice'
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     simPack: simPackReducer,
     phoneCard: phoneCardReducer,
     auth: authReducer,
+    sim: simReducer,
   }
 })
 
