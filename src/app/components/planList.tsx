@@ -13,7 +13,7 @@ import useSWR from "swr";
 import { apiGraphql } from "@/constants/apiConstant";
 import { getAllSimpack } from "@/services/api/simPackApi";
 import { SimPack } from "@/interfaces/data";
-import MLink from "./config/Mlink";
+import MLink from "@/app/components/config/MLink";
 import { Button, Modal } from 'antd';
 
 export default function PlanList() {

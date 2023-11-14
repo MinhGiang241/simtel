@@ -12,19 +12,6 @@ import { getSimList, setSimCount, setSimLoading } from '@/GlobalRedux/Sim/SimSli
 import { error } from '../components/modals/CustomToast'
 import { AnyAction } from '@reduxjs/toolkit'
 
-export function getSimFunction(dispatch: Dispatch<AnyAction>, page: number, type: string | undefined, telco: string | undefined) {
-  dispatch(setSimLoading(true))
-  getAllSim({ skip: (page - 1) * 4, limit: 4, type, telco }).then(v => {
-    console.log('sim', v);
-    dispatch(getSimList(v['list']))
-    dispatch(setSimCount(v['count']))
-    dispatch(setSimLoading(false))
-  }).catch(err => {
-    dispatch(setSimLoading(false))
-    error("Lỗi", err)
-  })
-}
-
 export default function Sim() {
   return (
     <>
@@ -39,3 +26,4 @@ export default function Sim() {
     </>
   )
 }
+

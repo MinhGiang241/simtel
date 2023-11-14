@@ -1,11 +1,12 @@
 import { setSimTelco, setSimType } from '@/GlobalRedux/Sim/SimSlice'
 import { RootState } from '@/GlobalRedux/store'
 import { getAllSim } from '@/services/api/simApi'
+import { getSimFunction } from '@/services/sim/simServices'
 import { Select, Space } from 'antd'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { getSimFunction } from '../page'
+
 
 export default function FilterSim() {
   const { Option } = Select

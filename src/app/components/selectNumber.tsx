@@ -16,7 +16,8 @@ import PageWrapper from './pageWrapper'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/GlobalRedux/store'
 import { setSimPage } from '@/GlobalRedux/Sim/SimSlice'
-import { getSimFunction } from '../sims/page'
+import { getSimFunction } from '@/services/sim/simServices'
+
 
 
 interface Props {

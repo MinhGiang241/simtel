@@ -10,8 +10,9 @@ import { Button, Tooltip, } from 'antd';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/GlobalRedux/store';
 import { MoonLoader } from 'react-spinners';
-import { getSimFunction } from '../sims/page';
+
 import FilterSim from '../sims/components/FilterSim';
+import { getSimFunction } from '@/services/sim/simServices';
 interface Props {
   hideFilter?: boolean
   colorHeader?: string,
