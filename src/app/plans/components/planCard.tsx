@@ -39,7 +39,7 @@ export default function PlanCard({ simpack }: { simpack: SimPack }) {
     if (isError) {
       setOpenError(true)
     } else {
-      pushPathName(router, dispatch, '/payments')
+      pushPathName(router, dispatch, '/plans/payments')
       //setOpenInform(true)
       setErrorString(e)
     }

@@ -11,7 +11,7 @@ interface Props {
 
 export default function ErrorModal({ open, onOk, onCancel, error }: Props) {
   return (
-    <Modal footer={<div />} width={524} open={open} onOk={onOk} onCancel={onCancel}>
+    <Modal footer={<div />} width={524} open={open} onOk={(_) => onOk()} onCancel={(_) => onCancel()}>
       <div className='px-10'>
         <div className='flex justify-center mt-2 mb-4'>
           <CloseCircleFilled className='text-7xl text-m_orange' />

@@ -52,7 +52,7 @@ export const simPackSlice = createSlice({
       state.selected = action.payload
     },
     setSeletedType: (state, action) => {
-      state.selectedType = action.payload
+      return { ...state, selectedType: action.payload }
     },
     setPhone: (state, action) => {
       state.phone = action.payload

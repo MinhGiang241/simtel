@@ -19,7 +19,7 @@ export default function PlanDetailModal({ open, onOk, onCacel, simpack }: Props)
   const dispatch = useDispatch();
 
   return (
-    <Modal footer={<div />} width={613} open={open} onOk={() => onOk(type)} onCancel={onCacel} >
+    <Modal footer={<div />} width={613} open={open} onOk={() => onOk(type)} onCancel={(_) => onCacel()} >
       <div className='mx-10' >
         <div className='flex justify-center mb-8 mt-1'>
           <h4 className='text-2xl font-bold'>Chi tiết gói cước</h4>

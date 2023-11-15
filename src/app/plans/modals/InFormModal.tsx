@@ -13,7 +13,7 @@ export default function InFormModal({ open, onOk, onCancel }: Props) {
   var phone = useSelector((state: RootState) => state.simPack.phone)
 
   return (
-    <Modal width={612} footer={<div />} open={open} onOk={onOk} onCancel={onCancel}>
+    <Modal width={612} footer={<div />} open={open} onOk={(_) => onOk()} onCancel={(_) => onCancel()}>
       <div className='px-10'>
         <div className='flex justify-center mt-1 mb-4'>
           <h4 className='text-2xl font-bold'>Thông báo</h4>
