@@ -22,7 +22,7 @@ import Itelecom from './logo/itelecom.png'
 const items: MenuProps['items'] = [
   { key: 'Vietel', label: (<div className='text-base'>Vietel</div>) },
   { key: 'Vinaphone', label: (<div className='text-base'>Vinaphone</div>) },
-  { key: 'Mobifone', label: (<div className='text-base'>Mobiphone</div>) },
+  { key: 'Mobifone', label: (<div className='text-base'>Mobifone</div>) },
   { key: 'Itelecom', label: (<div className='text-base'>Itelecom</div>) },
   { key: 'Gmobile', label: (<div className='text-base'>Gmobile</div>) },
   { key: 'Vietnamobile', label: (<div className='text-base'>Vietnamobile</div>) },
@@ -51,7 +51,7 @@ const getImageTelco = (telco: string) => {
   }
 }
 
-var telcoImages = ["Vietel", "Vinaphone", "Mobiphone", "Itelecom", "Gmobile", "Vietnamobile", "Wintel", '']
+var telcoImages = ["Vietel", "Vinaphone", "Mobifone", "Itelecom", "Gmobile", "Vietnamobile", "Wintel", '']
 
 export default function CardPage() {
   const [image, setImage] = useState<any>((<div>Tất cả</div>))
