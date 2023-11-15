@@ -14,6 +14,7 @@ const config: Config = {
         m_gray: "#EDF2F7",
         m_red_banner: "#A81618",
         m_opacity: "#bd5b5b",
+        m_orange: "#FF7300",
         transparent: 'transparent',
         current: 'currentColor',
       },

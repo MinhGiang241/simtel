@@ -57,3 +57,8 @@ body {
 .slide:not(.slick-active) {
   cursor: pointer;
 }
+
+.ant-pagination .ant-pagination-item-active {
+  font-weight: 400 !important;
+  border-color: #EDF2F7 !important;
+}

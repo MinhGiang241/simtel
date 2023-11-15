@@ -36,7 +36,7 @@ export default function NumberList({ hideFilter, colorHeader, colorTextHeader }:
   const telco = useSelector((state: RootState) => state.sim.telco)
 
   useEffect(() => {
-    getSimFunction(dispatch, page, type, telco)
+    getSimFunction(dispatch, page, type, telco, false)
   }, [])
 
   interface DataType {

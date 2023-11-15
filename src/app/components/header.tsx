@@ -31,17 +31,17 @@ export default function Header() {
   const carts = [
     {
       label: (
-        <a className='text-base' rel="noopener noreferrer" href="/plans">
+        <MLink className='text-base' link="/plans">
           Gói cước thoại
-        </a>
+        </MLink>
       ),
       key: "0"
     },
     {
       label: (
-        <a className='text-base' rel="noopener noreferrer" href="/plans">
+        <MLink className='text-base' link="/plans">
           Gói cước data
-        </a>
+        </MLink>
       ),
       key: "1"
     },

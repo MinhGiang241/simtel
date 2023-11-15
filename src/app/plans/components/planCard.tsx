@@ -1,13 +1,67 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import MobileIcon from './icons/mobile.svg'
 import DatabaseIcon from './icons/database.svg'
 import { RightOutlined, CheckOutlined } from '@ant-design/icons'
 import { SimPack } from '@/interfaces/data'
 import { FormattedNumber } from 'react-intl'
-import { Button } from 'antd'
+import { Button, Modal } from 'antd'
+import PlanDetailModal from '../modals/PlanDetailModal'
+import ConfirmModal from '../modals/ConfirmModal'
+import InFormModal from '../modals/InFormModal'
+import ErrorModal from '../modals/ErrorModal'
+import { pushPathName } from '@/services/routes'
+import { useDispatch } from 'react-redux'
+import { useRouter } from 'next/navigation'
 
 export default function PlanCard({ simpack }: { simpack: SimPack }) {
+  const router = useRouter()
+  const dispatch = useDispatch()
+
+  const [open, setOpen] = useState<boolean>(false)
+  const [openConfirm, setOpenConfirm] = useState<boolean>(false)
+  const [openInform, setOpenInform] = useState<boolean>(false)
+  const [openError, setOpenError] = useState<boolean>(false)
+
+  const [type, setType] = useState<number>()
+  const [errorString, setErrorString] = useState<string>()
+
+  const handleOk = (t: number) => {
+    setType(t)
+    setOpen(false)
+    setOpenConfirm(true)
+  }
+  const handleCancel = () => {
+    setOpen(false)
+  }
+  const handleOkConfirm = (isError: boolean, e?: string) => {
+    setOpenConfirm(false)
+    if (isError) {
+      setOpenError(true)
+    } else {
+      pushPathName(router, dispatch, '/payments')
+      //setOpenInform(true)
+      setErrorString(e)
+    }
+
+  }
+  const handleCancelConfirm = () => {
+    setOpenConfirm(false)
+  }
+  const handleOkInform = () => {
+    setOpenInform(false)
+    setOpenError(true)
+  }
+  const handleCancelInform = () => {
+    setOpenInform(false)
+  }
+
+  const handleOkError = () => {
+  }
+  const handleCancelError = () => {
+    setOpenError(false)
+  }
+
 
   return (
     <div className='bg-m_red h-[420px] w-[359px] mb-8 rounded-2xl border-m_red border-2'>
@@ -32,45 +86,14 @@ export default function PlanCard({ simpack }: { simpack: SimPack }) {
             <div>3GB tốc độ cao/ngày</div>
           </div>
         </div>
-        <Button className='border-m_red bg-m_red text-white w-[164px] text-base font-semibold h-[48px] rounded-lg mt-10'>Đăng ký</Button>
+        <Button
+          onClick={() => setOpen(true)}
+          className='border-m_red bg-m_red text-white w-[164px] text-base font-semibold h-[48px] rounded-lg mt-10'>Đăng ký</Button>
       </div>
+      <PlanDetailModal open={open} onOk={handleOk} onCacel={handleCancel} simpack={simpack} />
+      <ConfirmModal open={openConfirm} onOk={handleOkConfirm} onCancel={handleCancelConfirm} simpack={simpack} type={type} />
+      <InFormModal open={openInform} onOk={handleOkInform} onCancel={handleCancelInform} />
+      <ErrorModal open={openError} onOk={handleOkError} onCancel={handleCancelError} error={errorString} />
     </div>
   )
-  /**
-    return (
-      <div className='flex justify-center items-center w-[350px] h-[500px] mx-1 my-1 pb-8'>
-        <div className='relative bg-m_red w-[350px] h-[460px] rounded-xl shadow-gray-700 shadow-md'>
-          <div className='w-28 h-7 bg-white z-20 rounded-tl-xl rounded-br-xl justify-center flex items-center text-m_red'>
-            {simpack.telco}
-          </div>
-          <div className='w-full flex flex-col items-center'>
-            <h1 className='text-6xl font-semibold text-white'>
-              <FormattedNumber value={(simpack.price ?? 0)} style='currency' currency='VND' />
-            </h1>
-            <div className='text-white mt-2 text-xl'>
-
-              <span className='font-semibold'>{simpack.code ?? ''}</span><span>{` | 30 ngày`}</span>
-            </div>
-          </div>
-
-          <div className='h-64 flex flex-col items-center justify-center absolute bottom-14 w-full bg-white/40'>
-            <div className='w-80 h-16 bg-white w-30 rounded-2xl flex  items-center px-3'>
-              <DatabaseIcon /> <div className='text-lg ml-1'><span className='font-semibold'>{`${simpack.data_max ?? 0}GB tốc độ cao`}</span>/ngày </div>
-            </div>
-            <div className='h-6' />
-            <div className='w-80 h-16 bg-white w-30 rounded-2xl flex  items-center px-3' >
-              <MobileIcon /> <div className='text-lg ml-1'>Miễn phí data <span className='font-semibold'>Youtube, Tiktok</span></div>
-            </div>
-          </div>
-
-          <div className='flex justify-start h-14 absolute bottom-0 z-20 bg-white rounded-bl-xl rounded-br-xl w-full'>
-            <MLink link={`/orders/?pack=true&id=${simpack._id}`} className='flex items-center'>
-
-              <span className='text-xl font-semibold ml-2 text-m_red'>Đăng ký </span> <RightOutlined style={{ color: "#ED1E23", fontSize: '110%' }} />
-            </MLink>
-          </div>
-        </div>
-      </div>
-      )
-      **/
 }
