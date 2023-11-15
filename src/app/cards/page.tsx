@@ -17,7 +17,6 @@ import Mobifone from './logo/mobifone.svg'
 import Wintel from './logo/wintel.svg'
 import Vietnamobile from './logo/vietnamobile.svg'
 import Mobile from './logo/mobile.svg'
-import Itelecom from './logo/itelecom.png'
 
 const items: MenuProps['items'] = [
   { key: 'Vietel', label: (<div className='text-base'>Vietel</div>) },
@@ -88,21 +87,8 @@ export default function CardPage() {
           <div key={i} className='w-[261px] h-[76px] border flex items-center justify-center mr-3 mb-3 rounded-lg'>
             {getImageTelco(e)}
           </div>
-
         ))}
-
-        {/* {image} */}
-        {/* <Dropdown
-          onOpenChange={(v) => {
-            console.log(v);
-
-          }} menu={{ onClick: handleDropdownClick, items }} placement="bottomLeft" arrow={{ pointAtCenter: false }}>
-          <button className='h-full w-20 font-semibold'>
-            Thay đổi
-          </button>
-        </Dropdown> */}
       </div>
-
       <div className='w-full'>
         <div className='mt-10 mb-6'>
           <span className='text-lg font-bold underline-offset-2 underline'>Chọn mệnh giá</span><span className='text-m_red'> *</span>
@@ -114,7 +100,3 @@ export default function CardPage() {
     </PageWrapper>
   )
 }
-
-
-
-
