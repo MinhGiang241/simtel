@@ -1,8 +1,8 @@
 'use client'
-import React, { useEffect, } from 'react'
+import React, { useEffect, useState } from 'react'
 import CardItem from './cardItem'
 import { getAllPhoneCard } from '@/services/api/simPackApi'
-import { Pagination } from 'antd';
+import { Button, Pagination } from 'antd';
 import { useSelector } from 'react-redux'
 import { RootState } from '@/GlobalRedux/store'
 import { getListCard, setCountCard, setLoadingCard, setPageCard } from '@/GlobalRedux/PhoneCard/PhoneCardSlice'
@@ -12,6 +12,7 @@ import { MoonLoader } from 'react-spinners'
 
 export default function CardList() {
   const dispatch = useDispatch()
+  const [selected, setSelected] = useState<string>()
   const data = useSelector((state: RootState) => state.phoneCard.value)
   const page = useSelector((state: RootState) => state.phoneCard.page)
   const count = useSelector((state: RootState) => state.phoneCard.count)
@@ -39,7 +40,7 @@ export default function CardList() {
       {loading ? (<div className='h-80 w-full flex justify-center items-center'><MoonLoader color='#E50914' /></div>) : (
         <>
           <div className='flex flex-wrap justify-between'>
-            {data.map((item, index) => (<CardItem key={index} card={item} />))}
+            {data.map((item, index) => (<CardItem onClick={() => setSelected(item._id)} selected={selected} key={index} card={item} />))}
           </div >
           <div className='w-full flex justify-center mb-14'>
             <Pagination current={page} size="default" total={count} showQuickJumper pageSize={9} showSizeChanger={false} onChange={(v) => {
