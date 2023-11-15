@@ -17,7 +17,6 @@ import Mobifone from './logo/mobifone.svg'
 import Wintel from './logo/wintel.svg'
 import Vietnamobile from './logo/vietnamobile.svg'
 import Mobile from './logo/mobile.svg'
-import Itelecom from './logo/itelecom.png'
 
 const items: MenuProps['items'] = [
   { key: 'Vietel', label: (<div className='text-base'>Vietel</div>) },
@@ -55,6 +54,7 @@ var telcoImages = ["Vietel", "Vinaphone", "Mobifone", "Itelecom", "Gmobile", "Vi
 
 export default function CardPage() {
   const [image, setImage] = useState<any>((<div>Tất cả</div>))
+  const [selected, setSelected] = useState<string>()
   const dispatch = useDispatch()
   const telco = useSelector((state: RootState) => state.phoneCard.telco)
   //const page = useSelector((state: RootState) => state.phoneCard.page)
@@ -85,24 +85,11 @@ export default function CardPage() {
     <PageWrapper>
       <div className='mt-5 flex items-center justify-center w-full flex-wrap h-[152px] '>
         {telcoImages.map((e: string, i: number) => (
-          <div key={i} className='w-[261px] h-[76px] border flex items-center justify-center mr-3 mb-3 rounded-lg'>
+          <button onClick={() => setSelected(e)} key={i} className={`${selected == e ? "bg-[#f5f5f5] border border-m_red" : ''} w-[261px] h-[76px] border flex items-center justify-center mr-3 mb-3 rounded-lg`}>
             {getImageTelco(e)}
-          </div>
-
-        ))}
-
-        {/* {image} */}
-        {/* <Dropdown
-          onOpenChange={(v) => {
-            console.log(v);
-
-          }} menu={{ onClick: handleDropdownClick, items }} placement="bottomLeft" arrow={{ pointAtCenter: false }}>
-          <button className='h-full w-20 font-semibold'>
-            Thay đổi
           </button>
-        </Dropdown> */}
+        ))}
       </div>
-
       <div className='w-full'>
         <div className='mt-10 mb-6'>
           <span className='text-lg font-bold underline-offset-2 underline'>Chọn mệnh giá</span><span className='text-m_red'> *</span>
@@ -114,7 +101,3 @@ export default function CardPage() {
     </PageWrapper>
   )
 }
-
-
-
-
