@@ -54,7 +54,7 @@ export default function GridPlan() {
       </div>;
     }
     if (type === 'page') {
-      return (<div className={page === index ? `bg-m_red text-white` : `bg-m_gray text-black`} ><p>{index}</p></div>)
+      return (<div className={page === index ? `bg-m_red text-white rounded-sm` : `bg-m_gray text-black border border-m_gray rounded-sm`} ><p>{index}</p></div>)
     }
     return originalElement;
   };
@@ -66,9 +66,17 @@ export default function GridPlan() {
           {simPacKList.map((item, index) => <PlanCard key={index} simpack={item} />)}
         </div>
         <div className='w-full flex justify-center mb-14'>
-          <Pagination itemRender={itemRender} current={page} size="default" total={count} showQuickJumper={false} pageSize={9} showSizeChanger={false} onChange={(v) => {
-            dispatch(setPage(v))
-          }} />
+          <Pagination
+            itemRender={itemRender}
+            current={page}
+            size="default"
+            total={count}
+            showQuickJumper
+            pageSize={9}
+            showSizeChanger={false}
+            onChange={(v) => {
+              dispatch(setPage(v))
+            }} />
         </div>
       </>
       )

@@ -15,6 +15,7 @@ import { AuthState, userLogout } from '@/GlobalRedux/Auth/authSlice';
 import { success } from './modals/CustomToast';
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
+import MLink from './config/MLink'
 
 
 export default function Header() {
@@ -49,41 +50,41 @@ export default function Header() {
   const items = [
     {
       label: (
-        <a className='text-base' rel="noopener noreferrer" href="/sims">
+        <MLink className='text-base' link="/sims">
           Viettel
-        </a>
+        </MLink>
       ),
       key: "0"
     },
     {
       label: (
-        <a className='text-base' rel="noopener noreferrer" href="/sims">
+        <MLink className='text-base' link="/sims">
           Vinaphone
-        </a>
+        </MLink>
       ),
       key: "1"
     },
     {
       label: (
-        <a className='text-base' rel="noopener noreferrer" href="/sims">
+        <MLink className='text-base' link="/sims">
           Wintel
-        </a>
+        </MLink>
       ),
       key: "2"
     },
     {
       label: (
-        <a className='text-base' rel="noopener noreferrer" href="/sims">
+        <MLink className='text-base' link="/sims">
           Vietnammobile
-        </a>
+        </MLink>
       ),
       key: "3"
     },
     {
       label: (
-        <a className='text-base' rel="noopener noreferrer" href="/sims">
+        <MLink className='text-base' link="/sims">
           Mobifone
-        </a>
+        </MLink>
       ),
       key: "4"
     }
