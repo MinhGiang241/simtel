@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux'
 import { useRouter, redirect } from 'next/navigation'
 import { setPath } from '@/GlobalRedux/path/pathSlice'
 
-export default function page() {
+export default function SimpackPayment() {
   const dispatch = useDispatch()
   const router = useRouter()
   const type = useSelector((state: RootState) => state.simPack.selectedType)
