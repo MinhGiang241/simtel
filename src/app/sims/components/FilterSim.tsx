@@ -23,12 +23,12 @@ export default function FilterSim() {
 
   const handleSelectType = (value: any) => {
     dispatch(setSimType(value === "Sim vật lý" ? 'Physical' : value))
-    getSimFunction(dispatch, page, value === "Sim vật lý" ? 'Physical' : value, telco)
+    getSimFunction(dispatch, page, value === "Sim vật lý" ? 'Physical' : value, telco, true)
   }
 
   const handleSelectBranch = (value: any) => {
     dispatch(setSimTelco(value))
-    getSimFunction(dispatch, page, type, value)
+    getSimFunction(dispatch, page, type, value, true)
   }
 
   const handleSelectPrice = (value: any) => { }

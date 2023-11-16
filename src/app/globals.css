@@ -58,6 +58,15 @@ body {
   cursor: pointer;
 }
 
-/* .ant-modal-content {
-  height: 400px;
-} */
+.ant-pagination .ant-pagination-item-active {
+  font-weight: 400 !important;
+  border-color: #EDF2F7 !important;
+}
+
+.carousel {
+  display: flex;
+}
+
+.carousel-container {
+  display: flex;
+}

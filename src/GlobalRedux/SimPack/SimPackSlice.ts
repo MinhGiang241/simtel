@@ -11,6 +11,9 @@ export interface SimPackState {
   telco?: string,
   sortBy?: string,
   type?: string,
+  selected?: SimPack,
+  selectedType?: number,
+  phone?: string,
 }
 
 const initialState: SimPackState = {
@@ -44,10 +47,19 @@ export const simPackSlice = createSlice({
     },
     setType: (state, action) => {
       state.type = action.payload
+    },
+    setSeleted: (state, action) => {
+      state.selected = action.payload
+    },
+    setSeletedType: (state, action) => {
+      return { ...state, selectedType: action.payload }
+    },
+    setPhone: (state, action) => {
+      state.phone = action.payload
     }
   }
 })
 
-export const { getList, setCount, setPage, setLoading, setType, setTelco, setSortBy } = simPackSlice.actions
+export const { getList, setCount, setPage, setLoading, setType, setTelco, setSortBy, setSeleted, setSeletedType, setPhone } = simPackSlice.actions
 
 export default simPackSlice.reducer

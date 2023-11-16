@@ -178,7 +178,7 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
           showSizeChanger={false}
           onChange={(i, __) => {
             dispatch(setSimPage(i))
-            getSimFunction(dispatch, i, type, telco)
+            getSimFunction(dispatch, i, type, telco, false)
           }}
         />
       </div>
