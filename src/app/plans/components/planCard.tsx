@@ -23,7 +23,7 @@ export default function PlanCard({ simpack }: { simpack: SimPack }) {
   const [openInform, setOpenInform] = useState<boolean>(false)
   const [openError, setOpenError] = useState<boolean>(false)
 
-  const [type, setType] = useState<number>()
+  const [type, setType] = useState<number>(0)
   const [errorString, setErrorString] = useState<string>()
 
   const handleOk = (t: number) => {

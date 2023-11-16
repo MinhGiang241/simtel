@@ -11,6 +11,9 @@ import { pushPathName } from '@/services/routes'
 import { useDispatch } from 'react-redux'
 import { useRouter, redirect } from 'next/navigation'
 import { setPath } from '@/GlobalRedux/path/pathSlice'
+import { error, success } from '@/app/components/modals/CustomToast'
+import { Order } from '@/interfaces/data'
+import { createOrder, } from '@/services/api/simPackApi'
 
 export default function SimpackPayment() {
   const dispatch = useDispatch()
@@ -21,12 +24,45 @@ export default function SimpackPayment() {
 
   const [method, setMethod] = useState<number>();
 
+  const [loading, setLoading] = useState<boolean>(false)
+
   useEffect(() => {
     if (!simpack) {
       dispatch(setPath('/plans/'))
       redirect('/plans/')
     }
   }, [])
+
+  const handleOrder = () => {
+    pushPathName(router, dispatch, '/pay')
+    try {
+      setLoading(true)
+      var dataSubmit: Order = {
+        full_name: phone,
+        tel: phone,
+        email: "",
+        address: ``,
+        item: { type: "simpack", itemId: simpack?._id, price: simpack?.price },
+        total_amount: simpack?.price,
+        prod_total_amount: simpack?.price,
+        transport_fee: 0,
+        discount_amount: 0,
+        process_state: 'WaitProcessing',
+        payment_state: 'WaitToPay',
+        payment_method: method === 1 ? 'Cod' : 'Wallet',
+      }
+      createOrder([dataSubmit]).then((_) => {
+        setLoading(false)
+        success('Đặt hàng thành công', "Bạn đã đặt hàng thành công ,đơn hàng của bạn đã được chuyển đến bộ phận quản lý",)
+        pushPathName(router, dispatch, '/pay')
+      })
+
+    } catch (err) {
+      setLoading(false);
+      error("Thanh toán thất bại", err as string)
+    }
+
+  }
 
   return (
     <div className='w-full bg-m_backgound  flex flex-col items-center min-h-[70rem]'>
@@ -162,8 +198,10 @@ export default function SimpackPayment() {
                 </div>
               </div>
               <Button onClick={(_) => {
-                pushPathName(router, dispatch, '/pay')
-              }} className='w-[177px] bg-m_red text-white border-m_red text-base font-semibold h-12'>Thanh toán</Button>
+                handleOrder()
+              }}
+                loading={loading}
+                className='w-[177px] bg-m_red text-white border-m_red text-base font-semibold h-12'>Thanh toán</Button>
             </div>
           </div>
         </div>

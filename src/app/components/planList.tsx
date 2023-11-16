@@ -15,6 +15,10 @@ import { getAllSimpack } from "@/services/api/simPackApi";
 import { SimPack } from "@/interfaces/data";
 import MLink from "@/app/components/config/MLink";
 import { Button, Modal } from 'antd';
+import { useRouter } from "next/navigation";
+import { pushPathName } from "@/services/routes";
+import PlanDetailModal from "../plans/modals/PlanDetailModal";
+import ConfirmModal from "../plans/modals/ConfirmModal";
 
 export default function PlanList() {
 
@@ -62,6 +66,7 @@ export default function PlanList() {
           <Slider {...settings}>
 
             {isLoading ? [] : data['list'].map((item: SimPack) => (<Plan
+              simpack={item}
               key={item._id}
               id={item._id}
               urlImage={`/images/plan${Math.floor(Math.random() * 3) + 1}.jpg`}
@@ -94,20 +99,52 @@ interface Props {
   describle: string,
   price: number,
   id: string,
+  simpack: SimPack
 }
 
-function Plan({ urlImage, branch, name, describle, price, id }: Props) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+function Plan({ urlImage, branch, name, describle, price, id, simpack }: Props) {
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
+  // const showModal = () => {
+  //   setIsModalOpen(true);
+  // };
+  // const handleOk = () => {
+  //   setIsModalOpen(false);
+  // };
+  // const handleCancel = () => {
+  //   setIsModalOpen(false);
+  // };
+
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const [open, setOpen] = useState<boolean>(false)
+  const [openConfirm, setOpenConfirm] = useState<boolean>(false)
+  const [type, setType] = useState<number>()
+
+  const handleOk = (t: number) => {
+    setType(t)
+    setOpen(false)
+    setOpenConfirm(true)
+  }
   const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+    setOpen(false)
+  }
+  const handleOkConfirm = (isError: boolean, e?: string) => {
+    setOpenConfirm(false)
+    if (isError) {
+      //setOpenError(true)
+    } else {
+      pushPathName(router, dispatch, '/plans/payments')
+      //setOpenInform(true)
+      // setErrorString(e)
+    }
+
+  }
+  const handleCancelConfirm = () => {
+    setOpenConfirm(false)
+  }
+
+
   return (
     <div className="w-full flex justify-center">
       <div className='w-[307px] h-[550px]'>
@@ -123,17 +160,17 @@ function Plan({ urlImage, branch, name, describle, price, id }: Props) {
                 <div className="text-sm">1GB/đến 24h ngày đăng ký...</div>
               </div>
               <div className='flex items-center'>
-                <Button className='font-bold text-m_red bg-white border-none p-0' type="primary" onClick={showModal}>
+                <Button className='font-bold text-m_red bg-white border-none p-0' type="primary" onClick={() => setOpen(true)}>
                   Xem chi tiết
                 </Button>
-                <Modal title="Chi tiết gói cước" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                  <div className="flex justify-center items-center">
-                    <div>VIETTEL99</div>
-                    <div>210 ngày</div>
-                  </div>
-                  <div className="flex justify-center">360.000đ</div>
-                  <div>Some contents...</div>
-                </Modal>
+                {/* <Modal title="Chi tiết gói cước" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}> */}
+                {/*   <div className="flex justify-center items-center"> */}
+                {/*     <div>VIETTEL99</div> */}
+                {/*     <div>210 ngày</div> */}
+                {/*   </div> */}
+                {/*   <div className="flex justify-center">360.000đ</div> */}
+                {/*   <div>Some contents...</div> */}
+                {/* </Modal> */}
               </div>
             </div>
             <div>{describle}</div>
@@ -142,13 +179,25 @@ function Plan({ urlImage, branch, name, describle, price, id }: Props) {
               {/* <p className='font-bold text-m_red'></p> */}
               {/* <TagOutlined style={{ fontSize: "150%" }} /> */}
               <p className='ml-1 font-bold'>{`${price} đ`}</p>
-              <MLink link={`/orders/?pack=true&id=${id}`} className='bg-m_red text-white font-bold select-none active:opacity-70 px-4 py-2 rounded-md'>
+              {/* <MLink link={`/orders/?pack=true&id=${id}`} className='bg-m_red text-white font-bold select-none active:opacity-70 px-4 py-2 rounded-md'> */}
+              {/*   Đăng ký */}
+              {/* </MLink> */}
+              <button
+                onClick={() => {
+                  setType(0)
+                  setOpenConfirm(true)
+                }}
+                className='bg-m_red text-white font-bold select-none active:opacity-70 px-4 py-2 rounded-md'>
                 Đăng ký
-              </MLink>
+              </button>
+
             </div>
           </div>
         </div>
       </div >
+      <PlanDetailModal open={open} onOk={handleOk} onCacel={handleCancel} simpack={simpack} />
+      <ConfirmModal open={openConfirm} onOk={handleOkConfirm} onCancel={handleCancelConfirm} simpack={simpack} type={type} />
+
     </div>)
 
 }
