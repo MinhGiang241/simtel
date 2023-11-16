@@ -52,12 +52,13 @@ export default function PlanList() {
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             navigation
             centeredSlides
+            loop={true}
           // pagination={{ clickable: true }}
           // scrollbar={{ draggable: true }}
 
           >
             {isLoading ? [] : data['list'].map((item: SimPack) =>
-            (<SwiperSlide>
+            (<SwiperSlide key={item._id}>
               <PlanSlick
                 simpack={item}
                 key={item._id}

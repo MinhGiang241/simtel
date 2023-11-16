@@ -60,27 +60,6 @@ export default function ConfirmModal({ open, onOk, onCancel, simpack, type }: Pr
           <p>Quý khách xác nhận đăng ký gói cước <span className='font-semibold'>[{type === 0 ? 'Gói tự do' : 'Gói cước kèm sim'}]</span> nhà mạng <span className='font-semibold'>[{simpack.telco}]</span> với giá <span className='font-semibold'>[<FormattedNumber value={(simpack.price ?? 0)} style='currency' currency='VND' />]</span>
           </p>
         </div>
-        {/**/}
-        {/* <label className='font-semibold text-base mb-2' htmlFor='phone'> */}
-        {/*   Số điện thoại <span className='text-m_red'>*</span> */}
-        {/* </label> */}
-        {/* <MInput */}
-        {/*   className='h-14' */}
-        {/*   id='phone' */}
-        {/*   name='phone' */}
-        {/*   onChange={() => { }} */}
-        {/*   error={''} */}
-        {/*   value={formik.values.phone} */}
-        {/*   touch={false} */}
-        {/*   onBlur={() => { }} */}
-        {/* /> */}
-        {/* <div className='w-full flex justify-center mt-7'> */}
-        {/*   <Button */}
-        {/*     htmlType='submit' */}
-        {/*     className='bg-m_red text-white w-[165px] h-12 px-3 text-base font-semibold rounded-lg border-m_red'> */}
-        {/*     Đăng ký */}
-        {/*   </Button> */}
-        {/* </div> */}
 
 
         <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => {

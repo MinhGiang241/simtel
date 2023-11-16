@@ -1,4 +1,4 @@
-import { Input } from 'antd'
+import { Input, Select } from 'antd'
 import React from 'react'
 
 interface Props {
@@ -14,10 +14,14 @@ interface Props {
   action?: React.ReactNode,
   touch?: Boolean,
   placeholder?: string,
+  options: { value: string, label: string, disabled?: boolean }[]
   onBlur?: (e: React.FocusEvent<any, Element>) => void;
+  defaultValue?: string,
+  loading?: boolean,
+  allowClear?: boolean,
 }
 
-export default function MInput({
+export default function MDropdown({
   onChange,
   required = false,
   id,
@@ -31,6 +35,10 @@ export default function MInput({
   touch = false,
   onBlur,
   placeholder,
+  options,
+  defaultValue,
+  loading,
+  allowClear,
 }: Props) {
 
 
@@ -43,9 +51,10 @@ export default function MInput({
 
       <div className='w-full flex flex-col mb-2'>
 
-        <Input onBlur={onBlur} status={(error && touch) ? `error` : ''} type={type} className={className} name={name} id={id} allowClear onChange={onChange} value={value} placeholder={placeholder} />
-        {(error && touch) ? (<div className='text-m_red'>{error}</div>) : null}
+        <Select loading={loading} defaultValue={defaultValue} options={options} onBlur={onBlur} status={(error) ? `error` : ''} type={type} className={className} name={name} id={id} allowClear={allowClear} onChange={onChange} value={value} placeholder={placeholder} />
+        {(error) ? (<div className='text-m_red'>{error}</div>) : null}
       </div>
     </div>
   )
-} 
+}
+

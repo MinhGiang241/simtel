@@ -1,4 +1,5 @@
 'use client'
+import { setPath } from '@/GlobalRedux/path/pathSlice'
 import { pushPathName } from '@/services/routes'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -15,6 +16,10 @@ export default function MLink({ children, className, link }: Props) {
   const router = useRouter()
   const dispatch = useDispatch()
   return (
-    <Link onClick={() => pushPathName(router, dispatch, link ?? '#')} href={link ?? '#'} className={className} >{children}</Link>
+    <Link onClick={() => {
+      if (link) {
+        dispatch(setPath(link))
+      }
+    }} href={link ?? '#'} className={className} >{children}</Link>
   )
 }
