@@ -62,3 +62,11 @@ body {
   font-weight: 400 !important;
   border-color: #EDF2F7 !important;
 }
+
+.carousel {
+  display: flex;
+}
+
+.carousel-container {
+  display: flex;
+}
