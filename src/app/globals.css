@@ -57,3 +57,7 @@ body {
 .slide:not(.slick-active) {
   cursor: pointer;
 }
+
+/* .ant-modal-content {
+  height: 400px;
+} */
