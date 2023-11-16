@@ -155,7 +155,7 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
           <div className='flex justify-center items-center mt-4 p-4 rounded-lg bg-m_opacity mb-4'>
             <h2 className='text-white'>Loại trừ số:</h2>
             <div className='flex mr-2'>
-              {...num.map((i, e) => (<button key={i} className='active:opacity-70 select-none mx-1 text-white rounded-full border-white border-2 px-2 py-2 h-7 w-7 text-center flex justify-center items-center'>{e}</button>))}
+              {...num.map((i, e) => (<button key={e} className='active:opacity-70 select-none mx-1 text-white rounded-full border-white border-2 px-2 py-2 h-7 w-7 text-center flex justify-center items-center'>{i}</button>))}
             </div>
           </div>
           <div className='text-white text-sm'>● Tìm sim có số 6789 bạn hãy gõ 6789</div>
