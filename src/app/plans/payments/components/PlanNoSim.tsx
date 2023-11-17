@@ -89,7 +89,7 @@ export default function PlanNoSim() {
           <FormattedNumber value={(simpack ? simpack.price ?? 0 : 0)} style='currency' currency='VND' />
         </div>
         {(simpack?.description ?? '').split('\n').map((e, i) => (
-          e && (<div className='flex mb-3 items-start'>
+          e && (<div key={i} className='flex mb-3 items-start'>
             <CheckOutlined className='text-xl mr-2' style={{ color: "green" }} />
             <div className='text-base'>{e}</div>
           </div>)
