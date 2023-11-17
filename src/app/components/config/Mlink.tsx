@@ -20,6 +20,6 @@ export default function MLink({ children, className, link }: Props) {
       if (link) {
         dispatch(setPath(`${link}/`))
       }
-    }} href={link ?? '#'} className={className} >{children}</Link>
+    }} href={`${link}/` ?? '#'} className={className} >{children}</Link>
   )
 }
