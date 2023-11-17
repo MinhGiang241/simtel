@@ -15,7 +15,7 @@ import { AuthState, userLogout } from '@/GlobalRedux/Auth/authSlice';
 import { success } from './modals/CustomToast';
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
-import MLink from './config/Mlink'
+import MLink from '@/app/components/config/MLink'
 
 
 export default function Header() {
