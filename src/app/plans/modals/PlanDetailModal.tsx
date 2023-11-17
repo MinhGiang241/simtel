@@ -37,22 +37,15 @@ export default function PlanDetailModal({ open, onOk, onCacel, simpack, isView, 
 
         <Divider />
         <div className='mt-7 mb-7'>
-          <div className='flex mb-3 items-start'>
-            <CheckOutlined className='text-xl mr-2' style={{ color: "green" }} />
-            <div className='text-base'>Chu kỳ 6 tháng tặng thêm 1 tháng khuyến mãi, gia hạn tự động.</div>
-          </div>
-          <div className='flex mb-3 items-start'>
-            <CheckOutlined className='text-xl mr-2' style={{ color: "green" }} />
-            <div className='text-base'>Truy cập Data 4G không giới hạn dung lượng dùng trên Smartphone/Tablet.</div>
-          </div>
-          <div className='flex mb-3 items-start'>
-            <CheckOutlined className='text-xl mr-2' style={{ color: "green" }} />
-            <div className='text-base'>Tại thời điểm gia hạn thất bại, gói cước chờ gia hạn 60 ngày.</div>
-          </div>
-          <div className='flex items-start'>
-            <CheckOutlined className='text-xl mr-2' style={{ color: "green" }} />
-            <div className='text-base'>Cam kết sử dụng mạng SimTel trong vòng 24 tháng, kể từ khi đăng ký gói cước thành công.</div>
-          </div>
+          {(simpack?.description ?? '').split('\n').map((e, i) => (
+
+            e && (<div key={i} className='flex mb-3 items-start'>
+              <CheckOutlined className='text-xl mr-2' style={{ color: "green" }} />
+              <div className='text-base'>{e}</div>
+            </div>)
+
+          ))}
+
         </div>
         <Divider />
         <div className='text-base font-bold mb-3'>Chọn loại gói cước</div>

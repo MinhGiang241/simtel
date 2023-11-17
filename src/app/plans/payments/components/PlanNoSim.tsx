@@ -88,22 +88,13 @@ export default function PlanNoSim() {
         <div className='text-m_red text-4xl font-bold mt-2 mb-5'>
           <FormattedNumber value={(simpack ? simpack.price ?? 0 : 0)} style='currency' currency='VND' />
         </div>
-        <div className='flex mb-3 items-start'>
-          <CheckOutlined className='text-xl mr-2' style={{ color: "green" }} />
-          <div className='text-base'>Chu kỳ 6 tháng tặng thêm 1 tháng khuyến mãi, gia hạn tự động.</div>
-        </div>
-        <div className='flex mb-3 items-start'>
-          <CheckOutlined className='text-xl mr-2' style={{ color: "green" }} />
-          <div className='text-base'>Truy cập Data 4G không giới hạn dung lượng dùng trên Smartphone/Tablet.</div>
-        </div>
-        <div className='flex mb-3 items-start'>
-          <CheckOutlined className='text-xl mr-2' style={{ color: "green" }} />
-          <div className='text-base'>Tại thời điểm gia hạn thất bại, gói cước chờ gia hạn 60 ngày.</div>
-        </div>
-        <div className='flex items-start'>
-          <CheckOutlined className='text-xl mr-2' style={{ color: "green" }} />
-          <div className='text-base'>Cam kết sử dụng mạng SimTel trong vòng 24 tháng, kể từ khi đăng ký gói cước thành công.</div>
-        </div>
+        {(simpack?.description ?? '').split('\n').map((e, i) => (
+          e && (<div className='flex mb-3 items-start'>
+            <CheckOutlined className='text-xl mr-2' style={{ color: "green" }} />
+            <div className='text-base'>{e}</div>
+          </div>)
+        )
+        )}
         <Divider />
         <div className='mt-8 w-full flex flex-col items-start mb-8' >
           <h4 className='font-semibold text-lg'>Hình thức thanh toán</h4>

@@ -81,7 +81,7 @@ export default function NumberList({ hideFilter, }: Props) {
     },
     seria?: string,
     status?: string,
-    desciption?: string,
+    description?: string,
     highlight?: string[],
     classify?: string,
     type?: string,
