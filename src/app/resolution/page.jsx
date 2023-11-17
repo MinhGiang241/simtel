@@ -1,13 +1,29 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PageWrapper from '../components/pageWrapper'
+import { useSearchParams } from 'next/navigation'
+import { get_article } from '@/services/api/policy'
+import parse from 'html-react-parser';
 
-export default function page() {
+
+export default function Resolution() {
+    const [article, setArticle] = useState('')
+
+    const searchParams = useSearchParams()
+    const id = searchParams.get('id')
+
+    useEffect(() => {
+        get_article(id).then((v) => {
+            setArticle(v)
+        })
+    }, [id])
+
     return (
         <PageWrapper>
             <div className='mt-5'>
                 <div>
-                    <div className='font-bold mb-2'>Quy trình giải quyết tranh chấp, khiếu nại</div>
+                    {parse(article?.content ?? '')}
+                    {/* <div className='font-bold mb-2'>Quy trình giải quyết tranh chấp, khiếu nại</div>
                     <div className='mb-2'>SIMTEL.vn luôn có trách nhiệm tiếp nhận và xử lý khiếu nại của Người dùng liên quan đến dịch vụ của SIMTEL.vn cung cấp. Khi phát sinh tranh chấp, các bên ưu tiên giải quyết bằng phương pháp tự thỏa thuận, thương lượng, hòa giải theo quy trình sau:</div>
                     <div className='font-bold mb-2'>Bước 1: Yêu cầu giải quyết khiếu nại</div>
                     <div className='mb-2'>Người dùng gửi yêu cầu khiếu nại cùng các chứng cứ, tài liệu liên quan về địa chỉ tiếp nhận khiếu nại mà SIMTEL đã công bố.</div>
@@ -25,7 +41,7 @@ export default function page() {
                     <div className='mb-2'>○ Mã số doanh nghiệp 0110499021 do Sở Kế hoạch và Đầu Tư Thành phố Hà Nội cấp đăng ký lần đầu ngày 05/10/2023</div>
                     <div className='mb-2'>○ Trụ sở chính: Xóm Mới, Thôn Đồng Trì, Xã Tứ Hiệp, Huyện Thanh Trì, Thành phố Hà Nội, Việt Nam</div>
                     <div className='mb-2'>○ Hotline: 0559.111.666</div>
-                    <div className='mb-2'>○ Email: simtel.vn@gmail.com </div>
+                    <div className='mb-2'>○ Email: simtel.vn@gmail.com </div> */}
                 </div>
             </div>
         </PageWrapper>
