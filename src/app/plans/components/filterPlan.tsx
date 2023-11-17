@@ -78,7 +78,7 @@ export default function FilterPlan() {
               { value: 'Mobifone', label: 'Mobifone' },
               { value: 'Vinaphone', label: 'Vinaphone' },
               { value: 'Vietnamobile', label: 'Vietnamobile' },
-              { value: 'Vietel', label: 'Vietel' },
+              { value: 'Viettel', label: 'Viettel' },
               { value: 'Gmobile', label: 'Gmobile' },
               { value: 'Itelecom', label: 'Itelecom' },
               { value: 'Wintel', label: 'Wintel' },

@@ -22,7 +22,7 @@ import Mobile from '../cards/logo/mobile.svg'
 
 const getImageTelco = (telco: string) => {
   switch (telco) {
-    case 'Vietel':
+    case 'Viettel':
       return ((<Viettel className='scale-[0.8]' />))
     case 'Vinaphone':
       return ((<Vinaphone className='scale-[0.8]' />))
