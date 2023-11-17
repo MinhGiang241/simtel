@@ -111,7 +111,7 @@ export default function Header() {
         <div className='text-lg flex justify-center items-center flex-grow ' >
           <div className='w-[143px] h-[40px] flex justify-center items-center text-center'>
             <Dropdown menu={{ items: carts }}>
-              <button className={`w-[99px] text-base h-[24px] active:opacity-70 select-none flex justify-center text-center ${pathname === '/plans/' ? 'font-bold' : ''}`} onClick={(e) => e.preventDefault()}>
+              <button className={`w-[99px] text-base h-[24px] active:opacity-70 font-bold select-none flex justify-center text-center ${pathname === '/plans/' ? ' text-m_red underline-offset-4 underline ' : ''}`} onClick={(e) => e.preventDefault()}>
                 <Space>
                   Gói cước
                   <DownOutlined />
@@ -126,7 +126,7 @@ export default function Header() {
               Mua sim
             </button> */}
             <Dropdown menu={{ items }}>
-              <button className={`w-[99px] text-base h-[24px] active:opacity-70 select-none flex justify-center text-center ${pathname === '/sims/' ? 'font-bold' : ''}`} onClick={(e) => e.preventDefault()}>
+              <button className={`w-[99px] text-base h-[24px] active:opacity-70 font-bold select-none flex justify-center text-center ${pathname === '/sims/' ? ' text-m_red underline-offset-4 underline' : ''}`} onClick={(e) => e.preventDefault()}>
                 <Space>
                   Mua sim
                   <DownOutlined />
@@ -135,14 +135,14 @@ export default function Header() {
             </Dropdown>
           </div>
           <div className='w-[143px] h-[40px] flex justify-center items-center text-center' >
-            <button className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none ${pathname === '/cards/' ? 'font-bold' : ''}`} onClick={() => {
+            <button className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-bold ${pathname === '/cards/' ? ' text-m_red underline-offset-4 underline' : ''}`} onClick={() => {
               pushPathName(router, dispatch, '/cards')
             }}>
               Nạp thẻ
             </button>
           </div>
           <div className='w-[143px] h-[40px] flex justify-center items-center text-center'>
-            <button className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none ${pathname === '/blog/' ? 'font-bold' : ''}`} onClick={() => {
+            <button className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-bold ${pathname === '/blog/' ? 'text-m_red underline-offset-4 underline' : ''}`} onClick={() => {
               pushPathName(router, dispatch, '/blog')
             }}>
               Khuyến mại
