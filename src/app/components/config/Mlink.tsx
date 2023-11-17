@@ -18,7 +18,7 @@ export default function MLink({ children, className, link }: Props) {
   return (
     <Link onClick={() => {
       if (link) {
-        dispatch(setPath(`${link}/`))
+        dispatch(setPath(link))
       }
     }} href={`${link}` ?? '#'} className={className} >{children}</Link>
   )

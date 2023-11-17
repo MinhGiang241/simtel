@@ -136,14 +136,14 @@ export default function Header() {
           </div>
           <div className='w-[143px] h-[40px] flex justify-center items-center text-center' >
             <button className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-bold ${pathname === '/cards/' ? ' text-m_red underline-offset-4 underline' : ''}`} onClick={() => {
-              pushPathName(router, dispatch, '/cards')
+              pushPathName(router, dispatch, '/cards/')
             }}>
               Nạp thẻ
             </button>
           </div>
           <div className='w-[143px] h-[40px] flex justify-center items-center text-center'>
             <button className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-bold ${pathname === '/blog/' ? 'text-m_red underline-offset-4 underline' : ''}`} onClick={() => {
-              pushPathName(router, dispatch, '/blog')
+              pushPathName(router, dispatch, '/blog/')
             }}>
               Khuyến mại
             </button>
