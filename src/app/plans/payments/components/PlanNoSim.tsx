@@ -142,7 +142,7 @@ export default function PlanNoSim() {
             </div>
           </div>
 
-          <button onClick={() => pushPathName(router, dispatch, '/plans')} className='underline underline-offset-4 text-base text-sky-700'>
+          <button onClick={() => pushPathName(router, dispatch, '/plans/')} className='underline underline-offset-4 text-base text-sky-700'>
             Đổi gói cước
           </button>
           <Divider />

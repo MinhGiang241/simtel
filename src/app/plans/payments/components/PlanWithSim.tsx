@@ -390,7 +390,7 @@ export default function PlanWithSim() {
           <Divider />
           <div className='flex justify-center w-full mb-5'>
             <Button
-              onClick={() => pushPathName(router, dispatch, '/plans')}
+              onClick={() => pushPathName(router, dispatch, '/plans/')}
               className='bg-white border border-m_red text-m_red w-[148px] h-10 rounded-lg font-semibold text-sm'
               icon={<PlusOutlined />}
             >

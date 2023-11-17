@@ -4,6 +4,6 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 
 export const pushPathName = (router: AppRouterInstance, dispatch: Dispatch<AnyAction>, path: string) => {
 
-  router.push(`${path}/`)
+  router.push(path)
   dispatch(setPath(`${path}/`))
 }
