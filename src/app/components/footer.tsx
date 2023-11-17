@@ -1,44 +1,61 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './component.css'
 import Logo from './logo/logo.svg'
 import Fb_footer from './logo/fb_footer.svg'
 import Twitter_footer from './logo/twitter_footer.svg'
 import Mess_footer from './logo/mess_footer.svg'
+import { pushPathName } from '@/services/routes';
+import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { get_article } from '@/services/api/policy'
 
 export default function Footer() {
+  const [article, setArticle] = useState<any[]>([])
+  const router = useRouter()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    get_article(undefined).then((v) => {
+      setArticle(v)
+    })
+  }, [])
+
   return (
-    <div className='bg-m_gray h-72  '>
-      <div className='footer px-24' >
-        <div className="grid grid-cols-5 gap-4">
-          <div className="col-span-1 p-4"><Logo className="mt-6 ml-10" style={{ transform: "scale(1.9)" }} /></div>
+    <div className='bg-m_gray h-auto'>
+      <div className='footer px-10' >
+        <div className="grid grid-cols-4 gap-4">
           <div className="col-span-1 p-4">
-            <div className='font-bold text-lg pb-3'>Dịch vụ di động</div>
-            <div className='text-sm pb-2 text-slate-500'>Mua sim số</div>
-            <div className='text-sm pb-2 text-slate-500'>Mua gói cước</div>
+            <Logo className="mt-6 ml-10" style={{ transform: "scale(1.9)" }} />
+          </div>
+          <div className="col-span-1 p-4">
+            <div className='font-bold text-lg pb-3'>CÔNG TY CỔ PHẦN VIỄN THÔNG SMARTEL</div>
+            <div className='text-sm pb-2 text-slate-500'>Mã số doanh nghiệp 0110499021 do Sở Kế hoạch và Đầu Tư Thành phố Hà Nội cấp đăng ký lần đầu ngày 05/10/2023</div>
+            <div className='text-sm pb-2 text-slate-500'>Trụ sở chính: Xóm Mới, Thôn Đồng Trì, Xã Tứ Hiệp, Huyện Thanh Trì, Thành phố Hà Nội, Việt Nam</div>
+            <div className='text-sm pb-2 text-slate-500'>Hotline: 0559.111.666</div>
+            <div className='text-sm pb-2 text-slate-500'>Email: simtel.vn@gmail.com</div>
           </div>
           <div className="col-span-1 p-4">
             <div className='font-bold text-lg pb-3'>Chính sách</div>
-            <div className='text-sm pb-2 text-slate-500'>Chính sách vận chuyển</div>
-            <div className='text-sm pb-2 text-slate-500'>Thanh toán</div>
-            <div className='text-sm pb-2 text-slate-500'>Điều kiện & Điều khoản giao dịch chung</div>
-            <div className='text-sm pb-2 text-slate-500'>Điều khoản cam kết</div>
-            <div className='text-sm pb-2 text-slate-500'>Đổi trả</div>
-            <div className='text-sm pb-2 text-slate-500'>Chính sách kiểm hàng</div>
+            {article.map((e) => (<div key={e._id} className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, `/resolution?id=${e._id}`) }}>{e.title}</div>))}
+            {/* <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/') }}>Mua sim số</div>
+            <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/') }}>Mua gói cước</div> */}
           </div>
+          {/* <div className="col-span-1 p-4">
+            <div className='font-bold text-lg pb-3'></div>
+            <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/') }}>Chính sách vận chuyển</div>
+            <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/') }}>Thanh toán</div>
+            <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/') }}>Điều kiện & Điều khoản giao dịch chung</div>
+            <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/') }}>Điều khoản cam kết</div>
+            <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/') }}>Đổi trả</div>
+            <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/') }}>Chính sách kiểm hàng</div>
+          </div> */}
           <div className="col-span-1 p-4">
-            <div className='font-bold text-lg pb-3'>Hỗ trợ</div>
-            <div className='text-sm pb-2 text-slate-500'>Đăng ký TTTB</div>
-            <div className='text-sm pb-2 text-slate-500'>Đổi/cấp lại SIM</div>
-            <div className='text-sm pb-2 text-slate-500'>Đổi/cấp lại eSIM</div>
-            <div className='text-sm pb-2 text-slate-500'>divên hệ</div>
-            <div className='text-sm pb-2 text-slate-500'>FAQs</div>
-          </div>
-          <div className="col-span-1 p-4">
-            <div className='font-bold text-lg pb-3'>Quy trình</div>
-            <div className='text-sm pb-2 text-slate-500'>Mua bán</div>
-            <div className='text-sm pb-2 text-slate-500'>Quản lý chất lượng dịch vụ</div>
-            <div className='text-sm pb-2 text-slate-500'>Giấy phép cung cấp dịch vụ viễn thông</div>
+            <div className='font-bold text-lg pb-3'>Danh mục</div>
+            <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/plans') }}>Gói cước</div>
+            <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/sims') }}>Mua sim</div>
+            <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/cards') }}>Nạp thẻ</div>
+            <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/blog') }}>Khuyến mại</div>
           </div>
         </div>
       </div>

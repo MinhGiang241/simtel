@@ -52,7 +52,7 @@ export default function PlanList() {
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             navigation
             centeredSlides
-            loop={true}
+            loop
           // pagination={{ clickable: true }}
           // scrollbar={{ draggable: true }}
 

@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux"
 import { useState } from "react"
 import Image from 'next/image'
 import { useSwiperSlide } from 'swiper/react';
+import { FormattedNumber } from "react-intl"
 
 interface Props {
   urlImage: string,
@@ -76,8 +77,10 @@ export default function PlanSlick({ urlImage, branch, name, describle, price, id
             <div>{describle}</div>
 
             <div className='flex justify-between items-center mt-8 rounded-b-xl'>
-              <p className='ml-1 font-bold'>{`${price} đ`}</p>
-
+              {/* <p className='ml-1 font-bold'>{`${price} đ`}</p> */}
+              <div className='ml-1 font-bold'>
+                <FormattedNumber value={(price ?? 0)} style='currency' currency='VND' />
+              </div>
               <button
                 onClick={() => {
                   setType(0)
