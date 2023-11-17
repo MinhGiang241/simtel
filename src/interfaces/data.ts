@@ -60,6 +60,8 @@ export interface Order {
   email?: string,
   sex?: string,
   birthday?: string,
+  note?: string,
+  itemIds?: string[]
 }
 
 export interface Sim {

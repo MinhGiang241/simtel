@@ -14,7 +14,9 @@ export const pathSlice = createSlice({
   name: 'path',
   initialState,
   reducers: {
-    setPath: (state, action) => { state.value = action.payload }
+    setPath: (_, action) => {
+      return { value: action.payload }
+    }
   }
 })
 

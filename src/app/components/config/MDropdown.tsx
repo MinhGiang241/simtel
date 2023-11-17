@@ -1,28 +1,30 @@
 import { Input, Select } from 'antd'
+import { FormikErrors } from 'formik';
 import React from 'react'
 
 interface Props {
-  onChange: (e: React.ChangeEvent<any>) => void,
+  setValue: (field: string, value: any, shouldValidate?: boolean | undefined) => Promise<FormikErrors<any>> | Promise<void>,
   title?: string,
   required?: Boolean,
   id: string,
   name: string,
   error?: string,
-  value?: string,
+  value?: any,
   className?: string,
   type?: string,
   action?: React.ReactNode,
   touch?: Boolean,
   placeholder?: string,
-  options: { value: string, label: string, disabled?: boolean }[]
+  options?: { value: any, label: string, disabled?: boolean }[]
   onBlur?: (e: React.FocusEvent<any, Element>) => void;
-  defaultValue?: string,
+  defaultValue?: any,
   loading?: boolean,
   allowClear?: boolean,
+  afterSetValueFunction?: Function
 }
 
 export default function MDropdown({
-  onChange,
+  setValue,
   required = false,
   id,
   name,
@@ -39,6 +41,7 @@ export default function MDropdown({
   defaultValue,
   loading,
   allowClear,
+  afterSetValueFunction,
 }: Props) {
 
 
@@ -50,9 +53,13 @@ export default function MDropdown({
       </div>
 
       <div className='w-full flex flex-col mb-2'>
-
-        <Select loading={loading} defaultValue={defaultValue} options={options} onBlur={onBlur} status={(error) ? `error` : ''} type={type} className={className} name={name} id={id} allowClear={allowClear} onChange={onChange} value={value} placeholder={placeholder} />
-        {(error) ? (<div className='text-m_red'>{error}</div>) : null}
+        <Select loading={loading} defaultValue={defaultValue} options={options} onBlur={onBlur} status={(error && touch) ? `error` : ''} className={className} id={id} allowClear={allowClear} onChange={(e) => {
+          setValue(name, e);
+          if (afterSetValueFunction) {
+            afterSetValueFunction(e)
+          }
+        }} value={value} placeholder={placeholder} />
+        {(error && touch) ? (<div className='text-m_red'>{error}</div>) : null}
       </div>
     </div>
   )

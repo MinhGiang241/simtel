@@ -92,12 +92,9 @@ export default function Header() {
 
   useEffect(() => {
     window.onpopstate = () => {
-      console.log('location', location);
       dispatch(setPath(location.pathname))
     }
   })
-
-  console.log('state', isAuth);
 
   useEffect(() => {
     dispatch(setPath(location.pathname))

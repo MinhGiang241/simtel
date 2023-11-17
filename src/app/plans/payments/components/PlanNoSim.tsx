@@ -18,12 +18,12 @@ export default function PlanNoSim() {
   const phone = useSelector((state: RootState) => state.simPack.phone)
   const simpack = useSelector((state: RootState) => state.simPack.selected)
 
-  const [method, setMethod] = useState<number>();
+  const [method, setMethod] = useState<string>();
 
   const [loading, setLoading] = useState<boolean>(false)
 
   const handleOrder = () => {
-    pushPathName(router, dispatch, '/pay')
+
     try {
       setLoading(true)
       var dataSubmit: Order = {
@@ -38,7 +38,7 @@ export default function PlanNoSim() {
         discount_amount: 0,
         process_state: 'WaitProcessing',
         payment_state: 'WaitToPay',
-        payment_method: method === 1 ? 'Cod' : 'Wallet',
+        payment_method: method,
       }
       createOrder([dataSubmit]).then((_) => {
         setLoading(false)
@@ -105,8 +105,11 @@ export default function PlanNoSim() {
           <div className='text-base'>Cam kết sử dụng mạng SimTel trong vòng 24 tháng, kể từ khi đăng ký gói cước thành công.</div>
         </div>
         <Divider />
+        <div className='mt-8 w-full flex flex-col items-start mb-8' >
+          <h4 className='font-semibold text-lg'>Hình thức thanh toán</h4>
+        </div>
         <Radio.Group value={method} onChange={(e) => setMethod(e.target.value)} className={` w-full`}>
-          <Radio value={0} className={`${method === 0 ? `bg-m_gray border-sky-700` : `border-m_gray`}  border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}>
+          <Radio value={'Wallet'} className={`${method === 'Wallet' ? `bg-m_gray border-sky-700` : `border-m_gray`}  border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}>
             <div className='flex justify-between w-full'>
               <div>Thanh Toán qua VNPAYQR</div>
               <Image className='absolute right-1 top-1' src='/images/apota.png' alt='apota' loading='lazy' width={100} height={60} />
@@ -115,14 +118,14 @@ export default function PlanNoSim() {
 
           </Radio>
 
-          <Radio value={1} className={`${method === 1 ? `bg-m_gray border-sky-700` : `border-m_gray`} border-2 pl-3 w-full py-3 rounded-xl flex flex-row relative mt-6 mb-6`}>
+          <Radio value={'Cod'} className={`${method === 'Cod' ? `bg-m_gray border-sky-700` : `border-m_gray`} border-2 pl-3 w-full py-3 rounded-xl flex flex-row relative mt-6 mb-6`}>
             <div>
               <div className='text-base'>Thanh toán COD</div>
               <div className='text-sm'>(Thanh toán trực tiếp cho ngân hàng)</div>
             </div>
           </Radio>
 
-          <Radio value={2} className={`${method === 2 ? `bg-m_gray border-sky-700` : `border-m_gray`} border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}>
+          <Radio value={'Bank'} className={`${method === 'Bank' ? `bg-m_gray border-sky-700` : `border-m_gray`} border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}>
             <div className='text-base'>Thanh toán qua tài khoản ngân hàng</div>
           </Radio>
         </Radio.Group>
@@ -148,9 +151,9 @@ export default function PlanNoSim() {
             </div>
           </div>
 
-          <div className='cursor-pointer text-base text-sky-700'>
+          <button onClick={() => pushPathName(router, dispatch, '/plans')} className='underline underline-offset-4 text-base text-sky-700'>
             Đổi gói cước
-          </div>
+          </button>
           <Divider />
           <Input className='h-11 relative' placeholder='Nhập mã giảm giá' suffix={(<button onClick={() => { }} className='font-bold text-sm right-0 absolute h-[42px]   text-m_red bg-[#FFF4F0] w-[86px] rounded-r-md'> Áp dụng</button>)} />
           <Divider />
