@@ -31,7 +31,7 @@ export default function Header() {
   const carts = [
     {
       label: (
-        <MLink className='text-base' link="/plans">
+        <MLink className='text-base' link="/plans/">
           Gói cước thoại
         </MLink>
       ),
@@ -39,7 +39,7 @@ export default function Header() {
     },
     {
       label: (
-        <MLink className='text-base' link="/plans">
+        <MLink className='text-base' link="/plans/">
           Gói cước data
         </MLink>
       ),
@@ -50,7 +50,7 @@ export default function Header() {
   const items = [
     {
       label: (
-        <MLink className='text-base' link="/sims">
+        <MLink className='text-base' link="/sims/">
           Viettel
         </MLink>
       ),
@@ -58,7 +58,7 @@ export default function Header() {
     },
     {
       label: (
-        <MLink className='text-base' link="/sims">
+        <MLink className='text-base' link="/sims/">
           Vinaphone
         </MLink>
       ),
@@ -66,7 +66,7 @@ export default function Header() {
     },
     {
       label: (
-        <MLink className='text-base' link="/sims">
+        <MLink className='text-base' link="/sims/">
           Wintel
         </MLink>
       ),
@@ -74,7 +74,7 @@ export default function Header() {
     },
     {
       label: (
-        <MLink className='text-base' link="/sims">
+        <MLink className='text-base' link="/sims/">
           Vietnammobile
         </MLink>
       ),
@@ -82,7 +82,7 @@ export default function Header() {
     },
     {
       label: (
-        <MLink className='text-base' link="/sims">
+        <MLink className='text-base' link="/sims/">
           Mobifone
         </MLink>
       ),
