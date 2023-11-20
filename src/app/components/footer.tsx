@@ -61,12 +61,12 @@ export default function Footer() {
       </div>
       <div className='bg-m_red h-[72px] w-full flex justify-center items-center'>
         <div className='w-[1140px] flex justify-between items-center'>
-          <div className='flex'>
+          <div className='flex w-[120px] h-[24px]'>
             <Fb_footer className="mr-2" />
             <Twitter_footer className="mr-2" />
             <Mess_footer className="mr-2" />
           </div>
-          <div className='text-white text-xs'>@Copyright, Masflex 2023. All rights reserved.</div>
+          <div className='text-white text-xs w-[271px] h-[20px]'>@Copyright, Masflex 2023. All rights reserved.</div>
         </div>
       </div>
     </div>

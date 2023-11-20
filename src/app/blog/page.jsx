@@ -15,7 +15,7 @@ export default function Page() {
         <PageWrapper>
             <div className='w-full mt-10'>
                 <div className="flex pl-5" >
-                    {/* <h2 className="px-2 text-m_red font-bold text-4xl">Tin tức khuyến mại</h2> */}
+                    {/* <h2 className="px-2 text-m_red font-bold text-4xl"> khuyến mại</h2> */}
                     <div className='text-slate-400 pr-2'>Trang chủ</div>
                     <div className='text-slate-400 pr-2'>{">"}</div>
                     <div>Tin tức, khuyến mại</div>
