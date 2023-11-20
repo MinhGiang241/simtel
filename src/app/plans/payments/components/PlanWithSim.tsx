@@ -3,7 +3,7 @@ import { Order, SimPack } from '@/interfaces/data'
 import { pushPathName } from '@/services/routes'
 import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { createOrder, getOrderLink } from '@/services/api/orderApi'
+import { createOrder, getOrderLink, getOrderById } from '@/services/api/orderApi'
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { error, success } from '@/app/components/modals/CustomToast'
@@ -17,6 +17,7 @@ import { District, Province, Ward } from '@/interfaces/province'
 import Image from 'next/image'
 import { FormattedNumber } from 'react-intl'
 import PlanDetailModal from '../../modals/PlanDetailModal'
+import { setSeleted } from '@/GlobalRedux/SimPack/SimPackSlice'
 
 interface FormValues {
   name: string,
@@ -172,20 +173,18 @@ export default function PlanWithSim() {
 
           setLoading(false)
           success('Đặt hàng thành công', "Bạn đã đặt hàng thành công ,đơn hàng của bạn đã được chuyển đến bộ phận quản lý",)
-          pushPathName(router, dispatch, `/simpack/payments?order=${v}`)
-          if (method === "Wallet") {
-            return getOrderLink({ orderId: v, amount: dataSubmit.total_amount, orderInfo: "test" })
-          } else {
-            pushPathName(router, dispatch, '/pay')
-          }
-        }).then((v) => {
-          console.log('orderLoinh', v);
-          router.push(v.paymentUrl)
+          // pushPathName(router, dispatch, `/simpack/payments?order=${v}`)
+          // if (method === "Wallet") {
+          //   return getOrderLink({ orderId: v, amount: dataSubmit.total_amount ?? 0, orderInfo: "test" })
+          // } else {
+          //   pushPathName(router, dispatch, '/pay')
+          // }
+          pushPathName(router, dispatch, '/pay')
         })
-
-
-
-
+        //   .then((v) => {
+        //   console.log('orderLoinh', v);
+        //   router.push(v.paymentUrl)
+        // })
       } catch (err) {
         setLoading(false);
         error("Thanh toán thất bại", err as string)
@@ -209,7 +208,7 @@ export default function PlanWithSim() {
         console.log('order', orderId);
         if (v) {
           order = v
-          dispatch(setSimSelected(v.i))
+          dispatch(setSeleted(v.i))
           await getDistrictListByProvinceId(order.provinceId)
           await getWardListByDistrictId(order.districtId)
           formik.setFieldValue('name', order?.full_name)

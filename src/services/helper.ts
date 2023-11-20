@@ -1,4 +1,4 @@
-import { apiGraphql, apiGraphqlQLTN } from "@/constants/apiConstant";
+import { apiGraphql } from "@/constants/apiConstant";
 import request, { gql } from "graphql-request";
 import { Response } from './api/type'
 

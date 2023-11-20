@@ -38,7 +38,7 @@ export default function Discount() {
       <div className='w-full h-[500px] pt-6'>
         <div className="grid grid-cols-3 gap-4">
           {blog?.map((x, key) => (
-            <div className="col-span-1 p-4 m-2">
+            <div key={key} className="col-span-1 p-4 m-2">
               <div className='cursor-pointer' key={key} onClick={() => {
                 pushPathName(router, dispatch, '/detail')
               }}>

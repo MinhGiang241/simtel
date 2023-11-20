@@ -21,7 +21,7 @@ export default function SimpackPayment() {
   const orderId = searchParams.get('order')
 
   useEffect(() => {
-    if (!simpack) {
+    if (!simpack && !orderId) {
       dispatch(setPath('/plans/'))
       redirect('/plans/')
 

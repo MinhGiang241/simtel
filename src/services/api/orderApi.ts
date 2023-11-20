@@ -39,7 +39,7 @@ export const getOrderLink = async (
     {
       orderId: string,
       orderInfo?: String,
-      amount: number,
+      amount?: number,
       paymentMethod?: string,
       bankCode?: string,
       extraData?: string,
