@@ -153,9 +153,8 @@ export default function Header() {
         <div className='h-16 w-[1px] bg-gray-700 ml-6 mr-6' />
         <div className='h-full flex justify-end items-center'>
           {isAuth == AuthState.LOGGED && (
-
             <>
-              <button className='border-black border-2 p-1 rounded-md active:opacity-70'>
+              <button className='border-black border-2 p-1 rounded-md active:opacity-70 mr-6'>
                 <ShoppingCartOutlined style={{ fontSize: '200%' }} />
               </button>
 

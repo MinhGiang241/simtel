@@ -21,6 +21,7 @@ export default function Footer() {
     })
   }, [])
 
+
   return (
     <div className='bg-m_gray h-auto'>
       <div className='footer px-10' >
@@ -37,7 +38,7 @@ export default function Footer() {
           </div>
           <div className="col-span-1 p-4">
             <div className='font-bold text-lg pb-3'>Chính sách</div>
-            {article.map((e) => (<div key={e._id} className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, `/resolution?id=${e._id}`) }}>{e.title}</div>))}
+            {article.map((e) => (<div key={e._id} className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, `/resolution?id=${e._id}`) }}>{e.title}</div>))}
             {/* <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/') }}>Mua sim số</div>
             <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/') }}>Mua gói cước</div> */}
           </div>
@@ -52,10 +53,10 @@ export default function Footer() {
           </div> */}
           <div className="col-span-1 p-4">
             <div className='font-bold text-lg pb-3'>Danh mục</div>
-            <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/plans/') }}>Gói cước</div>
-            <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/sims/') }}>Mua sim</div>
-            <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/cards/') }}>Nạp thẻ</div>
-            <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/blog/') }}>Khuyến mại</div>
+            <div className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, '/plans/') }}>Gói cước</div>
+            <div className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, '/sims/') }}>Mua sim</div>
+            <div className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, '/cards/') }}>Nạp thẻ</div>
+            <div className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, '/blog/') }}>Khuyến mại</div>
           </div>
         </div>
       </div>
