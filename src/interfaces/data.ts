@@ -19,7 +19,7 @@ export interface SimPack {
   cycle?: string,
   price?: number,
   data_max?: number,
-  desciption?: string,
+  description?: string,
   priority?: number,
   sms?: number,
   telco?: string,
@@ -60,6 +60,8 @@ export interface Order {
   email?: string,
   sex?: string,
   birthday?: string,
+  note?: string,
+  itemIds?: string[]
 }
 
 export interface Sim {
@@ -73,7 +75,7 @@ export interface Sim {
   price?: number,
   seria?: string,
   status?: string,
-  desciption?: string,
+  description?: string,
   highlight?: string[],
   classify?: string,
   compare_price?: number,

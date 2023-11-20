@@ -74,7 +74,7 @@ export default function PlanSlick({ urlImage, branch, name, describle, price, id
                 </Button>
               </div>
             </div>
-            <div>{describle}</div>
+            {/*   <div>{describle}</div> */}
 
             <div className='flex justify-between items-center mt-8 rounded-b-xl'>
               {/* <p className='ml-1 font-bold'>{`${price} đ`}</p> */}

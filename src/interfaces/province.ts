@@ -1,0 +1,45 @@
+export interface Province {
+  _id?: string,
+  code?: string,
+  hola_code?: string,
+  name?: string,
+  name_with_type?: string,
+  region?: string,
+  short_name?: string,
+  slug?: string,
+  type?: string,
+  vnp_code?: string,
+}
+
+export interface District {
+  _id?: string,
+  code?: string,
+  hola_code?: string,
+  name?: string,
+  name_with_type?: string,
+  parent_code?: string,
+  path: string,
+  path_unsign: string,
+  path_with_type: string,
+  short_name?: string,
+  slug?: string,
+  type?: string,
+  vnp_code?: string,
+}
+
+export interface Ward {
+  _id?: string,
+  abbr?: string,
+  code?: string,
+  hola_code?: string,
+  name?: string,
+  name_with_type?: string,
+  parent_code?: string,
+  path: string,
+  path_unsign: string,
+  path_with_type: string,
+  short_name?: string,
+  slug?: string,
+  type?: string,
+  vnp_code?: string,
+} 

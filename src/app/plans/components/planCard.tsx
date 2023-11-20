@@ -17,6 +17,14 @@ import { useRouter } from 'next/navigation'
 export default function PlanCard({ simpack }: { simpack: SimPack }) {
   const router = useRouter()
   const dispatch = useDispatch()
+  var simpactContenCard = simpack.description?.split("\n") ?? []
+
+  if (simpactContenCard.length > 3) {
+    simpactContenCard = simpactContenCard.slice(0, 3)
+  }
+  console.log('coon', simpactContenCard);
+  console.log('des', simpack.description)
+
 
   const [open, setOpen] = useState<boolean>(false)
   const [openConfirm, setOpenConfirm] = useState<boolean>(false)
@@ -72,23 +80,17 @@ export default function PlanCard({ simpack }: { simpack: SimPack }) {
         </div>
         <div className='text-m_red text-3xl text-center font-black mt-2'><FormattedNumber value={(simpack.price ?? 0)} style='currency' currency='VND' /></div>
         <div className='w-[290px] h-0.5 bg-m_gray mx-auto mt-6 mb-8' />
-        <div className=''>
-          <div className='flex'>
-            <CheckOutlined className='mr-4  text-xl' style={{ color: "green" }} />
-            <div>3GB tốc độ cao/ngày</div>
-          </div>
-          <div className='flex my-5'>
-            <CheckOutlined className='mr-4  text-xl' style={{ color: "green" }} />
-            <div>Miễn phí Data ,Youtube ,TikTok</div>
-          </div>
-          <div className='flex'>
-            <CheckOutlined className='mr-4  text-xl' style={{ color: "green" }} />
-            <div>3GB tốc độ cao/ngày</div>
-          </div>
+        <div className='h-36 flex flex-col justify-between text-ellipsis overflow-clip'>
+          {simpactContenCard.map((e, i) => (
+            <div className='mx-8 flex text-ellipsis' key={i}>
+              <CheckOutlined className='mr-4  text-xl' style={{ color: "green" }} />
+              <div>{e}</div>
+            </div>
+          ))}
         </div>
         <Button
           onClick={() => setOpen(true)}
-          className='border-m_red bg-m_red text-white w-[164px] text-base font-semibold h-[48px] rounded-lg mt-10'>Đăng ký</Button>
+          className='border-m_red bg-m_red text-white w-[164px] text-base font-semibold h-[48px] rounded-lg mt-3'>Đăng ký</Button>
       </div>
       <PlanDetailModal open={open} onOk={handleOk} onCacel={handleCancel} simpack={simpack} />
       <ConfirmModal open={openConfirm} onOk={handleOkConfirm} onCancel={handleCancelConfirm} simpack={simpack} type={type} />

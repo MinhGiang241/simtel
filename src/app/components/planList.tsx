@@ -1,10 +1,8 @@
 "use client"
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './component.css'
-import Image from 'next/image'
-import { TagOutlined } from '@ant-design/icons'
+
 import Link from 'next/link'
 import { useDispatch } from 'react-redux';
 import { setPath } from '@/GlobalRedux/path/pathSlice';
@@ -22,6 +20,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar'
 import { useSwiper } from 'swiper/react';
+import { MoonLoader } from 'react-spinners';
 
 register();
 export default function PlanList() {
@@ -45,7 +44,7 @@ export default function PlanList() {
         </Link>
       </div>
       {
-        isLoading ? (<div>Loading ...</div>) : (
+        isLoading ? (<div className='h-80 w-full flex justify-center items-center'><MoonLoader color='#E50914' /></div>) : (
           <Swiper
             spaceBetween={50}
             slidesPerView={3}
@@ -58,7 +57,7 @@ export default function PlanList() {
 
           >
             {isLoading ? [] : data['list'].map((item: SimPack) =>
-            (<SwiperSlide>
+            (<SwiperSlide key={item._id}>
               <PlanSlick
                 simpack={item}
                 key={item._id}
@@ -67,7 +66,7 @@ export default function PlanList() {
                 name={item.code ?? ''}
                 branch={item?.telco ?? ''}
                 price={item?.price ?? 0}
-                describle={item?.desciption ?? ''} />
+                describle={item?.description ?? ''} />
             </SwiperSlide>
             )
 

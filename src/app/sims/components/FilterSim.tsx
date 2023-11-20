@@ -12,7 +12,7 @@ export default function FilterSim() {
   const { Option } = Select
   const dispatch = useDispatch()
   const num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-  const branch = ['Vietel', 'Vinaphone', 'Mobifone', 'Vietnamobile', 'Gmobile', 'Itelecom', 'Wintel']
+  const branch = ['Viettel', 'Vinaphone', 'Mobifone', 'Vietnamobile', 'Gmobile', 'Itelecom', 'Wintel']
   const simTypes = [
     { value: 'Physical', label: 'Sim vật lý' }, { value: 'Esim', label: 'Esim' }]
   const price = ['50.000đ', '100.000đ', '150.000đ']
@@ -44,7 +44,7 @@ export default function FilterSim() {
             aria-label='branch'
             style={{ width: '100%', height: '3rem' }}
             placeholder="Chọn nhà mạng"
-            // defaultValue={['Vietel']}
+            // defaultValue={['Viettel']}
             onChange={handleSelectBranch}
             optionLabelProp="branch"
           >

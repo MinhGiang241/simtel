@@ -19,7 +19,7 @@ import Vietnamobile from './logo/vietnamobile.svg'
 import Mobile from './logo/mobile.svg'
 
 const items: MenuProps['items'] = [
-  { key: 'Vietel', label: (<div className='text-base'>Vietel</div>) },
+  { key: 'Viettel', label: (<div className='text-base'>Viettel</div>) },
   { key: 'Vinaphone', label: (<div className='text-base'>Vinaphone</div>) },
   { key: 'Mobifone', label: (<div className='text-base'>Mobifone</div>) },
   { key: 'Itelecom', label: (<div className='text-base'>Itelecom</div>) },

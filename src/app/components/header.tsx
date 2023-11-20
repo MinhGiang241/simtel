@@ -15,7 +15,7 @@ import { AuthState, userLogout } from '@/GlobalRedux/Auth/authSlice';
 import { success } from './modals/CustomToast';
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
-import MLink from './config/Mlink'
+import MLink from '@/app/components/config/Mlink'
 
 
 export default function Header() {
@@ -31,7 +31,7 @@ export default function Header() {
   const carts = [
     {
       label: (
-        <MLink className='text-base' link="/plans">
+        <MLink className='text-base' link="/plans/">
           Gói cước thoại
         </MLink>
       ),
@@ -39,7 +39,7 @@ export default function Header() {
     },
     {
       label: (
-        <MLink className='text-base' link="/plans">
+        <MLink className='text-base' link="/plans/">
           Gói cước data
         </MLink>
       ),
@@ -50,7 +50,7 @@ export default function Header() {
   const items = [
     {
       label: (
-        <MLink className='text-base' link="/sims">
+        <MLink className='text-base' link="/sims/">
           Viettel
         </MLink>
       ),
@@ -58,7 +58,7 @@ export default function Header() {
     },
     {
       label: (
-        <MLink className='text-base' link="/sims">
+        <MLink className='text-base' link="/sims/">
           Vinaphone
         </MLink>
       ),
@@ -66,7 +66,7 @@ export default function Header() {
     },
     {
       label: (
-        <MLink className='text-base' link="/sims">
+        <MLink className='text-base' link="/sims/">
           Wintel
         </MLink>
       ),
@@ -74,7 +74,7 @@ export default function Header() {
     },
     {
       label: (
-        <MLink className='text-base' link="/sims">
+        <MLink className='text-base' link="/sims/">
           Vietnammobile
         </MLink>
       ),
@@ -82,7 +82,7 @@ export default function Header() {
     },
     {
       label: (
-        <MLink className='text-base' link="/sims">
+        <MLink className='text-base' link="/sims/">
           Mobifone
         </MLink>
       ),
@@ -92,12 +92,9 @@ export default function Header() {
 
   useEffect(() => {
     window.onpopstate = () => {
-      console.log('location', location);
       dispatch(setPath(location.pathname))
     }
   })
-
-  console.log('state', isAuth);
 
   useEffect(() => {
     dispatch(setPath(location.pathname))
@@ -114,7 +111,7 @@ export default function Header() {
         <div className='text-lg flex justify-center items-center flex-grow ' >
           <div className='w-[143px] h-[40px] flex justify-center items-center text-center'>
             <Dropdown menu={{ items: carts }}>
-              <button className={`w-[99px] text-base h-[24px] active:opacity-70 select-none flex justify-center text-center ${pathname === '/plans/' ? 'font-bold' : ''}`} onClick={(e) => e.preventDefault()}>
+              <button className={`w-[99px] text-base h-[24px] active:opacity-70 font-bold select-none flex justify-center text-center ${pathname === '/plans/' ? ' text-m_red underline-offset-4 underline ' : ''}`} onClick={(e) => e.preventDefault()}>
                 <Space>
                   Gói cước
                   <DownOutlined />
@@ -129,7 +126,7 @@ export default function Header() {
               Mua sim
             </button> */}
             <Dropdown menu={{ items }}>
-              <button className={`w-[99px] text-base h-[24px] active:opacity-70 select-none flex justify-center text-center ${pathname === '/sims/' ? 'font-bold' : ''}`} onClick={(e) => e.preventDefault()}>
+              <button className={`w-[99px] text-base h-[24px] active:opacity-70 font-bold select-none flex justify-center text-center ${pathname === '/sims/' ? ' text-m_red underline-offset-4 underline' : ''}`} onClick={(e) => e.preventDefault()}>
                 <Space>
                   Mua sim
                   <DownOutlined />
@@ -138,15 +135,15 @@ export default function Header() {
             </Dropdown>
           </div>
           <div className='w-[143px] h-[40px] flex justify-center items-center text-center' >
-            <button className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none ${pathname === '/cards/' ? 'font-bold' : ''}`} onClick={() => {
-              pushPathName(router, dispatch, '/cards')
+            <button className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-bold ${pathname === '/cards/' ? ' text-m_red underline-offset-4 underline' : ''}`} onClick={() => {
+              pushPathName(router, dispatch, '/cards/')
             }}>
               Nạp thẻ
             </button>
           </div>
           <div className='w-[143px] h-[40px] flex justify-center items-center text-center'>
-            <button className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none ${pathname === '/blog/' ? 'font-bold' : ''}`} onClick={() => {
-              pushPathName(router, dispatch, '/blog')
+            <button className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-bold ${pathname === '/blog/' ? 'text-m_red underline-offset-4 underline' : ''}`} onClick={() => {
+              pushPathName(router, dispatch, '/blog/')
             }}>
               Khuyến mại
             </button>

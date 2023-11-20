@@ -11,9 +11,11 @@ interface Props {
   onOk: (type: number) => void,
   onCacel: () => void,
   simpack: SimPack
+  isView?: boolean
+  typeView?: number
 }
 
-export default function PlanDetailModal({ open, onOk, onCacel, simpack }: Props) {
+export default function PlanDetailModal({ open, onOk, onCacel, simpack, isView, typeView }: Props) {
 
   const [type, setType] = useState(0);
   const dispatch = useDispatch();
@@ -35,26 +37,19 @@ export default function PlanDetailModal({ open, onOk, onCacel, simpack }: Props)
 
         <Divider />
         <div className='mt-7 mb-7'>
-          <div className='flex mb-3 items-start'>
-            <CheckOutlined className='text-xl mr-2' style={{ color: "green" }} />
-            <div className='text-base'>Chu kỳ 6 tháng tặng thêm 1 tháng khuyến mãi, gia hạn tự động.</div>
-          </div>
-          <div className='flex mb-3 items-start'>
-            <CheckOutlined className='text-xl mr-2' style={{ color: "green" }} />
-            <div className='text-base'>Truy cập Data 4G không giới hạn dung lượng dùng trên Smartphone/Tablet.</div>
-          </div>
-          <div className='flex mb-3 items-start'>
-            <CheckOutlined className='text-xl mr-2' style={{ color: "green" }} />
-            <div className='text-base'>Tại thời điểm gia hạn thất bại, gói cước chờ gia hạn 60 ngày.</div>
-          </div>
-          <div className='flex items-start'>
-            <CheckOutlined className='text-xl mr-2' style={{ color: "green" }} />
-            <div className='text-base'>Cam kết sử dụng mạng SimTel trong vòng 24 tháng, kể từ khi đăng ký gói cước thành công.</div>
-          </div>
+          {(simpack?.description ?? '').split('\n').map((e, i) => (
+
+            e && (<div key={i} className='flex mb-3 items-start'>
+              <CheckOutlined className='text-xl mr-2' style={{ color: "green" }} />
+              <div className='text-base'>{e}</div>
+            </div>)
+
+          ))}
+
         </div>
         <Divider />
         <div className='text-base font-bold mb-3'>Chọn loại gói cước</div>
-        <Radio.Group className='flex' value={type} onChange={(v: RadioChangeEvent) => {
+        <Radio.Group disabled={isView} className='flex' value={typeView ?? type} onChange={(v: RadioChangeEvent) => {
           setType(v.target.value)
         }}>
           <Radio value={0}>
@@ -69,7 +64,7 @@ export default function PlanDetailModal({ open, onOk, onCacel, simpack }: Props)
           <Button onClick={() => {
             onOk(type)
           }}
-            className='bg-m_red text-white w-[165px] h-12 px-3 text-base font-semibold rounded-lg border-m_red'>Mua ngay</Button>
+            className='bg-m_red text-white w-[165px] h-12 px-3 text-base font-semibold rounded-lg border-m_red'>{isView ? "Đóng" : 'Mua ngay'}</Button>
         </div>
       </div>
     </Modal>

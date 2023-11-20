@@ -1,6 +1,6 @@
 'use client'
 import React, { HTMLAttributes, useEffect } from 'react';
-import { Table, } from 'antd';
+import { Space, Table, } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { FormattedNumber } from 'react-intl'
 import { useDispatch } from 'react-redux';
@@ -13,16 +13,44 @@ import { MoonLoader } from 'react-spinners';
 
 import FilterSim from '../sims/components/FilterSim';
 import { getSimFunction } from '@/services/sim/simServices';
+import Viettel from "../cards/logo/viettel.svg"
+import Vinaphone from '../cards/logo/vinaphone.svg'
+import Mobifone from '../cards/logo/mobifone.svg'
+import Wintel from '../cards/logo/wintel.svg'
+import Vietnamobile from '../cards/logo/vietnamobile.svg'
+import Mobile from '../cards/logo/mobile.svg'
+
+const getImageTelco = (telco: string) => {
+  switch (telco) {
+    case 'Viettel':
+      return ((<Viettel className='scale-[0.8]' />))
+    case 'Vinaphone':
+      return ((<Vinaphone className='scale-[0.8]' />))
+    case 'Mobifone':
+      return ((<Mobifone className='scale-[0.8]' />))
+    case 'Itelecom':
+      return ((<img src="/images/itelecom.png" alt="#" width={60} height={20} />))
+    case 'Gmobile':
+      return ((<Mobile className='scale-[0.8]' />))
+    case 'Vietnamobile':
+      return ((<Vietnamobile className='scale-[0.8]' />))
+    case 'Wintel':
+      return ((<Wintel className='scale-[0.8]' />))
+    default:
+      return (<div className='flex w-full justify-center'></div>)
+  }
+}
+
 interface Props {
   hideFilter?: boolean
   colorHeader?: string,
   colorTextHeader?: string
 }
 
-export default function NumberList({ hideFilter, colorHeader, colorTextHeader }: Props) {
-  console.log({ colorTextHeader, colorHeader });
 
-  var rowStyle = { style: { background: colorHeader ? colorHeader : '#E50914', fontSize: '17px', fontWeight: 700, color: colorTextHeader ? colorTextHeader : 'white' } }
+export default function NumberList({ hideFilter, }: Props) {
+
+  var rowStyle = { style: { background: '#E50914', fontSize: '17px', fontWeight: 700, color: 'white' } }
 
   const router = useRouter()
   const dispatch = useDispatch()
@@ -53,7 +81,7 @@ export default function NumberList({ hideFilter, colorHeader, colorTextHeader }:
     },
     seria?: string,
     status?: string,
-    desciption?: string,
+    description?: string,
     highlight?: string[],
     classify?: string,
     type?: string,
@@ -65,7 +93,6 @@ export default function NumberList({ hideFilter, colorHeader, colorTextHeader }:
 
   const columns: ColumnsType<DataType> = [
     {
-
       onHeaderCell: (_) => rowStyle,
       title: 'Số điện thoại',
       dataIndex: 'msid',
@@ -77,7 +104,7 @@ export default function NumberList({ hideFilter, colorHeader, colorTextHeader }:
       title: 'Nhà mạng',
       dataIndex: 'telco',
       key: 'telco',
-      render: (text) => <div key={text} className='rounded bg-m_red text-white w-28 text-center'>{text}</div>,
+      render: (text) => <div key={text} className=''>{getImageTelco(text)}</div>,
     },
     {
       onHeaderCell: (_) => rowStyle,
@@ -92,10 +119,12 @@ export default function NumberList({ hideFilter, colorHeader, colorTextHeader }:
       key: 'plan',
       dataIndex: 'plan',
       render: (text) => (
-        <Tooltip key={text} placement="bottomLeft">
-          {/* <p key={text}>Gói cước tự do</p> */}
-          <Button title={text}>Gói cước tự do</Button>
-        </Tooltip>
+        <Space key={text} wrap>
+          <Tooltip color='#FFF' title="Được đăng ký Gói cước MAY 77.000đ siêu ưu đãi 4GB/ngày, miễn phí gọi nội mạng VinaPhone & iTel" placement="bottomLeft">
+            {/* <p key={text}>Gói cước tự do</p> */}
+            <Button title={text}>Gói cước tự do</Button>
+          </Tooltip>
+        </Space>
       ),
     },
     {
@@ -125,7 +154,7 @@ export default function NumberList({ hideFilter, colorHeader, colorTextHeader }:
           pagination={false}
           rowKey={'id'}
           onRow={(_, index: any) => ({
-            style: { background: index % 2 != 0 && '#e2e8f0', },
+            style: { background: index % 2 != 0 ? '#EDF2F7' : 'background: #F8FAFC', },
           } as HTMLAttributes<any>)}
         />)}
     </div>
@@ -139,22 +168,20 @@ export function TableAction({ current, old }: { current: number, old: number },)
 
   return (
     <>
-      <div key={current} className='flex justify-between'>
+      <div key={current} className='flex justify-between items-center'>
         <div className='flex flex-col mr-3'>
-          <p className='text-lg'>
-            {/* {`${current} đ`} */}
+          <p className='text-lg font-bold text-m_red'>
             <FormattedNumber value={current} style='currency' currency='VND' />
           </p>
-          <p className='line-through'>
-            {/* {`${old} đ`} */}
+          <p className='line-through text-base'>
             <FormattedNumber value={old} style='currency' currency='VND' />
           </p>
         </div>
-        <button onClick={() => {
-          pushPathName(router, dispatch, '/orders')
-        }} className='text-lg px-4 rounded-2xl text-m_red bg-white border-m_red border-2 active:opacity-70 select-none'>
+        <Button onClick={() => {
+          /*   pushPathName(router, dispatch, '/orders') */
+        }} className='w-[95px] h-7 text-sm font-semibold rounded-xs text-m_red bg-white border-m_red border'>
           Mua ngay
-        </button>
+        </Button>
       </div>
     </>
 

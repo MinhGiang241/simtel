@@ -173,7 +173,6 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
           defaultCurrent={page}
           total={count}
           size="default"
-          showQuickJumper
           pageSize={4}
           showSizeChanger={false}
           onChange={(i, __) => {

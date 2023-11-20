@@ -11,7 +11,6 @@ export const customerLogin = async (phone: string, password: string) => {
     formData.append("audience", "guest");
 
     var response: AxiosResponse | undefined = await axios.post(loginApi, formData)
-    console.log('res', response);
     if (response) {
       localStorage.setItem('access_token', response?.data?.access_token)
       localStorage.setItem('expired_at', response?.data?.expires_at)

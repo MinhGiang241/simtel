@@ -29,33 +29,8 @@ body {
   min-height: 70rem;
 }
 
-.slick-slide>div {
-  margin-left: 0 40px;
-}
-
-.slick-list {
-  margin: 0 -40px;
-}
-
-.slick-active {
-  padding: 30px 0;
-}
-
-.slick-center {
-  transform: scale(1.2);
-  padding: 30px 50px !important;
-}
-
-.slick-slide:not(.slick-active) {
-  margin: 30px 0;
-}
-
 .child {
   width: 100%;
-}
-
-.slide:not(.slick-active) {
-  cursor: pointer;
 }
 
 .ant-pagination .ant-pagination-item-active {
@@ -63,10 +38,7 @@ body {
   border-color: #EDF2F7 !important;
 }
 
-.carousel {
-  display: flex;
-}
-
-.carousel-container {
-  display: flex;
+.ant-tooltip-inner {
+  color: black !important;
+  padding: 10px !important;
 }

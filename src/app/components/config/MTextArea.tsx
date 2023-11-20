@@ -14,10 +14,11 @@ interface Props {
   action?: React.ReactNode,
   touch?: Boolean,
   placeholder?: string,
+  row?: number
   onBlur?: (e: React.FocusEvent<any, Element>) => void;
 }
 
-export default function MInput({
+export default function MTextArea({
   onChange,
   required = false,
   id,
@@ -27,12 +28,13 @@ export default function MInput({
   value,
   className,
   action,
-  type = 'text',
+  row = 4,
   touch = false,
   onBlur,
   placeholder,
 }: Props) {
 
+  const { TextArea } = Input
 
   return (
     <div className='w-full'>
@@ -43,9 +45,20 @@ export default function MInput({
 
       <div className='w-full flex flex-col mb-2'>
 
-        <Input onBlur={onBlur} status={(error && touch) ? `error` : ''} type={type} className={className} name={name} id={id} allowClear onChange={onChange} value={value} placeholder={placeholder} />
+        <TextArea
+          autoSize={{ minRows: 6, maxRows: 6 }}
+          onBlur={onBlur}
+          status={(error && touch) ? `error` : ''}
+          className={className}
+          name={name}
+          id={id}
+          allowClear
+          onChange={onChange}
+          value={value}
+          placeholder={placeholder} />
         {(error && touch) ? (<div className='text-m_red'>{error}</div>) : null}
       </div>
     </div>
   )
-} 
+}
+
