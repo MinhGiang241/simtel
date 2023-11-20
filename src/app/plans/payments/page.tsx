@@ -3,7 +3,7 @@ import { RootState } from '@/GlobalRedux/store'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { useRouter, redirect } from 'next/navigation'
+import { useRouter, redirect, useSearchParams } from 'next/navigation'
 
 import PlanNoSim from './components/PlanNoSim'
 import PlanWithSim from './components/PlanWithSim'
@@ -17,11 +17,14 @@ export default function SimpackPayment() {
   const phone = useSelector((state: RootState) => state.simPack.phone)
   const simpack = useSelector((state: RootState) => state.simPack.selected)
   const [loading, setLoading] = useState(true)
+  const searchParams = useSearchParams()
+  const orderId = searchParams.get('order')
 
   useEffect(() => {
     if (!simpack) {
       dispatch(setPath('/plans/'))
       redirect('/plans/')
+
     } else {
       setLoading(false)
     }

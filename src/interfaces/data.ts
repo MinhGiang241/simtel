@@ -61,7 +61,11 @@ export interface Order {
   sex?: string,
   birthday?: string,
   note?: string,
-  itemIds?: string[]
+  itemIds?: string[],
+  provinceId?: string,
+  districtId?: string,
+  wardId?: string,
+  i?: any
 }
 
 export interface Sim {

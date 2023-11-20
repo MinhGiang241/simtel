@@ -19,6 +19,8 @@ import Mobifone from '../cards/logo/mobifone.svg'
 import Wintel from '../cards/logo/wintel.svg'
 import Vietnamobile from '../cards/logo/vietnamobile.svg'
 import Mobile from '../cards/logo/mobile.svg'
+import { setSimSelected } from '@/GlobalRedux/Sim/SimSlice';
+import { Sim } from '@/interfaces/data';
 
 const getImageTelco = (telco: string) => {
   switch (telco) {
@@ -29,6 +31,8 @@ const getImageTelco = (telco: string) => {
     case 'Mobifone':
       return ((<Mobifone className='scale-[0.8]' />))
     case 'Itelecom':
+      return ((<img src="/images/itelecom.png" alt="#" width={60} height={20} />))
+    case 'Itel':
       return ((<img src="/images/itelecom.png" alt="#" width={60} height={20} />))
     case 'Gmobile':
       return ((<Mobile className='scale-[0.8]' />))
@@ -85,6 +89,7 @@ export default function NumberList({ hideFilter, }: Props) {
     highlight?: string[],
     classify?: string,
     type?: string,
+    sim?: Sim
   }
 
 
@@ -130,10 +135,10 @@ export default function NumberList({ hideFilter, }: Props) {
     {
       onHeaderCell: (_) => rowStyle,
       title: 'Giá tiền',
-      key: 'money',
-      dataIndex: 'money',
-      render: ({ price, compare_price }) => {
-        return (<TableAction current={price} old={compare_price} />)
+      key: 'sim',
+      dataIndex: 'sim',
+      render: (v) => {
+        return (<TableAction current={v.price} old={v.compare_price} sim={v} />)
       },
     },
   ];
@@ -150,7 +155,7 @@ export default function NumberList({ hideFilter, }: Props) {
         (<Table
           bordered={false}
           columns={columns}
-          dataSource={data.map<DataType>(v => ({ ...v, money: { price: v.price, compare_price: v.compare_price } }))}
+          dataSource={data.map<DataType>(v => ({ ...v, money: { price: v.price, compare_price: v.compare_price }, sim: v }))}
           pagination={false}
           rowKey={'id'}
           onRow={(_, index: any) => ({
@@ -162,7 +167,7 @@ export default function NumberList({ hideFilter, }: Props) {
 }
 
 
-export function TableAction({ current, old }: { current: number, old: number },) {
+export function TableAction({ current, old, sim }: { current: number, old: number, sim: Sim },) {
   const router = useRouter()
   const dispatch = useDispatch()
 
@@ -173,12 +178,13 @@ export function TableAction({ current, old }: { current: number, old: number },)
           <p className='text-lg font-bold text-m_red'>
             <FormattedNumber value={current} style='currency' currency='VND' />
           </p>
-          <p className='line-through text-base'>
+          {old && <p className='line-through text-base'>
             <FormattedNumber value={old} style='currency' currency='VND' />
-          </p>
+          </p>}
         </div>
         <Button onClick={() => {
-          /*   pushPathName(router, dispatch, '/orders') */
+          dispatch(setSimSelected(sim))
+          pushPathName(router, dispatch, '/sims/payments')
         }} className='w-[95px] h-7 text-sm font-semibold rounded-xs text-m_red bg-white border-m_red border'>
           Mua ngay
         </Button>

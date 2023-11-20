@@ -30,3 +30,5 @@ export const getAllSim = async ({
   var variables = { telco, not_include, price, type, search, skip, limit }
   return await CallApi({ query, variables });
 }
+
+
