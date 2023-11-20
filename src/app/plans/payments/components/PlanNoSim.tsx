@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { RootState } from '@/GlobalRedux/store'
 import { pushPathName } from '@/services/routes'
 import { Order } from '@/interfaces/data'
-import { createOrder } from '@/services/api/simPackApi'
+import { createOrder } from '@/services/api/orderApi'
 import { error, success } from '@/app/components/modals/CustomToast'
 import Image from 'next/image'
 
@@ -40,7 +40,7 @@ export default function PlanNoSim() {
         payment_state: 'WaitToPay',
         payment_method: method,
       }
-      createOrder([dataSubmit]).then((_) => {
+      createOrder(dataSubmit).then((_) => {
         setLoading(false)
         success('Đặt hàng thành công', "Bạn đã đặt hàng thành công ,đơn hàng của bạn đã được chuyển đến bộ phận quản lý",)
         pushPathName(router, dispatch, '/pay')
