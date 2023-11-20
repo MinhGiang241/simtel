@@ -42,11 +42,11 @@ export default function CardList() {
           <div className='flex flex-wrap justify-between'>
             {data.map((item, index) => (<CardItem onClick={() => setSelected(item._id)} selected={selected} key={index} card={item} />))}
           </div >
-          <div className='w-full flex justify-center mb-14'>
-            <Pagination current={page} size="default" total={count} showQuickJumper pageSize={9} showSizeChanger={false} onChange={(v) => {
+          {/* <div className='w-full flex justify-center mb-14'>
+            <Pagination current={page} size="default" total={count} pageSize={9} showQuickJumper={false} onChange={(v) => {
               dispatch(setPageCard(v))
             }} />
-          </div>
+          </div> */}
 
         </ >
       )

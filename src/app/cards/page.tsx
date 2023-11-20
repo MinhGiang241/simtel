@@ -83,21 +83,21 @@ export default function CardPage() {
   }
   return (
     <PageWrapper>
+      <div className='mt-5 text-lg font-bold w-[137px] h-[38px]'>Chọn nhà mạng</div>
       <div className='mt-5 flex items-center justify-center w-full flex-wrap h-[152px] '>
         {telcoImages.map((e: string, i: number) => (
-          <button onClick={() => setSelected(e)} key={i} className={`${selected == e ? "bg-[#f5f5f5] border border-m_red" : ''} w-[261px] h-[76px] border flex items-center justify-center mr-3 mb-3 rounded-lg`}>
+          <button onClick={() => setSelected(e)} key={i} className={`${selected == e ? "bg-[#f5f5f5] border border-m_red" : ''} w-[261px] h-[80px] border flex items-center justify-center mr-3 mb-3 rounded-lg`}>
             {getImageTelco(e)}
           </button>
         ))}
       </div>
       <div className='w-full'>
         <div className='mt-10 mb-6'>
-          <span className='text-lg font-bold underline-offset-2 underline'>Chọn mệnh giá</span><span className='text-m_red'> *</span>
+          <span className='text-lg font-bold w-[137px] h-[38px]'>Chọn mệnh giá</span><span className='text-m_red'> *</span>
         </div>
         <CardList />
       </div>
       <PaymentSelect />
-      <div className='h-96' />
     </PageWrapper>
   )
 }

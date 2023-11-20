@@ -12,12 +12,12 @@ export default function PaymentSelect() {
   return (
     <div className='w-full'>
       <div className='mt-4 mb-6'>
-        <span className='text-lg font-bold'>Chọn phương thức thanh toán</span><span className='text-m_red'> *</span>
+        <span className='font-bold text-lg'>Chọn phương thức thanh toán</span><span className='text-m_red'> *</span>
       </div>
       <div className="flex items-center border w-[554px] h-[68px] rounded-xl bg-m_gray">
         <Radio.Group >
-          <Radio className="ml-4" >
-            <h4 className='ml-4 font-semibold text-slate-400'>Thanh toán qua AppotaPay</h4>
+          <Radio disabled className="ml-4" >
+            <h4 className='ml-4 font-semibold text-slate-400 w-[188px] h-[24px]'>Thanh toán qua AppotaPay</h4>
           </Radio>
         </Radio.Group>
         {/* <div className="w-10" /> */}
