@@ -192,7 +192,7 @@ export default function SimPayments() {
           pushPathName(router, dispatch, `/sims/payments?order=${v}`)
 
           if (method === "Wallet") {
-            return getOrderLink({ orderId: v, amount: 1000, orderInfo: "test" })
+            return getOrderLink({ orderId: v, amount: dataSubmit.total_amount, orderInfo: "test" })
           } else {
             pushPathName(router, dispatch, '/pay')
           }
