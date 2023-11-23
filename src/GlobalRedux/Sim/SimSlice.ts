@@ -10,6 +10,7 @@ export interface SimState {
   telco?: string,
   price?: number,
   type?: string,
+  selected?: Sim,
 }
 
 const initialState: SimState = {
@@ -44,11 +45,14 @@ export const simSlice = createSlice({
     },
     setSimLoading: (state, action) => {
       state.loading = action.payload
+    },
+    setSimSelected: (state, action) => {
+      return { ...state, selected: action.payload }
     }
 
   }
 })
 
-export const { getSimList, setSimCount, setSimPage, setSimTelco, setSimPrice, setSimType, setSimLoading } = simSlice.actions
+export const { setSimSelected, getSimList, setSimCount, setSimPage, setSimTelco, setSimPrice, setSimType, setSimLoading } = simSlice.actions
 
 export default simSlice.reducer

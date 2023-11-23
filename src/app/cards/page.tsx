@@ -83,8 +83,8 @@ export default function CardPage() {
   }
   return (
     <PageWrapper>
-      <div className='mt-5 text-lg font-bold w-[137px] h-[38px]'>Chọn nhà mạng</div>
-      <div className='mt-5 flex items-center justify-center w-full flex-wrap h-[152px] '>
+      <div className='mt-5 text-lg font-bold w-[137px] '>Chọn nhà mạng</div>
+      <div className='mt-5 flex items-center justify-center w-full flex-wrap  '>
         {telcoImages.map((e: string, i: number) => (
           <button onClick={() => setSelected(e)} key={i} className={`${selected == e ? "bg-[#f5f5f5] border border-m_red" : ''} w-[261px] h-[80px] border flex items-center justify-center mr-3 mb-3 rounded-lg`}>
             {getImageTelco(e)}

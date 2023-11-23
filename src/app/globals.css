@@ -42,3 +42,11 @@ body {
   color: black !important;
   padding: 10px !important;
 }
+
+.swiper-button-next {
+  --swiper-navigation-color:red;
+}
+
+.swiper-button-prev {
+  --swiper-navigation-color:red;
+}

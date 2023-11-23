@@ -173,7 +173,7 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
           defaultCurrent={page}
           total={count}
           size="default"
-          pageSize={4}
+          pageSize={10}
           showSizeChanger={false}
           onChange={(i, __) => {
             dispatch(setSimPage(i))

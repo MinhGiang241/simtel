@@ -8,7 +8,8 @@ import Image from 'next/image'
 import { pushPathName } from '@/services/routes'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useDispatch } from 'react-redux'
-import { createOrder, getSimPackById } from '@/services/api/simPackApi'
+import { getSimPackById } from '@/services/api/simPackApi'
+import { createOrder } from '@/services/api/orderApi'
 
 import { Order, SimPack } from '@/interfaces/data'
 import { FormattedNumber } from 'react-intl'
@@ -107,7 +108,7 @@ export default function OrderPage() {
           payment_state: 'WaitToPay',
           payment_method: method,
         }
-        await createOrder([dataSubmit]).then((_) => {
+        await createOrder(dataSubmit).then((_) => {
           setLoading(false)
           success('Đặt hàng thành công', "Bạn đã đặt hàng thành công ,đơn hàng của bạn đã được chuyển đến bộ phận quản lý",)
           pushPathName(router, dispatch, '/plans/')

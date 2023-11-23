@@ -1,9 +1,9 @@
 import { RootState } from '@/GlobalRedux/store'
-import { Order, SimPack } from '@/interfaces/data'
+import { Order, Sim, SimPack } from '@/interfaces/data'
 import { pushPathName } from '@/services/routes'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { createOrder } from '@/services/api/simPackApi'
+import { createOrder, getOrderLink, getOrderById } from '@/services/api/orderApi'
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { error, success } from '@/app/components/modals/CustomToast'
@@ -17,6 +17,8 @@ import { District, Province, Ward } from '@/interfaces/province'
 import Image from 'next/image'
 import { FormattedNumber } from 'react-intl'
 import PlanDetailModal from '../../modals/PlanDetailModal'
+import { setSeleted } from '@/GlobalRedux/SimPack/SimPackSlice'
+import { getRandomSimBySimpack } from '@/services/api/simApi'
 
 interface FormValues {
   name: string,
@@ -36,30 +38,36 @@ export default function PlanWithSim() {
   const type = useSelector((state: RootState) => state.simPack.selectedType)
   const tel = useSelector((state: RootState) => state.simPack.phone)
   const simpack = useSelector((state: RootState) => state.simPack.selected)
+  const telco = simpack?.telco
+  const searchParams = useSearchParams()
+  const orderId = searchParams.get('order')
+  var order: Order
 
   const [method, setMethod] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false)
   const [districtLoading, setDistrictLoading] = useState<boolean>(false)
   const [wardLoading, setWardLoading] = useState<boolean>(false)
+  const [number, setNumber] = useState<Sim>()
 
   const [provinces, setProvinces] = useState<Province[]>([])
   const [districts, setDistricts] = useState<District[]>([])
   const [wards, setWards] = useState<Ward[]>([])
 
-  useEffect(() => {
-    getProvinceQLTN().then((v) => {
-      if (v) { setProvinces(v) }
-    })
-  }, [])
+  // useEffect(() => {
+  //   getProvinceQLTN().then((v) => {
+  //     if (v) { setProvinces(v) }
+  //   })
+  // }, [])
 
-  useEffect(() => { }, [districts, wards, provinces])
+  useEffect(() => { }, [districts, wards, provinces, number])
 
   const getDistrictListByProvinceId = async (value: string | undefined) => {
+    await formik.setFieldValue('ward', undefined);
+    await formik.setFieldValue('district', undefined);
     if (!value) {
       setDistricts([])
       setWards([])
-      await formik.setFieldValue('ward', undefined);
-      await formik.setFieldValue('district', undefined);
+
     } else {
       setDistrictLoading(true)
       getDistricts({ provinceId: value }).then((v) => {
@@ -74,11 +82,10 @@ export default function PlanWithSim() {
   }
 
   const getWardListByDistrictId = async (value: string | undefined) => {
-    console.log('w', value);
-
+    await formik.setFieldValue('ward', undefined);
     if (!value) {
       setWards([])
-      await formik.setFieldValue('ward', undefined);
+
     } else {
       setWardLoading(true)
       getWards({ districtId: value }).then((v) => {
@@ -157,14 +164,36 @@ export default function PlanWithSim() {
           payment_state: 'WaitToPay',
           payment_method: method,
           note: values.note,
-          itemIds: [simpack?._id!]
+          itemIds: [
+            {
+              "schema": "ShopingCardItem",
+              "schema_label": "Item giỏ hàng",
+              "display_name": `Sim-${simpack?.telco}-${number?.msid}`
+            }
+          ],
+          provinceId: values.province,
+          districtId: values.district,
+          wardId: values.ward,
         }
-        createOrder([dataSubmit]).then((_) => {
+        if (!method) {
+          throw (" Bạn chưa chọn hình thức thanh toán")
+        }
+        createOrder(dataSubmit).then(async (v) => {
+
           setLoading(false)
           success('Đặt hàng thành công', "Bạn đã đặt hàng thành công ,đơn hàng của bạn đã được chuyển đến bộ phận quản lý",)
+          // pushPathName(router, dispatch, `/simpack/payments?order=${v}`)
+          // if (method === "Wallet") {
+          //   return getOrderLink({ orderId: v, amount: dataSubmit.total_amount ?? 0, orderInfo: "test" })
+          // } else {
+          //   pushPathName(router, dispatch, '/pay')
+          // }
           pushPathName(router, dispatch, '/pay')
         })
-
+        //   .then((v) => {
+        //   console.log('orderLoinh', v);
+        //   router.push(v.paymentUrl)
+        // })
       } catch (err) {
         setLoading(false);
         error("Thanh toán thất bại", err as string)
@@ -182,6 +211,50 @@ export default function PlanWithSim() {
     setOpen(false)
   }
 
+  useEffect(() => {
+    getProvinceQLTN().then((v) => {
+      if (v) { setProvinces(v) }
+    })
+    getSim()
+
+    if (orderId) {
+      getOrderById(orderId).then(async (v) => {
+        console.log('order', orderId);
+        if (v) {
+          order = v
+          dispatch(setSeleted(v.i))
+          await getDistrictListByProvinceId(order.provinceId)
+          await getWardListByDistrictId(order.districtId)
+          formik.setFieldValue('name', order?.full_name)
+          formik.setFieldValue('phone', order?.tel)
+          formik.setFieldValue('email', order.email)
+          formik.setFieldValue('address', order.address?.split(',')[0])
+          formik.setFieldValue('province', order.provinceId)
+          formik.setFieldValue('district', order.districtId)
+          formik.setFieldValue('ward', order.wardId)
+          formik.setFieldValue('note', order.note)
+          setMethod(order.payment_method)
+        }
+      }).catch((e) => {
+        console.log('err e', e);
+
+      })
+    }
+    // if (!simpack) {
+    //   dispatch(setPath('/plans/'))
+    //   redirect('/plans/')
+    // } else {
+    //   setLoading(false)
+    // }
+  }, [])
+
+  const getSim = async () => {
+    getRandomSimBySimpack(telco, simpack, number?.msid).then((v) => {
+      if (v) {
+        setNumber(v)
+      }
+    })
+  }
 
   return (
     <div className=' flex justify-between mb-28'>
@@ -338,7 +411,7 @@ export default function PlanWithSim() {
         <Radio.Group value={method} onChange={(e) => setMethod(e.target.value)} className={` w-full`}>
           <Radio value={'Wallet'} className={`${method === 'Wallet' ? `bg-m_gray border-sky-700` : `border-m_gray`}  border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}>
             <div className='flex justify-between w-full'>
-              <div>Thanh Toán qua VNPAYQR</div>
+              <div>Thanh toán online</div>
               <Image className='absolute right-1 top-1' src='/images/apota.png' alt='apota' loading='lazy' width={100} height={60} />
             </div>
 
@@ -365,10 +438,28 @@ export default function PlanWithSim() {
       <div className='bg-white w-2/5 border-m_gray border-2 rounded-lg h-fit'>
         <div className='p-5 h-full'>
           <div className='text-base font-bold mb-3'>Đơn hàng (1)</div>
-          <div className='flex w-full justify-between'>
-            <p className='font-bold text-lg'>Cước data - {simpack?.telco}</p>
+          {/* <div className='flex w-full justify-between'> */}
+          {/*   <p className='font-bold text-lg'>Cước data - {simpack?.telco}</p> */}
+          {/*   <CloseOutlined /> */}
+          {/* </div> */}
+
+          {number && (<> <div className='flex w-full justify-between'>
+            <p className='font-bold text-lg'>{number?.msid}</p>
             <CloseOutlined />
           </div>
+
+            <button
+              onClick={() => {
+                getSim()
+                //pushPathName(router, dispatch, '/sims/')
+              }}
+              className='underline underline-offset-4 text-base text-sky-700 mt-2'>
+              Đổi số
+            </button>
+            <div className='flex w-full justify-between my-4'>
+              <p className='text-base'>Loại sim</p> <p className='font-bold text-base'>{number?.type === "Physical" ? "Sim vật lý" : 'eSIM'}</p>
+            </div>
+          </>)}
 
           <div className='flex w-full justify-between my-4'>
             <p className='text-base'>Tên gói cước</p> <p className='font-bold text-base'>{simpack?.code}</p>
@@ -437,6 +528,7 @@ export default function PlanWithSim() {
             className='w-[177px] bg-m_red text-white border-m_red text-base font-semibold h-12'>Thanh toán</Button>
           <button onClick={() => formik.handleSubmit()}></button>
         </div>
+        {/*  <Button onClick={() => { router.push('/plans/payments?order=111111') }}>dkfasklfjaskfjsaklfjaslk</Button> */}
 
 
       </div>

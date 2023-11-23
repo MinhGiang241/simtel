@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { RootState } from '@/GlobalRedux/store'
 import { pushPathName } from '@/services/routes'
 import { Order } from '@/interfaces/data'
-import { createOrder } from '@/services/api/simPackApi'
+import { createOrder, getOrderLink } from '@/services/api/orderApi'
 import { error, success } from '@/app/components/modals/CustomToast'
 import Image from 'next/image'
 
@@ -40,11 +40,26 @@ export default function PlanNoSim() {
         payment_state: 'WaitToPay',
         payment_method: method,
       }
-      createOrder([dataSubmit]).then((_) => {
+      if (!method) {
+        throw (" Bạn chưa chọn hình thức thanh toán")
+      }
+
+      createOrder(dataSubmit).then(async (v) => {
+
         setLoading(false)
         success('Đặt hàng thành công', "Bạn đã đặt hàng thành công ,đơn hàng của bạn đã được chuyển đến bộ phận quản lý",)
+        // pushPathName(router, dispatch, `/simpack/payments?order=${v}`)
+        // if (method === "Wallet") {
+        //   return getOrderLink({ orderId: v, amount: dataSubmit.total_amount ?? 0, orderInfo: "test" })
+        // } else {
+        //   pushPathName(router, dispatch, '/pay')
+        // }
         pushPathName(router, dispatch, '/pay')
       })
+      //   .then((v) => {
+      //   console.log('orderLoinh', v);
+      //   router.push(v?.paymentUrl)
+      // })
 
     } catch (err) {
       setLoading(false);
