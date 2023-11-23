@@ -1,4 +1,4 @@
-import { Order, Sim } from '@/interfaces/data';
+import { Sim } from '@/interfaces/data';
 import { CallApi } from '../helper'
 
 
@@ -31,6 +31,22 @@ mutation ($sortBy:String,$limit:Float,$skip:Float){
 `
     var variables = { limit, skip, sortBy, }
     return await CallApi({ query, variables });
+}
+
+export const getListCardType = async (type: string | undefined, limit: number, skip: number) => {
+    var query = `
+   mutation ($type:String,$skip:Float,$limit:Float){
+    response: phonecard_get_list_card_type (type: $type,skip: $skip,limit: $limit ) {
+        code
+        message
+        data
+    }
+}
+        
+    `
+
+    var variables = { type, skip, limit }
+    return await CallApi({ query, variables })
 }
 
 export const getSimPackById = async (id: string | undefined | null) => {

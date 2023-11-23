@@ -24,9 +24,9 @@ export default function PaymentSelect() {
         {/* <Image src={'/images/vnpay.png'} alt='vnpay' width={120} height={80} /> */}
       </div>
 
-      <button className='select-none ml-auto active:opacity-70 bg-m_red text-white rounded-lg px-6 py-2 flex justify-center items-center m-auto mt-10 w-[177px] h-[48px]'>
-        <p className='text-lg text-center pr-1' onClick={() => { pushPathName(router, dispatch, '/pay') }}>Thanh toán</p>
-      </button>
+      {/* <button className='select-none ml-auto active:opacity-70 bg-m_red text-white rounded-lg px-6 py-2 flex justify-center items-center m-auto mt-10 w-[177px] h-[48px]'> */}
+      {/*   <p className='text-lg text-center pr-1' onClick={() => { pushPathName(router, dispatch, '/pay') }}>Thanh toán</p> */}
+      {/* </button> */}
 
     </div>
 

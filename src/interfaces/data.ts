@@ -85,4 +85,13 @@ export interface Sim {
   compare_price?: number,
   type?: string,
   sp?: SimPack,
-} 
+}
+
+export interface CardType {
+  _id?: string,
+  createdTime?: string,
+  updatedTime?: string,
+  cardType?: string,
+  code?: string,
+  value?: number
+}
