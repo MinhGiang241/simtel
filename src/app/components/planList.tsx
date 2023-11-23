@@ -57,7 +57,7 @@ export default function PlanList() {
 
           >
             {isLoading ? [] : data['list'].map((item: SimPack) =>
-            (<SwiperSlide key={item._id}>
+            (<SwiperSlide key={item._id} style={{ "--swiper-navigation-color": "#FFF", }}>
               <PlanSlick
                 simpack={item}
                 key={item._id}

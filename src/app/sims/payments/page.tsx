@@ -13,7 +13,7 @@ import MInput from '@/app/components/config/MInput'
 import MDropdown from '@/app/components/config/MDropdown'
 import MTextArea from '@/app/components/config/MTextArea'
 import { createOrder, getOrderLink, getOrderById } from '@/services/api/orderApi'
-import { Order } from '@/interfaces/data'
+import { Order, SimPack } from '@/interfaces/data'
 import { error, success } from '@/app/components/modals/CustomToast'
 import { pushPathName } from '@/services/routes'
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons'
@@ -22,6 +22,7 @@ import { FormattedNumber } from 'react-intl'
 import { useSearchParams } from 'next/navigation'
 import PlanDetailModal from '@/app/plans/modals/PlanDetailModal'
 import { setSimSelected } from '@/GlobalRedux/Sim/SimSlice'
+import { getRandomSimpackBySim } from '@/services/api/simPackApi'
 
 interface FormValues {
   name: string,
@@ -54,12 +55,7 @@ export default function SimPayments() {
   const [districts, setDistricts] = useState<District[]>([])
   const [wards, setWards] = useState<Ward[]>([])
   const [loading, setLoading] = useState<boolean>(false)
-
-  useEffect(() => {
-    getProvinceQLTN().then((v) => {
-      if (v) { setProvinces(v) }
-    })
-  }, [])
+  const [randSimpack, setRandSimpack] = useState<SimPack>()
 
 
 
@@ -175,7 +171,13 @@ export default function SimPayments() {
           payment_state: 'WaitToPay',
           payment_method: method,
           note: values.note,
-          itemIds: [sim?._id!],
+          itemIds: [
+            {
+              "schema": "ShopingCardItem",
+              "schema_label": "Item giỏ hàng",
+              "display_name": `Sim-${sim?.telco}-${sim?.msid}`
+            }
+          ],
           provinceId: values.province,
           districtId: values.district,
           wardId: values.ward,
@@ -217,7 +219,12 @@ export default function SimPayments() {
   }
 
   useEffect(() => {
+    getSimPack()
     if (orderId) {
+      getProvinceQLTN().then((v) => {
+        if (v) { setProvinces(v) }
+      })
+
       getOrderById(orderId).then(async (v) => {
         console.log('order', orderId);
         if (v) {
@@ -249,6 +256,14 @@ export default function SimPayments() {
   }, [])
 
 
+  const getSimPack = () => {
+    getRandomSimpackBySim("Wintel", sim, randSimpack?._id).then((v) => {
+      console.log('v', v);
+      if (v) {
+        setRandSimpack(v)
+      }
+    })
+  }
 
   return (
     <div className='w-full bg-m_backgound  flex flex-col items-center min-h-[70rem]'>
@@ -441,6 +456,10 @@ export default function SimPayments() {
                 </button>
 
                 <div className='flex w-full justify-between my-4'>
+                  <p className='text-base'>Loại sim</p> <p className='font-bold text-base'>{sim?.type === "Physical" ? "Sim vật lý" : 'eSIM'}</p>
+                </div>
+
+                <div className='flex w-full justify-between my-4'>
                   <p className='text-base'>Nhà mạng</p> <p className='font-bold text-base'>{sim?.telco}</p>
                 </div>
 
@@ -521,7 +540,7 @@ export default function SimPayments() {
 
 
             </div>
-            {/*  <PlanDetailModal typeView={type} open={open} onOk={handleOk} onCacel={handleCancel} simpack={simpack!} isView /> */}
+            {randSimpack && <PlanDetailModal typeView={1} open={open} onOk={handleOk} onCacel={handleCancel} simpack={randSimpack!} isView />}
           </div>
 
         </div>}
@@ -530,3 +549,4 @@ export default function SimPayments() {
 
   )
 }
+

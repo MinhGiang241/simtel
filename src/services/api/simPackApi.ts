@@ -1,4 +1,4 @@
-import { Order } from '@/interfaces/data';
+import { Order, Sim } from '@/interfaces/data';
 import { CallApi } from '../helper'
 
 
@@ -48,4 +48,17 @@ mutation(\$id: String){
     return await CallApi({ query, variables });
 }
 
+export const getRandomSimpackBySim = async (telco: string | undefined, sim: Sim | undefined, oldId: string | undefined) => {
+    var query = `
+     mutation ($telco:String,$sim:Dictionary,$oldId:String){
+        response: simpack_get_random_simpack_by_sim (telco: $telco,sim: $sim,oldId: $oldId ) {
+            code
+            message
+            data
+        }
+    }
+ `
 
+    var variables = { telco, sim, oldId }
+    return await CallApi({ query, variables })
+}

@@ -1,5 +1,5 @@
 import { RootState } from '@/GlobalRedux/store'
-import { Order, SimPack } from '@/interfaces/data'
+import { Order, Sim, SimPack } from '@/interfaces/data'
 import { pushPathName } from '@/services/routes'
 import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -18,6 +18,7 @@ import Image from 'next/image'
 import { FormattedNumber } from 'react-intl'
 import PlanDetailModal from '../../modals/PlanDetailModal'
 import { setSeleted } from '@/GlobalRedux/SimPack/SimPackSlice'
+import { getRandomSimBySimpack } from '@/services/api/simApi'
 
 interface FormValues {
   name: string,
@@ -37,6 +38,7 @@ export default function PlanWithSim() {
   const type = useSelector((state: RootState) => state.simPack.selectedType)
   const tel = useSelector((state: RootState) => state.simPack.phone)
   const simpack = useSelector((state: RootState) => state.simPack.selected)
+  const telco = simpack?.telco
   const searchParams = useSearchParams()
   const orderId = searchParams.get('order')
   var order: Order
@@ -45,18 +47,19 @@ export default function PlanWithSim() {
   const [loading, setLoading] = useState<boolean>(false)
   const [districtLoading, setDistrictLoading] = useState<boolean>(false)
   const [wardLoading, setWardLoading] = useState<boolean>(false)
+  const [number, setNumber] = useState<Sim>()
 
   const [provinces, setProvinces] = useState<Province[]>([])
   const [districts, setDistricts] = useState<District[]>([])
   const [wards, setWards] = useState<Ward[]>([])
 
-  useEffect(() => {
-    getProvinceQLTN().then((v) => {
-      if (v) { setProvinces(v) }
-    })
-  }, [])
+  // useEffect(() => {
+  //   getProvinceQLTN().then((v) => {
+  //     if (v) { setProvinces(v) }
+  //   })
+  // }, [])
 
-  useEffect(() => { }, [districts, wards, provinces])
+  useEffect(() => { }, [districts, wards, provinces, number])
 
   const getDistrictListByProvinceId = async (value: string | undefined) => {
     await formik.setFieldValue('ward', undefined);
@@ -161,7 +164,13 @@ export default function PlanWithSim() {
           payment_state: 'WaitToPay',
           payment_method: method,
           note: values.note,
-          itemIds: [simpack?._id!],
+          itemIds: [
+            {
+              "schema": "ShopingCardItem",
+              "schema_label": "Item giỏ hàng",
+              "display_name": `Sim-${simpack?.telco}-${number?.msid}`
+            }
+          ],
           provinceId: values.province,
           districtId: values.district,
           wardId: values.ward,
@@ -203,6 +212,11 @@ export default function PlanWithSim() {
   }
 
   useEffect(() => {
+    getProvinceQLTN().then((v) => {
+      if (v) { setProvinces(v) }
+    })
+    getSim()
+
     if (orderId) {
       getOrderById(orderId).then(async (v) => {
         console.log('order', orderId);
@@ -233,6 +247,14 @@ export default function PlanWithSim() {
     //   setLoading(false)
     // }
   }, [])
+
+  const getSim = async () => {
+    getRandomSimBySimpack(telco, simpack, number?.msid).then((v) => {
+      if (v) {
+        setNumber(v)
+      }
+    })
+  }
 
   return (
     <div className=' flex justify-between mb-28'>
@@ -416,10 +438,28 @@ export default function PlanWithSim() {
       <div className='bg-white w-2/5 border-m_gray border-2 rounded-lg h-fit'>
         <div className='p-5 h-full'>
           <div className='text-base font-bold mb-3'>Đơn hàng (1)</div>
-          <div className='flex w-full justify-between'>
-            <p className='font-bold text-lg'>Cước data - {simpack?.telco}</p>
+          {/* <div className='flex w-full justify-between'> */}
+          {/*   <p className='font-bold text-lg'>Cước data - {simpack?.telco}</p> */}
+          {/*   <CloseOutlined /> */}
+          {/* </div> */}
+
+          {number && (<> <div className='flex w-full justify-between'>
+            <p className='font-bold text-lg'>{number?.msid}</p>
             <CloseOutlined />
           </div>
+
+            <button
+              onClick={() => {
+                getSim()
+                //pushPathName(router, dispatch, '/sims/')
+              }}
+              className='underline underline-offset-4 text-base text-sky-700 mt-2'>
+              Đổi số
+            </button>
+            <div className='flex w-full justify-between my-4'>
+              <p className='text-base'>Loại sim</p> <p className='font-bold text-base'>{number?.type === "Physical" ? "Sim vật lý" : 'eSIM'}</p>
+            </div>
+          </>)}
 
           <div className='flex w-full justify-between my-4'>
             <p className='text-base'>Tên gói cước</p> <p className='font-bold text-base'>{simpack?.code}</p>

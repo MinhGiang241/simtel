@@ -20,7 +20,7 @@ import Wintel from '../cards/logo/wintel.svg'
 import Vietnamobile from '../cards/logo/vietnamobile.svg'
 import Mobile from '../cards/logo/mobile.svg'
 import { setSimSelected } from '@/GlobalRedux/Sim/SimSlice';
-import { Sim } from '@/interfaces/data';
+import { Sim, SimPack } from '@/interfaces/data';
 
 const getImageTelco = (telco: string) => {
   switch (telco) {
@@ -89,7 +89,8 @@ export default function NumberList({ hideFilter, }: Props) {
     highlight?: string[],
     classify?: string,
     type?: string,
-    sim?: Sim
+    sim?: Sim,
+    simpack?: SimPack
   }
 
 
@@ -121,13 +122,13 @@ export default function NumberList({ hideFilter, }: Props) {
     {
       onHeaderCell: (_) => rowStyle,
       title: 'Gói cước',
-      key: 'plan',
-      dataIndex: 'plan',
-      render: (text) => (
-        <Space key={text} wrap>
-          <Tooltip color='#FFF' title="Được đăng ký Gói cước MAY 77.000đ siêu ưu đãi 4GB/ngày, miễn phí gọi nội mạng VinaPhone & iTel" placement="bottomLeft">
+      key: 'simpack',
+      dataIndex: 'simpack',
+      render: (sp) => (
+        <Space key={sp._id} wrap>
+          <Tooltip color='#FFF' title={sp?.description?.replaceAll("\n", ' ,')} placement="bottomLeft">
             {/* <p key={text}>Gói cước tự do</p> */}
-            <Button title={text}>Gói cước tự do</Button>
+            <Button title={sp._id}>{sp?.code ? sp?.code : 'Gói cước tự do'}</Button>
           </Tooltip>
         </Space>
       ),
@@ -155,7 +156,7 @@ export default function NumberList({ hideFilter, }: Props) {
         (<Table
           bordered={false}
           columns={columns}
-          dataSource={data.map<DataType>(v => ({ ...v, money: { price: v.price, compare_price: v.compare_price }, sim: v }))}
+          dataSource={data.map<DataType>(v => ({ ...v, money: { price: v.price, compare_price: v.compare_price }, sim: v, simpack: v.sp }))}
           pagination={false}
           rowKey={'id'}
           onRow={(_, index: any) => ({

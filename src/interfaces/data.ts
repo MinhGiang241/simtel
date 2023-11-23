@@ -61,7 +61,7 @@ export interface Order {
   sex?: string,
   birthday?: string,
   note?: string,
-  itemIds?: string[],
+  itemIds?: any,
   provinceId?: string,
   districtId?: string,
   wardId?: string,
@@ -84,4 +84,5 @@ export interface Sim {
   classify?: string,
   compare_price?: number,
   type?: string,
+  sp?: SimPack,
 } 

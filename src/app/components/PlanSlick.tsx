@@ -61,12 +61,12 @@ export default function PlanSlick({ urlImage, branch, name, describle, price, id
           {branch}
         </div>
         <div className='top-0 rounded-xl shadow-gray-700 shadow-md w-[307.35px] h-[435.84px] scale-100'>
-          <Image className='rounded-t-xl z-0' alt='plan' src={urlImage} width={398} height={400} />
+          <Image loading="lazy" className='rounded-t-xl z-0' alt='plan' src={urlImage} width={398} height={400} />
           <div className='pt-4 px-4 h-[110px] -translate-y-8 rounded-tl-[40px] z-20 bg-white'>
             <div className='flex justify-between mb-3' >
-              <div className="flex flex-col">
+              <div className="flex flex-col ">
                 <p className='font-bold text-2xl '>{name}</p>
-                <div className="text-sm">1GB/đến 24h ngày đăng ký...</div>
+                <div className="text-sm h-6 w-40 text-ellipsis overflow-hidden whitespace-nowrap">{describle?.replaceAll('\n', ' ,')}</div>
               </div>
               <div className='flex items-center'>
                 <Button className='font-bold text-m_red bg-white border-none p-0' type="primary" onClick={() => setOpen(true)}>
@@ -83,8 +83,7 @@ export default function PlanSlick({ urlImage, branch, name, describle, price, id
               </div>
               <button
                 onClick={() => {
-                  setType(0)
-                  setOpenConfirm(true)
+                  setOpen(true)
                 }}
                 className='bg-m_red text-white font-bold select-none active:opacity-70 px-4 py-2 rounded-md'>
                 Đăng ký
