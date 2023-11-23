@@ -1,9 +1,9 @@
 import { CallApi } from '../helper'
 
-export const get_article = async (id: any) => {
+export const get_article_footer = async (id: any) => {
     var query = `
-    mutation ($id:String){
-        response: article_get_article (id: $id ) {
+    mutation {
+        response: article_get_article_footer  {
             code
             message
             data

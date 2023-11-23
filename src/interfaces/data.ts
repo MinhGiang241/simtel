@@ -23,7 +23,7 @@ export interface SimPack {
   priority?: number,
   sms?: number,
   telco?: string,
-  thump?: string,
+  thumb?: string,
   code?: string,
 }
 
