@@ -40,7 +40,7 @@ export default function Page() {
                             }}>
                                 <img className="w-full h-[221px]" src={`${uploadUrl}${x.img}`} alt="#" />
                                 <div className='flex justify-between mt-4'>
-                                    <div className='flex items-center text-m_red text-base'><Down className="mr-1" />Khuyến mãi</div>
+                                    <div className='flex items-center text-m_red text-base'><Down className="mr-1" />{x.service}</div>
                                     <div className='flex items-center mr-2 text-slate-400 text-base'><Calender className="mr-1" />{`${new Date(x.date.toString()).getDate()}/${new Date(x.date.toString()).getMonth() + 1}/${new Date(x.date.toString()).getFullYear()}`}</div>
                                 </div>
                                 <div className='pt-2 font-bold text-base'>{x.label}</div>
