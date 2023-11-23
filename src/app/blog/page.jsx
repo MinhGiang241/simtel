@@ -17,7 +17,7 @@ export default function Page() {
 
     useEffect(() => {
         get_blog(undefined).then((v) => {
-            console.log(v);
+            // console.log(v);
             setBlog(v)
         })
     }, [])

@@ -8,7 +8,7 @@ import Mess_footer from './logo/mess_footer.svg'
 import { pushPathName } from '@/services/routes';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
-import { get_article } from '@/services/api/policy'
+import { get_article_footer } from '@/services/api/policy'
 
 export default function Footer() {
   const [article, setArticle] = useState<any[]>([])
@@ -16,7 +16,8 @@ export default function Footer() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    get_article(undefined).then((v) => {
+    get_article_footer(undefined).then((v) => {
+      // console.log(v);
       setArticle(v)
     })
   }, [])
@@ -38,9 +39,7 @@ export default function Footer() {
           </div>
           <div className="col-span-1 p-4">
             <div className='font-bold text-lg pb-3'>Chính sách</div>
-            {article.map((e) => (<div key={e._id} className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, `/resolution?id=${e._id}`) }}>{e.title}</div>))}
-            {/* <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/') }}>Mua sim số</div>
-            <div className='text-sm pb-2 text-slate-500' onClick={() => { pushPathName(router, dispatch, '/') }}>Mua gói cước</div> */}
+            {article?.map((e) => (<div key={e._id} className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, `/resolution?id=${e._id}`) }}>{e?.article?.title}</div>))}
           </div>
           {/* <div className="col-span-1 p-4">
             <div className='font-bold text-lg pb-3'></div>

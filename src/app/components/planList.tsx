@@ -14,7 +14,7 @@ import { register } from 'swiper/element/bundle';
 import { Swiper, SwiperSlide, useSwiperSlide } from 'swiper/react';
 import PlanSlick from "./PlanSlick";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-
+import { uploadUrl } from '@/constants/apiConstant'
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -23,6 +23,7 @@ import { useSwiper } from 'swiper/react';
 import { MoonLoader } from 'react-spinners';
 
 register();
+
 export default function PlanList() {
   const swiper = useSwiper();
 
@@ -62,7 +63,7 @@ export default function PlanList() {
                 simpack={item}
                 key={item._id}
                 id={item._id}
-                urlImage={`/images/plan${Math.floor(Math.random() * 3) + 1}.jpg`}
+                urlImage={`${uploadUrl}${item?.thumb}`}
                 name={item.code ?? ''}
                 branch={item?.telco ?? ''}
                 price={item?.price ?? 0}

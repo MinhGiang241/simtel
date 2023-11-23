@@ -16,7 +16,7 @@ export default function Discount() {
 
   useEffect(() => {
     get_blog(undefined).then((v) => {
-      console.log(v);
+      // console.log(v);
       if (v.length > 3) {
         setBlog(v.slice(0, 3))
       } else {
