@@ -183,17 +183,17 @@ export default function PlanWithSim() {
           setLoading(false)
           success('Đặt hàng thành công', "Bạn đã đặt hàng thành công ,đơn hàng của bạn đã được chuyển đến bộ phận quản lý",)
           // pushPathName(router, dispatch, `/simpack/payments?order=${v}`)
-          // if (method === "Wallet") {
-          //   return getOrderLink({ orderId: v, amount: dataSubmit.total_amount ?? 0, orderInfo: "test" })
-          // } else {
-          //   pushPathName(router, dispatch, '/pay')
-          // }
-          pushPathName(router, dispatch, '/pay')
+          if (method === "Wallet" && number) {
+            return getOrderLink({ orderId: v, amount: dataSubmit.total_amount ?? 0, orderInfo: "test" })
+          } else {
+            pushPathName(router, dispatch, '/pay')
+          }
+
         })
-        //   .then((v) => {
-        //   console.log('orderLoinh', v);
-        //   router.push(v.paymentUrl)
-        // })
+          .then((v) => {
+            console.log('orderLoinh', v);
+            router.push(v.paymentUrl)
+          })
       } catch (err) {
         setLoading(false);
         error("Thanh toán thất bại", err as string)

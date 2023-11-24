@@ -190,6 +190,7 @@ export default function SimPayments() {
           setLoading(false)
           success('Đặt hàng thành công', "Bạn đã đặt hàng thành công ,đơn hàng của bạn đã được chuyển đến bộ phận quản lý",)
           pushPathName(router, dispatch, `/sims/payments?order=${v}`)
+
           if (method === "Wallet") {
             return getOrderLink({ orderId: v, amount: dataSubmit.total_amount, orderInfo: "test" })
           } else {
@@ -220,10 +221,11 @@ export default function SimPayments() {
 
   useEffect(() => {
     getSimPack()
+    getProvinceQLTN().then((v) => {
+      if (v) { setProvinces(v) }
+    })
     if (orderId) {
-      getProvinceQLTN().then((v) => {
-        if (v) { setProvinces(v) }
-      })
+
 
       getOrderById(orderId).then(async (v) => {
         console.log('order', orderId);

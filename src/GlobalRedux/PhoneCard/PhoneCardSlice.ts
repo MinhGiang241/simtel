@@ -1,13 +1,14 @@
-import { PhoneCard } from "@/interfaces/data";
+import { CardType, PhoneCard } from "@/interfaces/data";
 import { createSlice } from "@reduxjs/toolkit";
 
 
 export interface PhoneCardState {
-  value: Array<PhoneCard>
+  value: Array<CardType>
   count: number,
   page: number,
   loading: Boolean
   telco?: string,
+  selected?: CardType
 }
 
 const initialState: PhoneCardState = {
@@ -34,11 +35,14 @@ export const phoneCardSlice = createSlice({
       state.loading = action.payload
     },
     setTelcoCard: (state, action) => {
-      state.telco = action.payload
+      return { ...state, telco: action.payload }
+    },
+    setSelectedCard: (state, action) => {
+      return { ...state, selected: action.payload }
     }
   }
 })
 
-export const { getListCard, setCountCard, setPageCard, setLoadingCard, setTelcoCard } = phoneCardSlice.actions
+export const { getListCard, setCountCard, setPageCard, setLoadingCard, setTelcoCard, setSelectedCard } = phoneCardSlice.actions
 
 export default phoneCardSlice.reducer

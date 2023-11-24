@@ -13,6 +13,7 @@ import ErrorModal from '../modals/ErrorModal'
 import { pushPathName } from '@/services/routes'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/navigation'
+import { setSeleted, setSeletedType } from '@/GlobalRedux/SimPack/SimPackSlice'
 
 export default function PlanCard({ simpack }: { simpack: SimPack }) {
   const router = useRouter()
@@ -34,10 +35,16 @@ export default function PlanCard({ simpack }: { simpack: SimPack }) {
   const [type, setType] = useState<number>(0)
   const [errorString, setErrorString] = useState<string>()
 
-  const handleOk = (t: number) => {
+  const handleOk = (t: number, simpack: SimPack) => {
     setType(t)
     setOpen(false)
-    setOpenConfirm(true)
+    if (t === 1) {
+      dispatch(setSeleted(simpack))
+      dispatch(setSeletedType(type))
+      pushPathName(router, dispatch, "/plans/payments")
+    } else {
+      setOpenConfirm(true)
+    }
   }
   const handleCancel = () => {
     setOpen(false)

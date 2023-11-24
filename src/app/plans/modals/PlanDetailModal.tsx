@@ -8,7 +8,7 @@ import { setSeleted } from '@/GlobalRedux/SimPack/SimPackSlice'
 
 interface Props {
   open: boolean,
-  onOk: (type: number) => void,
+  onOk: (type: number, simpack: SimPack) => void,
   onCacel: () => void,
   simpack: SimPack
   isView?: boolean
@@ -21,7 +21,7 @@ export default function PlanDetailModal({ open, onOk, onCacel, simpack, isView, 
   const dispatch = useDispatch();
 
   return (
-    <Modal footer={<div />} width={613} open={open} onOk={() => onOk(type)} onCancel={(_) => onCacel()} >
+    <Modal footer={<div />} width={613} open={open} onOk={() => onOk(type, simpack)} onCancel={(_) => onCacel()} >
       <div className='mx-10' >
         <div className='flex justify-center mb-8 mt-1'>
           <h4 className='text-2xl font-bold'>Chi tiết gói cước</h4>
@@ -62,7 +62,7 @@ export default function PlanDetailModal({ open, onOk, onCacel, simpack, isView, 
         </Radio.Group>
         <div className='flex justify-center mt-6'>
           <Button onClick={() => {
-            onOk(type)
+            onOk(type, simpack)
           }}
             className='bg-m_red text-white w-[165px] h-12 px-3 text-base font-semibold rounded-lg border-m_red'>{isView ? "Đóng" : 'Mua ngay'}</Button>
         </div>

@@ -9,6 +9,7 @@ import { useState } from "react"
 import Image from 'next/image'
 import { useSwiperSlide } from 'swiper/react';
 import { FormattedNumber } from "react-intl"
+import { setSeleted, setSeletedType } from "@/GlobalRedux/SimPack/SimPackSlice"
 
 interface Props {
   urlImage: string,
@@ -30,10 +31,16 @@ export default function PlanSlick({ urlImage, branch, name, describle, price, id
   const [openConfirm, setOpenConfirm] = useState<boolean>(false)
   const [type, setType] = useState<number>()
 
-  const handleOk = (t: number) => {
+  const handleOk = (t: number, simpack: SimPack) => {
     setType(t)
     setOpen(false)
-    setOpenConfirm(true)
+    if (t === 1) {
+      dispatch(setSeleted(simpack))
+      dispatch(setSeletedType(type))
+      pushPathName(router, dispatch, "/plans/payments")
+    } else {
+      setOpenConfirm(true)
+    }
   }
   const handleCancel = () => {
     setOpen(false)
