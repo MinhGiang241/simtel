@@ -16,7 +16,7 @@ export default function Discount() {
 
   useEffect(() => {
     get_blog(undefined).then((v) => {
-      // console.log(v);
+      console.log(v);
       if (v.length > 3) {
         setBlog(v.slice(0, 3))
       } else {
@@ -43,7 +43,7 @@ export default function Discount() {
                 pushPathName(router, dispatch, `/detail?id=${x._id}`)
               }}>
                 {/* <Member className="w-full h-[221px]" /> */}
-                <img className="w-full h-[221px]" src={`${uploadUrl}${x.icon}`} alt="#" />
+                <img className="w-full h-[221px]" src={`${uploadUrl}${x.article.thumb}`} alt="#" />
                 <div className='flex justify-between mt-4'>
                   <div className='flex items-center text-m_red text-base w-[236px] h-[24px]'><Down className="mr-1" />{x.name}</div>
                   <div className='flex items-center mr-2 text-slate-400 text-base'><Calender className="mr-1" />{`${new Date(x.createdTime.toString()).getDate()}/${new Date(x.createdTime.toString()).getMonth() + 1}/${new Date(x.createdTime.toString()).getFullYear()}`}</div>

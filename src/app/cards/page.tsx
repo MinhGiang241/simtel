@@ -63,7 +63,7 @@ const getImageTelco = (telco: string) => {
   }
 }
 
-var telcoImages = ["Vietel", "Vinaphone", "Mobifone", "Itelecom", "Gmobile", "Vietnamobile", "Wintel", 'Local', 'Vnsky', 'FPT Retail', 'Simtel', '']
+var telcoImages = ["Viettel", "Vinaphone", "Mobifone", "Itelecom", "Gmobile", "Vietnamobile", "Wintel", 'Local', 'Vnsky', 'FPT Retail', 'Simtel', '']
 
 export default function CardPage() {
   const [image, setImage] = useState<any>((<div>Tất cả</div>))
