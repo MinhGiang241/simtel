@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { CallApi } from "../helper";
 import { loginApi } from "@/constants/apiConstant";
 import { setUserData } from "@/GlobalRedux/Auth/authSlice";
+import { Customer } from "@/interfaces/data";
 
 export const customerLogin = async (phone: string, password: string) => {
   try {
@@ -43,4 +44,19 @@ mutation {
   var requestHeaders = { 'Authorization': `Berrer ${accessToken}` }
   return await CallApi({ query, variables, requestHeaders });
 
+}
+
+export const createAccount = async (data: Customer) => {
+  var query = `
+mutation ($data:Dictionary){
+    response: customer_create_customer (data: $data ) {
+        code
+        message
+        data
+    }
+}
+                
+`
+  var variables = { data }
+  return await CallApi({ query, variables })
 }

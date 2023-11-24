@@ -2,6 +2,9 @@ import { Button, Input } from 'antd'
 import { FormikErrors, useFormik } from 'formik';
 import React, { useEffect, useState } from 'react'
 import MInput from '../config/MInput';
+import { Customer } from '@/interfaces/data';
+import { error, success } from './CustomToast';
+import { createAccount } from '@/services/api/authApi';
 
 interface Props {
   onCancel: Function,
@@ -11,33 +14,36 @@ interface Props {
 interface FormValues {
   phone: string,
   mail: string,
-  re_mail: string,
+  name: string,
   password: string,
   re_password: string,
-
 }
 
 
 
 export default function SignUp({ onCancel, switchLogin }: Props) {
+  const [loading, setLoading] = useState<boolean>(false)
 
   const validate = (values: FormValues) => {
     const errors: FormikErrors<FormValues> = {}
     if (!values.phone) {
       errors.phone = "Không được để trống trường bắt buộc"
+    } else if (!(/(84|0[3|5|7|8|9])+([0-9]{8})\b/).test(values.phone)) {
+      errors.phone = "Số điện thoại không đúng định dạng"
     }
     if (!values.password) {
       errors.password = 'Không được để trống trường bắt buộc'
     }
+    if (!values.name) {
+      errors.name = 'Không được để trống trường bắt buộc'
+    }
+
     if (!values.mail) {
       errors.mail = 'Không được để trống trường bắt buộc'
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.mail)) {
       errors.mail = 'Email không đúng định dạng';
     }
 
-    if (!values.re_mail) {
-      errors.re_mail = 'Không được để trống trường bắt buộc'
-    }
     if (!values.re_password) {
       errors.re_password = 'Không được để trống trường bắt buộc'
     } else if (values.password != values.re_password) {
@@ -50,9 +56,9 @@ export default function SignUp({ onCancel, switchLogin }: Props) {
 
   const formik = useFormik<FormValues>({
     initialValues: {
+      name: '',
       phone: '',
       mail: '',
-      re_mail: '',
       password: '',
       re_password: '',
     },
@@ -60,8 +66,30 @@ export default function SignUp({ onCancel, switchLogin }: Props) {
     //validateOnMount: false,
     validateOnChange: true,
     isInitialValid: false,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async values => {
+      /* alert(JSON.stringify(values, null, 2)); */
+      try {
+        setLoading(true)
+        var customer: Customer = {
+          tel: values.phone,
+          password: values.password,
+          email: values.mail,
+          full_name: values.name,
+        }
+        createAccount(customer).then((v) => {
+          setLoading(false)
+          success("Tạo tài khoản thành công !", "Hãy cùng trải nghiệm với hoà mạng Simtel.vn để tận hưởng trọn vẹn hàng ngàn tiện ích.")
+          switchLogin()
+        }).catch((e) => {
+          setLoading(false)
+          throw (e)
+        })
+
+      } catch (err) {
+        setLoading(false)
+        error('Lỗi', err as string)
+      }
+
     },
   });
 
@@ -77,6 +105,18 @@ export default function SignUp({ onCancel, switchLogin }: Props) {
 
       <MInput
         required
+        title='Họ và tên'
+        id='name'
+        name='name'
+        onChange={formik.handleChange}
+        error={formik.errors.name}
+        touch={formik.touched.name}
+        onBlur={formik.handleBlur} />
+
+      <div className='h-4' />
+
+      <MInput
+        required
         title='Số điện thoại'
         id='phone'
         name='phone'
@@ -88,7 +128,7 @@ export default function SignUp({ onCancel, switchLogin }: Props) {
       <div className='h-4' />
       <MInput
         required
-        title='Mail nhận OTP'
+        title='Email'
         id='mail'
         name='mail'
         onChange={formik.handleChange}
@@ -100,23 +140,10 @@ export default function SignUp({ onCancel, switchLogin }: Props) {
 
       <MInput
         required
-        title='Xác thực mã OTP'
-        id='re_mail'
-        name='re_mail'
-        onChange={formik.handleChange}
-        error={formik.errors.re_mail}
-        touch={formik.touched.re_mail}
-        onBlur={formik.handleBlur}
-        action={<button type='button' className='text-m_red active:opacity-70 select-none'>Lấy mã OTP</button>} />
-
-      <div className='h-4' />
-
-      <MInput
-        required
         title='Mật khẩu'
         id='password'
         name='password'
-        type='password'
+        isPassword
         onChange={formik.handleChange}
         error={formik.errors.password}
         touch={formik.touched.password}
@@ -128,7 +155,7 @@ export default function SignUp({ onCancel, switchLogin }: Props) {
         title='Xác nhận mật khẩu '
         id='re_password'
         name='re_password'
-        type='password'
+        isPassword
         onChange={formik.handleChange}
         error={formik.errors.re_password}
         touch={formik.touched.re_password}
@@ -147,12 +174,12 @@ export default function SignUp({ onCancel, switchLogin }: Props) {
       </div>
 
       <div className='flex justify-center mt-3'>
-        <Button htmlType='submit' className='bg-m_red border-m_red px-4 rounded-xl text-white'>
-          Đăng ký tài khoản
+        <Button loading={loading} htmlType='submit' className='bg-m_red border-m_red px-4  text-white rounded-lg w-[165px] h-12 text-base font-semibold'>
+          Đăng ký
         </Button>
       </div>
 
-      <div className='flex justify-center mt-3'>Đã có tài khoản? Quý khách muốn&nbsp;
+      <div className='flex justify-center mt-3'>Bạn đã có tài khoản? &nbsp;
         <button type='button' onClick={() => switchLogin()} className='text-m_red active:opacity-70 select-none'> Đăng nhập?</button>
       </div>
 

@@ -18,7 +18,7 @@ interface Props {
 }
 
 interface FormValues {
-  email: string,
+  phone: string,
   password: string,
 }
 
@@ -27,12 +27,14 @@ export default function Login({ onCancel, switchSignUp }: Props) {
   const dispatch = useDispatch()
   const validate = (values: FormValues) => {
     const errors: FormikErrors<FormValues> = {}
-    if (!values.email) {
-      errors.email = "Không được để trống trường bắt buộc"
+    if (!values.phone) {
+      errors.phone = "Không được để trống trường bắt buộc"
+    } else if (!(/(84|0[3|5|7|8|9])+([0-9]{8})\b/).test(values.phone)) {
+      errors.phone = 'Định dạng số điện thoại không hợp lệ'
     }
-    else if (!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.email)) {
-      errors.email = 'Email không hợp lệ'
-    }
+    // else if (!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.email)) {
+    //   errors.email = 'Email không hợp lệ'
+    // }
 
     if (!values.password) {
       errors.password = 'Không được để trống trường bắt buộc'
@@ -43,7 +45,7 @@ export default function Login({ onCancel, switchSignUp }: Props) {
 
   const formik = useFormik<FormValues>({
     initialValues: {
-      email: '',
+      phone: '',
       password: ''
     },
     validate,
@@ -51,7 +53,7 @@ export default function Login({ onCancel, switchSignUp }: Props) {
       try {
         // alert(JSON.stringify(values, null, 2));
         setLoading(true)
-        var token = await customerLogin(values.email, values.password)
+        var token = await customerLogin(values.phone, values.password)
         var info = await getAccountInfo()
 
         dispatch(setUserData({
@@ -82,13 +84,13 @@ export default function Login({ onCancel, switchSignUp }: Props) {
 
       <MInput
         required
-        title='Email'
-        id='email'
-        name='email'
-        placeholder='Nhập email'
+        title='Số điện thoại'
+        id='phone'
+        name='phone'
+        placeholder='Nhập số điện thoại'
         onChange={formik.handleChange}
-        error={formik.errors.email}
-        touch={formik.touched.email}
+        error={formik.errors.phone}
+        touch={formik.touched.phone}
         onBlur={formik.handleBlur}
       />
 
