@@ -111,7 +111,7 @@ export default function OrderPage() {
         await createOrder(dataSubmit).then((_) => {
           setLoading(false)
           success('Đặt hàng thành công', "Bạn đã đặt hàng thành công ,đơn hàng của bạn đã được chuyển đến bộ phận quản lý",)
-          pushPathName(router, dispatch, '/plans/')
+          pushPathName(router, dispatch, '/plans')
         })
 
       } catch (err) {

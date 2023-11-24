@@ -143,7 +143,7 @@ export default function PlanWithSim() {
 
   const formik = useFormik<FormValues>({
     initialValues: {
-      name: '', phone: tel ?? '', email: '', address: '', note: ''
+      name: '', phone: '', email: '', address: '', note: ''
     },
     validate,
     onSubmit: async (values) => {

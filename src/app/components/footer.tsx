@@ -52,10 +52,10 @@ export default function Footer() {
           </div> */}
           <div className="col-span-1 p-4">
             <div className='font-bold text-lg pb-3'>Danh mục</div>
-            <div className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, '/plans/') }}>Gói cước</div>
-            <div className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, '/sims/') }}>Mua sim</div>
-            <div className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, '/cards/') }}>Nạp thẻ</div>
-            <div className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, '/blog/') }}>Khuyến mại</div>
+            <div className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, '/plans') }}>Gói cước</div>
+            <div className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, '/sims') }}>Mua sim</div>
+            <div className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, '/cards') }}>Nạp thẻ</div>
+            <div className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, '/blog') }}>Khuyến mại</div>
           </div>
         </div>
       </div>

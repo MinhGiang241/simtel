@@ -452,7 +452,7 @@ export default function SimPayments() {
                 </div>
 
                 <button
-                  onClick={() => { pushPathName(router, dispatch, '/sims/') }}
+                  onClick={() => { pushPathName(router, dispatch, '/sims') }}
                   className='underline underline-offset-4 text-base text-sky-700 mt-2'>
                   Đổi số
                 </button>
@@ -491,7 +491,7 @@ export default function SimPayments() {
                 <Divider />
                 <div className='flex justify-center w-full mb-5'>
                   <Button
-                    onClick={() => pushPathName(router, dispatch, '/sims/')}
+                    onClick={() => pushPathName(router, dispatch, '/sims')}
                     className='bg-white border border-m_red text-m_red w-[148px] h-10 rounded-lg font-semibold text-sm'
                     icon={<PlusOutlined />}
                   >
