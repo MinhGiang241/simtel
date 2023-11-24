@@ -12,7 +12,7 @@ interface Props {
 
 export default function CardItem({ card, selected, onClick }: Props) {
   return (
-    <div className={`${card._id === selected ? "bg-[#f5f5f5] border border-m_red" : ''} border rounded-lg mx-2 mb-12 relative h-[80px] w-[261px]`}>
+    <div className={`${card._id === selected ? "bg-[#f5f5f5] border border-m_red" : ''} hover:border-sky-400 border rounded-lg mx-2 mb-12 relative h-[80px] w-[261px]`}>
       <button className='w-full' onClick={(_) => onClick()}>
         <div className='text-center text-white h-6 bg-m_red w-28 rounded-br-md rounded-tl-md'>
           {card.cardType}
