@@ -99,7 +99,7 @@ export default function CardList() {
               current={page}
               size="default"
               total={count}
-              // pageSize={9}
+              pageSize={8}
               showSizeChanger={false}
               showQuickJumper={false}
               onChange={(v) => {
