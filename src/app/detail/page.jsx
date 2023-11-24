@@ -58,7 +58,7 @@ export default function Page() {
                             {
                                 detail?.article?.relate_articles?.map((x, key) => (
                                     <div className='border-b-2 border-m_gray' key={key}>
-                                        <div className='flex items-center pb-2'>
+                                        <div className='flex items-center pb-2 mt-5'>
                                             <Down className="mr-2 " />
                                             <div className='text-m_red'>{x.schema_label}</div>
                                         </div>
