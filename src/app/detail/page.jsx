@@ -54,26 +54,26 @@ export default function Page() {
                     </div>
                     <div className="p-4">
                         <div>
-
-                            <div className='text-xl font-bold pb-2'>Bài viết liên quan</div>
-
-                            {detail?.article?.relate_articles?.map((x, key) => (
-                                <div className='border-b-2 border-m_gray' key={key}>
-                                    <div className='flex items-center pb-2'>
-                                        <Down className="mr-2 " />
-                                        <div className='text-m_red'>{x.schema_label}</div>
+                            <div className='text-xl font-bold pb-2'>Bài viết liên quan </div>
+                            {
+                                detail?.article?.relate_articles?.map((x, key) => (
+                                    <div className='border-b-2 border-m_gray' key={key}>
+                                        <div className='flex items-center pb-2 mt-5'>
+                                            <Down className="mr-2 " />
+                                            <div className='text-m_red'>{x.schema_label}</div>
+                                        </div>
+                                        <div className='text-lg font-bold'>{x.display_name}</div>
+                                        <div className='flex pt-2 mb-4'>
+                                            <Calender className="mr-2" />
+                                            <div className='text-slate-400'>19/09/2023</div>
+                                        </div>
                                     </div>
-                                    <div className='text-lg font-bold'>{x.display_name}</div>
-                                    <div className='flex pt-2 mb-4'>
-                                        <Calender className="mr-2" />
-                                        <div className='text-slate-400'>19/09/2023</div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </PageWrapper>
+                                ))
+                            }
+                        </div >
+                    </div >
+                </div >
+            </div >
+        </PageWrapper >
     )
 }

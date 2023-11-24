@@ -50,10 +50,10 @@ export default function PlanList() {
             spaceBetween={50}
             slidesPerView={3}
             modules={[Navigation, Pagination, Scrollbar, A11y]}
-            navigation
+            // navigation
             centeredSlides
             loop
-          // pagination={{ clickable: true }}
+            pagination={{ clickable: false }}
           // scrollbar={{ draggable: true }}
 
           >
