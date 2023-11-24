@@ -220,7 +220,7 @@ export default function Header() {
           </div>
         </div>
       </Modal>
-      <Modal key={modalKey} width={800} open={open} onCancel={() => setOpen(false)} footer={(<div />)} >
+      <Modal key={modalKey} width={721} open={open} onCancel={() => setOpen(false)} footer={(<div />)} >
         {isLogin ? (
           <Login
             switchSignUp={() => setIslogin(false)}

@@ -50,12 +50,20 @@ const getImageTelco = (telco: string) => {
       return ((<Vietnamobile width={89} height={38} />))
     case 'Wintel':
       return ((<Wintel width={119} height={24} />))
+    case 'Local':
+      return ((<img src="/images/local.jpeg" alt="#" width={60} height={10} />))
+    case 'Vnsky':
+      return ((<img src="/images/vnsky.png" alt="#" width={90} height={40} />))
+    case 'FPT Retail':
+      return ((<img src="/images/fpt.jpg" alt="#" width={70} height={20} />))
+    case 'Simtel':
+      return ((<img src="/images/simtel.png" alt="#" width={70} height={50} />))
     default:
       return (<div>Tất cả</div>)
   }
 }
 
-var telcoImages = ["Viettel", "Vinaphone", "Mobifone", "Itelecom", "Gmobile", "Vietnamobile", "Wintel", '']
+var telcoImages = ["Viettel", "Vinaphone", "Mobifone", "Itelecom", "Gmobile", "Vietnamobile", "Wintel", 'Local', 'Vnsky', 'FPT Retail', 'Simtel', '']
 
 export default function CardPage() {
   const [image, setImage] = useState<any>((<div>Tất cả</div>))
@@ -139,7 +147,7 @@ export default function CardPage() {
               tel: phone,
               // email: "minhgiang@gmail.com",
               // address: `Hà Nội`,
-              /* item: { type: "simpack", itemId: simpack?._id, price: simpack?.price }, */
+              items: [{ type: "phonecard", itemId: selectedCardType?._id, value: selectedCardType?.value }],
               total_amount: selectedCardType?.value,
               prod_total_amount: selectedCardType?.value,
               transport_fee: 0,
@@ -148,13 +156,6 @@ export default function CardPage() {
               payment_state: 'WaitToPay',
               payment_method: "Wallet",
               note: "note",
-              itemIds: [
-                {
-                  "schema": "ShopingCardItem",
-                  "schema_label": "Item giỏ hàng",
-                  "display_name": `PhoneCard-${selectedCardType?.cardType}-${selectedCardType?.value}`
-                }
-              ],
               // provinceId: values.province,
               // districtId: values.district,
               // wardId: values.ward,

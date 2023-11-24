@@ -21,7 +21,7 @@ export default function Page() {
 
     useEffect(() => {
         get_detail_blog(id).then((v) => {
-            console.log(v);
+            // console.log(v);
             setDetail(v)
         })
     }, [id])
@@ -54,7 +54,9 @@ export default function Page() {
                     </div>
                     <div className="p-4">
                         <div>
-                            <div className='text-xl font-bold pb-2'>Bài viết liên quan </div>
+
+                            <div className='text-xl font-bold pb-2'>Bài viết liên quan</div>
+
                             {detail?.article?.relate_articles?.map((x, key) => (
                                 <div className='border-b-2 border-m_gray' key={key}>
                                     <div className='flex items-center pb-2'>

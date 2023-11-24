@@ -85,7 +85,9 @@ export default function CardList() {
     <>
       {loading ? (<div className='h-80 w-full flex justify-center items-center'><MoonLoader color='#E50914' /></div>) : (
         <>
+
           {<div className='mt-5 flex items-center w-full flex-wrap'>
+
             {data.map((item, index) => (<CardItem onClick={() => {
               setSelected(item._id);
               dispatch(setSelectedCard(item))

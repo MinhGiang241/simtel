@@ -11,13 +11,14 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/GlobalRedux/store';
 import { useDispatch } from 'react-redux';
 
+
 interface Props {
   onCancel: Function
   switchSignUp: Function
 }
 
 interface FormValues {
-  phone: string,
+  email: string,
   password: string,
 }
 
@@ -26,11 +27,13 @@ export default function Login({ onCancel, switchSignUp }: Props) {
   const dispatch = useDispatch()
   const validate = (values: FormValues) => {
     const errors: FormikErrors<FormValues> = {}
-    if (!values.phone) {
-      errors.phone = "Không được để trống trường bắt buộc"
-    } else if (values.phone.length < 8) {
-      errors.phone = "Không ít hơn 8 ký tự"
+    if (!values.email) {
+      errors.email = "Không được để trống trường bắt buộc"
     }
+    else if (!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.email)) {
+      errors.email = 'Email không hợp lệ'
+    }
+
     if (!values.password) {
       errors.password = 'Không được để trống trường bắt buộc'
     }
@@ -40,7 +43,7 @@ export default function Login({ onCancel, switchSignUp }: Props) {
 
   const formik = useFormik<FormValues>({
     initialValues: {
-      phone: '',
+      email: '',
       password: ''
     },
     validate,
@@ -48,7 +51,7 @@ export default function Login({ onCancel, switchSignUp }: Props) {
       try {
         // alert(JSON.stringify(values, null, 2));
         setLoading(true)
-        var token = await customerLogin(values.phone, values.password)
+        var token = await customerLogin(values.email, values.password)
         var info = await getAccountInfo()
 
         dispatch(setUserData({
@@ -75,16 +78,17 @@ export default function Login({ onCancel, switchSignUp }: Props) {
       formik.handleSubmit();
     }}>
 
-      <h1 className='font-bold text-2xl mb-4 text-center'>Đăng nhập</h1>
+      <h1 className='font-bold text-3xl mt-2 mb-4 text-center'>Đăng nhập</h1>
 
       <MInput
         required
-        title='Số điện thoại'
-        id='phone'
-        name='phone'
+        title='Email'
+        id='email'
+        name='email'
+        placeholder='Nhập email'
         onChange={formik.handleChange}
-        error={formik.errors.phone}
-        touch={formik.touched.phone}
+        error={formik.errors.email}
+        touch={formik.touched.email}
         onBlur={formik.handleBlur}
       />
 
@@ -92,40 +96,42 @@ export default function Login({ onCancel, switchSignUp }: Props) {
 
       <MInput
         required
-        title='Mật khẩu/ Mã OTP'
+        title='Mật khẩu'
         id='password'
         name='password'
-        type='password'
+        placeholder='Nhập mật khẩu'
         onChange={formik.handleChange}
         error={formik.errors.password}
         touch={formik.touched.password}
-        onBlur={formik.handleBlur} />
+        onBlur={formik.handleBlur}
+        isPassword
+      />
 
-      <div className='flex justify-between my-3 text-m_red underline underline-offset-2'>
-        <button type='button' onClick={() => success('Gửi mã xác nhận thành công', 'Gửi mã OTP thành công đến email của quý khách')} className='select-none active:opacity-70'>Lấy  mã OTP</button>
-        <button type='button' onClick={() => error('Gửi mã xác nhận không thành công', 'Gửi mã OTP không thành công đến email của quý khách')} className='select-none active:opacity-70'>Quên mật khẩu</button>
+      <div className='flex justify-end my-3 text-m_red underline underline-offset-2'>
+        {/* <button type='button' onClick={() => success('Gửi mã xác nhận thành công', 'Gửi mã OTP thành công đến email của quý khách')} className='select-none active:opacity-70'>Lấy  mã OTP</button> */}
+        <button type='button' onClick={() => error('Gửi mã xác nhận không thành công', 'Gửi mã OTP không thành công đến email của quý khách')} className='text-sm select-none active:opacity-70'>Quên mật khẩu</button>
       </div>
 
       <div className='flex w-full justify-center mb-3'>
         <Button
           loading={loading}
           htmlType="submit"
-          className='bg-m_red text-white border-m_red px-5 rounded-xl' >
+          className='bg-m_red text-white border-m_red px-5 rounded-lg w-[165px] h-12 text-base font-semibold' >
           Đăng nhập
         </Button>
       </div>
 
-      <div className='text-center'>
-        Quý khách chưa có tài khoản? Quý khách muốn <button type='button' onClick={() => switchSignUp()} className='text-m_red  select-none active:opacity-70'>Đăng ký</button>
+      <div className='text-center text-base'>
+        Bạn chưa có tài khoản? <button type='button' onClick={() => switchSignUp()} className='text-m_red  select-none active:opacity-70'>Đăng ký</button>
       </div>
 
-      <div className='text-center mt-3'>
-        <h4>Bằng việc đăng nhập, Quý khách đã đồng ý thực hiện mọi giao dịch theo</h4>
-        <button
-          type='button'
-          className='text-m_red select-none active:opacity-70'>
-          Điều khoản sử dụng và Chính sách bảo mật của Simtel</button>
-      </div>
+      {/* <div className='text-center mt-3'> */}
+      {/*   <h4>Bằng việc đăng nhập, Quý khách đã đồng ý thực hiện mọi giao dịch theo</h4> */}
+      {/*   <button */}
+      {/*     type='button' */}
+      {/*     className='text-m_red select-none active:opacity-70'> */}
+      {/*     Điều khoản sử dụng và Chính sách bảo mật của Simtel</button> */}
+      {/* </div> */}
     </form>
   )
 }

@@ -10,6 +10,7 @@ import { Order } from '@/interfaces/data'
 import { createOrder, getOrderLink } from '@/services/api/orderApi'
 import { error, success } from '@/app/components/modals/CustomToast'
 import Image from 'next/image'
+import { throws } from 'assert'
 
 export default function PlanNoSim() {
   const dispatch = useDispatch()
@@ -31,7 +32,7 @@ export default function PlanNoSim() {
         tel: phone,
         email: "",
         address: ``,
-        item: { type: "simpack", itemId: simpack?._id, price: simpack?.price },
+        items: [{ type: "simpack", itemId: simpack?._id, value: simpack?.price }],
         total_amount: simpack?.price,
         prod_total_amount: simpack?.price,
         transport_fee: 0,
@@ -43,23 +44,25 @@ export default function PlanNoSim() {
       if (!method) {
         throw (" Bạn chưa chọn hình thức thanh toán")
       }
-
+      /*  alert(JSON.stringify(dataSubmit)) */
       createOrder(dataSubmit).then(async (v) => {
 
         setLoading(false)
         success('Đặt hàng thành công', "Bạn đã đặt hàng thành công ,đơn hàng của bạn đã được chuyển đến bộ phận quản lý",)
-        // pushPathName(router, dispatch, `/simpack/payments?order=${v}`)
-        // if (method === "Wallet") {
-        //   return getOrderLink({ orderId: v, amount: dataSubmit.total_amount ?? 0, orderInfo: "test" })
-        // } else {
-        //   pushPathName(router, dispatch, '/pay')
-        // }
-        pushPathName(router, dispatch, '/pay')
+        pushPathName(router, dispatch, `/simpack/payments?order=${v}`)
+        if (method === "Wallet") {
+          return getOrderLink({ orderId: v, amount: dataSubmit.total_amount ?? 0, orderInfo: "test" })
+        } else {
+          pushPathName(router, dispatch, '/pay')
+        }
       })
-      //   .then((v) => {
-      //   console.log('orderLoinh', v);
-      //   router.push(v?.paymentUrl)
-      // })
+        .then((v) => {
+          console.log('orderLoinh', v);
+          router.push(v?.paymentUrl)
+        }).catch((e) => {
+          setLoading(false);
+          error("Thanh toán thất bại", e as string)
+        })
 
     } catch (err) {
       setLoading(false);
@@ -157,7 +160,7 @@ export default function PlanNoSim() {
             </div>
           </div>
 
-          <button onClick={() => pushPathName(router, dispatch, '/plans/')} className='underline underline-offset-4 text-base text-sky-700'>
+          <button onClick={() => pushPathName(router, dispatch, '/plans')} className='underline underline-offset-4 text-base text-sky-700'>
             Đổi gói cước
           </button>
           <Divider />

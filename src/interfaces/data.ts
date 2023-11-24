@@ -45,7 +45,7 @@ export interface Order {
   updatedTime?: string,
   code?: string,
   tel?: string,
-  item?: Object,
+  items?: Object,
   full_name?: string,
   address?: string,
   customerId?: string,

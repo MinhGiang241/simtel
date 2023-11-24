@@ -73,7 +73,7 @@ export default function SignUp({ onCancel, switchLogin }: Props) {
         formik.handleSubmit();
       }}
       className='w-full px-16'>
-      <h1 className='font-bold text-2xl mb-4 text-center'>Đăng ký tài khoản</h1>
+      <h1 className='font-bold text-3xl mt-2 mb-4 text-center'>Đăng ký tài khoản</h1>
 
       <MInput
         required
