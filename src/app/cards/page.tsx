@@ -45,12 +45,20 @@ const getImageTelco = (telco: string) => {
       return ((<Vietnamobile width={89} height={38} />))
     case 'Wintel':
       return ((<Wintel width={119} height={24} />))
+    case 'Local':
+      return ((<img src="/images/local.jpeg" alt="#" width={60} height={10} />))
+    case 'Vnsky':
+      return ((<img src="/images/vnsky.png" alt="#" width={90} height={40} />))
+    case 'FPT Retail':
+      return ((<img src="/images/fpt.jpg" alt="#" width={70} height={20} />))
+    case 'Simtel':
+      return ((<img src="/images/simtel.png" alt="#" width={70} height={50} />))
     default:
       return (<div>Tất cả</div>)
   }
 }
 
-var telcoImages = ["Vietel", "Vinaphone", "Mobifone", "Itelecom", "Gmobile", "Vietnamobile", "Wintel", '']
+var telcoImages = ["Vietel", "Vinaphone", "Mobifone", "Itelecom", "Gmobile", "Vietnamobile", "Wintel", 'Local', 'Vnsky', 'FPT Retail', 'Simtel', '']
 
 export default function CardPage() {
   const [image, setImage] = useState<any>((<div>Tất cả</div>))
