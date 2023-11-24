@@ -79,7 +79,7 @@ export default function CardPage() {
 
   const getCardType = (e?: string) => {
     console.log('telco', telco);
-    getListCardType(e, 8, 1)
+    getListCardType(e, 8, 0)
       .then((v) => {
         dispatch(setLoadingCard(false))
         if (v && v.list.length > 0) {

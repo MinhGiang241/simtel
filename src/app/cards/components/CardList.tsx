@@ -9,6 +9,7 @@ import { getListCard, setCountCard, setLoadingCard, setPageCard, setSelectedCard
 import { useDispatch } from 'react-redux'
 import { error } from '@/app/components/modals/CustomToast'
 import { MoonLoader } from 'react-spinners'
+import { RightOutlined, LeftOutlined } from '@ant-design/icons'
 
 export default function CardList() {
   const dispatch = useDispatch()
@@ -38,21 +39,72 @@ export default function CardList() {
     //     error("Lỗi", e)
     //   })
   }, [page])
+  const getCardType = (page: number) => {
+    console.log('telco', telco);
+    getListCardType(telco, 8, (page - 1) * 8)
+      .then((v) => {
+        dispatch(setLoadingCard(false))
+        if (v && v.list.length > 0) {
+          dispatch(getListCard(v.list))
+          dispatch(setCountCard(v.count))
+        } else {
+          dispatch(getListCard([]))
+          dispatch(setCountCard(0))
+        }
+      }).catch((e: string) => {
+        dispatch(setLoadingCard(false))
+        error("Lỗi", e)
+      })
+
+  }
+
+  const itemRender = (index: number, type: "page" | "next" | "prev" | "jump-prev" | "jump-next", originalElement: React.ReactNode) => {
+    if (type === "next") {
+      return <div>
+        <RightOutlined />
+      </div>;
+    }
+    if (type === "prev") {
+      return <div>
+        <LeftOutlined />
+      </div>;
+    }
+    if (type === 'page') {
+      return (
+        <div
+          className={page === index ? `bg-m_red text-white rounded-sm` : `bg-m_gray text-black border border-m_gray rounded-sm`} >
+          <p>{index}</p>
+        </div>)
+    }
+    return originalElement;
+  };
+
+
 
   return (
     <>
       {loading ? (<div className='h-80 w-full flex justify-center items-center'><MoonLoader color='#E50914' /></div>) : (
         <>
-          {<div className='flex flex-wrap justify-between'>
+          {<div className='mt-5 flex items-center w-full flex-wrap'>
             {data.map((item, index) => (<CardItem onClick={() => {
               setSelected(item._id);
               dispatch(setSelectedCard(item))
             }} selected={selected} key={index} card={item} />))}
           </div >}
           <div className='w-full flex justify-center mb-14'>
-            <Pagination current={page} size="default" total={count} pageSize={9} showQuickJumper={false} onChange={(v) => {
-              dispatch(setPageCard(v))
-            }} />
+            <Pagination
+              itemRender={itemRender}
+              current={page}
+              size="default"
+              total={count}
+              // pageSize={9}
+              showSizeChanger={false}
+              showQuickJumper={false}
+              onChange={(v) => {
+                dispatch(setPageCard(v))
+                getCardType(v)
+
+              }} />
           </div>
 
 

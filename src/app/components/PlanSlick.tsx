@@ -36,7 +36,7 @@ export default function PlanSlick({ urlImage, branch, name, describle, price, id
     setOpen(false)
     if (t === 1) {
       dispatch(setSeleted(simpack))
-      dispatch(setSeletedType(type))
+      dispatch(setSeletedType(1))
       pushPathName(router, dispatch, "/plans/payments")
     } else {
       setOpenConfirm(true)

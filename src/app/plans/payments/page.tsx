@@ -22,13 +22,15 @@ export default function SimpackPayment() {
 
   useEffect(() => {
     if (!simpack && !orderId) {
-      dispatch(setPath('/plans/'))
-      redirect('/plans/')
+      dispatch(setPath('/plans'))
+      redirect('/plans')
 
     } else {
       setLoading(false)
     }
   }, [])
+  console.log('t', type);
+
 
   return (
     <div className='w-full bg-m_backgound  flex flex-col items-center min-h-[70rem]'>

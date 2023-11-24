@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { FormattedNumber } from 'react-intl'
 import { CheckOutlined } from '@ant-design/icons'
 import { useDispatch } from 'react-redux'
-import { setSeleted } from '@/GlobalRedux/SimPack/SimPackSlice'
+import { setSeleted, setSeletedType } from '@/GlobalRedux/SimPack/SimPackSlice'
 
 interface Props {
   open: boolean,
@@ -62,6 +62,8 @@ export default function PlanDetailModal({ open, onOk, onCacel, simpack, isView, 
         </Radio.Group>
         <div className='flex justify-center mt-6'>
           <Button onClick={() => {
+            dispatch(setSeletedType(type))
+            console.log('type', type);
             onOk(type, simpack)
           }}
             className='bg-m_red text-white w-[165px] h-12 px-3 text-base font-semibold rounded-lg border-m_red'>{isView ? "Đóng" : 'Mua ngay'}</Button>

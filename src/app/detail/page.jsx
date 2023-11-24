@@ -55,7 +55,7 @@ export default function Page() {
                     <div className="p-4">
                         <div>
                             <div className='text-xl font-bold pb-2'>Bài viết liên quan </div>
-                            {detail?.article?.relate_articles.map((x, key) => (
+                            {detail?.article?.relate_articles?.map((x, key) => (
                                 <div className='border-b-2 border-m_gray' key={key}>
                                     <div className='flex items-center pb-2'>
                                         <Down className="mr-2 " />
