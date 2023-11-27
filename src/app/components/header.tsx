@@ -16,6 +16,7 @@ import { success } from './modals/CustomToast';
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import MLink from '@/app/components/config/Mlink'
+import { get_menu_header } from '@/services/api/menuHeader'
 
 
 export default function Header() {
@@ -27,6 +28,13 @@ export default function Header() {
   const isAuth = useSelector((state: RootState) => state.auth.authState)
   const dispatch = useDispatch()
   const router = useRouter()
+
+  useEffect(() => {
+    get_menu_header(undefined).then((v) => {
+      console.log(v);
+      get_menu_header(v)
+    })
+  }, [])
 
   const carts = [
     {
