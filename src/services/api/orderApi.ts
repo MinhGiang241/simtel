@@ -1,5 +1,5 @@
 import { Order } from "@/interfaces/data";
-import { CallApi } from "../helper"
+import { CallApi } from "../helper";
 
 export const createOrder = async (data: Order) => {
   var query = `
@@ -11,13 +11,10 @@ mutation ($data:Dictionary){
     }
     }
         
-`
-  var variables = { data }
+`;
+  var variables = { data };
   return await CallApi({ query, variables });
-}
-
-
-
+};
 
 export const getOrderById = async (id: string) => {
   var query = `
@@ -28,24 +25,27 @@ mutation ($id:String){
         data
     }
 } 
-  `
+  `;
 
-  var variables = { id }
-  return await CallApi({ query, variables })
-}
+  var variables = { id };
+  return await CallApi({ query, variables });
+};
 
-export const getOrderLink = async (
-  { orderInfo, orderId, amount, paymentMethod, bankCode, extraData }:
-    {
-      orderId: string,
-      orderInfo?: String,
-      amount?: number,
-      paymentMethod?: string,
-      bankCode?: string,
-      extraData?: string,
-    }
-
-) => {
+export const getOrderLink = async ({
+  orderInfo,
+  orderId,
+  amount,
+  paymentMethod,
+  bankCode,
+  extraData,
+}: {
+  orderId: string;
+  orderInfo?: String;
+  amount?: number;
+  paymentMethod?: string;
+  bankCode?: string;
+  extraData?: string;
+}) => {
   var query = `
 mutation ($orderId:String,$orderInfo:String,$amount:Float,$paymentMethod:String,$bankCode:String,$extraData:String){
     response: appota_get_payment_url (orderId: $orderId,orderInfo: $orderInfo,amount: $amount,paymentMethod: $paymentMethod,bankCode: $bankCode,extraData: $extraData ) {
@@ -56,8 +56,15 @@ mutation ($orderId:String,$orderInfo:String,$amount:Float,$paymentMethod:String,
 }
 
 
-  `
+  `;
 
-  var variables = { orderInfo, orderId, amount, paymentMethod, bankCode, extraData }
-  return await CallApi({ query, variables })
-}
+  var variables = {
+    orderInfo,
+    orderId,
+    amount,
+    paymentMethod,
+    bankCode,
+    extraData,
+  };
+  return await CallApi({ query, variables });
+};
