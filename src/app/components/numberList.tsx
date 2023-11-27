@@ -232,9 +232,6 @@ export function TableAction({
   current: number;
   old: number;
 }) {
-  const router = useRouter();
-  const dispatch = useDispatch();
-
   return (
     <>
       <div key={current} className="flex justify-between items-center">
