@@ -45,7 +45,7 @@ export interface Order {
   updatedTime?: string,
   code?: string,
   tel?: string,
-  item?: Object,
+  items?: Object,
   full_name?: string,
   address?: string,
   customerId?: string,
@@ -94,4 +94,20 @@ export interface CardType {
   cardType?: string,
   code?: string,
   value?: number
+}
+
+export interface Customer {
+  _id?: string,
+  createdTime?: string,
+  updatedTime?: string,
+  tel?: string,
+  full_name?: string,
+  email?: string,
+  fbId?: string,
+  zalo?: string,
+  sex?: string,
+  birthday?: string,
+  password?: string,
+  passwordHash?: string,
+  birthyear?: number
 }

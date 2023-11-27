@@ -162,7 +162,7 @@ export default function SimPayments() {
           tel: values.phone,
           email: values.email,
           address: `${values.address}, ${address?.path_with_type ?? ''} `,
-          item: [{ type: "sim", itemId: sim?._id, price: sim?.price }],
+          items: [{ type: "sim", itemId: sim?._id, value: sim?.price }],
           total_amount: sim?.price,
           prod_total_amount: sim?.price,
           transport_fee: 0,
@@ -171,13 +171,6 @@ export default function SimPayments() {
           payment_state: 'WaitToPay',
           payment_method: method,
           note: values.note,
-          itemIds: [
-            {
-              "schema": "ShopingCardItem",
-              "schema_label": "Item giỏ hàng",
-              "display_name": `Sim-${sim?.telco}-${sim?.msid}`
-            }
-          ],
           provinceId: values.province,
           districtId: values.district,
           wardId: values.ward,

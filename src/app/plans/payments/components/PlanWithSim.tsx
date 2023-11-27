@@ -112,7 +112,7 @@ export default function PlanWithSim() {
       errors.phone = "Không được để trống trường bắt buộc"
     } else if (values.phone.length < 8) {
       errors.phone = "Không ít hơn 8 ký tự"
-    } else if (!/\d/.test(values.phone)) {
+    } else if (!(/(84|0[3|5|7|8|9])+([0-9]{8})\b/).test(values.phone)) {
       errors.phone = 'Số điện thoại không hợp lệ'
     }
 
@@ -155,7 +155,7 @@ export default function PlanWithSim() {
           tel: values.phone,
           email: values.email,
           address: `${values.address}, ${address?.path_with_type ?? ''}`,
-          item: { type: "simpack", itemId: simpack?._id, price: simpack?.price },
+          items: [{ type: "simpack", itemId: simpack?._id, value: simpack?.price }],
           total_amount: simpack?.price,
           prod_total_amount: simpack?.price,
           transport_fee: 0,
@@ -164,13 +164,7 @@ export default function PlanWithSim() {
           payment_state: 'WaitToPay',
           payment_method: method,
           note: values.note,
-          itemIds: [
-            {
-              "schema": "ShopingCardItem",
-              "schema_label": "Item giỏ hàng",
-              "display_name": `Sim-${simpack?.telco}-${number?.msid}`
-            }
-          ],
+
           provinceId: values.province,
           districtId: values.district,
           wardId: values.ward,

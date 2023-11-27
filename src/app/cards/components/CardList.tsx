@@ -85,6 +85,7 @@ export default function CardList() {
     <>
       {loading ? (<div className='h-80 w-full flex justify-center items-center'><MoonLoader color='#E50914' /></div>) : (
         <>
+
           {<div className='mt-5 flex items-center w-full flex-wrap'>
 
             {data.map((item, index) => (<CardItem onClick={() => {
@@ -98,7 +99,7 @@ export default function CardList() {
               current={page}
               size="default"
               total={count}
-              // pageSize={9}
+              pageSize={8}
               showSizeChanger={false}
               showQuickJumper={false}
               onChange={(v) => {

@@ -147,7 +147,7 @@ export default function CardPage() {
               tel: phone,
               // email: "minhgiang@gmail.com",
               // address: `Hà Nội`,
-              /* item: { type: "simpack", itemId: simpack?._id, price: simpack?.price }, */
+              items: [{ type: "phonecard", itemId: selectedCardType?._id, value: selectedCardType?.value }],
               total_amount: selectedCardType?.value,
               prod_total_amount: selectedCardType?.value,
               transport_fee: 0,
@@ -156,13 +156,6 @@ export default function CardPage() {
               payment_state: 'WaitToPay',
               payment_method: "Wallet",
               note: "note",
-              itemIds: [
-                {
-                  "schema": "ShopingCardItem",
-                  "schema_label": "Item giỏ hàng",
-                  "display_name": `PhoneCard-${selectedCardType?.cardType}-${selectedCardType?.value}`
-                }
-              ],
               // provinceId: values.province,
               // districtId: values.district,
               // wardId: values.ward,
