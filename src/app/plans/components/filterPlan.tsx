@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, { useEffect } from "react";
 import { FilterOutlined } from "@ant-design/icons";
@@ -15,6 +16,7 @@ import {
 import { RootState } from "@/GlobalRedux/store";
 import { getAllSimpack } from "@/services/api/simPackApi";
 import { errorToast } from "@/app/components/modals/CustomToast";
+import { simPackPageSize } from "@/constants/constants";
 
 export default function FilterPlan() {
   const dispatch = useDispatch();
@@ -42,7 +44,13 @@ export default function FilterPlan() {
 
   useEffect(() => {
     dispatch(setLoading(true));
-    getAllSimpack(9, (!page ? 0 : page - 1) * 9, telco, type, sortBy)
+    getAllSimpack(
+      simPackPageSize,
+      (!page ? 0 : page - 1) * simPackPageSize,
+      telco,
+      type,
+      sortBy,
+    )
       .then((v) => {
         dispatch(setLoading(false));
         if (v && v.list.length > 0) {

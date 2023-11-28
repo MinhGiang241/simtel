@@ -111,7 +111,18 @@ export default function Login({ onCancel, switchSignUp }: Props) {
       />
 
       <div className="flex justify-end my-3 text-m_red underline underline-offset-2">
-        {/* <button type='button' onClick={() => success('Gửi mã xác nhận thành công', 'Gửi mã OTP thành công đến email của quý khách')} className='select-none active:opacity-70'>Lấy  mã OTP</button> */}
+        {/* <button */}
+        {/*   type="button" */}
+        {/*   onClick={() => */}
+        {/*     successToast( */}
+        {/*       "Gửi mã xác nhận thành công", */}
+        {/*       "Gửi mã OTP thành công đến email của quý khách", */}
+        {/*     ) */}
+        {/*   } */}
+        {/*   className="select-none active:opacity-70" */}
+        {/* > */}
+        {/*   Lấy mã OTP */}
+        {/* </button> */}
         <button
           type="button"
           onClick={() =>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, { useEffect } from "react";
 import PlanCard from "./planCard";
@@ -30,7 +31,13 @@ export default function GridPlan() {
 
   useEffect(() => {
     dispatch(setLoading(true));
-    getAllSimpack(9, (!page ? 0 : page - 1) * 9, telco, type, sortBy)
+    getAllSimpack(
+      simPackPageSize,
+      (!page ? 0 : page - 1) * simPackPageSize,
+      telco,
+      type,
+      sortBy,
+    )
       .then((v) => {
         if (v && v.list.length > 0) {
           dispatch(getList(v.list));

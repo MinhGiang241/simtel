@@ -29,6 +29,8 @@ export default function FilterSim() {
   const page = useSelector((state: RootState) => state.sim.page);
   const telco = useSelector((state: RootState) => state.sim.telco);
   const type = useSelector((state: RootState) => state.sim.type);
+  const search = useSelector((state: RootState) => state.sim.search);
+  const not = useSelector((state: RootState) => state.sim.not);
 
   const telcos = useSelector((state: RootState) => state.config.telcos);
   const loadingTelcos = useSelector(
@@ -43,12 +45,14 @@ export default function FilterSim() {
       value === "Sim vật lý" ? "Physical" : value,
       telco,
       true,
+      search,
+      not,
     );
   };
 
   const handleSelectBranch = (value: any) => {
     dispatch(setSimTelco(value));
-    getSimFunction(dispatch, page, type, value, true);
+    getSimFunction(dispatch, page, type, value, true, search, not);
   };
 
   const handleSelectPrice = (value: any) => {};

@@ -37,6 +37,8 @@ export default function FilterOnBanner({ open, onOk, onCancel }: Props) {
   const [selected, setSelected] = useState<string>();
   const telcos = useSelector((state: RootState) => state.config.telcos);
   const page = useSelector((state: RootState) => state.sim.page);
+  const search = useSelector((state: RootState) => state.sim.search);
+  const not = useSelector((state: RootState) => state.sim.not);
   const type = useSelector((state: RootState) => state.sim.type);
   const telcoOptions = telcos.map((i) => ({
     key: i._id,
@@ -93,7 +95,7 @@ export default function FilterOnBanner({ open, onOk, onCancel }: Props) {
           <Button
             onClick={() => {
               dispatch(setSimTelco(selected));
-              getSimFunction(dispatch, page, type, selected, true);
+              getSimFunction(dispatch, page, type, selected, true, search, not);
               onCancel();
             }}
             className="text-white bg-m_red border-m_red mt-5 w-[165px] h-12 text-base font-semibold"

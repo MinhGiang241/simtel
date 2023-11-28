@@ -69,14 +69,15 @@ export default function NumberList({ hideFilter }: Props) {
   const loading = useSelector((state: RootState) => state.sim.loading);
   const count = useSelector((state: RootState) => state.sim.count);
   const type = useSelector((state: RootState) => state.sim.type);
+  const search = useSelector((state: RootState) => state.sim.search);
+  const not = useSelector((state: RootState) => state.sim.not);
   const telco = useSelector((state: RootState) => state.sim.telco);
   const telcos = useSelector((state: RootState) => state.config.telcos);
 
-  console.log("telcooo", telco);
   useEffect(() => {
-    getSimFunction(dispatch, page, type, telco, false);
+    getSimFunction(dispatch, page, type, telco, false, search, not);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [telcos, page, type, telco]);
+  }, [search, not, telcos, page, type, telco]);
 
   interface DataType {
     _id?: string;

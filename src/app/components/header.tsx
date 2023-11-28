@@ -103,6 +103,8 @@ export default function Header() {
   const page = useSelector((state: RootState) => state.sim.page);
   const telco = useSelector((state: RootState) => state.sim.telco);
   const type = useSelector((state: RootState) => state.sim.type);
+  const not = useSelector((state: RootState) => state.sim.not);
+  const search = useSelector((state: RootState) => state.sim.search);
 
   const loadingTelcos = useSelector(
     (state: RootState) => state.config.loadingTelcos,
@@ -113,7 +115,7 @@ export default function Header() {
       <MLink
         onClick={() => {
           dispatch(setSimTelco(i.name));
-          getSimFunction(dispatch, page, type, i.name, false);
+          getSimFunction(dispatch, page, type, i.name, false, search, not);
         }}
         className="text-base"
         link="/sims"

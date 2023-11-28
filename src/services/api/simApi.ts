@@ -3,12 +3,12 @@ import { CallApi } from "../helper";
 
 interface simList {
   telco?: string;
-  not_include?: string[],
-  price?: number,
-  type?: string,
-  search?: string,
-  skip?: number,
-  limit?: number,
+  not_include?: string[];
+  price?: number;
+  type?: string;
+  search?: string;
+  skip?: number;
+  limit?: number;
 }
 export const getAllSim = async ({
   telco,
@@ -26,13 +26,17 @@ export const getAllSim = async ({
         message
         data
     }
-}        
-  `
-  var variables = { telco, not_include, price, type, search, skip, limit }
-  return await CallApi({ query, variables });
 }
+  `;
+  var variables = { telco, not_include, price, type, search, skip, limit };
+  return await CallApi({ query, variables });
+};
 
-export const getRandomSimBySimpack = async (telco: string | undefined, simpack: SimPack | undefined, old_number: string | undefined) => {
+export const getRandomSimBySimpack = async (
+  telco: string | undefined,
+  simpack: SimPack | undefined,
+  old_number: string | undefined,
+) => {
   var query = `
   mutation ($telco:String,$simpack:Dictionary,$old_number:String){
     response: sim_get_random_sim_by_simpack (telco: $telco,simpack: $simpack,old_number: $old_number ) {
@@ -41,8 +45,7 @@ export const getRandomSimBySimpack = async (telco: string | undefined, simpack: 
         data
     }
 }
-                
-  `
-  var variables = { telco, simpack, old_number }
-  return await CallApi({ query, variables })
-}
+  `;
+  var variables = { telco, simpack, old_number };
+  return await CallApi({ query, variables });
+};

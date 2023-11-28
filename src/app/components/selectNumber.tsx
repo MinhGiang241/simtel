@@ -1,6 +1,6 @@
 "use client";
-import { Input, Select } from "antd";
-import React, { useState } from "react";
+import { Input } from "antd";
+import React, { useEffect, useState } from "react";
 import "./component.css";
 import NumberList from "./numberList";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
@@ -15,11 +15,16 @@ import Shadow from "./logo/shadow.svg";
 import PageWrapper from "./pageWrapper";
 import { useSelector } from "react-redux";
 import { RootState } from "@/GlobalRedux/store";
-import { setSimPage } from "@/GlobalRedux/Sim/SimSlice";
+import {
+  setSimPage,
+  setSimSearch,
+  setSimNot,
+} from "@/GlobalRedux/Sim/SimSlice";
 import { getSimFunction } from "@/services/sim/simServices";
-import { Button, Modal } from "antd";
+import { Button } from "antd";
 import FilterOnBanner from "./modals/FilterOnBanner";
 import { simPageSize } from "@/constants/constants";
+import { errorToast } from "./modals/CustomToast";
 
 interface Props {
   hideFilter?: boolean;
@@ -29,8 +34,16 @@ interface Props {
 export default function SelectNumber({ hideFilter, isHome = false }: Props) {
   const router = useRouter();
   const dispatch = useDispatch();
-  const num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+  const [text, setText] = useState<string>("");
+  const search = useSelector((state: RootState) => state.sim.search);
+  const not = useSelector((state: RootState) => state.sim.not);
+  const [num, setNum] = useState(
+    Array.from({ length: 10 }, (_, index) => ({
+      active: not?.includes(`${index}`) ?? false,
+      val: `${index}`,
+    })),
+  );
   const page = useSelector((state: RootState) => state.sim.page);
   const loading = useSelector((state: RootState) => state.sim.loading);
   const count = useSelector((state: RootState) => state.sim.count);
@@ -99,6 +112,11 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
           </div>
           <div className="flex items-center">
             <Input
+              defaultValue={search}
+              onChange={(e) => {
+                setText(e.target.value.trim());
+                // dispatch(setSimSearch(e.target.value.trim()));
+              }}
               placeholder="**** *** ***"
               className="text-sm h-14 w-96 input-search"
               allowClear
@@ -113,16 +131,24 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
           </div>
           <div className="flex justify-center items-center mt-4 p-4 rounded-lg bg-m_opacity mb-4">
             <h2 className="text-white">Loại trừ số:</h2>
-            <div className="flex mr-2">
-              {...num.map((i, e) => (
-                <button
-                  key={e}
-                  className="active:opacity-70 select-none mx-1 text-white rounded-full border-white border-2 px-2 py-2 h-7 w-7 text-center flex justify-center items-center"
-                >
-                  {i}
-                </button>
-              ))}
-            </div>
+            {num && (
+              <div className="flex mr-2">
+                {...num.map((i, e) => (
+                  <button
+                    onClick={() => {
+                      num[e].active = !num[e].active;
+                      setNum([...num]);
+                    }}
+                    key={e}
+                    className={`${
+                      i.active ? "bg-m_orange" : ""
+                    } z-30 active:opacity-70 select-none mx-1 text-white rounded-full border-white border-2 px-2 py-2 h-7 w-7 text-center flex justify-center items-center`}
+                  >
+                    {i.val}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
           <div className="text-white text-sm">
             ● Tìm sim có số 6789 bạn hãy gõ 6789
@@ -133,7 +159,27 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
           <div className="text-white text-sm">
             ● Tìm sim bắt đầu bằng 0914 đuôi bất kỳ bạn hãy gõ 0914*
           </div>
-          <button className="text-m_red bg-white w-32 rounded-lg p-4 m-auto mt-4">
+          <button
+            onClick={() => {
+              var notIncludes = num.filter((i) => i.active).map((v) => v.val);
+              if (!/^[0-9* ]+$/.test(text)) {
+                errorToast("Chỉ chứa số và ký tự *");
+              } else {
+                dispatch(setSimSearch(text));
+                dispatch(setSimNot(notIncludes));
+                getSimFunction(
+                  dispatch,
+                  1,
+                  type,
+                  telco,
+                  true,
+                  text,
+                  notIncludes,
+                );
+              }
+            }}
+            className="text-m_red bg-white w-32 rounded-lg p-4 m-auto mt-4"
+          >
             Tìm kiếm
           </button>
         </div>
@@ -154,7 +200,7 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
           showSizeChanger={false}
           onChange={(i, __) => {
             dispatch(setSimPage(i));
-            getSimFunction(dispatch, i, type, telco, false);
+            getSimFunction(dispatch, i, type, telco, false, text, not);
           }}
         />
       </div>
