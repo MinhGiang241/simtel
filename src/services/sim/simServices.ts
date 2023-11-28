@@ -6,7 +6,7 @@ import {
 } from "@/GlobalRedux/Sim/SimSlice";
 import { AnyAction, Dispatch } from "@reduxjs/toolkit";
 import { getAllSim } from "../api/simApi";
-import { error } from "@/app/components/modals/CustomToast";
+import { errorToast } from "@/app/components/modals/CustomToast";
 
 export const getSimFunction = (
   dispatch: Dispatch<AnyAction>,
@@ -29,6 +29,6 @@ export const getSimFunction = (
     })
     .catch((err) => {
       dispatch(setSimLoading(false));
-      error("Lỗi", err);
+      errorToast("Lỗi", err);
     });
 };
