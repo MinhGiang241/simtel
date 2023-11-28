@@ -15,7 +15,7 @@ import { RootState } from "@/GlobalRedux/store";
 import { setPath } from "@/GlobalRedux/path/pathSlice";
 import { pushPathName } from "@/services/routes";
 import { AuthState, userLogout } from "@/GlobalRedux/Auth/authSlice";
-import { success } from "./modals/CustomToast";
+import { successToast } from "./modals/CustomToast";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import MLink from "@/app/components/config/Mlink";
@@ -281,7 +281,7 @@ export default function Header() {
               onClick={() => {
                 dispatch(userLogout(undefined));
                 setConfirmLogOut(false);
-                success("Thành công", "đăng xuất thành công");
+                successToast("Thành công", "đăng xuất thành công");
               }}
             >
               Đăng xuất

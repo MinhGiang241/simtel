@@ -1,6 +1,10 @@
+import { setSimTelco } from "@/GlobalRedux/Sim/SimSlice";
+import { setTelco } from "@/GlobalRedux/SimPack/SimPackSlice";
 import { RootState } from "@/GlobalRedux/store";
+import { getSimFunction } from "@/services/sim/simServices";
 import { Button, Modal } from "antd";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 interface Props {
@@ -32,10 +36,14 @@ export default function FilterOnBanner({ open, onOk, onCancel }: Props) {
   const [selectedCard, setSelectedCard] = useState<string>();
   const [selected, setSelected] = useState<string>();
   const telcos = useSelector((state: RootState) => state.config.telcos);
+  const page = useSelector((state: RootState) => state.sim.page);
+  const type = useSelector((state: RootState) => state.sim.type);
   const telcoOptions = telcos.map((i) => ({
     key: i._id,
     value: i.name,
   }));
+  const dispatch = useDispatch();
+
   return (
     <Modal
       className="h-[400px]"
@@ -83,7 +91,11 @@ export default function FilterOnBanner({ open, onOk, onCancel }: Props) {
         </div>
         <div className="w-full flex justify-center">
           <Button
-            onClick={() => onCancel()}
+            onClick={() => {
+              dispatch(setSimTelco(selected));
+              getSimFunction(dispatch, page, type, selected, true);
+              onCancel();
+            }}
             className="text-white bg-m_red border-m_red mt-5 w-[165px] h-12 text-base font-semibold"
           >
             Tìm kiếm

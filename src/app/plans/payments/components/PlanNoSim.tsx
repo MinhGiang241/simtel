@@ -12,7 +12,7 @@ import {
   getOrderById,
   getOrderLink,
 } from "@/services/api/orderApi";
-import { error, success } from "@/app/components/modals/CustomToast";
+import { errorToast, successToast } from "@/app/components/modals/CustomToast";
 import Image from "next/image";
 import { setPhone, setSeleted } from "@/GlobalRedux/SimPack/SimPackSlice";
 
@@ -57,7 +57,7 @@ export default function PlanNoSim() {
       await createOrder(dataSubmit)
         .then(async (v) => {
           setLoading(false);
-          success(
+          successToast(
             "Đặt hàng thành công",
             "Bạn đã đặt hàng thành công ,đơn hàng của bạn đã được chuyển đến bộ phận quản lý",
           );
@@ -92,11 +92,11 @@ export default function PlanNoSim() {
         })
         .catch((e) => {
           setLoading(false);
-          error("Thanh toán thất bại", e as string);
+          errorToast("Thanh toán thất bại", e as string);
         });
     } catch (err) {
       setLoading(false);
-      error("Thanh toán thất bại", err as string);
+      errorToast("Thanh toán thất bại", err as string);
     }
   };
 

@@ -10,7 +10,7 @@ import {
 } from "@/services/api/orderApi";
 import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { error, success } from "@/app/components/modals/CustomToast";
+import { errorToast, successToast } from "@/app/components/modals/CustomToast";
 import { Button, Divider, Input, Radio, RadioChangeEvent } from "antd";
 import { FormikErrors, useFormik, useFormikContext } from "formik";
 import MInput from "@/app/components/config/MInput";
@@ -196,7 +196,7 @@ export default function PlanWithSim() {
         createOrder(dataSubmit)
           .then(async (v) => {
             setLoading(false);
-            success(
+            successToast(
               "Đặt hàng thành công",
               "Bạn đã đặt hàng thành công ,đơn hàng của bạn đã được chuyển đến bộ phận quản lý",
             );
@@ -218,7 +218,7 @@ export default function PlanWithSim() {
           });
       } catch (err) {
         setLoading(false);
-        error("Thanh toán thất bại", err as string);
+        errorToast("Thanh toán thất bại", err as string);
       }
     },
   });

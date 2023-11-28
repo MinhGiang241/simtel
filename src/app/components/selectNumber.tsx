@@ -19,6 +19,7 @@ import { setSimPage } from "@/GlobalRedux/Sim/SimSlice";
 import { getSimFunction } from "@/services/sim/simServices";
 import { Button, Modal } from "antd";
 import FilterOnBanner from "./modals/FilterOnBanner";
+import { simPageSize } from "@/constants/constants";
 
 interface Props {
   hideFilter?: boolean;
@@ -149,7 +150,7 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
           defaultCurrent={page}
           total={count}
           size="default"
-          pageSize={4}
+          pageSize={simPageSize}
           showSizeChanger={false}
           onChange={(i, __) => {
             dispatch(setSimPage(i));

@@ -14,7 +14,7 @@ import {
 } from "@/GlobalRedux/SimPack/SimPackSlice";
 import { RootState } from "@/GlobalRedux/store";
 import { getAllSimpack } from "@/services/api/simPackApi";
-import { error } from "@/app/components/modals/CustomToast";
+import { errorToast } from "@/app/components/modals/CustomToast";
 
 export default function FilterPlan() {
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ export default function FilterPlan() {
         }
       })
       .catch((e) => {
-        error("Lỗi", e);
+        errorToast("Lỗi", e);
         dispatch(setLoading(false));
       });
   }, [telco, type, sortBy, page]);

@@ -22,7 +22,7 @@ import {
   getOrderById,
 } from "@/services/api/orderApi";
 import { Order, SimPack } from "@/interfaces/data";
-import { error, success } from "@/app/components/modals/CustomToast";
+import { errorToast, successToast } from "@/app/components/modals/CustomToast";
 import { pushPathName } from "@/services/routes";
 import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import Image from "next/image";
@@ -200,7 +200,7 @@ export default function SimPayments() {
         createOrder(dataSubmit)
           .then(async (v) => {
             setLoading(false);
-            success(
+            successToast(
               "Đặt hàng thành công",
               "Bạn đã đặt hàng thành công ,đơn hàng của bạn đã được chuyển đến bộ phận quản lý",
             );
@@ -223,7 +223,7 @@ export default function SimPayments() {
           });
       } catch (err) {
         setLoading(false);
-        error("Thanh toán thất bại", err as string);
+        errorToast("Thanh toán thất bại", err as string);
       }
     },
   });

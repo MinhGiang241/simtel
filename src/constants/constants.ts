@@ -1,0 +1,9 @@
+export const simPageSize = 10;
+export const cardPageSize = 8;
+export const simPackPageSize = 9;
+export const m_red = "#E50914";
+export const m_gray = "#EDF2F7";
+export const m_red_banner = "#A81618";
+export const m_opacity = "#bd5b5b";
+export const m_orange = "#FF7300";
+export const m_backgound = "#F8FAFC";

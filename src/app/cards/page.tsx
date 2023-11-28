@@ -15,7 +15,7 @@ import {
   setPageCard,
   setTelcoCard,
 } from "@/GlobalRedux/PhoneCard/PhoneCardSlice";
-import { error, success } from "../components/modals/CustomToast";
+import { errorToast, successToast } from "../components/modals/CustomToast";
 import { getAllPhoneCard, getListCardType } from "@/services/api/simPackApi";
 import Viettel from "./logo/viettel.svg";
 import Vinaphone from "./logo/vinaphone.svg";
@@ -124,7 +124,7 @@ export default function CardPage() {
       })
       .catch((e: string) => {
         dispatch(setLoadingCard(false));
-        error("Lỗi", e);
+        errorToast("Lỗi", e);
       });
   };
 
@@ -230,11 +230,11 @@ export default function CardPage() {
               })
               .catch((er) => {
                 setLoading(false);
-                error("Thanh toán thất bại", er as string);
+                errorToast("Thanh toán thất bại", er as string);
               });
           } catch (err) {
             setLoading(false);
-            error("Thanh toán thất bại", err as string);
+            errorToast("Thanh toán thất bại", err as string);
           }
         }}
         loading={loading}
