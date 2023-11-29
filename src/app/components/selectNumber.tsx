@@ -163,7 +163,7 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
             onClick={() => {
               var notIncludes = num.filter((i) => i.active).map((v) => v.val);
               if (!/^[0-9* ]+$/.test(text)) {
-                errorToast("Chỉ chứa số và ký tự *");
+                errorToast("Lỗi", "Chỉ chứa số và ký tự *");
               } else {
                 dispatch(setSimSearch(text));
                 dispatch(setSimNot(notIncludes));
