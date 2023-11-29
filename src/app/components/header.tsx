@@ -7,7 +7,7 @@ import {
   ExclamationCircleOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
-import { Button, Menu, MenuProps, Modal } from "antd";
+import { Button, Dropdown, Menu, MenuProps, Modal } from "antd";
 import Login from "./modals/Login";
 import SignUp from "./modals/SignUp";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +17,8 @@ import { pushPathName } from "@/services/routes";
 import { AuthState, userLogout } from "@/GlobalRedux/Auth/authSlice";
 import { successToast } from "./modals/CustomToast";
 import { DownOutlined } from "@ant-design/icons";
-import { Dropdown, Space } from "antd";
+import { Drawer, Collapse, Space } from "antd";
+import { MenuOutlined } from "@ant-design/icons";
 import MLink from "@/app/components/config/Mlink";
 import { getActiveTelco } from "@/services/api/config";
 import { setLoadingTelcos, setTelcos } from "@/GlobalRedux/config/ConfigSlice";
@@ -36,6 +37,14 @@ export default function Header() {
   const isAuth = useSelector((state: RootState) => state.auth.authState);
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const [hidden, setHidden] = useState(false);
+  const showDrawer = () => {
+    setHidden(true);
+  };
+  const onClose = () => {
+    setHidden(false);
+  };
 
   const carts = [
     {
@@ -126,6 +135,70 @@ export default function Header() {
     key: i._id,
   }));
 
+  const data = [
+    {
+      key: "1",
+      label: "Mua gói cước",
+      children: (
+        <div>
+          <div className="mb-2">
+            <MLink className="text-base text-black" link="/plans">
+              Gói cước thoại
+            </MLink>
+          </div>
+          <div>
+            <MLink className="text-base text-black" link="/plans">
+              Gói cước data
+            </MLink>
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: "2",
+      label: "Mua sim",
+      children: (
+        <div>
+          <div className="mb-3">
+            <MLink className="text-base text-black" link="/sims">
+              Viettel
+            </MLink>
+          </div>
+          <div className="mb-3">
+            <MLink className="text-base text-black" link="/sims">
+              Vinaphone
+            </MLink>
+          </div>
+          <div className="mb-3">
+            <MLink className="text-base text-black" link="/sims">
+              Wintel
+            </MLink>
+          </div>
+          <div className="mb-3">
+            <MLink className="text-base text-black" link="/sims">
+              Vietnammobile
+            </MLink>
+          </div>
+          <div>
+            <MLink className="text-base text-black" link="/sims">
+              Mobifone
+            </MLink>
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: "3",
+      label: "Nạp thẻ",
+      children: <button>Nạp thẻ</button>,
+    },
+    {
+      key: "4",
+      label: "Khuyến mại",
+      children: <button>Khuyến mại</button>,
+    },
+  ];
+
   useEffect(() => {
     window.onpopstate = () => {
       console.log("lll");
@@ -140,15 +213,16 @@ export default function Header() {
 
   return (
     <div className="w-full h-[88px] flex justify-center shadow-lg fixed z-50 bg-white">
-      <div className="flex w-[160rem] max-w-[1140px] items-center ">
+      <div className="flex w-[160rem] max-w-[1140px] items-center justify-between">
         <button
+          className="ml-4 sm:ml-0"
           onClick={() => {
             pushPathName(router, dispatch, "/");
           }}
         >
           <Logo viewBox="0 0 152 60" width={130} height={48} />
         </button>
-        <div className="text-lg flex justify-center items-center flex-grow ">
+        <div className="text-lg justify-center items-center flex-grow sm:flex hidden ">
           <div className="w-[143px] h-[40px] flex justify-center items-center text-center">
             <Dropdown menu={{ items: carts }}>
               <button
@@ -217,8 +291,9 @@ export default function Header() {
             </button>
           </div>
         </div>
-        <div className="h-16 w-[1px] bg-gray-700 ml-6 mr-6" />
+
         <div className="h-full flex justify-end items-center">
+          <div className="h-16 w-[1px] bg-gray-700 ml-6 mr-6" />
           {isAuth == AuthState.LOGGED && (
             <>
               <button className="border-black border-2 p-1 rounded-md active:opacity-70 mr-6">
@@ -226,19 +301,22 @@ export default function Header() {
               </button>
 
               <button
-                className="mx-auto border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70 select-none"
+                className="mx-auto border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70 select-none sm:flex items-center hidden"
                 onClick={() => {
                   setConfirmLogOut(true);
                 }}
               >
                 Đăng xuất
               </button>
+              <button className="sm:hidden flex mr-5" onClick={showDrawer}>
+                <MenuOutlined />
+              </button>
             </>
           )}
           {isAuth == AuthState.NOT_LOGGED && (
             <>
               <button
-                className="bg-m_red mr-4 h-12 w-[135px] text-white font-bold px-2 rounded-xl active:opacity-70 select-none"
+                className="bg-m_red mr-4 h-12 w-[135px] text-white font-bold px-2 rounded-xl active:opacity-70 select-none sm:flex hidden justify-center items-center"
                 onClick={() => {
                   setModalKey(Date.now());
                   setOpen(true);
@@ -248,7 +326,7 @@ export default function Header() {
                 Đăng nhập
               </button>
               <button
-                className="text-m_red border-m_red border h-12 font-bold w-[135px] rounded-xl active:opacity-70 select-none"
+                className="text-m_red border-m_red border h-12 font-bold w-[135px] rounded-xl active:opacity-70 select-none sm:flex hidden justify-center items-center"
                 onClick={() => {
                   setModalKey(Date.now());
                   setOpen(true);
@@ -257,11 +335,66 @@ export default function Header() {
               >
                 Đăng ký
               </button>
-              <button className="border-l-2 ml-4 pl-2.5 border-m_gray">
+              <button className="border-l-2 border-m_gray">
                 <Cart />
+              </button>
+              <button className="sm:hidden flex mr-5 ml-5" onClick={showDrawer}>
+                <MenuOutlined />
               </button>
             </>
           )}
+          <Drawer
+            headerStyle={{ display: "none" }}
+            placement="right"
+            onClose={onClose}
+            open={hidden}
+            width="302px"
+          >
+            <div className="ml-2 pt-4 pb-4">
+              <Logo viewBox="0 0 152 60" width={114} height={38} />
+            </div>
+            <div className="border-b pb-5">
+              <Collapse items={data} defaultActiveKey={["1"]} />
+            </div>
+            {isAuth == AuthState.LOGGED && (
+              <>
+                <button
+                  className="mx-auto border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70 select-none sm:flex items-center flex mt-5"
+                  onClick={() => {
+                    setConfirmLogOut(true);
+                  }}
+                >
+                  Đăng xuất
+                </button>
+              </>
+            )}
+            {isAuth == AuthState.NOT_LOGGED && (
+              <>
+                <div className="mt-5 flex justify-center">
+                  <button
+                    className="bg-m_red mr-4 h-12 w-[135px] text-white font-bold px-2 rounded-xl active:opacity-70 select-none"
+                    onClick={() => {
+                      setModalKey(Date.now());
+                      setOpen(true);
+                      setIslogin(true);
+                    }}
+                  >
+                    Đăng nhập
+                  </button>
+                  <button
+                    className="text-m_red border-m_red border h-12 font-bold w-[135px] rounded-xl active:opacity-70 select-none"
+                    onClick={() => {
+                      setModalKey(Date.now());
+                      setOpen(true);
+                      setIslogin(false);
+                    }}
+                  >
+                    Đăng ký
+                  </button>
+                </div>
+              </>
+            )}
+          </Drawer>
         </div>
       </div>
       <Modal
@@ -288,6 +421,7 @@ export default function Header() {
             >
               Đăng xuất
             </Button>
+            {/* <MenuOutlined /> */}
             <div className="w-12" />
             <Button
               className="bg-white border-m_red rounded-xl px-6 text-m_red"

@@ -63,7 +63,7 @@ export default function PlanSlick({ urlImage, branch, name, describle, price, id
 
   return (
     <div className=" w-full flex justify-center" key={id}>
-      <div className={`${swiperSlide.isActive ? `scale-110` : ``} w-[307px] h-[550px]`}>
+      <div className={`${swiperSlide.isActive ? `scale-100` : ``} w-[307px] h-[550px]`}>
         <div className='left-4 w-28 h-8 bg-white z-20 translate-y-8 rounded-tl-xl rounded-br-xl justify-center flex items-center text-m_red'>
           {branch}
         </div>

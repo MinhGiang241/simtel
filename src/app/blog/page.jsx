@@ -38,7 +38,7 @@ export default function Page() {
                             <div className="col-span-1 p-4 m-2 cursor-pointer" key={key} onClick={() => {
                                 pushPathName(router, dispatch, `/detail?id=${x._id}`)
                             }}>
-                                <img className="w-full h-[221px]" src={`${uploadUrl}${x.icon}`} alt="#" />
+                                <img className="w-full h-[221px]" src={`${uploadUrl}${x.article.thumb}`} alt="#" />
                                 <div className='flex justify-between mt-4'>
                                     <div className='flex items-center text-m_red text-base'><Down className="mr-1" />{x.name}</div>
                                     <div className='flex items-center mr-2 text-slate-400 text-base'><Calender className="mr-1" />{`${new Date(x.createdTime.toString()).getDate()}/${new Date(x.createdTime.toString()).getMonth() + 1}/${new Date(x.createdTime.toString()).getFullYear()}`}</div>

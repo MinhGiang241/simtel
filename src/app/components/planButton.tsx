@@ -11,50 +11,19 @@ export default function PlanButton() {
 
   return (
     <div className="w-full flex-col items-center">
-      <div className="mt-4 flex justify-center">
-        <h2 className="px-2 text-m_red font-bold text-4xl pt-10">
-          {" "}
-          {"Chọn ngay gói cước phù hợp"}
-        </h2>
+      <div className="mt-4 flex justify-center" >
+        <h2 className="px-1 sm:px-2 text-m_red font-bold sm:text-4xl text-2xl sm:pt-10 pt-5"> {'Chọn ngay gói cước phù hợp'}</h2>
       </div>
-      <div className="bg-slate-100 flex justify-center items-center mt-10 border rounded-full py-2 w-[563px] h-[84px] m-auto">
-        <button
-          className={` text-lg px-5 py-2 rounded-full active:opacity-70 font-bold select-none flex justify-center items-center ${
-            selectedPlan === "data"
-              ? "active w-[243px] h-[60px] bg-white text-black relative"
-              : "w-[243px] text-slate-300"
-          }`}
-          onClick={() => handlePlanClick("data")}
-        >
-          <div
-            className={`${
-              selectedPlan === "data"
-                ? "active border-2 border-m_red w-7 absolute bottom-0 rounded-3xl"
-                : ""
-            }`}
-          />
+      <div className="bg-slate-100 flex justify-center items-center mt-10 border rounded-full py-2 sm:w-[563px] sm:h-[84px] w-[360px] h-[52px] m-auto">
+        <button className={`text-xs sm:text-lg px-5 py-2 rounded-full active:opacity-70 font-bold select-none flex justify-center items-center ${selectedPlan === 'data' ? 'active sm:w-[243px] sm:h-[60px] w-[149px] h-[36px] bg-white text-black relative' : 'w-[149px] sm:w-[243px] text-slate-300'}`} onClick={() => handlePlanClick('data')}>
+          <div className={`${selectedPlan === 'data' ? 'active border-2 border-m_red w-7 absolute bottom-0 rounded-3xl' : ''}`} />
           {/* <div className='border-2 border-m_red w-7 absolute bottom-0 rounded-3xl' /> */}
           <Data className={`mr-2`} />
           Gói cước data
         </button>
-        <div className="w-10 text-slate-300 flex justify-center items-center">
-          |
-        </div>
-        <button
-          className={`text-lg px-5 py-2 rounded-full active:opacity-70 font-bold select-none flex justify-center items-center ${
-            selectedPlan === "phone"
-              ? "active w-[243px] h-[60px] bg-white text-black relative"
-              : "w-[243px] text-slate-300"
-          }`}
-          onClick={() => handlePlanClick("phone")}
-        >
-          <div
-            className={`${
-              selectedPlan === "phone"
-                ? "active border-2 border-m_red w-7 absolute bottom-0 rounded-3xl"
-                : ""
-            }`}
-          />
+        <div className="w-10 text-slate-300 flex justify-center items-center">|</div>
+        <button className={`text-xs sm:text-lg px-5 py-2 rounded-full active:opacity-70 font-bold select-none flex justify-center items-center ${selectedPlan === 'phone' ? 'active sm:w-[243px] sm:h-[60px] w-[149px] h-[36px] bg-white text-black relative' : 'w-[149px] sm:w-[243px] text-slate-300'}`} onClick={() => handlePlanClick('phone')}>
+          <div className={`${selectedPlan === 'phone' ? 'active border-2 border-m_red w-7 absolute bottom-0 rounded-3xl' : ''}`} />
           <Phone className="mr-2" />
           Gói cước thoại
         </button>
