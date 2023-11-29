@@ -154,26 +154,26 @@ export default function NumberList({ hideFilter, }: Props) {
       </div >
       <div>
         {data.map((c) => (
-          <div className='border mb-3 mt-3 w-[343px] h-[196px]'>
-            <div className='flex justify-between'>
+          <div className='border mb-3 mt-3 w-[343px] h-[196px] p-4 rounded-lg'>
+            <div className='flex justify-between pb-2'>
               <div>Số điện thoại</div>
-              <div>123123</div>
+              <div>{c.msid}</div>
             </div>
-            <div className='flex justify-between'>
+            <div className='flex justify-between pb-2'>
               <div>Nhà mạng</div>
-              <div>123123</div>
+              <div>{c.telco}</div>
             </div>
-            <div className='flex justify-between'>
+            <div className='flex justify-between pb-2'>
               <div>Loại sim</div>
-              <div>123123</div>
+              <div>{c?.type}</div>
             </div>
-            <div className='flex justify-between'>
+            <div className='flex justify-between border-b pb-2'>
               <div>Gói cước</div>
               <div>123123</div>
             </div>
-            <div className='flex justify-between'>
+            <div className='flex justify-between pb-2 pt-2'>
               <div>12d</div>
-              <button>Mua ngay</button>
+              <button className='border w-[110px] h-[32px] rounded-md'>Mua ngay</button>
             </div>
           </div>
         ))}
