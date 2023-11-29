@@ -30,13 +30,12 @@ export default function Discount() {
 
   return (
     <div className='w-full mt-5'>
-
       <div className="flex justify-center" >
         {/* <h2 className="font-bold text-4xl">, </h2> */}
-        <h2 className="px-2 text-m_red font-bold text-3xl mt-10">Tin tức, khuyến mại</h2>
+        <h2 className="px-2 text-m_red font-bold sm:text-3xl text-2xl mt-10">Tin tức, khuyến mại</h2>
       </div>
-      <div className='w-full h-[500px] pt-6'>
-        <div className="grid grid-cols-3 gap-4">
+      <div className='w-full pt-6'>
+        <div className="sm:grid sm:grid-cols-3 sm:gap-4 flex flex-wrap">
           {blog?.map((x, key) => (
             <div className="col-span-1 p-4 m-2" key={key} >
               <div className='cursor-pointer' onClick={() => {

@@ -1,46 +1,45 @@
-"use client"
+"use client";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import './component.css'
+import "./component.css";
 
-import Link from 'next/link'
-import { useDispatch } from 'react-redux';
-import { setPath } from '@/GlobalRedux/path/pathSlice';
+import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { setPath } from "@/GlobalRedux/path/pathSlice";
 import useSWR from "swr";
 import { apiGraphql } from "@/constants/apiConstant";
 import { getAllSimpack } from "@/services/api/simPackApi";
 import { SimPack } from "@/interfaces/data";
-import { register } from 'swiper/element/bundle';
-import { Swiper, SwiperSlide, useSwiperSlide } from 'swiper/react';
+import { register } from "swiper/element/bundle";
+import { Swiper, SwiperSlide } from "swiper/react";
 import PlanSlick from "./PlanSlick";
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-import { uploadUrl } from '@/constants/apiConstant'
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar'
-import { useSwiper } from 'swiper/react';
-import { MoonLoader } from 'react-spinners';
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { uploadUrl } from "@/constants/apiConstant";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import { useSwiper } from "swiper/react";
+import { MoonLoader } from "react-spinners";
+import { simPackPageSize } from "@/constants/constants";
 
 register();
 
 export default function PlanList() {
-  const swiper = useSwiper();
+  const { data, isLoading } = useSWR(apiGraphql, async () => {
+    return await getAllSimpack(simPackPageSize, 0);
+  });
 
-  const { data, isLoading } = useSWR(
-    apiGraphql,
-    async () => {
-      return await getAllSimpack(10, 0,)
-    }
-  )
-
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   return (
-    <div className='mt-5 w-[1140px]'>
-      <div className='w-full flex justify-self-end font-bold text-m_red relative'>
-        <div className='flex-grow' />
-        <Link onClick={() => dispatch(setPath('/plans/'))} href='/plans' className='mr-6'>
+    <div className="mt-5 ">
+      <div className="w-full flex justify-self-end font-bold text-m_red relative">
+        <div className="flex-grow" />
+        <Link
+          onClick={() => dispatch(setPath("/plans/"))}
+          href="/plans"
+          className="mr-6"
+        >
           Xem tất cả
         </Link>
       </div>
@@ -100,7 +99,5 @@ export default function PlanList() {
         )
       }
     </div>
-  )
+  );
 }
-
-

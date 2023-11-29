@@ -18,6 +18,8 @@ const config: Config = {
         m_backgound: "#F8FAFC",
         transparent: 'transparent',
         current: 'currentColor',
+        m_blue: '#3E6BBB',
+        m_sky: '#B6CAE0'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

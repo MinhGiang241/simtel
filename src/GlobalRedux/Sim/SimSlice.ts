@@ -1,58 +1,74 @@
-import { Sim } from '@/interfaces/data'
-import { createSlice } from '@reduxjs/toolkit'
+import { Sim } from "@/interfaces/data";
+import { createSlice } from "@reduxjs/toolkit";
 
 export interface SimState {
-  values: Sim[],
-  count: number,
-  page: number,
-  loading: Boolean,
-  not: string[],
-  telco?: string,
-  price?: number,
-  type?: string,
-  selected?: Sim,
+  values: Sim[];
+  count: number;
+  page: number;
+  loading: Boolean;
+  not?: string[];
+  telco?: string;
+  price?: number;
+  type?: string;
+  selected?: Sim;
+  search?: string;
 }
 
 const initialState: SimState = {
   values: [],
   count: 0,
   page: 1,
-  not: [],
   loading: true,
-}
+};
 
 export const simSlice = createSlice({
-  name: 'sim',
+  name: "sim",
   initialState,
   reducers: {
     getSimList: (state, action) => {
-      state.values = action.payload
+      state.values = action.payload;
     },
     setSimCount: (state, action) => {
-      state.count = action.payload
+      state.count = action.payload;
     },
     setSimPage: (state, action) => {
-      state.page = action.payload
+      state.page = action.payload;
     },
     setSimTelco: (state, action) => {
-      state.telco = action.payload
+      state.telco = action.payload;
     },
     setSimPrice: (state, action) => {
-      state.price = action.payload
+      state.price = action.payload;
     },
     setSimType: (state, action) => {
-      state.type = action.payload
+      state.type = action.payload;
     },
     setSimLoading: (state, action) => {
-      state.loading = action.payload
+      state.loading = action.payload;
+    },
+    setSimNot: (state, action) => {
+      return { ...state, not: action.payload };
     },
     setSimSelected: (state, action) => {
-      return { ...state, selected: action.payload }
-    }
+      return { ...state, selected: action.payload };
+    },
+    setSimSearch: (state, action) => {
+      return { ...state, search: action.payload };
+    },
+  },
+});
 
-  }
-})
+export const {
+  setSimSelected,
+  getSimList,
+  setSimCount,
+  setSimPage,
+  setSimTelco,
+  setSimPrice,
+  setSimType,
+  setSimLoading,
+  setSimSearch,
+  setSimNot,
+} = simSlice.actions;
 
-export const { setSimSelected, getSimList, setSimCount, setSimPage, setSimTelco, setSimPrice, setSimType, setSimLoading } = simSlice.actions
-
-export default simSlice.reducer
+export default simSlice.reducer;
