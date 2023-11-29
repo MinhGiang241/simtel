@@ -125,10 +125,10 @@ export default function NumberList({ hideFilter, }: Props) {
       key: 'simpack',
       dataIndex: 'simpack',
       render: (sp) => (
-        <Space key={sp._id} wrap>
+        <Space key={sp?._id} wrap>
           <Tooltip color='#FFF' title={sp?.description?.replaceAll("\n", ' ,')} placement="bottomLeft">
             {/* <p key={text}>Gói cước tự do</p> */}
-            <Button title={sp._id}>{sp?.code ? sp?.code : 'Gói cước tự do'}</Button>
+            <Button title={sp?._id}>{sp?.code ? sp?.code : 'Gói cước tự do'}</Button>
           </Tooltip>
         </Space>
       ),
@@ -147,22 +147,50 @@ export default function NumberList({ hideFilter, }: Props) {
 
   return (
     <div>
-      <div className={`flex justify-between align- items-end ${hideFilter ? 'h-10 mb-4' : 'h-24 mb-10'}`}>
+      <div className={`hidden sm:flex justify-between align- items-end ${hideFilter ? 'h-10 mb-4' : 'h-24 mb-10'}`}>
         {!hideFilter && (< FilterSim />
         )}
         <h4 className='font-bold'>{count} số hiện có</h4>
       </div >
-      {loading ? <div className='h-80 w-full flex justify-center items-center'><MoonLoader color='#E50914' /></div> :
-        (<Table
-          bordered={false}
-          columns={columns}
-          dataSource={data.map<DataType>(v => ({ ...v, money: { price: v.price, compare_price: v.compare_price }, sim: v, simpack: v.sp }))}
-          pagination={false}
-          rowKey={'id'}
-          onRow={(_, index: any) => ({
-            style: { background: index % 2 != 0 ? '#EDF2F7' : 'background: #F8FAFC', },
-          } as HTMLAttributes<any>)}
-        />)}
+      <div>
+        {data.map((c) => (
+          <div className='border mb-3 mt-3 w-[343px] h-[196px]'>
+            <div className='flex justify-between'>
+              <div>Số điện thoại</div>
+              <div>123123</div>
+            </div>
+            <div className='flex justify-between'>
+              <div>Nhà mạng</div>
+              <div>123123</div>
+            </div>
+            <div className='flex justify-between'>
+              <div>Loại sim</div>
+              <div>123123</div>
+            </div>
+            <div className='flex justify-between'>
+              <div>Gói cước</div>
+              <div>123123</div>
+            </div>
+            <div className='flex justify-between'>
+              <div>12d</div>
+              <button>Mua ngay</button>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className='hidden'>
+        {loading ? <div className='h-80 w-full flex justify-center items-center'><MoonLoader color='#E50914' /></div> :
+          (<Table
+            bordered={false}
+            columns={columns}
+            dataSource={data.map<DataType>(v => ({ ...v, money: { price: v.price, compare_price: v.compare_price }, sim: v, simpack: v.sp }))}
+            pagination={false}
+            rowKey={'id'}
+            onRow={(_, index: any) => ({
+              style: { background: index % 2 != 0 ? '#EDF2F7' : 'background: #F8FAFC', },
+            } as HTMLAttributes<any>)}
+          />)}
+      </div>
     </div>
   )
 }

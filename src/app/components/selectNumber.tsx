@@ -126,13 +126,13 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
         <Right className="absolute right-0" />
         <Left className="absolute left-[-9] bottom-16" />
         <Shadow className="absolute left-10" />
-        <Man className="absolute bottom-0 left-40 w-[579px] h-[464px]" />
-        <div className='w-[55%]' />
+        <Man className="absolute bottom-0 left-40 w-[579px] h-[464px] hidden sm:flex" />
+        <div className='sm:w-[55%] pr-3' />
         <div className='flex flex-col pt-10'>
           <div className='mb-1 text-base text-white'>Nhập số thuê bao mong muốn:</div>
           <div className='flex items-center'>
-            <Input placeholder='**** *** ***' className='text-sm h-14 w-96 input-search' allowClear />
-            <Button onClick={showModal} className='bg-transparent border border-white h-14 text-white rounded-lg ml-2 p-4'><FilterOutlined className="pr-2" />Bộ lọc</Button >
+            <Input placeholder='**** *** ***' className='text-sm sm:h-14 sm:w-96 w-[291px] h-[40px] input-search' allowClear />
+            <Button onClick={showModal} className='bg-transparent border border-white sm:h-14 h-[40px] flex items-center text-white rounded-lg ml-2 p-4'><FilterOutlined className="pr-2" />Bộ lọc</Button >
             <Modal className='h-[400px]' title="Bộ lọc" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} width={800}>
               <div className='mb-5'>
                 <div className='mb-2'>Nhà mạng</div>
@@ -152,8 +152,8 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
               </div>
             </Modal>
           </div>
-          <div className='flex justify-center items-center mt-4 p-4 rounded-lg bg-m_opacity mb-4'>
-            <h2 className='text-white'>Loại trừ số:</h2>
+          <div className='flex justify-center items-center mt-4 p-4 rounded-lg bg-m_opacity mb-4 w-[343px] h-[36px]'>
+            <h2 className='text-white'>Loại trừ:</h2>
             <div className='flex mr-2'>
               {...num.map((i, e) => (<button key={e} className='active:opacity-70 select-none mx-1 text-white rounded-full border-white border-2 px-2 py-2 h-7 w-7 text-center flex justify-center items-center'>{i}</button>))}
             </div>

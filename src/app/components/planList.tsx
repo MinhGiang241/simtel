@@ -47,6 +47,29 @@ export default function PlanList() {
       {
         isLoading ? (<div className='h-80 w-full flex justify-center items-center'><MoonLoader color='#E50914' /></div>) : (
           <Swiper
+
+            slideActiveClass="scale-110"
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              // 400: {
+              //   slidesPerView: 1,
+              // },
+              639: {
+                slidesPerView: 1,
+              },
+              1140: {
+                slidesPerView: 3
+              },
+              // 1500: {
+              //   slidesPerView: 6
+              // },
+              // 1700: {
+              //   slidesPerView: 7
+              // }
+            }}
+
             spaceBetween={50}
             slidesPerView={3}
             modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -55,12 +78,10 @@ export default function PlanList() {
             loop
             pagination={{ clickable: false }}
           // scrollbar={{ draggable: true }}
-
           >
             {isLoading ? [] : data['list'].map((item: SimPack) =>
 
             (<SwiperSlide key={item._id}>
-
               <PlanSlick
                 simpack={item}
                 key={item._id}
