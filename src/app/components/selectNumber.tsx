@@ -162,21 +162,10 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
           <button
             onClick={() => {
               var notIncludes = num.filter((i) => i.active).map((v) => v.val);
-              if (!/^[0-9* ]+$/.test(text)) {
-                errorToast("Lỗi", "Chỉ chứa số và ký tự *");
-              } else {
-                dispatch(setSimSearch(text));
-                dispatch(setSimNot(notIncludes));
-                getSimFunction(
-                  dispatch,
-                  1,
-                  type,
-                  telco,
-                  true,
-                  text,
-                  notIncludes,
-                );
-              }
+
+              dispatch(setSimSearch(text));
+              dispatch(setSimNot(notIncludes));
+              getSimFunction(dispatch, 1, type, telco, true, text, notIncludes);
             }}
             className="text-m_red bg-white w-32 rounded-lg p-4 m-auto mt-4"
           >
