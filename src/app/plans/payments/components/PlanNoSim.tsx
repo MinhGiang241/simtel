@@ -113,14 +113,14 @@ export default function PlanNoSim() {
   }, []);
 
   return (
-    <div className=" flex justify-between mb-28">
-      <div className="bg-white  w-7/12 border-m_gray border-2 rounded-lg p-5">
+    <div className=" flex lg:flex-row lg:items-start lg:justify-between flex-col items-center mb-28">
+      <div className="bg-white lg:w-7/12 w-3/4 border-m_gray border-2 rounded-lg p-5">
         <div className="text-base font-bold mb-3">Chọn loại gói cước</div>
         <Radio.Group
           className="flex"
           disabled
           value={type}
-          onChange={(v: RadioChangeEvent) => {}}
+          onChange={(v: RadioChangeEvent) => { }}
         >
           <Radio value={0}>
             <h1 className="ml-3">Gói cước</h1>
@@ -179,9 +179,8 @@ export default function PlanNoSim() {
         >
           <Radio
             value={"Wallet"}
-            className={`${
-              method === "Wallet" ? `bg-m_gray border-sky-700` : `border-m_gray`
-            }  border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}
+            className={`${method === "Wallet" ? `bg-m_gray border-sky-700` : `border-m_gray`
+              }  border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}
           >
             <div className="flex justify-between w-full">
               <div>Thanh Toán qua VNPAYQR</div>
@@ -198,9 +197,8 @@ export default function PlanNoSim() {
 
           <Radio
             value={"Cod"}
-            className={`${
-              method === "Cod" ? `bg-m_gray border-sky-700` : `border-m_gray`
-            } border-2 pl-3 w-full py-3 rounded-xl flex flex-row relative mt-6 mb-6`}
+            className={`${method === "Cod" ? `bg-m_gray border-sky-700` : `border-m_gray`
+              } border-2 pl-3 w-full py-3 rounded-xl flex flex-row relative mt-6 mb-6`}
           >
             <div>
               <div className="text-base">Thanh toán COD</div>
@@ -212,16 +210,15 @@ export default function PlanNoSim() {
 
           <Radio
             value={"Bank"}
-            className={`${
-              method === "Bank" ? `bg-m_gray border-sky-700` : `border-m_gray`
-            } border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}
+            className={`${method === "Bank" ? `bg-m_gray border-sky-700` : `border-m_gray`
+              } border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}
           >
             <div className="text-base">Thanh toán qua tài khoản ngân hàng</div>
           </Radio>
         </Radio.Group>
       </div>
 
-      <div className="bg-white w-2/5 border-m_gray border-2 rounded-lg h-fit ">
+      <div className="bg-white lg:w-2/5  w-3/4 border-m_gray border-2 rounded-lg h-fit ">
         <div className="p-5 h-full">
           <div className="text-base font-bold mb-3">Đơn hàng (1)</div>
 
@@ -257,7 +254,7 @@ export default function PlanNoSim() {
             placeholder="Nhập mã giảm giá"
             suffix={
               <button
-                onClick={() => {}}
+                onClick={() => { }}
                 className="font-bold text-sm right-0 absolute h-[42px]   text-m_red bg-[#FFF4F0] w-[86px] rounded-r-md"
               >
                 {" "}

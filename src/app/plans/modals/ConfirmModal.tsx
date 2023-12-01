@@ -51,7 +51,7 @@ export default function ConfirmModal({ open, onOk, onCancel, simpack, type }: Pr
 
   return (
     <Modal key={modalKey} width={612} footer={<div />} onOk={(_) => onOk(false, undefined)} onCancel={(_) => onCancel()} open={open} >
-      <div className='px-10'>
+      <div className='lg:px-10'>
         <div className='flex justify-center mt-1 mb-4'>
           <h4 className='text-2xl font-bold'>Xác nhận</h4>
         </div>

@@ -74,10 +74,10 @@ export default function FilterPlan() {
       {/*     <FilterOutlined className='text-xl' style={{ color: '#ED1E23' }} /><h4 className='text-md text-m_red font-bold'>Bộ lọc</h4> */}
       {/*   </button> */}
       {/* </div> */}
-      <div className='flex w-full justify-evenly items-center h-28 bg-m_gray lg:mt-20 mt-14'>
-        <div className='w-[301px] h-[62] mx-6 flex flex-col ' >
-          {/* <label htmlFor='branch' className='text-lg font-bold'>Nhà mạng</label> */}
+      <div className='flex w-full lg:justify-evenly justify-end items-center lg:h-28 lg:bg-m_gray lg:mt-20 mt-7'>
+        <div className='w-[301px] h-[62] mx-6 flex-col hidden lg:flex' >
           <Select
+            className=""
             onChange={onChangeTelco}
             allowClear
             id="branch"
@@ -87,8 +87,7 @@ export default function FilterPlan() {
           />
         </div>
 
-        <div className="w-[301px] mx-6 flex flex-col">
-          {/* <label htmlFor='type' className='text-lg font-bold'>Loại gói cước</label> */}
+        <div className="w-[301px] mx-6 flex-col hidden lg:flex">
           <Select
             onChange={onChangeType}
             allowClear
@@ -102,8 +101,7 @@ export default function FilterPlan() {
           />
         </div>
 
-        <div className="w-[301px] mx-6 flex flex-col">
-          {/* <label htmlFor='price' className='text-lg font-bold'>Sắp xếp theo giá tiền</label> */}
+        <div className="w-[301px] mx-6 flex-col hidden lg:flex">
           <Select
             onChange={onChangeSort}
             allowClear
@@ -116,7 +114,7 @@ export default function FilterPlan() {
             ]}
           />
         </div>
-        <div className="w-[117px] h-[48px] border-m_red border flex items-center justify-evenly mr-6 rounded-md cursor-pointer select-none">
+        <div className="w-[91px] h-[32px] lg:w-[117px] lg:h-[48px] border-m_red border flex items-center justify-evenly mr-6 rounded-md cursor-pointer select-none">
           <FilterOutlined className="text-xl" style={{ color: "#ED1E23" }} />
           <h4 className="text-md text-m_red font-bold">Bộ lọc</h4>
         </div>

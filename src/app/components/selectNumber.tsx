@@ -102,9 +102,9 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
     <>
       <div className="flex w-full justify-center bg-m_red_banner h-96 relative">
         <Right className="absolute right-0 lg:flex hidden" />
-        <Left className="absolute left-[-9] bottom-16 lg:flex hidden" />
+        <Left className="absolute left-[0] bottom-16 lg:flex hidden" />
         <Shadow className="absolute left-10 lg:flex hidden" />
-        <Man className="-translate-y-20 w-[579px] h-[464px] hidden " />
+        <Man className="-translate-y-20 -translate-x-10 w-[579px] h-[464px] lg:flex hidden " />
         {/* <div className="lg:w-[55%] pr-3 " /> */}
         <div className="flex">
           <div />
@@ -119,18 +119,18 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
                   setText(e.target.value.trim());
                 }}
                 placeholder="**** *** ***"
-                className="text-lg lg:h-14 lg:w-96 w-[291px] h-[40px] input-search"
+                className="text-lg lg:h-14 lg:w-[417px] w-[291px] h-[40px] input-search"
                 allowClear
               />
               <Button
                 onClick={showModal}
-                className="bg-transparent border border-white lg:h-14 h-[40px] flex items-center text-white rounded-lg lg:ml-2 ml-1 lg:p-4 text-xs w-[60px] pl-1"
+                className="bg-transparent border border-white lg:h-14 h-[40px] lg:w-[125px] flex items-center justify-center text-white rounded-lg lg:ml-2 ml-1 lg:p-2 lg:text-base text-xs w-[60px] pl-1"
               >
-                <FilterOutlined className="lg:pr-2" />
+                <FilterOutlined className="lg:pr-2 pl-2" />
                 Bộ lọc
               </Button>
             </div>
-            <div className='flex justify-center items-center mt-4 p-4 rounded-lg bg-m_opacity mb-4 w-[350px] h-[36px]'>
+            <div className='flex justify-center items-center mt-4 p-4 rounded-lg bg-m_opacity mb-4 lg:w-[552px] lg:h-[48px] w-[350px] h-[36px]'>
               <h2 className='text-white text-xs'>Loại trừ:</h2>
               <div className='flex mr-2'>
                 {...num.map((i, e) => (<button

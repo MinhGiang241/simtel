@@ -14,7 +14,7 @@ export default function Plan() {
       <PageWrapper isTopPadding={false}>
         <PlanButton />
         <FilterPlan />
-        <div className='h-7' />
+        <div className='lg:h-7 hidden' />
         <GridPlan />
       </PageWrapper>
     </>

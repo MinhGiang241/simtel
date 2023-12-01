@@ -177,7 +177,7 @@ export default function NumberList({ hideFilter }: Props) {
                 dispatch(setSimSelected(sim));
                 pushPathName(router, dispatch, "/sims/payments");
               }}
-              className="w-[95px] h-7 text-lg font-semibold rounded-xs text-m_red bg-white border-m_red border"
+              className="w-[95px] h-7 text-sm font-semibold rounded-xs text-m_red bg-white border-m_red border"
             >
               Mua ngay
             </Button>

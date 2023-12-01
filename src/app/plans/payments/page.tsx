@@ -35,7 +35,7 @@ export default function SimpackPayment() {
   }, []);
 
   return (
-    <div className="w-full bg-m_backgound  flex flex-col items-center min-h-[70rem]">
+    <div className="w-full bg-m_backgound flex flex-col items-center min-h-[70rem]">
       <div className="w-full h-[88px]" />
       <div className="max-w-[1140px] w-full">
         <div className="h-full mt-10 mb-10">
