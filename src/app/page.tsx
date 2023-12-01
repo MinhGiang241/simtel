@@ -15,7 +15,7 @@ export default function Home() {
       <PlanButton />
       <PlanList />
       <SelectSimTitle />
-      {/* <div className="w-full h-16" /> */}
+
     </div>
     <SelectNumber isHome />
     <div className="max-w-7xl h-fit">

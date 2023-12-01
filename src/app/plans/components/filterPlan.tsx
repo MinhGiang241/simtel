@@ -74,7 +74,7 @@ export default function FilterPlan() {
       {/*     <FilterOutlined className='text-xl' style={{ color: '#ED1E23' }} /><h4 className='text-md text-m_red font-bold'>Bộ lọc</h4> */}
       {/*   </button> */}
       {/* </div> */}
-      <div className='flex w-full justify-evenly items-center h-28 bg-m_gray sm:mt-20 mt-14'>
+      <div className='flex w-full justify-evenly items-center h-28 bg-m_gray lg:mt-20 mt-14'>
         <div className='w-[301px] h-[62] mx-6 flex flex-col ' >
           {/* <label htmlFor='branch' className='text-lg font-bold'>Nhà mạng</label> */}
           <Select

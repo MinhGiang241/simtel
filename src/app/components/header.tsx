@@ -215,22 +215,21 @@ export default function Header() {
     <div className="w-full h-[88px] flex justify-center shadow-lg fixed z-50 bg-white">
       <div className="flex w-[160rem] max-w-[1140px] items-center justify-between">
         <button
-          className="ml-4 sm:ml-0"
+          className="ml-4 lg:ml-0"
           onClick={() => {
             pushPathName(router, dispatch, "/");
           }}
         >
           <Logo viewBox="0 0 152 60" width={130} height={48} />
         </button>
-        <div className="text-lg justify-center items-center flex-grow sm:flex hidden ">
+        <div className="text-lg justify-center items-center flex-grow lg:flex hidden ">
           <div className="w-[143px] h-[40px] flex justify-center items-center text-center">
             <Dropdown menu={{ items: carts }}>
               <button
-                className={`w-[99px] text-base h-[24px] active:opacity-70 font-bold select-none flex justify-center text-center ${
-                  pathname === "/plans"
-                    ? " text-m_red underline-offset-4 underline "
-                    : ""
-                }`}
+                className={`w-[99px] text-base h-[24px] active:opacity-70 font-bold select-none flex justify-center text-center ${pathname === "/plans"
+                  ? " text-m_red underline-offset-4 underline "
+                  : ""
+                  }`}
                 onClick={(e) => e.preventDefault()}
               >
                 <Space>
@@ -248,11 +247,10 @@ export default function Header() {
             </button> */}
             <Dropdown menu={{ items: telcoOption }}>
               <button
-                className={`w-[99px] text-base h-[24px] active:opacity-70 font-bold select-none flex justify-center text-center ${
-                  pathname === "/sims"
-                    ? " text-m_red underline-offset-4 underline"
-                    : ""
-                }`}
+                className={`w-[99px] text-base h-[24px] active:opacity-70 font-bold select-none flex justify-center text-center ${pathname === "/sims"
+                  ? " text-m_red underline-offset-4 underline"
+                  : ""
+                  }`}
                 onClick={(e) => e.preventDefault()}
               >
                 <Space>
@@ -264,11 +262,10 @@ export default function Header() {
           </div>
           <div className="w-[143px] h-[40px] flex justify-center items-center text-center">
             <button
-              className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-bold ${
-                pathname === "/cards"
-                  ? " text-m_red underline-offset-4 underline"
-                  : ""
-              }`}
+              className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-bold ${pathname === "/cards"
+                ? " text-m_red underline-offset-4 underline"
+                : ""
+                }`}
               onClick={() => {
                 pushPathName(router, dispatch, "/cards");
               }}
@@ -278,11 +275,10 @@ export default function Header() {
           </div>
           <div className="w-[143px] h-[40px] flex justify-center items-center text-center">
             <button
-              className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-bold ${
-                pathname === "/blog"
-                  ? "text-m_red underline-offset-4 underline"
-                  : ""
-              }`}
+              className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-bold ${pathname === "/blog"
+                ? "text-m_red underline-offset-4 underline"
+                : ""
+                }`}
               onClick={() => {
                 pushPathName(router, dispatch, "/blog");
               }}
@@ -301,14 +297,14 @@ export default function Header() {
               </button>
 
               <button
-                className="mx-auto border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70 select-none sm:flex items-center hidden"
+                className="mx-auto border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70 select-none lg:flex items-center hidden"
                 onClick={() => {
                   setConfirmLogOut(true);
                 }}
               >
                 Đăng xuất
               </button>
-              <button className="sm:hidden flex mr-5" onClick={showDrawer}>
+              <button className="lg:hidden flex mr-5" onClick={showDrawer}>
                 <MenuOutlined />
               </button>
             </>
@@ -316,7 +312,7 @@ export default function Header() {
           {isAuth == AuthState.NOT_LOGGED && (
             <>
               <button
-                className="bg-m_red mr-4 h-12 w-[135px] text-white font-bold px-2 rounded-xl active:opacity-70 select-none sm:flex hidden justify-center items-center"
+                className="bg-m_red mr-4 h-12 w-[135px] text-white font-bold px-2 rounded-xl active:opacity-70 select-none lg:flex hidden justify-center items-center"
                 onClick={() => {
                   setModalKey(Date.now());
                   setOpen(true);
@@ -326,7 +322,7 @@ export default function Header() {
                 Đăng nhập
               </button>
               <button
-                className="text-m_red border-m_red border h-12 font-bold w-[135px] rounded-xl active:opacity-70 select-none sm:flex hidden justify-center items-center"
+                className="text-m_red border-m_red border h-12 font-bold w-[135px] rounded-xl active:opacity-70 select-none lg:flex hidden justify-center items-center"
                 onClick={() => {
                   setModalKey(Date.now());
                   setOpen(true);
@@ -338,7 +334,7 @@ export default function Header() {
               <button className="border-l-2 border-m_gray">
                 <Cart />
               </button>
-              <button className="sm:hidden flex mr-5 ml-5" onClick={showDrawer}>
+              <button className="lg:hidden flex mr-5 ml-5" onClick={showDrawer}>
                 <MenuOutlined />
               </button>
             </>
@@ -359,7 +355,7 @@ export default function Header() {
             {isAuth == AuthState.LOGGED && (
               <>
                 <button
-                  className="mx-auto border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70 select-none sm:flex items-center flex mt-5"
+                  className="mx-auto border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70 select-none lg:flex items-center flex mt-5"
                   onClick={() => {
                     setConfirmLogOut(true);
                   }}

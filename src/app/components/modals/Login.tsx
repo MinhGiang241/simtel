@@ -75,7 +75,7 @@ export default function Login({ onCancel, switchSignUp }: Props) {
 
   return (
     <form
-      className="w-full px-16"
+      className="w-full lg:px-16"
       onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         formik.handleSubmit();

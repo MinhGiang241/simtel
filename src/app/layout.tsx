@@ -34,14 +34,16 @@ export default function RootLayout({
           <StoreProviders>
             <AuthProvider>
               <IntlWrapper >
-                <Header />
+
                 <StyledComponentsRegistry>
-                  <div className='wrapper'>
+                  <Header />
+                  <div className='wrapper '>
                     {children}
                   </div>
                   <SupportWidget />
+                  <Footer />
                 </StyledComponentsRegistry>
-                <Footer />
+
               </IntlWrapper>
             </AuthProvider>
           </StoreProviders>

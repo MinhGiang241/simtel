@@ -32,10 +32,10 @@ export default function Discount() {
     <div className='w-full mt-5'>
       <div className="flex justify-center" >
         {/* <h2 className="font-bold text-4xl">, </h2> */}
-        <h2 className="px-2 text-m_red font-bold sm:text-3xl text-2xl mt-10">Tin tức, khuyến mại</h2>
+        <h2 className="px-2 text-m_red font-bold lg:text-3xl text-2xl mt-10">Tin tức, khuyến mại</h2>
       </div>
       <div className='w-full pt-6'>
-        <div className="sm:grid sm:grid-cols-3 sm:gap-4 flex flex-wrap">
+        <div className="lg:grid lg:grid-cols-3 lg:gap-4 flex flex-wrap">
           {blog?.map((x, key) => (
             <div className="col-span-1 p-4 m-2" key={key} >
               <div className='cursor-pointer' onClick={() => {
@@ -52,7 +52,7 @@ export default function Discount() {
             </div>
           ))}
         </div>
-        <button className='border border-m_red rounded-md w-[131px] h-[48px] flex justify-center items-center m-auto text-m_red font-semibold' onClick={() => {
+        <button className='border border-m_red rounded-md w-[131px] h-[48px] flex justify-center items-center m-auto text-m_red font-semibold mb-4' onClick={() => {
           pushPathName(router, dispatch, '/blog')
         }}>Xem thêm</button>
       </div >

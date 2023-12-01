@@ -49,18 +49,18 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
   const count = useSelector((state: RootState) => state.sim.count);
   const type = useSelector((state: RootState) => state.sim.type);
   const telco = useSelector((state: RootState) => state.sim.telco);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [ilgodalOpen, setIlgodalOpen] = useState(false);
   const [selected, setSelected] = useState<string>();
   const [selectedCard, setSelectedCard] = useState<string>();
 
   const showModal = () => {
-    setIsModalOpen(true);
+    setIlgodalOpen(true);
   };
   const handleOk = () => {
-    setIsModalOpen(false);
+    setIlgodalOpen(false);
   };
   const handleCancel = () => {
-    setIsModalOpen(false);
+    setIlgodalOpen(false);
   };
 
   const itemRender = (
@@ -87,8 +87,8 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
         <div
           className={
             page === index
-              ? `bg-m_red text-white rounded-sm`
-              : `bg-m_gray text-black border border-m_gray rounded-sm`
+              ? `bg-m_red text-white rounded-lg`
+              : `bg-m_gray text-black border border-m_gray rounded-lg`
           }
         >
           <p>{index}</p>
@@ -100,79 +100,71 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
 
   return (
     <>
-      <div className="flex w-full sm:max-sm:justify-center bg-m_red_banner h-96 relative">
-        <Right className="absolute right-0" />
-        <Left className="absolute left-[-9] bottom-16" />
-        <Shadow className="absolute left-10" />
-        <Man className="absolute bottom-0 left-40 w-[579px] h-[464px] hidden sm:flex" />
-        <div className="sm:w-[55%] pr-3" />
-        <div className="flex flex-col pt-10 max-sm:items-center">
-          <div className="mb-1 text-base text-white">
-            Nhập số thuê bao mong muốn:
-          </div>
-          <div className="flex items-center">
-            <Input
-              defaultValue={search}
-              onChange={(e) => {
-                setText(e.target.value.trim());
-              }}
-              placeholder="**** *** ***"
-              className="text-sm sm:h-14 sm:w-96 w-[291px] h-[40px] input-search"
-              allowClear
-            />
-            <Button
-              onClick={showModal}
-              className="bg-transparent border border-white sm:h-14 h-[40px] flex items-center text-white rounded-lg ml-2 p-4"
-            >
-              <FilterOutlined className="pr-2" />
-              Bộ lọc
-            </Button>
-
-            {/* <div className='mb-5'>
-              <div className='mb-2'>Nhà mạng</div>
-              <div>
-                {telcoImages?.map((x, key) => (
-                  <button onClick={() => setSelected(x.value)} key={key} className={`${selected == x.value ? "bg-[#f5f5f5] border border-m_red" : ""} border p-2 rounded-3xl px-4 mr-4`}>{x.value}</button>
-                ))}
-              </div>
-            </div> */}
-
-          </div>
-          <div className='flex justify-center items-center mt-4 p-4 rounded-lg bg-m_opacity mb-4 w-[460px] h-[36px]'>
-            <h2 className='text-white w-20'>Loại trừ:</h2>
-            <div className='flex mr-2'>
-              {...num.map((i, e) => (<button
-                onClick={() => {
-                  num[e].active = !num[e].active;
-                  setNum([...num]);
-                }}
-                key={e}
-                className={`${i.active ? "bg-m_orange" : ""
-                  }  active:opacity-70 select-none mx-1 text-white rounded-full border-white border-2 px-2 py-2 h-7 w-7 text-center flex justify-center items-center`}>{i.val}</button>))}
+      <div className="flex w-full justify-center bg-m_red_banner h-96 relative">
+        <Right className="absolute right-0 lg:flex hidden" />
+        <Left className="absolute left-[-9] bottom-16 lg:flex hidden" />
+        <Shadow className="absolute left-10 lg:flex hidden" />
+        <Man className="-translate-y-20 w-[579px] h-[464px] hidden " />
+        {/* <div className="lg:w-[55%] pr-3 " /> */}
+        <div className="flex">
+          <div />
+          <div className="flex flex-col pt-10 max-w-[1440px]  w-full">
+            <div className="mb-1 text-base text-white">
+              Nhập số thuê bao mong muốn:
             </div>
-          </div>
+            <div className="flex items-center">
+              <Input
+                defaultValue={search}
+                onChange={(e) => {
+                  setText(e.target.value.trim());
+                }}
+                placeholder="**** *** ***"
+                className="text-lg lg:h-14 lg:w-96 w-[291px] h-[40px] input-search"
+                allowClear
+              />
+              <Button
+                onClick={showModal}
+                className="bg-transparent border border-white lg:h-14 h-[40px] flex items-center text-white rounded-lg lg:ml-2 ml-1 lg:p-4 text-xs w-[60px] pl-1"
+              >
+                <FilterOutlined className="lg:pr-2" />
+                Bộ lọc
+              </Button>
+            </div>
+            <div className='flex justify-center items-center mt-4 p-4 rounded-lg bg-m_opacity mb-4 w-[350px] h-[36px]'>
+              <h2 className='text-white text-xs'>Loại trừ:</h2>
+              <div className='flex mr-2'>
+                {...num.map((i, e) => (<button
+                  onClick={() => {
+                    num[e].active = !num[e].active;
+                    setNum([...num]);
+                  }}
+                  key={e}
+                  className={`${i.active ? "bg-m_orange" : ""
+                    } text-xs active:opacity-50 select-none mx-1 text-white rounded-full border-white border-2 px-2 py-2 lg:h-7 lg:w-7 h-1 w-1 text-center flex justify-center items-center`}>{i.val}</button>))}
+              </div>
+            </div>
+            <div className="text-white text-lg">
+              ● Tìm sim có số 6789 bạn hãy gõ 6789
+            </div>
+            <div className="text-white text-lg">
+              ● Tìm sim có đầu 090 đuôi 9999 bạn hãy gõ 090*9999
+            </div>
+            <div className="text-white text-lg">
+              ● Tìm sim bắt đầu bằng 0914 đuôi bất kỳ bạn hãy gõ 0914*
+            </div>
+            <button
+              onClick={() => {
+                var notIncludes = num.filter((i) => i.active).map((v) => v.val);
 
-          <div className="text-white text-sm">
-            ● Tìm sim có số 6789 bạn hãy gõ 6789
+                dispatch(setSimSearch(text));
+                dispatch(setSimNot(notIncludes));
+                getSimFunction(dispatch, 1, type, telco, true, text, notIncludes);
+              }}
+              className="text-m_red bg-white w-32 rounded-lg p-4 m-auto mt-4"
+            >
+              Tìm kiếm
+            </button>
           </div>
-          <div className="text-white text-sm">
-            ● Tìm sim có đầu 090 đuôi 9999 bạn hãy gõ 090*9999
-          </div>
-          <div className="text-white text-sm">
-            ● Tìm sim bắt đầu bằng 0914 đuôi bất kỳ bạn hãy gõ 0914*
-          </div>
-          <button
-            onClick={() => {
-              var notIncludes = num.filter((i) => i.active).map((v) => v.val);
-
-              dispatch(setSimSearch(text));
-              dispatch(setSimNot(notIncludes));
-              getSimFunction(dispatch, 1, type, telco, true, text, notIncludes);
-            }}
-            className="text-m_red bg-white w-32 rounded-lg p-4 m-auto mt-4"
-          >
-            Tìm kiếm
-          </button>
         </div>
       </div>
       <PageWrapper isTopPadding={false}>
@@ -196,7 +188,7 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
         />
       </div>
       <FilterOnBanner
-        open={isModalOpen}
+        open={ilgodalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
       />

@@ -177,7 +177,7 @@ export default function NumberList({ hideFilter }: Props) {
                 dispatch(setSimSelected(sim));
                 pushPathName(router, dispatch, "/sims/payments");
               }}
-              className="w-[95px] h-7 text-sm font-semibold rounded-xs text-m_red bg-white border-m_red border"
+              className="w-[95px] h-7 text-lg font-semibold rounded-xs text-m_red bg-white border-m_red border"
             >
               Mua ngay
             </Button>
@@ -186,16 +186,16 @@ export default function NumberList({ hideFilter }: Props) {
       },
     },
   ];
-  console.log("data", data);
+  // console.log("data", data);
 
   return (
-    <div>
-      <div className={`hidden sm:flex justify-between align- items-end ${hideFilter ? 'h-10 mb-4' : 'h-24 mb-10'}`}>
+    <>
+      <div className={`hidden lg:flex justify-between align- items-end ${hideFilter ? 'h-10 mb-4' : 'h-24 mb-10'}`}>
         {!hideFilter && (< FilterSim />
         )}
         <h4 className='font-bold'>{count} số hiện có</h4>
       </div >
-      <div>
+      <div className="lg:hidden">
         {data.map((c) => (
           <div className='border border-m_sky mb-3 mt-3 w-[343px] h-[196px] p-4 rounded-lg'>
             <div className='flex justify-between pb-2'>
@@ -218,17 +218,22 @@ export default function NumberList({ hideFilter }: Props) {
               <div className="text-m_red font-bold">
                 <FormattedNumber value={c.price ?? 0} style="currency" currency="VND" />
               </div>
-              <button className='border border-m_red w-[110px] h-[32px] rounded-md text-m_red font-bold'>Mua ngay</button>
+              <button onClick={() => {
+                dispatch(setSimSelected(c));
+                pushPathName(router, dispatch, "/sims/payments");
+              }} className='border border-m_red w-[110px] h-[32px] rounded-md text-m_red font-bold'>Mua ngay</button>
             </div>
           </div>
         ))}
       </div>
-      {/* {loading ? (
+      {/* <div className="lg:flex hidden w-full"> */}
+      {loading ? (
         <div className="h-80 w-full flex justify-center items-center">
           <MoonLoader color="#E50914" />
         </div>
       ) : (
         <Table
+          className="lg:block hidden"
           bordered={false}
           columns={columns}
           dataSource={data.map<DataType>((v) => ({
@@ -247,8 +252,9 @@ export default function NumberList({ hideFilter }: Props) {
             }) as HTMLAttributes<any>
           }
         />
-      )} */}
-    </div>
+      )}
+      {/* </div> */}
+    </>
   );
 }
 
