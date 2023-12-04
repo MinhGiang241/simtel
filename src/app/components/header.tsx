@@ -190,12 +190,16 @@ export default function Header() {
     {
       key: "3",
       label: "Nạp thẻ",
-      children: <button>Nạp thẻ</button>,
+      children: <button onClick={() => {
+        pushPathName(router, dispatch, "/cards");
+      }}>Nạp thẻ</button>,
     },
     {
       key: "4",
       label: "Khuyến mại",
-      children: <button>Khuyến mại</button>,
+      children: <button onClick={() => {
+        pushPathName(router, dispatch, "/blog");
+      }}>Khuyến mại</button>,
     },
   ];
 

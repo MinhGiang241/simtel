@@ -29,10 +29,10 @@ export default function Page() {
     return (
         <PageWrapper>
             <div className='w-full mt-10'>
-                <div className="grid grid-cols-[60fr,40fr] gap-4">
+                <div className="lg:grid lg:grid-cols-[60fr,40fr] lg:gap-4 flex flex-wrap">
                     <div className="p-4">
                         <div>
-                            <img className="w-[749px] h-[461px] object-cover" src={`${uploadUrl}${detail?.article?.cover}`} alt="#" />
+                            <img className="lg:w-[749px] lg:h-[461px] object-cover" src={`${uploadUrl}${detail?.article?.cover}`} alt="#" />
                             <div className='text-3xl font-semibold mb-2 mt-3'>{detail?.article?.title}</div>
                             <div className='flex'>
                                 <Calender className="mr-2" />

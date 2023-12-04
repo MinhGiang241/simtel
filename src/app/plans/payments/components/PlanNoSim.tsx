@@ -143,13 +143,13 @@ export default function PlanNoSim() {
         </div>
 
         <div className="flex mt-5">
-          <p className="text-base font-bold">
+          <p className="lg:text-base text-xs font-bold">
             {simpack ? simpack.telco?.toUpperCase() : "VIETTEL99"}{" "}
           </p>
           <div className="h-5 w-0.5 bg-gray-300 mx-2 text-base" />
-          <p className="text-md">30 ngày</p>
+          <p className="lg:text-md text-xs">30 ngày</p>
         </div>
-        <div className="text-m_red text-4xl font-bold mt-2 mb-5">
+        <div className="text-m_red lg:text-4xl text-2xl font-bold mt-2 mb-5">
           <FormattedNumber
             value={simpack ? simpack.price ?? 0 : 0}
             style="currency"
@@ -161,10 +161,10 @@ export default function PlanNoSim() {
             e && (
               <div key={i} className="flex mb-3 items-start">
                 <CheckOutlined
-                  className="text-xl mr-2"
+                  className="lg:text-xl text-base mr-2"
                   style={{ color: "green" }}
                 />
-                <div className="text-base">{e}</div>
+                <div className="lg:text-base text-sm">{e}</div>
               </div>
             ),
         )}
@@ -183,7 +183,7 @@ export default function PlanNoSim() {
               }  border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}
           >
             <div className="flex justify-between w-full">
-              <div>Thanh Toán qua VNPAYQR</div>
+              <div className="lg:text-base text-xs">Thanh Toán qua VNPAYQR</div>
               <Image
                 className="absolute right-1 top-1"
                 src="/images/apota.png"
@@ -213,7 +213,7 @@ export default function PlanNoSim() {
             className={`${method === "Bank" ? `bg-m_gray border-sky-700` : `border-m_gray`
               } border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}
           >
-            <div className="text-base">Thanh toán qua tài khoản ngân hàng</div>
+            <div className="lg:text-base text-sm">Thanh toán qua tài khoản ngân hàng</div>
           </Radio>
         </Radio.Group>
       </div>
@@ -293,7 +293,7 @@ export default function PlanNoSim() {
         <div className="flex justify-between mx-5 mb-8 items-center">
           <div className="flex flex-col">
             <p className="text-base">Tổng cộng</p>
-            <div className="text-2xl font-bold">
+            <div className="lg:text-2xl text-lg font-bold">
               <FormattedNumber
                 value={simpack ? simpack.price ?? 0 : 0}
                 style="currency"
@@ -306,7 +306,7 @@ export default function PlanNoSim() {
               handleOrder();
             }}
             loading={loading}
-            className="w-[177px] bg-m_red text-white border-m_red text-base font-semibold h-12"
+            className="lg:w-[177px] w-[136px] bg-m_red text-white border-m_red text-base font-semibold h-12"
           >
             Thanh toán
           </Button>

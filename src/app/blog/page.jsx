@@ -33,7 +33,7 @@ export default function Page() {
                 </div>
 
                 <div className='w-full h-[500px] pt-2'>
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="lg:grid lg:grid-cols-3 lg:gap-4 flex flex-wrap">
                         {blog?.map((x, key) => (
                             <div className="col-span-1 p-4 m-2 cursor-pointer" key={key} onClick={() => {
                                 pushPathName(router, dispatch, `/detail?id=${x._id}`)

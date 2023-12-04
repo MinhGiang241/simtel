@@ -12,9 +12,9 @@ interface Props {
 
 export default function CardItem({ card, selected, onClick }: Props) {
   return (
-    <div className={`${card._id === selected ? "bg-[#f5f5f5] border border-m_red" : ''} hover:border-sky-400 border rounded-lg mx-2 mb-12 relative h-[80px] w-[261px]`}>
+    <div className={`${card._id === selected ? "bg-[#f5f5f5] border border-m_red" : ''} hover:border-sky-400 border rounded-lg mx-2 mb-12 relative lg:h-[80px] lg:w-[261px] w-[106px] h-[73px]`}>
       <button className='w-full' onClick={(_) => onClick()}>
-        <div className='text-center text-white h-6 bg-m_red w-28 rounded-br-md rounded-tl-md'>
+        <div className='text-center text-white h-6 bg-m_red lg:w-28 rounded-br-md rounded-tl-md'>
           {card.cardType}
         </div>
         {/* <CheckCircleOutlined className='text-4xl absolute top-2 right-3' style={{ color: "green" }} /> */}

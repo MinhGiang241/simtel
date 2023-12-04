@@ -108,7 +108,7 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
         {/* <div className="lg:w-[55%] pr-3 " /> */}
         <div className="flex">
           <div />
-          <div className="flex flex-col pt-10 max-w-[1440px]  w-full">
+          <div className="flex flex-col pt-10 max-w-[1440px] w-full">
             <div className="mb-1 text-base text-white">
               Nhập số thuê bao mong muốn:
             </div>
@@ -143,13 +143,13 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
                     } text-xs active:opacity-50 select-none mx-1 text-white rounded-full border-white border-2 px-2 py-2 lg:h-7 lg:w-7 h-1 w-1 text-center flex justify-center items-center`}>{i.val}</button>))}
               </div>
             </div>
-            <div className="text-white text-lg">
+            <div className="text-white lg:text-lg text-sm">
               ● Tìm sim có số 6789 bạn hãy gõ 6789
             </div>
-            <div className="text-white text-lg">
+            <div className="text-white lg:text-lg text-sm">
               ● Tìm sim có đầu 090 đuôi 9999 bạn hãy gõ 090*9999
             </div>
-            <div className="text-white text-lg">
+            <div className="text-white lg:text-lg text-sm">
               ● Tìm sim bắt đầu bằng 0914 đuôi bất kỳ bạn hãy gõ 0914*
             </div>
             <button
@@ -160,7 +160,7 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
                 dispatch(setSimNot(notIncludes));
                 getSimFunction(dispatch, 1, type, telco, true, text, notIncludes);
               }}
-              className="text-m_red bg-white w-32 rounded-lg p-4 m-auto mt-4"
+              className="text-m_red bg-white w-32 rounded-lg p-4 m-auto"
             >
               Tìm kiếm
             </button>

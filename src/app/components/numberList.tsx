@@ -195,7 +195,7 @@ export default function NumberList({ hideFilter }: Props) {
         )}
         <h4 className='font-bold'>{count} số hiện có</h4>
       </div >
-      <div className="lg:hidden">
+      <div className="lg:hidden flex flex-col justify-center items-center">
         {data.map((c) => (
           <div className='border border-m_sky mb-3 mt-3 w-[343px] h-[196px] p-4 rounded-lg'>
             <div className='flex justify-between pb-2'>

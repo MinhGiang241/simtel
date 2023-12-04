@@ -14,10 +14,10 @@ export default function PaymentSelect() {
       <div className='mt-4 mb-6'>
         <span className='font-bold text-lg'>Chọn phương thức thanh toán</span><span className='text-m_red'> *</span>
       </div>
-      <div className="flex items-center border w-[554px] h-[68px] rounded-xl bg-m_gray">
+      <div className="flex items-center border lg:max-w-[554px] max-w-[343px] h-[68px] rounded-xl bg-m_gray ml-3">
         <Radio.Group >
           <Radio disabled className="ml-4" >
-            <h4 className='ml-4 font-semibold text-slate-400 w-[188px] h-[24px]'>Thanh toán qua AppotaPay</h4>
+            <h4 className='ml-4 font-semibold text-slate-400 max-w-[188px] h-[24px]'>Thanh toán qua AppotaPay</h4>
           </Radio>
         </Radio.Group>
         {/* <div className="w-10" /> */}
