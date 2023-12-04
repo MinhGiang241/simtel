@@ -21,7 +21,7 @@ export default function Resolution() {
 
     return (
         <PageWrapper>
-            <div className='mt-5'>
+            <div className='mt-5 px-2'>
                 <div>
                     {parse(article?.article?.content ?? '')}
                 </div>

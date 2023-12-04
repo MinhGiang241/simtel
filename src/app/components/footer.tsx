@@ -66,7 +66,7 @@ export default function Footer() {
             <Twitter_footer className="mr-2" />
             <Mess_footer className="mr-2" />
           </div>
-          <div className='text-white text-xs w-[271px] h-[20px]'>@Copyright, Simtel 2023. All rights reserved.</div>
+          <div className='text-white text-xs w-[271px] h-[20px]'>@Copyright, Masflex 2023. All rights reserved.</div>
         </div>
       </div>
     </div>
