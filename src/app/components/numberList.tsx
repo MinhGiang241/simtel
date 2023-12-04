@@ -261,13 +261,15 @@ export default function NumberList({ hideFilter }: Props) {
 export function TableAction({
   current,
   old,
+
 }: {
   current: number;
   old: number;
+
 }) {
   return (
     <>
-      <div key={current} className="flex justify-between items-center">
+      <div className="flex justify-between items-center">
         <div className="flex flex-col mr-3">
           {current && (
             <p className="text-lg font-bold text-m_red">

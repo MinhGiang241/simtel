@@ -17,7 +17,7 @@ export default function Footer() {
 
   useEffect(() => {
     get_article_footer(undefined).then((v) => {
-      // console.log(v);
+      console.log('v', v);
       setArticle(v)
     })
   }, [])
@@ -39,7 +39,7 @@ export default function Footer() {
           </div>
           <div className="col-span-1 p-4">
             <div className='font-bold text-lg pb-3'>Chính sách</div>
-            {article?.map((e) => (<div key={e._id} className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, `/resolution?id=${e._id}`) }}>{e?.article?.title}</div>))}
+            {article?.map((e, i) => (<div key={i} className='text-sm pb-2 text-slate-500 cursor-pointer' onClick={() => { pushPathName(router, dispatch, `/resolution?id=${e?._id}`) }}>{e?.article?.title}</div>))}
           </div>
           {/* <div className="col-span-1 p-4">
             <div className='font-bold text-lg pb-3'></div>
