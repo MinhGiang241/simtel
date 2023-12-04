@@ -61,9 +61,9 @@ export default function PlanList() {
                 // 1140: {
                 //   slidesPerView: 3
                 // },
-                // 1500: {
-                //   slidesPerView: 6
-                // },
+                1440: {
+                  slidesPerView: 3
+                },
                 1980: {
                   slidesPerView: 3
                 }

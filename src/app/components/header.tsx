@@ -24,7 +24,7 @@ import { getActiveTelco } from "@/services/api/config";
 import { setLoadingTelcos, setTelcos } from "@/GlobalRedux/config/ConfigSlice";
 import { ItemType } from "antd/es/menu/hooks/useItems";
 import { MenuItemProps } from "rc-menu";
-import { setTelco } from "@/GlobalRedux/SimPack/SimPackSlice";
+import { setIsData, setTelco } from "@/GlobalRedux/SimPack/SimPackSlice";
 import { getSimFunction } from "@/services/sim/simServices";
 import { setSimTelco } from "@/GlobalRedux/Sim/SimSlice";
 
@@ -49,7 +49,7 @@ export default function Header() {
   const carts = [
     {
       label: (
-        <MLink className="text-base" link="/plans">
+        <MLink className="text-base" link="/plans" onClick={() => { dispatch(setIsData(true)) }}>
           Gói cước thoại
         </MLink>
       ),
@@ -57,7 +57,7 @@ export default function Header() {
     },
     {
       label: (
-        <MLink className="text-base" link="/plans">
+        <MLink className="text-base" link="/plans" onClick={() => { dispatch(setIsData(false)) }}>
           Gói cước data
         </MLink>
       ),
@@ -138,16 +138,18 @@ export default function Header() {
   const data = [
     {
       key: "1",
-      label: "Mua gói cước",
+      label: (<div onClick={() => {
+        pushPathName(router, dispatch, "/plans");
+      }}>Gói cước</div>),
       children: (
         <div>
           <div className="mb-2">
-            <MLink className="text-base text-black" link="/plans">
+            <MLink className="text-base text-black" link="/plans" onClick={() => { dispatch(setIsData(true)) }} >
               Gói cước thoại
             </MLink>
           </div>
           <div>
-            <MLink className="text-base text-black" link="/plans">
+            <MLink className="text-base text-black" link="/plans" onClick={() => { dispatch(setIsData(false)) }}>
               Gói cước data
             </MLink>
           </div>
@@ -156,7 +158,9 @@ export default function Header() {
     },
     {
       key: "2",
-      label: "Mua sim",
+      label: (<div onClick={() => {
+        pushPathName(router, dispatch, "/sims");
+      }}>Gói cước</div>),
       children: (
         <div>
           <div className="mb-3">
@@ -236,7 +240,9 @@ export default function Header() {
                   }`}
                 onClick={(e) => e.preventDefault()}
               >
-                <Space>
+                <Space onClick={() => {
+                  pushPathName(router, dispatch, "/plans");
+                }}>
                   Gói cước
                   <DownOutlined />
                 </Space>
@@ -257,7 +263,9 @@ export default function Header() {
                   }`}
                 onClick={(e) => e.preventDefault()}
               >
-                <Space>
+                <Space onClick={() => {
+                  pushPathName(router, dispatch, "/sims");
+                }}>
                   Mua sim
                   <DownOutlined />
                 </Space>
@@ -335,7 +343,7 @@ export default function Header() {
               >
                 Đăng ký
               </button>
-              <button className="border-l-2 border-m_gray">
+              <button className="border-m_gray">
                 <Cart />
               </button>
               <button className="lg:hidden flex mr-5 ml-5" onClick={showDrawer}>

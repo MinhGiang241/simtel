@@ -14,6 +14,7 @@ export interface SimPackState {
   selected?: SimPack;
   selectedType?: number;
   phone?: string;
+  isData?: boolean;
 }
 
 const initialState: SimPackState = {
@@ -48,6 +49,9 @@ export const simPackSlice = createSlice({
     setType: (state, action) => {
       state.type = action.payload;
     },
+    setIsData: (state, action) => {
+      return { ...state, isData: action.payload }
+    },
     setSeleted: (state, action) => {
       return { ...state, selected: action.payload };
     },
@@ -71,6 +75,7 @@ export const {
   setSeleted,
   setSeletedType,
   setPhone,
+  setIsData,
 } = simPackSlice.actions;
 
 export default simPackSlice.reducer;
