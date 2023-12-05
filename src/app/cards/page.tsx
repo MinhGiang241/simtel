@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import PageWrapper from "../components/pageWrapper";
-import { Button, Dropdown, Input, MenuProps } from "antd";
+import { Button, Dropdown, Input, MenuProps, Radio, RadioChangeEvent } from "antd";
 import Image from "next/image";
 import PaymentSelect from "./components/paymentSelect";
 import CardList from "./components/CardList";
@@ -101,6 +101,11 @@ export default function CardPage() {
   );
   const orderId = searchParams.get("order");
   const [phone, setPhone] = useState<string>("");
+  const [value, setValue] = useState(1);
+  const onChange = (e: RadioChangeEvent) => {
+    console.log('radio checked', e.target.value);
+    setValue(e.target.value);
+  };
   //const page = useSelector((state: RootState) => state.phoneCard.page)
   useEffect(() => {
     getCardType();
@@ -136,17 +141,26 @@ export default function CardPage() {
   return (
     <>
       <PageWrapper>
-        <div className="mt-5 text-lg font-bold mb-4">Chọn số điện thoại</div>
-        <div className="px-10">
-          <Input
-            className="h-10"
-            value={phone}
-            onChange={(e: any) => {
-              setPhone(e.target.value);
-            }}
-            allowClear
-          />
+        <div>
+          <div className="mt-5 text-lg font-bold">Chọn hình thức nạp thẻ</div>
+          <Radio.Group onChange={onChange} value={value} className="pt-5">
+            <Radio value={1} checked={value === 1}>Nạp thẻ trực tiếp</Radio>
+            <Radio value={2} checked={value === 2}>Mua mã thẻ</Radio>
+          </Radio.Group>
         </div>
+        {value === 1 && (
+          <div>
+            <div className="mt-5 text-lg font-bold mb-4">Chọn số điện thoại</div>
+            <div className="px-10">
+              <input
+                type="text"
+                className="h-10 border w-full rounded-md"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+          </div>
+        )}
         <div className="mt-5 text-lg font-bold w-[137px] ">Chọn nhà mạng</div>
         <div className="mt-5 flex items-center justify-center w-full flex-wrap">
           {telcoImages?.map((e: string, i: number) => (

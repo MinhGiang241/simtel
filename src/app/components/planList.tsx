@@ -72,7 +72,7 @@ export default function PlanList() {
               pagination={{ clickable: false }}
             // scrollbar={{ draggable: true }}
             >
-              {isLoading ? [] : data['list'].map((item: SimPack) =>
+              {isLoading ? [] : data['list']?.map((item: SimPack) =>
               (<SwiperSlide key={item._id} >
                 <PlanSlick
                   simpack={item}
