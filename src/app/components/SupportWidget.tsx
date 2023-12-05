@@ -10,17 +10,16 @@ import Tel from './logo/tel.svg'
 
 export default function SupportWidget() {
   return (
-    <div className='bottom-12 right-6 fixed flex flex-col z-50' >
-      <Mss />
-      <Zl />
-      <Tel />
-      {/* <Button className='h-fit w-fit bg-blue-600 p-2 rounded-full border-0 border-blue-600 shadow-gray-800 shadow-lg mb-5'>
-      </Button> */}
-      {/* <Button className='h-fit w-fit bg-blue-600 p-2 rounded-full mb-5 border-0 border-blue-600 shadow-gray-800 shadow-lg' >
-      </Button> */}
-      {/* <Button className='h-fit w-fit bg-blue-600 p-2 rounded-full border-0 border-blue-600 shadow-gray-800 shadow-lg '>
-      </Button> */}
-
+    <div className='bottom-0 right-0 fixed flex flex-col z-50' >
+      <button>
+        <Mss />
+      </button>
+      <button>
+        <Zl />
+      </button>
+      <button>
+        <Tel />
+      </button>
     </div>
   )
 }

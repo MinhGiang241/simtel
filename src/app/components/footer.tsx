@@ -31,7 +31,7 @@ export default function Footer() {
             <Logo className="mt-6 ml-10 mb-4" style={{ transform: "scale(1.9)" }} />
           </div>
           <div className="col-span-1 p-4">
-            <div className='font-bold text-lg pb-3'>CÔNG TY CỔ PHẦN VIỄN THÔNG ARTEL</div>
+            <div className='font-bold text-lg pb-3'>CÔNG TY CỔ PHẦN VIỄN THÔNG SIMTEL</div>
             <div className='text-sm pb-2 text-slate-500'>Mã số doanh nghiệp 0110499021 do Sở Kế hoạch và Đầu Tư Thành phố Hà Nội cấp đăng ký lần đầu ngày 05/10/2023</div>
             <div className='text-sm pb-2 text-slate-500'>Trụ sở chính: Xóm Mới, Thôn Đồng Trì, Xã Tứ Hiệp, Huyện Thanh Trì, Thành phố Hà Nội, Việt Nam</div>
             <div className='text-sm pb-2 text-slate-500'>Hotline: 0559.111.666</div>
