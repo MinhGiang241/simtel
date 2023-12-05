@@ -69,7 +69,7 @@ export default function PlanWithSim() {
   //   })
   // }, [])
 
-  useEffect(() => {}, [districts, wards, provinces, number]);
+  useEffect(() => { }, [districts, wards, provinces, number]);
 
   const getDistrictListByProvinceId = async (value: string | undefined) => {
     await formik.setFieldValue("ward", undefined);
@@ -289,14 +289,14 @@ export default function PlanWithSim() {
   };
 
   return (
-    <div className=" flex justify-between mb-28">
-      <div className="bg-white  w-7/12 border-m_gray border-2 rounded-lg p-5">
+    <div className="flex lg:flex-row lg:items-start lg:justify-between flex-col items-center mb-28">
+      <div className="bg-white lg:w-7/12 w-3/4 border-m_gray border-2 rounded-lg p-5">
         <div className="text-base font-bold mb-3">Chọn loại gói cước</div>
         <Radio.Group
           className="flex"
           disabled
           value={type}
-          onChange={(v: RadioChangeEvent) => {}}
+          onChange={(v: RadioChangeEvent) => { }}
         >
           <Radio value={0}>
             <h1 className="ml-3">Gói cước</h1>
@@ -317,7 +317,7 @@ export default function PlanWithSim() {
             formik.handleSubmit();
           }}
         >
-          <div className="flex w-full mb-3">
+          <div className="lg:flex w-full mb-3">
             <MInput
               className="h-14"
               required
@@ -347,7 +347,7 @@ export default function PlanWithSim() {
             />
           </div>
 
-          <div className="flex w-full mb-3">
+          <div className="lg:flex w-full mb-3">
             <MInput
               className="h-14"
               required
@@ -383,7 +383,7 @@ export default function PlanWithSim() {
             />
           </div>
 
-          <div className="flex w-full mb-3">
+          <div className="lg:flex w-full mb-3">
             <MDropdown
               allowClear
               options={districts.map((e: District) => ({
@@ -462,9 +462,8 @@ export default function PlanWithSim() {
         >
           <Radio
             value={"Wallet"}
-            className={`${
-              method === "Wallet" ? `bg-m_gray border-sky-700` : `border-m_gray`
-            }  border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}
+            className={`${method === "Wallet" ? `bg-m_gray border-sky-700` : `border-m_gray`
+              }  border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}
           >
             <div className="flex justify-between w-full">
               <div>Thanh toán online</div>
@@ -481,9 +480,8 @@ export default function PlanWithSim() {
 
           <Radio
             value={"Cod"}
-            className={`${
-              method === "Cod" ? `bg-m_gray border-sky-700` : `border-m_gray`
-            } border-2 pl-3 w-full py-3 rounded-xl flex flex-row relative mt-6 mb-6`}
+            className={`${method === "Cod" ? `bg-m_gray border-sky-700` : `border-m_gray`
+              } border-2 pl-3 w-full py-3 rounded-xl flex flex-row relative mt-6 mb-6`}
           >
             <div>
               <div className="text-base">Thanh toán COD</div>
@@ -495,16 +493,15 @@ export default function PlanWithSim() {
 
           <Radio
             value={"Bank"}
-            className={`${
-              method === "Bank" ? `bg-m_gray border-sky-700` : `border-m_gray`
-            } border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}
+            className={`${method === "Bank" ? `bg-m_gray border-sky-700` : `border-m_gray`
+              } border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}
           >
             <div className="text-base">Thanh toán qua tài khoản ngân hàng</div>
           </Radio>
         </Radio.Group>
       </div>
 
-      <div className="bg-white w-2/5 border-m_gray border-2 rounded-lg h-fit">
+      <div className="bg-white lg:w-2/5  w-3/4 border-m_gray border-2 rounded-lg h-fit">
         <div className="p-5 h-full">
           <div className="text-base font-bold mb-3">Đơn hàng (1)</div>
           {/* <div className='flex w-full justify-between'> */}
@@ -575,7 +572,7 @@ export default function PlanWithSim() {
             placeholder="Nhập mã giảm giá"
             suffix={
               <button
-                onClick={() => {}}
+                onClick={() => { }}
                 className="font-bold text-sm right-0 absolute h-[42px]   text-m_red bg-[#FFF4F0] w-[86px] rounded-r-md"
               >
                 {" "}
@@ -641,7 +638,7 @@ export default function PlanWithSim() {
               formik.setFieldTouched("ward", true);
             }}
             loading={loading}
-            className="w-[177px] bg-m_red text-white border-m_red text-base font-semibold h-12"
+            className="lg:w-[177px] bg-m_red text-white border-m_red text-base font-semibold h-12"
           >
             Thanh toán
           </Button>

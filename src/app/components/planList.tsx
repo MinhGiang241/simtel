@@ -22,13 +22,25 @@ import "swiper/css/scrollbar";
 import { useSwiper } from "swiper/react";
 import { MoonLoader } from "react-spinners";
 import { simPackPageSize } from "@/constants/constants";
+import { useEffect, useState } from "react";
 
 register();
 
 export default function PlanList() {
   const { data, isLoading } = useSWR(apiGraphql, async () => {
-    return await getAllSimpack(simPackPageSize, 0);
+    return await getAllSimpack(simPackPageSize, 0)
   });
+
+  // const [data, setData] = useState<any>([])
+  // var isLoading = false;
+  // useEffect(() => {
+  //   isLoading = true
+  //   getAllSimpack(simPackPageSize, 0).then((v) => {
+  //     isLoading = false
+  //     setData(v)
+
+  //   }).catch((e) => { isLoading = false })
+  // }, [])
 
   const dispatch = useDispatch();
   return (
@@ -45,52 +57,53 @@ export default function PlanList() {
       </div>
       {
         isLoading ? (<div className=' h-80 w-full flex justify-center items-center '><MoonLoader color='#E50914' /></div>) : (
-          <div className="w-[400px] lg:w-full flex justify-center">
-            <Swiper
-              slideActiveClass="scale-110"
-              breakpoints={{
-                0: {
-                  slidesPerView: 1,
-                },
-                1024: {
-                  slidesPerView: 1,
-                },
-                1440: {
-                  slidesPerView: 3
-                },
-                1980: {
-                  slidesPerView: 3
-                }
-              }}
+          // <div className="lg:w-full w-[400px] flex justify-center">
+          <Swiper
+            slideActiveClass="scale-110"
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              1025: {
+                slidesPerView: 3,
+              },
+              1440: {
+                slidesPerView: 3
+              },
+              1980: {
+                slidesPerView: 3
+              }
+            }}
 
-              spaceBetween={50}
-              slidesPerView={3}
-              modules={[Navigation, Pagination, Scrollbar, A11y]}
-              // navigation
-              centeredSlides
-              loop
-              pagination={{ clickable: false }}
-            // scrollbar={{ draggable: true }}
-            >
-              {isLoading ? [] : data['list']?.map((item: SimPack) =>
-              (<SwiperSlide key={item._id} >
-                <PlanSlick
-                  simpack={item}
-                  key={item._id}
-                  id={item._id}
-                  urlImage={`${uploadUrl}${item?.thumb}`}
-                  name={item.code ?? ''}
-                  branch={item?.telco ?? ''}
-                  price={item?.price ?? 0}
-                  describle={item?.description ?? ''} />
-              </SwiperSlide>
-              )
+            spaceBetween={50}
+            slidesPerView={3}
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            // navigation
+            centeredSlides
+            loop
+            pagination={{ clickable: false }}
+          // scrollbar={{ draggable: true }}
+          >
+            {isLoading ? [] : data['list']?.map((item: SimPack) =>
+            (<SwiperSlide key={item._id} >
+              <PlanSlick
 
-              )}
-            </Swiper>
-          </div>
+                simpack={item}
+                key={item._id}
+                id={item._id}
+                urlImage={`${uploadUrl}${item?.thumb}`}
+                name={item.code ?? ''}
+                branch={item?.telco ?? ''}
+                price={item?.price ?? 0}
+                describle={item?.description ?? ''} />
+            </SwiperSlide>
+            )
+
+            )}
+          </Swiper>
+          // </div>
         )
       }
-    </div>
+    </div >
   );
 }
