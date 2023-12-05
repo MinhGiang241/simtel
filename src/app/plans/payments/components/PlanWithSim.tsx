@@ -45,6 +45,7 @@ export default function PlanWithSim() {
   const router = useRouter();
   const type = useSelector((state: RootState) => state.simPack.selectedType);
   const tel = useSelector((state: RootState) => state.simPack.phone);
+  const user = useSelector((state: RootState) => state.auth.user);
   const simpack = useSelector((state: RootState) => state.simPack.selected);
   const telco = simpack?.telco;
   const config = useSelector((state: RootState) => state.config.config);
@@ -166,6 +167,7 @@ export default function PlanWithSim() {
       try {
         setLoading(true);
         var dataSubmit: Order = {
+          customerId: user?._id,
           full_name: values.name,
           tel: values.phone,
           email: values.email,

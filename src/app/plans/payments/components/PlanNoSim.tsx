@@ -20,6 +20,7 @@ export default function PlanNoSim() {
   const dispatch = useDispatch();
   const router = useRouter();
   const type = useSelector((state: RootState) => state.simPack.selectedType);
+  const user = useSelector((state: RootState) => state.auth.user);
   const phone = useSelector((state: RootState) => state.simPack.phone);
   const simpack = useSelector((state: RootState) => state.simPack.selected);
   const searchParams = useSearchParams();
@@ -33,6 +34,7 @@ export default function PlanNoSim() {
     try {
       setLoading(true);
       var dataSubmit: Order = {
+        customerId: user?._id,
         full_name: phone,
         tel: phone,
         email: "",
@@ -51,7 +53,7 @@ export default function PlanNoSim() {
       if (!method) {
         throw " Bạn chưa chọn hình thức thanh toán";
       }
-      /*  alert(JSON.stringify(dataSubmit)) */
+      // alert(JSON.stringify(dataSubmit))
 
       var orderId: any;
       await createOrder(dataSubmit)

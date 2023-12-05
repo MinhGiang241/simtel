@@ -56,6 +56,7 @@ export default function SimPayments() {
   const orderId = searchParams.get("order");
   const config = useSelector((state: RootState) => state.config.config);
   const transportFee = config?.enable_trans_fee ? config?.transportfee : 0;
+  const user = useSelector((state: RootState) => state.auth.user);
   var order: Order;
 
   const [method, setMethod] = useState<string>();
@@ -169,6 +170,7 @@ export default function SimPayments() {
       try {
         setLoading(true);
         var dataSubmit: Order = {
+          customerId: user?._id,
           full_name: values.name,
           tel: values.phone,
           email: values.email,

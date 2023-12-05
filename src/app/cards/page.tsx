@@ -94,6 +94,7 @@ export default function CardPage() {
   const [selected, setSelected] = useState<string>();
   const dispatch = useDispatch();
   const telco = useSelector((state: RootState) => state.phoneCard.telco);
+  const user = useSelector((state: RootState) => state.auth.user);
   const [loading, setLoading] = useState<boolean>(false);
   const searchParams = useSearchParams();
   const selectedCardType = useSelector(
@@ -194,7 +195,7 @@ export default function CardPage() {
             try {
               setLoading(true);
               var dataSubmit: Order = {
-                // full_name: "Kach",
+                customerId: user?._id,
                 tel: phone,
                 // email: "minhgiang@gmail.com",
                 // address: `Hà Nội`,
