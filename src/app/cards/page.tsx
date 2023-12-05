@@ -150,7 +150,7 @@ export default function CardPage() {
         </div>
         {value === 1 && (
           <div>
-            <div className="mt-5 text-lg font-bold mb-4">Chọn số điện thoại</div>
+            <div className="mt-5 text-lg font-bold mb-4">Nhập số điện thoại nạp thẻ</div>
             <div className="px-10">
               <input
                 type="text"
@@ -200,7 +200,7 @@ export default function CardPage() {
                 // address: `Hà Nội`,
                 items: [
                   {
-                    type: "phonecard",
+                    type: value == 1 ? 'topup' : "phonecard",
                     itemId: selectedCardType?._id,
                     value: selectedCardType?.value,
                   },
