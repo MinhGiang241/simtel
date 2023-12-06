@@ -5,9 +5,9 @@ import { Modal } from 'antd';
 import { useSearchParams } from 'next/navigation'
 import Clipboard from 'clipboard';
 import {
-    ExclamationCircleOutlined,
+    CheckCircleFilled,
 } from "@ant-design/icons";
-import { log } from "console";
+import toast from "react-hot-toast";
 
 
 export default function Page() {
@@ -18,6 +18,7 @@ export default function Page() {
     const handleCopyToClipboard = async () => {
         try {
             await navigator.clipboard.writeText(seriCard ?? '');
+            toast.success("Đã sao chép thành công!")
         } catch (err) {
             console.log(err);
         }
@@ -27,14 +28,14 @@ export default function Page() {
         <PageWrapper>
             <Modal open={true} >
                 <div className='flex flex-col items-center'>
-                    <ExclamationCircleOutlined
-                        className="text-5xl mb-3"
-                        style={{ color: "orange" }}
+                    <CheckCircleFilled
+                        className="text-5xl mb-3 text-green-600"
                     />
                     <div className='text-xl font-medium'>Thanh toán thành công!</div>
-                    <div className='font-light'>Quý khách đã thanh toán thành công cho đơn hàng {code}</div>
+                    <div className='font-light'>Quý khách đã thanh toán thành công cho đơn hàng:</div>
+                    <div>{code}</div>
                     <div className='font-light'>Mã thẻ của bạn là:</div>
-                    <div className='flex justify-evenly items-center border bg-m_gray w-60 m-auto'>{seriCard}<button onClick={handleCopyToClipboard}>Copy</button></div>
+                    <div className='flex justify-between px-5 items-center border bg-m_gray w-60 m-auto rounded-lg'>{seriCard}<button onClick={handleCopyToClipboard}>Copy</button></div>
                 </div>
             </Modal>
         </PageWrapper>
