@@ -5,15 +5,22 @@ import { Modal } from 'antd';
 import { useSearchParams } from 'next/navigation'
 import Clipboard from 'clipboard';
 import {
-    CheckCircleFilled, CopyOutlined
+    CheckCircleFilled, CopyOutlined, ExclamationCircleOutlined
 } from "@ant-design/icons";
 import toast from "react-hot-toast";
+import { pushPathName } from "@/services/routes";
+import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
 
 export default function Page() {
-    const [isModalOpen, setIsModalOpen] = useState(true);
     const searchParams = useSearchParams()
     const seriCard = searchParams.get('seriCard')
     const code = searchParams.get('order_code')
+    const errorCode = searchParams.get('errorCode')
+    const [isModalOpen, setIsModalOpen] = useState(!errorCode);
+    const router = useRouter()
+    const dispatch = useDispatch()
+    const [isModalErrorOpen, setIsModalErrorOpen] = useState(!!errorCode);
 
     const handleCopyToClipboard = async () => {
         try {
@@ -26,6 +33,7 @@ export default function Page() {
 
     const handleCancel = () => {
         setIsModalOpen(false);
+        setIsModalErrorOpen(false)
     };
 
     return (
@@ -40,6 +48,19 @@ export default function Page() {
                     <div>{code}</div>
                     <div className='font-light'>Mã thẻ của bạn là:</div>
                     <div className='flex justify-between pl-6 pr-2 items-center border bg-m_gray w-60 m-auto rounded-lg'>{seriCard}<button onClick={handleCopyToClipboard}><CopyOutlined /></button></div>
+                </div>
+            </Modal>
+            <Modal open={isModalErrorOpen} onCancel={handleCancel} footer={null}>
+                <div className='flex flex-col items-center'>
+                    <ExclamationCircleOutlined
+                        className="text-5xl mb-3"
+                        style={{ color: "orange" }}
+                    />
+                    <div className='text-xl font-medium'>Giỏ hàng hết hiệu lực!</div>
+                    <div className='font-light'>Opps, thời gian giữ tối đa là 30 phút đã qua</div>
+                    <div className='font-light'>Quý khách vui lòng thực hiện lại giao dịch !</div>
+                    {/* <div className='flex justify-between pl-6 pr-2 items-center border bg-m_gray w-60 m-auto rounded-lg'>{seriCard}<button onClick={handleCopyToClipboard}><CopyOutlined /></button></div> */}
+                    <button className="border p-2 rounded-lg px-4 mt-5 bg-m_red text-white" onClick={() => { pushPathName(router, dispatch, '/cards') }}>Mua lại</button>
                 </div>
             </Modal>
         </PageWrapper>
