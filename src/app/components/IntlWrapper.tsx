@@ -31,7 +31,7 @@ export default function IntlWrapper({
   useEffect(() => {
     getActiveTelcoList();
     getConfig().then((v) => {
-      console.log("config", v);
+      // console.log("config", v);
       if (v) {
         dispatch(setConfig(v));
       }
@@ -43,7 +43,7 @@ export default function IntlWrapper({
     getActiveTelco()
       .then((v) => {
         dispatch(setLoadingTelcos(false));
-        console.log("active", v);
+        // console.log("active", v);
         if (v) {
           dispatch(setTelcos(v));
         }

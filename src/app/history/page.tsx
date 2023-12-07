@@ -1,13 +1,32 @@
 "use client"
+import { RootState } from '@/GlobalRedux/store';
 import PageWrapper from '@/app/components/pageWrapper'
+import { User } from '@/interfaces/data';
 import { pushPathName } from '@/services/routes'
 import { useRouter } from 'next/navigation';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
+import { get_history } from "@/services/api/history";
+import { uploadUrl } from '@/constants/apiConstant'
+import Image from 'next/image'
 
 export default function Page() {
+    const [history, setHistory] = useState<any>([])
+    const user: User | undefined = useSelector((state: RootState) => state.auth.user);
     const router = useRouter()
     const dispatch = useDispatch()
+    // console.log(user, "user");
+
+    useEffect(() => {
+        get_history(user?._id, user?.tel, undefined).then((v) => {
+            setHistory(v)
+            console.log('vvv', v);
+        }).catch((e) => {
+            console.log('err', e);
+        })
+    }, [])
+
     return (
         <PageWrapper>
             <div className='border-b pb-3 mt-4'>
@@ -17,19 +36,27 @@ export default function Page() {
                         <div className='font-thin'>Nạp thẻ trực tiếp</div>
                         <div className='font-light text-m_red'>Đã hoàn thành</div>
                     </div>
-                    <div className='cursor-pointer' onClick={() => { pushPathName(router, dispatch, '/historicalDetail') }}>
-                        <div className='border flex bg-m_gray px-7 p-5'>
-                            <img width={"132px"} height={"110px"} src="" alt="#" />
-                            <div>
-                                <div>Mobifone 10.000</div>
-                                <div>Số điện thoại: 0383873719</div>
+                    {history?.map((x: any, key: any) => (
+                        <div key={x._id} className='cursor-pointer border-b mb-5 pb-5' onClick={() => { pushPathName(router, dispatch, '/historicalDetail') }}>
+                            <div className='border flex bg-m_gray px-7 p-5'>
+                                <Image width={132} height={110} src={`${uploadUrl}${x?.image}`} alt="#" />
+                                {
+                                    x?.shopingcarditem?.map((e: any, key1: any) => (
+                                        <div key={key1}>
+                                            <div>{e.telco} {e.value}</div>
+                                            <div>Số điện thoại: {e.phoneNumber}</div>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                            <div className='flex-col flex items-end'>
+                                <div>Tổng thanh toán: {x?.total_amount}</div>
+                            </div>
+                            <div className='flex-col flex items-end'>
+                                <button className='border p-3 px-8 rounded-lg bg-m_red text-white' onClick={() => { pushPathName(router, dispatch, '/cards') }}>Mua lại</button>
                             </div>
                         </div>
-                    </div>
-                    <div className='flex-col flex items-end'>
-                        <div>Tổng thanh toán: 9.550 đ</div>
-                        <button className='border p-3 px-8 rounded-lg bg-m_red text-white' onClick={() => { pushPathName(router, dispatch, '/cards') }}>Mua lại</button>
-                    </div>
+                    ))}
                 </div>
             </div>
         </PageWrapper>

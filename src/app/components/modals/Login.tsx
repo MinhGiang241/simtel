@@ -54,6 +54,7 @@ export default function Login({ onCancel, switchSignUp }: Props) {
         setLoading(true);
         var token = await customerLogin(values.phone, values.password);
         var info = await getAccountInfo();
+        console.log({ token });
 
         dispatch(
           setUserData({

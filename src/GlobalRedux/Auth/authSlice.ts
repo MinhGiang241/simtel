@@ -24,10 +24,15 @@ export const userSlice = createSlice({
       state.authState = action.payload
     },
     setUserData: (state, action) => {
-      state.user = action.payload.user;
-      state.accessToken = action.payload.accessToken
-      state.expiredAt = action.payload.expiredAt
-      state.authState = AuthState.LOGGED
+
+      return {
+        ...state,
+        user: action.payload.user,
+        accessToken: action.payload.accessToken,
+        expiredAt: action.payload.expiredAt,
+        authState: AuthState.LOGGED,
+      }
+
     },
     userLogout: (state, _) => {
       state.user = undefined;
