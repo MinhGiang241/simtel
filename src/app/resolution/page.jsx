@@ -14,7 +14,7 @@ export default function Resolution() {
 
     useEffect(() => {
         get_article(id).then((v) => {
-            console.log(v);
+            console.log("article", v);
             setArticle(v)
         })
     }, [id])
@@ -23,7 +23,7 @@ export default function Resolution() {
         <PageWrapper>
             <div className='mt-5 px-2'>
                 <div>
-                    {parse(article?.article?.content ?? '')}
+                    {parse(article?.content ?? '')}
                 </div>
             </div>
         </PageWrapper>
