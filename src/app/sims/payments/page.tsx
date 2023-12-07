@@ -531,7 +531,15 @@ export default function SimPayments() {
                   >
                     Đổi số
                   </button>
-
+                  <div className="mt-2">
+                    <div className="mt-2 flex justify-between items-center">
+                      <div>Tên hàng hoá:</div>
+                      <div className="font-bold">Sim điện thoại</div>
+                    </div>
+                    <div className="mt-2">Tổ chức chịu trách nhiệm chất lượng: Công ty Cổ phần Viễn thông Di động Đông Dương Telecom</div>
+                    <div className="mt-2">Đơn vị phân phối: Công ty cổ phần thương mại điện tử Smartel
+                      Xuất xứ: Việt Nam</div>
+                  </div>
                   <div className="flex w-full justify-between my-4">
                     <p className="text-base">Loại sim</p>{" "}
                     <p className="font-bold text-base">
