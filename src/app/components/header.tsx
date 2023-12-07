@@ -191,13 +191,13 @@ export default function Header() {
         </div>
       ),
     },
-    {
-      key: "3",
-      label: "Nạp thẻ",
-      children: <button onClick={() => {
-        pushPathName(router, dispatch, "/cards");
-      }}>Nạp thẻ</button>,
-    },
+    // {
+    //   key: "3",
+    //   label: "Nạp thẻ",
+    //   children: <button onClick={() => {
+    //     pushPathName(router, dispatch, "/cards");
+    //   }}>Nạp thẻ</button>,
+    // },
     {
       key: "4",
       label: "Khuyến mại",
@@ -272,7 +272,7 @@ export default function Header() {
               </button>
             </Dropdown>
           </div>
-          <div className="w-[143px] h-[40px] flex justify-center items-center text-center">
+          {/* <div className="w-[143px] h-[40px] flex justify-center items-center text-center">
             <button
               className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-bold ${pathname === "/cards"
                 ? " text-m_red underline-offset-4 underline"
@@ -284,7 +284,7 @@ export default function Header() {
             >
               Nạp thẻ
             </button>
-          </div>
+          </div> */}
           <div className="w-[143px] h-[40px] flex justify-center items-center text-center">
             <button
               className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-bold ${pathname === "/blog"

@@ -1,7 +1,13 @@
+"use client"
+import PageWrapper from '@/app/components/pageWrapper'
+import { pushPathName } from '@/services/routes'
+import { useRouter } from 'next/navigation';
 import React from 'react'
-import PageWrapper from '../components/pageWrapper'
+import { useDispatch } from 'react-redux'
 
 export default function Page() {
+    const router = useRouter()
+    const dispatch = useDispatch()
     return (
         <PageWrapper>
             <div className='mt-4'>
@@ -14,9 +20,9 @@ export default function Page() {
                     <div className='border-b flex'>
                         <img width={"132px"} height={"110px"} src="" alt="#" />
                         <div className='flex flex-col'>
-                            <div className='font-semibold'>Mobifone 10.000</div>
-                            <div className='font-extralight'>Nạp thẻ trực tiếp</div>
-                            <div>Đã hoàn thành</div>
+                            <div className='font-semibold text-xl'>Mobifone 10.000</div>
+                            <div className='font-thin'>Nạp thẻ trực tiếp</div>
+                            <div className='text-m_red'>Đã hoàn thành</div>
                         </div>
                     </div>
                     <div className='mt-2 border-b'>
@@ -56,7 +62,7 @@ export default function Page() {
                         </div>
                     </div>
                     <div className='flex justify-center'>
-                        <button>Mua lại</button>
+                        <button className='border p-3 px-8 rounded-lg bg-m_red text-white' onClick={() => { pushPathName(router, dispatch, '/cards') }}>Mua lại</button>
                     </div>
                 </div>
             </div>

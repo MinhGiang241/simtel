@@ -142,12 +142,15 @@ export default function CardPage() {
   return (
     <>
       <PageWrapper>
-        <div>
-          <div className="mt-5 text-lg font-bold">Chọn hình thức nạp thẻ</div>
-          <Radio.Group onChange={onChange} value={value} className="pt-5">
-            <Radio value={1} checked={value === 1}>Nạp thẻ trực tiếp</Radio>
-            <Radio value={2} checked={value === 2}>Mua mã thẻ</Radio>
-          </Radio.Group>
+        <div className="flex justify-between">
+          <div>
+            <div className="mt-5 text-lg font-bold">Chọn hình thức nạp thẻ</div>
+            <Radio.Group onChange={onChange} value={value} className="pt-5">
+              <Radio value={1} checked={value === 1}>Nạp thẻ trực tiếp</Radio>
+              <Radio value={2} checked={value === 2}>Mua mã thẻ</Radio>
+            </Radio.Group>
+          </div>
+          <button onClick={() => { pushPathName(router, dispatch, '/history') }}>Lịch sử giao dịch</button>
         </div>
         {value === 1 && (
           <div>
