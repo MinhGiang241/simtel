@@ -493,9 +493,9 @@ export default function SimPayments() {
                   >
                     <div>
                       <div className="text-base">Thanh toán COD</div>
-                      <div className="text-sm">
+                      {/* <div className="text-sm">
                         (Thanh toán trực tiếp cho ngân hàng)
-                      </div>
+                      </div> */}
                     </div>
                   </Radio>
 

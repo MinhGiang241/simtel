@@ -57,14 +57,14 @@ export default function PlanList() {
                 },
                 1024: {
                   width: 1024,
-                  slidesPerView: 3,
+                  slidesPerView: data['list']?.length < 3 ? 1 : 3,
                 },
                 1440: {
                   width: 1140,
-                  slidesPerView: 3
+                  slidesPerView: data['list']?.length < 3 ? 1 : 3
                 },
                 // 1980: {
-                //   slidesPerView: 3
+                //   slidesPerView: 5
                 // }
               }}
 
