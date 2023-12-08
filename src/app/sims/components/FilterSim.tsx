@@ -25,10 +25,10 @@ export default function FilterSim() {
     { value: "Esim", label: "Esim" },
   ];
   const prices = [
-    { from: 0, to: 100.000, value: 'Sim giá dưới 100 nghìn' },
+    { from: 0, to: 100000, value: 'Sim giá dưới 100 nghìn' },
     { from: 100000, to: 200000, value: 'Sim giá 100-200 nghìn' },
     { from: 200000, to: 500000, value: 'Sim giá 200-500 nghìn' },
-    { from: 5000000, to: 1000000, value: 'Sim giá 500 - 1 triệu' },
+    { from: 500000, to: 1000000, value: 'Sim giá 500 - 1 triệu' },
     { from: 1000000, to: 3000000, value: 'Sim giá 1 - 3 triệu' },
     { from: 3000000, to: 5000000, value: 'Sim giá 3 - 5 triệu' },
     { from: 5000000, to: 10000000, value: 'Sim giá 5 - 10 triệu' },
@@ -81,7 +81,7 @@ export default function FilterSim() {
     console.log(value);
     var prc = prices.find(i => i.value == value);
     dispatch(setSimPrice(`${prc?.from}-${prc?.to}`))
-    getSimFunction(dispatch, page, type, value, true, search, not, price);
+    getSimFunction(dispatch, page, type, telco, true, search, not, `${prc?.from}-${prc?.to}`);
   };
 
 
