@@ -642,7 +642,7 @@ export default function SimPayments() {
                     <Checkbox className="pr-2" />
                     <div className="text-base">
                       {/* Bằng việc nhấn thanh toán, Quý khách đồng ý với{" "} */}
-                      <span className=" active:opacity-70 select-none">
+                      <span className="">
                         Tôi xác nhận thông tin đơn hàng đã chính xác và xác nhận đồng ý với <button className="text-m_red" onClick={() => { pushPathName(router, dispatch, '/resolution?id=6555ca7968709b3551d5b141') }}>Điều khoản sử dụng</button> và các Chính sách của SimTel.vn{" "}
                       </span>
                     </div>
