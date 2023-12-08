@@ -164,7 +164,7 @@ export default function Header() {
       children: (
         <div>
 
-          {activeTelcos.map((v) => (<div className="mb-3">
+          {activeTelcos.map((v) => (<div key={v._id} className="mb-3">
             <MLink onClick={() => {
               dispatch(setSimTelco(v.name));
               getSimFunction(dispatch, page, type, v.name, false, search, not);

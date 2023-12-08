@@ -643,7 +643,7 @@ export default function SimPayments() {
                     <div className="text-base">
                       Bằng việc nhấn thanh toán, Quý khách đồng ý với{" "}
                       <span className="text-m_red active:opacity-70 cursor-pointer select-none" onClick={() => { pushPathName(router, dispatch, '/resolution?id=6555ca7968709b3551d5b141') }}>
-                        Điều kiện giao dịch chung và Chính sách vận chuyển giao nhận hàng{" "}
+                        Tôi xác nhận thông tin đơn hàng đã chính xác và xác nhận đồng ý với Điều khoản sử dụng và các Chính sách của SimTel.vn{" "}
                       </span>
                       của Simtel
                     </div>
