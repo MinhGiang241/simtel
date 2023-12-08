@@ -16,6 +16,7 @@ import { errorToast, successToast } from "@/app/components/modals/CustomToast";
 import Image from "next/image";
 import { setPhone, setSeleted } from "@/GlobalRedux/SimPack/SimPackSlice";
 import { Checkbox } from 'antd';
+import Link from "next/link";
 
 export default function PlanNoSim() {
   const dispatch = useDispatch();
@@ -287,11 +288,10 @@ export default function PlanNoSim() {
           <div className="flex items-start">
             <Checkbox className="pr-2" />
             <div className="text-base">
-              Bằng việc nhấn thanh toán, Quý khách đồng ý với{" "}
-              <button className="text-m_red active:opacity-70 cursor-pointer select-none" onClick={() => { pushPathName(router, dispatch, '/resolution?id=6555ca7968709b3551d5b141') }}>
-                Tôi xác nhận thông tin đơn hàng đã chính xác và xác nhận đồng ý với Điều khoản sử dụng và các Chính sách của SimTel.vn{" "}
-              </button>
-              của Simtel
+              {/* Bằng việc nhấn thanh toán, Quý khách đồng ý với{" "} */}
+              <span className=" active:opacity-70 select-none">
+                Tôi xác nhận thông tin đơn hàng đã chính xác và xác nhận đồng ý với <button className="text-m_red" onClick={() => { pushPathName(router, dispatch, '/resolution?id=6555ca7968709b3551d5b141') }}>Điều khoản sử dụng</button> và các Chính sách của SimTel.vn{" "}
+              </span>
             </div>
           </div>
         </div>
