@@ -8,7 +8,7 @@ export interface SimState {
   loading: Boolean;
   not?: string[];
   telco?: string;
-  price?: number;
+  price?: string;
   type?: string;
   selected?: Sim;
   search?: string;
@@ -38,7 +38,7 @@ export const simSlice = createSlice({
       state.telco = action.payload;
     },
     setSimPrice: (state, action) => {
-      state.price = action.payload;
+      return { ...state, price: action.payload }
     },
     setSimType: (state, action) => {
       state.type = action.payload;

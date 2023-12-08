@@ -49,6 +49,7 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
   const count = useSelector((state: RootState) => state.sim.count);
   const type = useSelector((state: RootState) => state.sim.type);
   const telco = useSelector((state: RootState) => state.sim.telco);
+  const price = useSelector((state: RootState) => state.sim.price);
   const [ilgodalOpen, setIlgodalOpen] = useState(false);
   const [selected, setSelected] = useState<string>();
   const [selectedCard, setSelectedCard] = useState<string>();
@@ -158,7 +159,7 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
 
                 dispatch(setSimSearch(text));
                 dispatch(setSimNot(notIncludes));
-                getSimFunction(dispatch, 1, type, telco, true, text, notIncludes);
+                getSimFunction(dispatch, 1, type, telco, true, text, notIncludes, price);
               }}
               className="text-m_red bg-white w-32 rounded-lg p-4 m-auto"
             >
@@ -183,7 +184,7 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
           showSizeChanger={false}
           onChange={(i, __) => {
             dispatch(setSimPage(i));
-            getSimFunction(dispatch, i, type, telco, false, text, not);
+            getSimFunction(dispatch, i, type, telco, false, text, not, price);
           }}
         />
       </div>

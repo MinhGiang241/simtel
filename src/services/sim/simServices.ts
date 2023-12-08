@@ -17,6 +17,7 @@ export const getSimFunction = (
   isNew: boolean,
   search?: string,
   not_include?: string[],
+  price?: string,
 ) => {
   console.log("page", page);
 
@@ -28,6 +29,7 @@ export const getSimFunction = (
     telco,
     search,
     not_include,
+    price
   })
     .then((v) => {
       if (isNew) {

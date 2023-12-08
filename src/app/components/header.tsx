@@ -114,6 +114,7 @@ export default function Header() {
   const type = useSelector((state: RootState) => state.sim.type);
   const not = useSelector((state: RootState) => state.sim.not);
   const search = useSelector((state: RootState) => state.sim.search);
+  const price = useSelector((state: RootState) => state.sim.price);
 
   const loadingTelcos = useSelector(
     (state: RootState) => state.config.loadingTelcos,
@@ -124,7 +125,7 @@ export default function Header() {
       <MLink
         onClick={() => {
           dispatch(setSimTelco(i.name));
-          getSimFunction(dispatch, page, type, i.name, false, search, not);
+          getSimFunction(dispatch, page, type, i.name, false, search, not, price);
         }}
         className="text-base"
         link="/sims"
@@ -167,7 +168,7 @@ export default function Header() {
           {activeTelcos.map((v) => (<div key={v._id} className="mb-3">
             <MLink onClick={() => {
               dispatch(setSimTelco(v.name));
-              getSimFunction(dispatch, page, type, v.name, false, search, not);
+              getSimFunction(dispatch, page, type, v.name, false, search, not, price);
             }} className="text-base text-black" link="/sims">
               {v.name}
             </MLink>

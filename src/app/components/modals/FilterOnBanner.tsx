@@ -38,6 +38,7 @@ export default function FilterOnBanner({ open, onOk, onCancel }: Props) {
   const telcos = useSelector((state: RootState) => state.config.telcos);
   const page = useSelector((state: RootState) => state.sim.page);
   const search = useSelector((state: RootState) => state.sim.search);
+  const price = useSelector((state: RootState) => state.sim.price);
   const not = useSelector((state: RootState) => state.sim.not);
   const type = useSelector((state: RootState) => state.sim.type);
   const telcoOptions = telcos.map((i) => ({
@@ -63,11 +64,10 @@ export default function FilterOnBanner({ open, onOk, onCancel }: Props) {
             <button
               onClick={() => setSelected(x.value)}
               key={key}
-              className={`${
-                selected == x.value
-                  ? "bg-[#EBF3FA] border border-[#3E6BBB]"
-                  : ""
-              } border p-2 rounded-3xl h-12 px-4 mr-4 text-base`}
+              className={`${selected == x.value
+                ? "bg-[#EBF3FA] border border-[#3E6BBB]"
+                : ""
+                } border p-2 rounded-3xl h-12 px-4 mr-4 text-base`}
             >
               {x.value}
             </button>
@@ -81,11 +81,10 @@ export default function FilterOnBanner({ open, onOk, onCancel }: Props) {
             <button
               onClick={() => setSelectedCard(e.value)}
               key={k}
-              className={`${
-                selectedCard == e.value
-                  ? "bg-[#EBF3FA] border border-[#3E6BBB]"
-                  : ""
-              }  border p-2 rounded-3xl h-12 px-4 mr-4 text-base`}
+              className={`${selectedCard == e.value
+                ? "bg-[#EBF3FA] border border-[#3E6BBB]"
+                : ""
+                }  border p-2 rounded-3xl h-12 px-4 mr-4 text-base`}
             >
               {e.value}
             </button>
@@ -95,7 +94,7 @@ export default function FilterOnBanner({ open, onOk, onCancel }: Props) {
           <Button
             onClick={() => {
               dispatch(setSimTelco(selected));
-              getSimFunction(dispatch, page, type, selected, true, search, not);
+              getSimFunction(dispatch, page, type, selected, true, search, not, price);
               onCancel();
             }}
             className="text-white bg-m_red border-m_red mt-5 w-[165px] h-12 text-base font-semibold"

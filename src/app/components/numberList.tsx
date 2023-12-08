@@ -73,9 +73,10 @@ export default function NumberList({ hideFilter }: Props) {
   const not = useSelector((state: RootState) => state.sim.not);
   const telco = useSelector((state: RootState) => state.sim.telco);
   const telcos = useSelector((state: RootState) => state.config.telcos);
+  const price = useSelector((state: RootState) => state.sim.price);
 
   useEffect(() => {
-    getSimFunction(dispatch, page, type, telco, false, search, not);
+    getSimFunction(dispatch, page, type, telco, false, search, not, price);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, not, telcos, page, type, telco]);
 
