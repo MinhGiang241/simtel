@@ -11,7 +11,7 @@ import {
 import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { errorToast, successToast } from "@/app/components/modals/CustomToast";
-import { Button, Divider, Input, Radio, RadioChangeEvent } from "antd";
+import { Button, Checkbox, Divider, Input, Radio, RadioChangeEvent } from "antd";
 import { FormikErrors, useFormik, useFormikContext } from "formik";
 import MInput from "@/app/components/config/MInput";
 import MTextArea from "@/app/components/config/MTextArea";
@@ -488,7 +488,7 @@ export default function PlanWithSim() {
             <div>
               <div className="text-base">Thanh toán COD</div>
               <div className="text-sm">
-                (Thanh toán trực tiếp cho ngân hàng)
+                (Thanh toán trực tiếp cho Đơn vị vận chuyển)
               </div>
             </div>
           </Radio>
@@ -612,12 +612,15 @@ export default function PlanWithSim() {
             </div>
           </div>
 
-          <div className="text-base">
-            Bằng việc nhấn thanh toán, Quý khách đồng ý với{" "}
-            <span className="text-m_red active:opacity-70 cursor-pointer select-none">
-              Điều kiện giao dịch chung và Chính sách vận chuyển giao nhận hàng{" "}
-            </span>
-            của Simtel
+          <div className="flex items-start">
+            <Checkbox className="pr-2" />
+            <div className="text-base">
+              Bằng việc nhấn thanh toán, Quý khách đồng ý với{" "}
+              <span onClick={() => { pushPathName(router, dispatch, '/resolution?id=6555ca7968709b3551d5b141') }} className="text-m_red active:opacity-70 cursor-pointer select-none">
+                Điều kiện giao dịch chung và Chính sách vận chuyển giao nhận hàng{" "}
+              </span>
+              của Simtel
+            </div>
           </div>
         </div>
         <Divider />

@@ -15,6 +15,7 @@ import {
 import { errorToast, successToast } from "@/app/components/modals/CustomToast";
 import Image from "next/image";
 import { setPhone, setSeleted } from "@/GlobalRedux/SimPack/SimPackSlice";
+import { Checkbox } from 'antd';
 
 export default function PlanNoSim() {
   const dispatch = useDispatch();
@@ -196,8 +197,8 @@ export default function PlanNoSim() {
               />
             </div>
           </Radio>
-
-          <Radio
+          <div className="h-5" />
+          {/* <Radio
             value={"Cod"}
             className={`${method === "Cod" ? `bg-m_gray border-sky-700` : `border-m_gray`
               } border-2 pl-3 w-full py-3 rounded-xl flex flex-row relative mt-6 mb-6`}
@@ -205,10 +206,10 @@ export default function PlanNoSim() {
             <div>
               <div className="text-base">Thanh toán COD</div>
               <div className="text-sm">
-                (Thanh toán trực tiếp cho ngân hàng)
+                (Thanh toán trực tiếp cho Đơn vị vận chuyển)
               </div>
             </div>
-          </Radio>
+          </Radio> */}
 
           <Radio
             value={"Bank"}
@@ -283,12 +284,15 @@ export default function PlanNoSim() {
             </div>
           </div>
 
-          <div className="text-base">
-            Bằng việc nhấn thanh toán, Quý khách đồng ý với{" "}
-            <span className="text-m_red active:opacity-70 cursor-pointer select-none">
-              Điều kiện giao dịch chung và Chính sách vận chuyển giao nhận hàng{" "}
-            </span>
-            của Simtel
+          <div className="flex items-start">
+            <Checkbox className="pr-2" />
+            <div className="text-base">
+              Bằng việc nhấn thanh toán, Quý khách đồng ý với{" "}
+              <button className="text-m_red active:opacity-70 cursor-pointer select-none" onClick={() => { pushPathName(router, dispatch, '/resolution?id=6555ca7968709b3551d5b141') }}>
+                Điều kiện giao dịch chung và Chính sách vận chuyển giao nhận hàng{" "}
+              </button>
+              của Simtel
+            </div>
           </div>
         </div>
         <Divider />

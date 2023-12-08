@@ -163,7 +163,16 @@ export default function Header() {
       }}>Gói cước</div>),
       children: (
         <div>
-          <div className="mb-3">
+
+          {activeTelcos.map((v) => (<div className="mb-3">
+            <MLink onClick={() => {
+              dispatch(setSimTelco(v.name));
+              getSimFunction(dispatch, page, type, v.name, false, search, not);
+            }} className="text-base text-black" link="/sims">
+              {v.name}
+            </MLink>
+          </div>))}
+          {/* <div className="mb-3">
             <MLink className="text-base text-black" link="/sims">
               Viettel
             </MLink>
@@ -187,7 +196,7 @@ export default function Header() {
             <MLink className="text-base text-black" link="/sims">
               Mobifone
             </MLink>
-          </div>
+          </div> */}
         </div>
       ),
     },
