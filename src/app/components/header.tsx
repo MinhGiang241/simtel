@@ -238,13 +238,13 @@ export default function Header() {
             pushPathName(router, dispatch, "/");
           }}
         >
-          <Logo viewBox="0 0 152 60" width={130} height={48} />
+          <Logo viewBox="0 0 130 48" width={130} height={48} />
         </button>
         <div className="text-lg justify-center items-center flex-grow lg:flex hidden ">
           <div className="w-[143px] h-[40px] flex justify-center items-center text-center">
             <Dropdown menu={{ items: carts }}>
               <button
-                className={`w-[99px] text-base h-[24px] active:opacity-70 font-bold select-none flex justify-center text-center ${pathname === "/plans"
+                className={` text-base h-[24px] active:opacity-70 font-semibold select-none flex justify-center text-center ${pathname === "/plans"
                   ? " text-m_red underline-offset-4 underline "
                   : ""
                   }`}
@@ -252,9 +252,9 @@ export default function Header() {
               >
                 <Space onClick={() => {
                   pushPathName(router, dispatch, "/plans");
-                }}>
-                  Gói cước
-                  <DownOutlined />
+                }} className=" h-[24px]">
+                  Mua gói cước
+                  <DownOutlined className="scale-[0.8]" />
                 </Space>
               </button>
             </Dropdown>
@@ -267,7 +267,7 @@ export default function Header() {
             </button> */}
             <Dropdown menu={{ items: telcoOption }}>
               <button
-                className={`w-[99px] text-base h-[24px] active:opacity-70 font-bold select-none flex justify-center text-center ${pathname === "/sims"
+                className={`text-base h-[24px] active:opacity-70 font-semibold select-none flex justify-center text-center ${pathname === "/sims"
                   ? " text-m_red underline-offset-4 underline"
                   : ""
                   }`}
@@ -277,14 +277,14 @@ export default function Header() {
                   pushPathName(router, dispatch, "/sims");
                 }}>
                   Mua sim
-                  <DownOutlined />
+                  <DownOutlined className="scale-[0.8]" />
                 </Space>
               </button>
             </Dropdown>
           </div>
           {/* <div className="w-[143px] h-[40px] flex justify-center items-center text-center">
             <button
-              className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-bold ${pathname === "/cards"
+              className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-semibold ${pathname === "/cards"
                 ? " text-m_red underline-offset-4 underline"
                 : ""
                 }`}
@@ -297,7 +297,7 @@ export default function Header() {
           </div> */}
           <div className="w-[143px] h-[40px] flex justify-center items-center text-center">
             <button
-              className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-bold ${pathname === "/blog"
+              className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-semibold ${pathname === "/blog"
                 ? "text-m_red underline-offset-4 underline"
                 : ""
                 }`}
@@ -311,15 +311,15 @@ export default function Header() {
         </div>
 
         <div className="h-full flex justify-end items-center">
-          <div className="h-16 w-[1px] bg-gray-700 ml-6 mr-6" />
+
           {isAuth == AuthState.LOGGED && (
             <>
-              <button className="border-black border-2 p-1 rounded-md active:opacity-70 mr-6">
+              {/* <button className="border-black border-2 p-1 rounded-md active:opacity-70 mr-6">
                 <ShoppingCartOutlined style={{ fontSize: "200%" }} />
-              </button>
+              </button> */}
 
               <button
-                className="mx-auto border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70 select-none lg:flex items-center hidden"
+                className="mx-auto border-black border-2 h-12 font-semibold px-2 rounded-xl active:opacity-70 select-none lg:flex items-center hidden"
                 onClick={() => {
                   setConfirmLogOut(true);
                 }}
@@ -334,7 +334,7 @@ export default function Header() {
           {isAuth == AuthState.NOT_LOGGED && (
             <>
               <button
-                className="bg-m_red mr-4 h-12 w-[135px] text-white font-bold px-2 rounded-xl active:opacity-70 select-none lg:flex hidden justify-center items-center"
+                className="bg-m_red mr-4 h-12 w-[135px] text-white font-semibold px-2 rounded-xl active:opacity-70 select-none lg:flex hidden justify-center items-center"
                 onClick={() => {
                   setModalKey(Date.now());
                   setOpen(true);
@@ -344,7 +344,7 @@ export default function Header() {
                 Đăng nhập
               </button>
               <button
-                className="text-m_red border-m_red border h-12 font-bold w-[135px] rounded-xl active:opacity-70 select-none lg:flex hidden justify-center items-center"
+                className="text-m_red border-m_red border h-[48px] font-semibold w-[116px] rounded-xl active:opacity-70 select-none lg:flex hidden justify-center items-center"
                 onClick={() => {
                   setModalKey(Date.now());
                   setOpen(true);
@@ -353,9 +353,9 @@ export default function Header() {
               >
                 Đăng ký
               </button>
-              <button className="border-m_gray">
+              {/* <button className="border-m_gray">
                 <Cart />
-              </button>
+              </button> */}
               <button className="lg:hidden flex mr-5 ml-5" onClick={showDrawer}>
                 <MenuOutlined />
               </button>
@@ -413,6 +413,10 @@ export default function Header() {
               </>
             )}
           </Drawer>
+          <div className="h-10 w-[2px] bg-m_gray ml-6 mr-6" />
+          <button className="border-m_gray">
+            <Cart />
+          </button>
         </div>
       </div>
       <Modal

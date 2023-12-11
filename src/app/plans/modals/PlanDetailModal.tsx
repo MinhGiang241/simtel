@@ -43,9 +43,9 @@ export default function PlanDetailModal({
             {simpack?.telco?.toUpperCase()}{" "}
           </p>
           <div className="h-5 w-0.5 bg-gray-300 mx-2 text-base" />
-          <p className="text-md">30 ngày</p>
+          <p className="text-base font-normal">30 ngày</p>
         </div>
-        <div className="flex justify-center text-4xl font-bold text-m_red">
+        <div className="flex justify-center text-[32px] leading-10 font-bold text-m_red">
           <FormattedNumber
             value={simpack?.price ?? 0}
             style="currency"
@@ -60,7 +60,7 @@ export default function PlanDetailModal({
               e && (
                 <div key={i} className="flex mb-3 items-start">
                   <CheckOutlined
-                    className="text-xl mr-2"
+                    className="text-base mr-2 mt-1"
                     style={{ color: "green" }}
                   />
                   <div className="text-base">{e}</div>
@@ -79,11 +79,11 @@ export default function PlanDetailModal({
           }}
         >
           <Radio value={0}>
-            <h1 className="ml-3">Gói cước</h1>
+            <h1 className="ml-3 text-base flex items-center">Gói cước</h1>
           </Radio>
           <div className="flex-1" />
           <Radio value={1}>
-            <h1 className="ml-3">Gói cước kèm sim</h1>
+            <h1 className="ml-3 text-base flex items-center">Gói cước kèm sim</h1>
           </Radio>
         </Radio.Group>
         <div className="flex justify-center mt-6">

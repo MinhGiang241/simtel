@@ -104,13 +104,13 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
       <div className="flex w-full justify-center bg-m_red_banner h-96 relative">
         <Right className="absolute right-0 lg:flex hidden" />
         <Left className="absolute left-[0] bottom-16 lg:flex hidden" />
-        <Shadow className="absolute left-10 lg:flex hidden" />
+        <Shadow className="absolute left-[5rem] lg:flex hidden" />
         <Man className="-translate-y-20 -translate-x-10 w-[579px] h-[464px] lg:flex hidden " />
         {/* <div className="lg:w-[55%] pr-3 " /> */}
         <div className="flex">
           <div />
           <div className="flex flex-col pt-10 max-w-[1440px] w-full">
-            <div className="mb-1 text-base text-white">
+            <div className="mb-1 text-base text-white font-normal">
               Nhập số thuê bao mong muốn:
             </div>
             <div className="flex items-center">
@@ -127,12 +127,12 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
                 onClick={showModal}
                 className="bg-transparent border border-white lg:h-14 h-[40px] lg:w-[125px] flex items-center justify-center text-white rounded-lg lg:ml-2 ml-1 lg:p-2 lg:text-base text-xs w-[60px] pl-1"
               >
-                <FilterOutlined className="lg:pr-2 pl-2" />
+                <FilterOutlined className="pl-2 lg:text-[24px]" />
                 Bộ lọc
               </Button>
             </div>
             <div className='flex justify-center items-center mt-4 p-4 rounded-lg bg-m_opacity mb-4 lg:w-[552px] lg:h-[48px] w-[350px] h-[36px]'>
-              <h2 className='text-white text-xs'>Loại trừ:</h2>
+              <h2 className='text-white lg:text-base'>Loại trừ:</h2>
               <div className='flex mr-2'>
                 {...num.map((i, e) => (<button
                   onClick={() => {
@@ -141,16 +141,16 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
                   }}
                   key={e}
                   className={`${i.active ? "bg-m_orange" : ""
-                    } text-xs active:opacity-50 select-none mx-1 text-white rounded-full border-white border-2 px-2 py-2 lg:h-7 lg:w-7 h-1 w-1 text-center flex justify-center items-center`}>{i.val}</button>))}
+                    } text-xs active:opacity-50 select-none mx-1 text-white rounded-full border-white border-2 px-2 py-2 lg:h-6 lg:w-6 h-1 w-1 text-center flex justify-center items-center`}>{i.val}</button>))}
               </div>
             </div>
-            <div className="text-white lg:text-lg text-sm">
+            <div className="text-white lg:text-base text-sm font-normal">
               ● Tìm sim có số 6789 bạn hãy gõ 6789
             </div>
-            <div className="text-white lg:text-lg text-sm">
+            <div className="text-white lg:text-base text-sm font-normal">
               ● Tìm sim có đầu 090 đuôi 9999 bạn hãy gõ 090*9999
             </div>
-            <div className="text-white lg:text-lg text-sm">
+            <div className="text-white lg:text-base text-sm font-normal">
               ● Tìm sim bắt đầu bằng 0914 đuôi bất kỳ bạn hãy gõ 0914*
             </div>
             <button
@@ -161,7 +161,7 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
                 dispatch(setSimNot(notIncludes));
                 getSimFunction(dispatch, 1, type, telco, true, text, notIncludes, price);
               }}
-              className="text-m_red bg-white w-32 rounded-lg p-4 m-auto"
+              className="text-m_red bg-white w-[134px] h-[48px] text-base font-semibold rounded-lg m-auto"
             >
               Tìm kiếm
             </button>

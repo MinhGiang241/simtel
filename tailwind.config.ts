@@ -19,7 +19,10 @@ const config: Config = {
         transparent: 'transparent',
         current: 'currentColor',
         m_blue: '#3E6BBB',
-        m_sky: '#B6CAE0'
+        m_sky: '#B6CAE0',
+        m_color_phone: '#3E6BBB',
+        m_table: '#CF3525',
+        m_text_footer: '#1E293B'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

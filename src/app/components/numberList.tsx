@@ -54,7 +54,7 @@ interface Props {
 export default function NumberList({ hideFilter }: Props) {
   var rowStyle = {
     style: {
-      background: "#E50914",
+      background: "#CF3525",
       fontSize: "17px",
       fontWeight: 700,
       color: "white",
@@ -107,37 +107,41 @@ export default function NumberList({ hideFilter }: Props) {
   const columns: ColumnsType<DataType> = [
     {
       onHeaderCell: (_) => rowStyle,
+      align: "center",
       title: "Số điện thoại",
       dataIndex: "msid",
       key: "msid",
       render: (text) => (
-        <p key={text} className="font-bold text-md text-blue-800">
+        <p key={text} className="flex justify-center font-bold text-md text-m_color_phone ">
           {text}
         </p>
       ),
     },
     {
       onHeaderCell: (_) => rowStyle,
+      align: "center",
       title: "Nhà mạng",
       dataIndex: "telco",
       key: "telco",
       render: (text) => (
-        <div key={text} className="">
+        <div key={text} className="flex justify-center">
           {getImageTelco(text)}
         </div>
       ),
     },
     {
       onHeaderCell: (_) => rowStyle,
+      align: "center",
       title: "Loại sim",
       dataIndex: "type",
       key: "type",
       render: (text) => (
-        <p key={text}>{text === "Physical" ? "Sim vật lý" : text}</p>
+        <p className="flex justify-center font-normal text-base" key={text}>{text === "Physical" ? "Sim vật lý" : text}</p>
       ),
     },
     {
       onHeaderCell: (_) => rowStyle,
+      align: "center",
       title: "Gói cước",
       key: "simpack",
       dataIndex: "simpack",
@@ -149,7 +153,7 @@ export default function NumberList({ hideFilter }: Props) {
             placement="bottomLeft"
           >
             {/* <p key={text}>Gói cước tự do</p> */}
-            <Button title={sp?._id}>
+            <Button className="bg-m_gray border-m_sky" title={sp?._id}>
               {sp?.code ? sp?.code : "Gói cước tự do"}
             </Button>
           </Tooltip>
@@ -158,6 +162,7 @@ export default function NumberList({ hideFilter }: Props) {
     },
     {
       onHeaderCell: (_) => rowStyle,
+      align: "center",
       title: "Giá tiền",
       key: "money",
       dataIndex: "money",
@@ -167,12 +172,12 @@ export default function NumberList({ hideFilter }: Props) {
     },
     {
       onHeaderCell: (_) => rowStyle,
-
+      align: "center",
       key: "sim",
       dataIndex: "sim",
       render: (sim) => {
         return (
-          <div key={sim._id} className="flex justify-between items-center">
+          <div key={sim._id} className="flex justify-center items-center">
             <Button
               onClick={() => {
                 dispatch(setSimSelected(sim));
@@ -191,10 +196,10 @@ export default function NumberList({ hideFilter }: Props) {
 
   return (
     <>
-      <div className={`hidden lg:flex justify-between align- items-end ${hideFilter ? 'h-10 mb-4' : 'h-24 mb-10'}`}>
+      <div className={`hidden lg:flex justify-between align- items-end ${hideFilter ? 'h-10 mb-4' : 'h-24 mb-3'}`}>
         {!hideFilter && (< FilterSim />
         )}
-        <h4 className='font-bold'>{count} số hiện có</h4>
+        <h4 className='font-semibold text-base'>{count} số hiện có</h4>
       </div >
       <div className="lg:hidden flex flex-col justify-center items-center">
         {data.map((c) => (
@@ -262,7 +267,6 @@ export default function NumberList({ hideFilter }: Props) {
 export function TableAction({
   current,
   old,
-
 }: {
   current: number;
   old: number;
@@ -270,7 +274,7 @@ export function TableAction({
 }) {
   return (
     <>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-center items-center">
         <div className="flex flex-col mr-3">
           {current && (
             <p className="text-lg font-bold text-m_red">

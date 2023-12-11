@@ -16,7 +16,7 @@ export default function Discount() {
 
   useEffect(() => {
     get_blog(undefined).then((v) => {
-      console.log(v);
+      // console.log(v);
       if (v.length > 3) {
         setBlog(v.slice(0, 3))
       } else {
@@ -29,30 +29,30 @@ export default function Discount() {
 
 
   return (
-    <div className='w-full mt-5'>
+    <div className='w-[1140px] mt-5'>
       <div className="flex justify-center" >
         {/* <h2 className="font-bold text-4xl">, </h2> */}
-        <h2 className="px-2 text-m_red font-bold lg:text-3xl text-2xl mt-10">Tin tức, khuyến mại</h2>
+        <h2 className="px-2 text-m_red font-bold lg:text-[32px] leading-10 text-2xl mt-10">Tin tức, khuyến mại</h2>
       </div>
-      <div className='w-full pt-6'>
+      <div className='w-full pt-2'>
         <div className="lg:grid lg:grid-cols-3 lg:gap-4 flex flex-wrap">
           {blog?.map((x, key) => (
-            <div className="col-span-1 p-4 m-2" key={key} >
+            <div className="col-span-1 m-2" key={key} >
               <div className='cursor-pointer' onClick={() => {
                 pushPathName(router, dispatch, `/detail?id=${x._id}`)
               }}>
                 {/* <Member className="w-full h-[221px]" /> */}
                 <img className="w-full h-[221px]" src={`${uploadUrl}${x.article.thumb}`} alt="#" />
                 <div className='flex justify-between mt-4'>
-                  <div className='flex items-center text-m_red text-base w-[236px] h-[24px]'><Down className="mr-1" />{x.name}</div>
-                  <div className='flex items-center mr-2 text-slate-400 text-base'><Calender className="mr-1" />{`${new Date(x.createdTime.toString()).getDate()}/${new Date(x.createdTime.toString()).getMonth() + 1}/${new Date(x.createdTime.toString()).getFullYear()}`}</div>
+                  <div className='flex items-center text-m_red text-base font-normal w-[236px] h-[24px]'><Down className="w-[24px] h-[24px]" />{x.name}</div>
+                  <div className='flex items-center mr-2 text-base font-normal text-slate-400'><Calender className="mr-1" />{`${new Date(x.createdTime.toString()).getDate()}/${new Date(x.createdTime.toString()).getMonth() + 1}/${new Date(x.createdTime.toString()).getFullYear()}`}</div>
                 </div>
-                <div className='pt-2 font-bold text-base'>{x.article.title}</div>
+                <div className='pt-2 font-bold text-xl'>{x.article.title}</div>
               </div>
             </div>
           ))}
         </div>
-        <button className='border border-m_red rounded-md w-[131px] h-[48px] flex justify-center items-center m-auto text-m_red font-semibold mb-4' onClick={() => {
+        <button className='border border-m_red rounded-md w-[131px] h-[48px] flex justify-center items-center m-auto text-m_red font-semibold mb-10 text-base' onClick={() => {
           pushPathName(router, dispatch, '/blog')
         }}>Xem thêm</button>
       </div >

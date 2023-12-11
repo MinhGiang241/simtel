@@ -49,7 +49,13 @@ export default function PlanList() {
         isLoading ? (<div className=' h-80 w-full flex justify-center items-center '><MoonLoader color='#E50914' /></div>) : (
           <div className="lg:w-full w-[400px] flex justify-center">
             <Swiper
-              slideActiveClass="scale-110"
+              // navigation={{
+              //   nextEl: '.review-swiper-button-next',
+              //   prevEl: '.review-swiper-button-prev',
+              // }}
+              // navigation
+              className="relative"
+              slideActiveClass="scale-[1.165]"
               breakpoints={{
                 0: {
                   width: 375,
@@ -110,8 +116,8 @@ export default function PlanList() {
 
   const dispatch = useDispatch();
   return (
-    <div className="mt-5 ">
-      <div className="w-full flex justify-self-end font-bold text-m_red relative ">
+    <div className="mt-5">
+      {/* <div className="w-full flex justify-self-end font-bold text-m_red relative ">
         <div className="flex-grow" />
         <Link
           onClick={() => dispatch(setPath("/plans/"))}
@@ -120,7 +126,7 @@ export default function PlanList() {
         >
           Xem tất cả
         </Link>
-      </div>
+      </div> */}
       <div>
         <SwiperItem />
       </div>
