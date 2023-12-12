@@ -25,13 +25,13 @@ export default function Footer() {
 
   return (
     <div className='bg-m_gray h-auto'>
-      <div className='footer px-10 w-[1140px] m-auto' >
-        <div className="lg:grid lg:grid-cols-4 lg:gap-4 flex flex-wrap">
+      <div className='footer px-10 lg:max-w-[1140px] m-auto' >
+        <div className="lg:grid lg:grid-cols-4 lg:gap-4 flex flex-wrap ">
           <div className="col-span-1 p-4">
-            <Logo className="mt-6 scale-[1.81]" />
+            <Logo className="mt-5 scale-[1.81] mb-5 lg:ml-0 ml-14" />
           </div>
           <div className="col-span-1 p-4">
-            <div className='font-bold text-xl pb-3 text-m_text_footer'>CÔNG TY CỔ PHẦN VIỄN THÔNG SIMTEL</div>
+            <div className='font-bold text-xl pb-3 text-m_text_footer'>CÔNG TY CỔ PHẦN VIỄN THÔNG SMARTEL</div>
             <div className='text-base font-normal pb-2 text-slate-500'>Mã số doanh nghiệp 0110499021 do Sở Kế hoạch và Đầu Tư Thành phố Hà Nội cấp đăng ký lần đầu ngày 05/10/2023</div>
             <div className='text-base font-normal pb-2 text-slate-500'>Trụ sở chính: Xóm Mới, Thôn Đồng Trì, Xã Tứ Hiệp, Huyện Thanh Trì, Thành phố Hà Nội, Việt Nam</div>
             <div className='text-base font-normal pb-2 text-slate-500'>Hotline: 0559.111.666</div>

@@ -132,7 +132,7 @@ export default function SelectNumber({ hideFilter, isHome = false }: Props) {
               </Button>
             </div>
             <div className='flex justify-center items-center mt-4 p-4 rounded-lg bg-m_opacity mb-4 lg:w-[552px] lg:h-[48px] w-[350px] h-[36px]'>
-              <h2 className='text-white lg:text-base'>Loại trừ:</h2>
+              <h2 className='text-white text-xs lg:text-base'>Loại trừ:</h2>
               <div className='flex mr-2'>
                 {...num.map((i, e) => (<button
                   onClick={() => {

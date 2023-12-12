@@ -29,7 +29,7 @@ export default function Discount() {
 
 
   return (
-    <div className='w-[1140px] mt-5'>
+    <div className='lg:w-[1140px] mt-5'>
       <div className="flex justify-center" >
         {/* <h2 className="font-bold text-4xl">, </h2> */}
         <h2 className="px-2 text-m_red font-bold lg:text-[32px] leading-10 text-2xl mt-10">Tin tức, khuyến mại</h2>
