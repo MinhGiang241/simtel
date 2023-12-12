@@ -17,10 +17,11 @@ export default function Page() {
     const seriCard = searchParams.get('seriCard')
     const code = searchParams.get('order_code')
     const errorCode = searchParams.get('errorCode')
-    const [isModalOpen, setIsModalOpen] = useState(!errorCode);
+    const type = searchParams.get('type')
+    const [isModalOpen, setIsModalOpen] = useState(errorCode === "0");
+    const [isModalErrorOpen, setIsModalErrorOpen] = useState(errorCode != '0');
     const router = useRouter()
     const dispatch = useDispatch()
-    const [isModalErrorOpen, setIsModalErrorOpen] = useState(!!errorCode);
 
     const handleCopyToClipboard = async () => {
         try {
@@ -33,12 +34,14 @@ export default function Page() {
 
     const handleCancel = () => {
         setIsModalOpen(false);
-        setIsModalErrorOpen(false)
+        setIsModalErrorOpen(false);
+        // setIsModalSucscessErrorCode(false);
     };
 
     return (
         <PageWrapper>
-            <Modal open={isModalOpen} onCancel={handleCancel} footer={null}>
+            {/* ****************************PHONE_CARD******************************* */}
+            {isModalOpen === (errorCode == "0" && type == 'PhoneCard') ? <Modal open={isModalOpen} onCancel={handleCancel} footer={null}>
                 <div className='flex flex-col items-center'>
                     <CheckCircleFilled
                         className="text-5xl mb-3 text-green-600"
@@ -49,7 +52,23 @@ export default function Page() {
                     <div className='font-light'>Mã thẻ của bạn là:</div>
                     <div className='flex justify-between pl-6 pr-2 items-center border bg-m_gray w-60 m-auto rounded-lg'>{seriCard}<button onClick={handleCopyToClipboard}><CopyOutlined /></button></div>
                 </div>
-            </Modal>
+            </Modal> : ''}
+            {/* ****************************TOPUP******************************* */}
+            {
+                isModalOpen === (errorCode == "0" && type == 'Topup') ? <Modal open={isModalOpen} onCancel={handleCancel} footer={null}>
+                    <div className='flex flex-col items-center'>
+                        <CheckCircleFilled
+                            className="text-5xl mb-3 text-green-600"
+                        />
+                        <div className='text-xl font-medium'>Thanh toán thành công!</div>
+                        <div className='font-light'>Quý khách đã thanh toán thành công cho đơn hàng:</div>
+                        <div>{code}</div>
+                        {/* <div className='font-light'>Mã thẻ của bạn là:</div>
+                        <div className='flex justify-between pl-6 pr-2 items-center border bg-m_gray w-60 m-auto rounded-lg'>{seriCard}<button onClick={handleCopyToClipboard}><CopyOutlined /></button></div> */}
+                    </div>
+                </Modal> : ''
+            }
+            {/* ****************************FALSE******************************* */}
             <Modal open={isModalErrorOpen} onCancel={handleCancel} footer={null}>
                 <div className='flex flex-col items-center'>
                     <ExclamationCircleOutlined

@@ -8,12 +8,11 @@ import {
   CheckCircleFilled,
 } from "@ant-design/icons";
 
-export const successToast = (title: string, content: string) => {
+export const successToast = (title: string, content: string,) => {
   toast.custom((t) => (
     <div
-      className={`${
-        t.visible ? "animate-enter" : "animate-leave"
-      } max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5 justify-center`}
+      className={`${t.visible ? "animate-enter" : "animate-leave"
+        } max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5 justify-center`}
     >
       <div className="px-10 relative">
         <div className="flex justify-center mt-6 mb-4">
@@ -70,9 +69,8 @@ export const successToast = (title: string, content: string) => {
 export const errorToast = (title: string, content: string) => {
   toast.custom((t) => (
     <div
-      className={`${
-        t.visible ? "animate-enter" : "animate-leave"
-      } max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5 justify-center`}
+      className={`${t.visible ? "animate-enter" : "animate-leave"
+        } max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5 justify-center`}
     >
       <div className="px-10 relative">
         <div className="flex justify-center mt-6 mb-4">

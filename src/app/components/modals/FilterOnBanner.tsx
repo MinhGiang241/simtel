@@ -65,7 +65,7 @@ export default function FilterOnBanner({ open, onOk, onCancel }: Props) {
               onClick={() => setSelected(x.value)}
               key={key}
               className={`${selected == x.value
-                ? "bg-[#EBF3FA] border border-[#3E6BBB]"
+                ? "bg-[#EBF3FA] border border-[#3E6BBB] font-semibold"
                 : ""
                 } border p-2 rounded-3xl h-12 px-4 mr-4 text-base`}
             >
@@ -82,7 +82,7 @@ export default function FilterOnBanner({ open, onOk, onCancel }: Props) {
               onClick={() => setSelectedCard(e.value)}
               key={k}
               className={`${selectedCard == e.value
-                ? "bg-[#EBF3FA] border border-[#3E6BBB]"
+                ? "bg-[#EBF3FA] border border-[#3E6BBB] font-semibold"
                 : ""
                 }  border p-2 rounded-3xl h-12 px-4 mr-4 text-base`}
             >

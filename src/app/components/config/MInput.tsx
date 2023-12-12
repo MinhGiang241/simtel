@@ -46,9 +46,7 @@ export default function MInput({
         <label className='text-base font-semibold' htmlFor={id}>{title} {required && (<span className='text-m_red'>*</span>)}</label>
         {action}
       </div>
-
       <div className='w-full flex flex-col mb-2'>
-
         <Input
           onBlur={onBlur}
           status={(error && touch) ? `error` : ''}
