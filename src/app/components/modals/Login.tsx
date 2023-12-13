@@ -82,7 +82,7 @@ export default function Login({ onCancel, switchSignUp }: Props) {
         formik.handleSubmit();
       }}
     >
-      <h1 className="font-bold text-3xl mt-2 mb-4 text-center">Đăng nhập</h1>
+      <h1 className="font-bold text-2xl mt-2 mb-4 text-center">Đăng nhập</h1>
 
       <MInput
         required
@@ -153,7 +153,7 @@ export default function Login({ onCancel, switchSignUp }: Props) {
         <button
           type="button"
           onClick={() => switchSignUp()}
-          className="text-m_red  select-none active:opacity-70"
+          className="text-m_red text-base select-none active:opacity-70"
         >
           Đăng ký
         </button>

@@ -27,6 +27,8 @@ import { MenuItemProps } from "rc-menu";
 import { setIsData, setTelco } from "@/GlobalRedux/SimPack/SimPackSlice";
 import { getSimFunction } from "@/services/sim/simServices";
 import { setSimTelco } from "@/GlobalRedux/Sim/SimSlice";
+import { User } from "@/interfaces/data";
+import Image from 'next/image'
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -115,6 +117,8 @@ export default function Header() {
   const not = useSelector((state: RootState) => state.sim.not);
   const search = useSelector((state: RootState) => state.sim.search);
   const price = useSelector((state: RootState) => state.sim.price);
+  const user: User | undefined = useSelector((state: RootState) => state.auth.user);
+  // console.log("user", user);
 
   const loadingTelcos = useSelector(
     (state: RootState) => state.config.loadingTelcos,
@@ -135,6 +139,31 @@ export default function Header() {
     ),
     key: i._id,
   }));
+
+  const user_list = [
+    {
+      label: (<>
+        <button onClick={() => { pushPathName(router, dispatch, '/history') }}>Lịch sử đơn hàng</button>
+      </>),
+      key: '1',
+    },
+    {
+      label: (<>
+        <u
+          className="font-semibold text-sm justify-center text-orange-500 active:opacity-70 select-none lg:flex items-center"
+          onClick={() => {
+            setConfirmLogOut(true);
+          }}
+        >
+          Đăng xuất
+        </u>
+        {/* <button className="lg:hidden flex mr-5" onClick={showDrawer}>
+          <MenuOutlined />
+        </button> */}
+      </>),
+      key: '2',
+    },
+  ];
 
   const data = [
     {
@@ -173,31 +202,6 @@ export default function Header() {
               {v.name}
             </MLink>
           </div>))}
-          {/* <div className="mb-3">
-            <MLink className="text-base text-black" link="/sims">
-              Viettel
-            </MLink>
-          </div>
-          <div className="mb-3">
-            <MLink className="text-base text-black" link="/sims">
-              Vinaphone
-            </MLink>
-          </div>
-          <div className="mb-3">
-            <MLink className="text-base text-black" link="/sims">
-              Wintel
-            </MLink>
-          </div>
-          <div className="mb-3">
-            <MLink className="text-base text-black" link="/sims">
-              Vietnammobile
-            </MLink>
-          </div>
-          <div>
-            <MLink className="text-base text-black" link="/sims">
-              Mobifone
-            </MLink>
-          </div> */}
         </div>
       ),
     },
@@ -260,11 +264,6 @@ export default function Header() {
             </Dropdown>
           </div>
           <div className="w-[143px] h-[40px] flex justify-center items-center text-center select-none">
-            {/* <button className={`active:opacity-70 select-none ${pathname === '/sims/' ? 'font-bold' : ''}`} onClick={() => {
-              pushPathName(router, dispatch, '/sims')
-            }}>
-              Mua sim
-            </button> */}
             <Dropdown menu={{ items: telcoOption }}>
               <button
                 className={`text-base h-[24px] active:opacity-70 font-semibold select-none flex justify-center text-center ${pathname === "/sims"
@@ -314,21 +313,32 @@ export default function Header() {
 
           {isAuth == AuthState.LOGGED && (
             <>
-              {/* <button className="border-black border-2 p-1 rounded-md active:opacity-70 mr-6">
-                <ShoppingCartOutlined style={{ fontSize: "200%" }} />
-              </button> */}
-
-              <button
+              {/* <button
                 className="mx-auto border-black border-2 h-12 font-semibold px-2 rounded-xl active:opacity-70 select-none lg:flex items-center hidden"
                 onClick={() => {
                   setConfirmLogOut(true);
                 }}
               >
                 Đăng xuất
-              </button>
+              </button> */}
               <button className="lg:hidden flex mr-5" onClick={showDrawer}>
                 <MenuOutlined />
               </button>
+              <Dropdown
+                className="cursor-pointer hidden lg:flex"
+                menu={{
+                  items: user_list,
+                }}
+                trigger={['click']}
+              >
+                <button onClick={(e) => e.preventDefault()}>
+                  <Space className="flex justify-center items-center">
+                    <Image className="rounded-full" src={"images/none.jpg"} alt="#" width={40} height={40} />
+                    <div className="font-semibold text-base">{user?.full_name}</div>
+                    <DownOutlined className="scale-[0.8]" />
+                  </Space>
+                </button>
+              </Dropdown>
             </>
           )}
           {isAuth == AuthState.NOT_LOGGED && (
@@ -376,14 +386,37 @@ export default function Header() {
             </div>
             {isAuth == AuthState.LOGGED && (
               <>
-                <button
-                  className="mx-auto border-black border-2 h-12 font-bold px-2 rounded-xl active:opacity-70 select-none lg:flex items-center flex mt-5"
-                  onClick={() => {
-                    setConfirmLogOut(true);
-                  }}
-                >
-                  Đăng xuất
-                </button>
+                {/* <div className="flex justify-between items-center pt-5">
+                  <div className="flex items-center">
+                    <Image className="rounded-full mr-2" src={"images/none.jpg"} alt="#" width={40} height={40} />
+                    <div className="font-semibold text-base">{user?.full_name}</div>
+                  </div>
+                  <u
+                    className="font-semibold text-sm justify-center text-orange-500 active:opacity-70 select-none lg:flex items-center flex"
+                    onClick={() => {
+                      setConfirmLogOut(true);
+                    }}
+                  >
+                    Đăng xuất
+                  </u>
+                </div> */}
+                <div className="flex justify-center items-center mt-4">
+                  <Dropdown
+                    className="cursor-pointer lg:flex"
+                    menu={{
+                      items: user_list,
+                    }}
+                    trigger={['click']}
+                  >
+                    <button onClick={(e) => e.preventDefault()}>
+                      <Space className="flex justify-center items-center">
+                        <Image className="rounded-full" src={"images/none.jpg"} alt="#" width={40} height={40} />
+                        <div className="font-semibold text-base">{user?.full_name}</div>
+                        <DownOutlined className="scale-[0.8]" />
+                      </Space>
+                    </button>
+                  </Dropdown>
+                </div>
               </>
             )}
             {isAuth == AuthState.NOT_LOGGED && (
@@ -410,13 +443,16 @@ export default function Header() {
                     Đăng ký
                   </button>
                 </div>
+                {/* <button className="border-m_gray">
+                  <Cart />
+                </button> */}
               </>
             )}
           </Drawer>
-          <div className="h-10 w-[2px] bg-m_gray ml-6 mr-6" />
-          <button className="border-m_gray">
+          {/* <div className="h-10 w-[2px] bg-m_gray ml-6 mr-6" /> */}
+          {/* <button className="border-m_gray">
             <Cart />
-          </button>
+          </button> */}
         </div>
       </div>
       <Modal
@@ -443,7 +479,6 @@ export default function Header() {
             >
               Đăng xuất
             </Button>
-            {/* <MenuOutlined /> */}
             <div className="w-12" />
             <Button
               className="bg-white border-m_red rounded-xl px-6 text-m_red"
