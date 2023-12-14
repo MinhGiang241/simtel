@@ -5,6 +5,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { get_detail_history } from '@/services/api/detailHistory';
+import { FormattedNumber } from 'react-intl';
+import Pay from '@/app/components/logo/pay.svg'
 
 export default function Page() {
     const [detail, setDetail] = useState<any>()
@@ -14,10 +16,10 @@ export default function Page() {
     const id = searchParams.get('id')
     useEffect(() => {
         get_detail_history(id).then((v) => {
-            console.log("detailHistory", v);
+            // console.log("detailHistory", v);
             setDetail(v)
         })
-    }, [id])
+    }, [])
 
     return (
         <PageWrapper>
@@ -27,7 +29,7 @@ export default function Page() {
                     <div className='px-1'>{">"}</div>
                     <div>Chi tiết đơn hàng</div>
                 </div>
-                <div className='w-full bg-m_gray px-72 p-5'>
+                <div className='w-full bg-slate-50 rounded-lg px-72 p-5'>
                     <div className='border-b flex'>
                         <img width={"132px"} height={"110px"} src="" alt="#" />
                         <div className='flex flex-col'>
@@ -39,15 +41,15 @@ export default function Page() {
                     <div className='mt-2 border-b'>
                         <div className='flex justify-between mb-1'>
                             <div>Số điện thoại</div>
-                            <div>{detail?.phoneNumber}</div>
+                            <div>{detail?.shopingcarditem[0]?.phoneNumber}</div>
                         </div>
                         <div className='flex justify-between mb-1'>
                             <div>Giá tiền</div>
-                            <div>{detail?.value}</div>
+                            <FormattedNumber value={(detail?.shopingcarditem[0]?.value || 0)} style='currency' currency='VND' />
                         </div>
                         <div className='flex justify-between mb-1'>
                             <div>Mã đơn hàng</div>
-                            <div>{detail?.code}</div>
+                            <div>{detail?.shopingcarditem[0]?.code}</div>
                         </div>
                         <div className='flex justify-between mb-1'>
                             <div>Thời gian tạo</div>
@@ -58,17 +60,18 @@ export default function Page() {
                         <div className='mb-1'>Thông tin thanh toán</div>
                         <div className='flex justify-between'>
                             <div className='mb-1'>Giá tiền</div>
-                            <div className='mb-1'>{detail?.value || 0}</div>
+                            <FormattedNumber value={(detail?.shopingcarditem[0]?.amount || 0)} style='currency' currency='VND' />
                         </div>
                         <div className='flex justify-between'>
                             <div className='mb-1'>Tổng thanh toán</div>
-                            <div className='mb-1'>{detail?.amount || 0}</div>
+                            <FormattedNumber value={(detail?.shopingcarditem[0]?.amount || 0)} style='currency' currency='VND' />
                         </div>
                     </div>
                     <div>
                         <div className='mb-1 mt-1'>Phương thức thanh toán</div>
-                        <div className='flex'>
-                            <img width={"64px"} height={"35px"} src="" alt="#" />
+                        <div className='flex items-center'>
+                            <Pay className="w-[64px] h-[35px] mr-3" />
+                            {/* <img width={"64px"} height={"35px"} src="" alt="#" /> */}
                             <div>Appatopay</div>
                         </div>
                     </div>

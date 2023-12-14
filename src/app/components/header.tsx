@@ -402,7 +402,7 @@ export default function Header() {
                 </div> */}
                 <div className="flex justify-center items-center mt-4">
                   <Dropdown
-                    className="cursor-pointer lg:flex"
+                    className="cursor-pointer"
                     menu={{
                       items: user_list,
                     }}
