@@ -150,7 +150,7 @@ export default function CardPage() {
               <Radio value={2} checked={value === 2}>Mua mã thẻ</Radio>
             </Radio.Group>
           </div>
-          <button onClick={() => { pushPathName(router, dispatch, '/history') }}>Lịch sử giao dịch</button>
+          {/* <button onClick={() => { pushPathName(router, dispatch, '/history') }}>Lịch sử giao dịch</button> */}
         </div>
         {value === 1 && (
           <div>
