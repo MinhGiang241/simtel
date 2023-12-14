@@ -31,8 +31,8 @@ export default function Page() {
     return (
         <PageWrapper>
             <div className='border-b pb-3 mt-4'>
-                <u className='font-bold'>Lịch sử đơn hàng</u>
-                <div>
+                <u className='font-bold ml-2 lg:ml-0'>Lịch sử đơn hàng</u>
+                <div className='p-3 lg:p-0'>
                     <div className='flex justify-between items-center mt-2'>
                         <div className='font-thin'>Nạp thẻ trực tiếp</div>
                         <div className='font-light text-m_red'>Đã hoàn thành</div>
