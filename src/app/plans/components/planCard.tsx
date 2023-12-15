@@ -74,36 +74,36 @@ export default function PlanCard({ simpack }: { simpack: SimPack }) {
 
   return (
     <div className="bg-m_red lg:h-[420px] lg:w-[359px] w-[170px] h-[240px] mb-8 rounded-2xl border-m_red border-2 m-2">
-      <div className="bg-white lg:h-[404px] lg:w-[355px] w-[165px] h-[231px] lg:mt-3 rounded-2xl flex flex-col mt-1 lg:pt-9 items-center p-1">
+      <div className="bg-white lg:h-[404px] lg:w-[355px] w-[165px] h-[231px] lg:mt-3 rounded-2xl flex flex-col mt-1 lg:pt-5 items-center p-1">
         <div className="flex w-ful justify-center items-center">
-          <p className="text-xs lg:text-md font-extrabold">
+          <p className="text-xs lg:text-base font-extrabold">
             {simpack.telco?.toUpperCase()}{" "}
           </p>
           <div className="h-4 w-0.5 bg-gray-300 mx-2" />
-          <p className="lg:text-md text-xs">30 ngày</p>
+          <p className="lg:text-base text-xs">30 ngày</p>
         </div>
-        <div className="text-m_red text-xs lg:text-3xl text-center font-black mt-2">
+        <div className="text-m_red text-xs lg:text-[30px] lg:leading-10 leading-4 text-center font-black mt-2">
           <FormattedNumber
             value={simpack.price ?? 0}
             style="currency"
             currency="VND"
           />
         </div>
-        <div className="w-[148px] lg:w-[290px] h-0.5 bg-m_gray mx-auto lg:mt-6 lg:mb-8 mb-2" />
-        <div className="lg:h-36 flex flex-col justify-between text-ellipsis overflow-clip">
+        <div className="w-[148px] lg:w-[290px] h-0.5 bg-m_gray mx-auto lg:mt-6 lg:mb-6 mb-2" />
+        <div className="lg:h-40 flex flex-col justify-between text-ellipsis overflow-clip">
           {simpactContenCard.map((e, i) => (
-            <div className="lg:mx-8 flex text-ellipsis" key={i}>
+            <div className="lg:mx-8 flex items-baseline text-ellipsis" key={i}>
               <CheckOutlined
                 className="mr-1 lg:mr-4 lg:text-xl text-xs"
                 style={{ color: "green" }}
               />
-              <div className="text-xs">{e}</div>
+              <div className="text-xs lg:text-base">{e}</div>
             </div>
           ))}
         </div>
         <Button
           onClick={() => setOpen(true)}
-          className="border-m_red bg-m_red text-white lg:w-[164px] text-base font-semibold lg:h-[48px] rounded-lg mt-3 w-[111px] h-[32px] flex justify-center items-center"
+          className="border-m_red bg-m_red text-white lg:w-[164px] text-base font-semibold lg:h-[48px] rounded-lg lg:mt-7 mt-3 w-[111px] h-[32px] flex justify-center items-center"
         >
           Đăng ký
         </Button>

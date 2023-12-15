@@ -59,7 +59,7 @@ export default function MInput({
           placeholder={placeholder}
           suffix={suffix ?? isPassword ? <div onClick={() => { setVisible(!visible) }} className='active:opacity-70 cursor-pointer'>{visible ? <EyeOutlined className='text-2xl' /> : <EyeInvisibleOutlined className='text-2xl' />}</div> : undefined}
         />
-        {(error && touch) ? (<div className='text-m_red'>{error}</div>) : null}
+        {(error && touch) ? (<div className='text-m_red text-sm'>{error}</div>) : null}
       </div>
     </div>
   )

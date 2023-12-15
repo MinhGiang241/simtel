@@ -296,16 +296,16 @@ export default function PlanWithSim() {
         <div className="text-base font-bold mb-3">Chọn loại gói cước</div>
         <Radio.Group
           className="flex"
-          disabled
+          defaultValue={1}
           value={type}
           onChange={(v: RadioChangeEvent) => { }}
         >
-          <Radio value={0}>
-            <h1 className="ml-3">Gói cước</h1>
+          <Radio value={0} disabled>
+            <h1 className="ml-3 text-base">Gói cước</h1>
           </Radio>
-          <div className="w-7" />
+          <div className="lg:w-40" />
           <Radio value={1}>
-            <h1 className="ml-3">Gói cước kèm sim</h1>
+            <h1 className="ml-3 text-base">Gói cước kèm sim</h1>
           </Radio>
         </Radio.Group>
         <Divider />
@@ -428,7 +428,7 @@ export default function PlanWithSim() {
             />
           </div>
           <MInput
-            className="h-14 mb-3"
+            className="h-14"
             required
             title="Địa chỉ chi tiết"
             id="address"
@@ -455,7 +455,7 @@ export default function PlanWithSim() {
 
         <Divider />
         <div className="mt-8 w-full flex flex-col items-start mb-8">
-          <h4 className="font-semibold text-lg">Hình thức thanh toán</h4>
+          <h4 className="font-semibold text-xl">Hình thức thanh toán</h4>
         </div>
         <Radio.Group
           value={method}
@@ -468,7 +468,7 @@ export default function PlanWithSim() {
               }  border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}
           >
             <div className="flex justify-between w-full">
-              <div>Thanh toán online</div>
+              <div className="text-base">Thanh toán online</div>
               <Image
                 className="absolute right-1 top-1"
                 src="/images/apota.png"
@@ -487,7 +487,7 @@ export default function PlanWithSim() {
           >
             <div>
               <div className="text-base">Thanh toán COD</div>
-              <div className="text-sm">
+              <div className="text-sm text-[#64748B]">
                 (Thanh toán trực tiếp cho Đơn vị vận chuyển)
               </div>
             </div>
@@ -504,8 +504,8 @@ export default function PlanWithSim() {
       </div>
 
       <div className="bg-white lg:w-2/5  w-3/4 border-m_gray border-2 rounded-lg h-fit">
-        <div className="p-5 h-full">
-          <div className="text-base font-bold mb-3">Đơn hàng (1)</div>
+        <div className="p-5 h-full lg:w-[456px]">
+          <div className="text-xl font-bold mb-3">Đơn hàng (1)</div>
           {/* <div className='flex w-full justify-between'> */}
           {/*   <p className='font-bold text-lg'>Cước data - {simpack?.telco}</p> */}
           {/*   <CloseOutlined /> */}
@@ -515,7 +515,7 @@ export default function PlanWithSim() {
             <>
               {" "}
               <div className="flex w-full justify-between">
-                <p className="font-bold text-lg">{number?.msid}</p>
+                <p className="font-bold text-xl">{number?.msid}</p>
                 <CloseOutlined />
               </div>
               <button
@@ -523,7 +523,7 @@ export default function PlanWithSim() {
                   getSim();
                   //pushPathName(router, dispatch, '/sims/')
                 }}
-                className="underline underline-offset-4 text-base text-sky-700 mt-2"
+                className="underline underline-offset-4 text-sm text-sky-700 mt-2"
               >
                 Đổi số
               </button>
@@ -555,7 +555,7 @@ export default function PlanWithSim() {
             onClick={() => {
               setOpen(true);
             }}
-            className="underline underline-offset-4 text-base text-sky-700"
+            className="underline underline-offset-4 text-sm text-sky-700"
           >
             Chi tiết gói cước
           </button>
@@ -575,7 +575,7 @@ export default function PlanWithSim() {
             suffix={
               <button
                 onClick={() => { }}
-                className="font-bold text-sm right-0 absolute h-[42px]   text-m_red bg-[#FFF4F0] w-[86px] rounded-r-md"
+                className="font-semibold text-sm right-0 absolute h-[42px] text-m_red bg-[#FFF4F0] w-[86px] rounded-r-md"
               >
                 {" "}
                 Áp dụng
@@ -616,8 +616,8 @@ export default function PlanWithSim() {
             <Checkbox className="pr-2" />
             <div className="text-base">
               {/* Bằng việc nhấn thanh toán, Quý khách đồng ý với{" "} */}
-              <span className="">
-                Tôi xác nhận thông tin đơn hàng đã chính xác và xác nhận đồng ý với <button className="text-m_red" onClick={() => { pushPathName(router, dispatch, '/resolution?id=6555ca7968709b3551d5b141') }}>Điều khoản sử dụng</button> và các Chính sách của SimTel.vn{" "}
+              <span className="text-sm">
+                Tôi xác nhận thông tin đơn hàng đã chính xác và xác nhận đồng ý với <button className="text-m_red text-sm" onClick={() => { pushPathName(router, dispatch, '/resolution?id=6555ca7968709b3551d5b141') }}>Điều khoản sử dụng</button> và các Chính sách của SimTel.vn{" "}
               </span>
             </div>
           </div>
@@ -634,6 +634,7 @@ export default function PlanWithSim() {
               />
             </div>
           </div>
+          <div className="lg:w-40" />
           <Button
             onClick={async (_) => {
               formik.handleSubmit();

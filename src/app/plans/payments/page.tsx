@@ -40,7 +40,7 @@ export default function SimpackPayment() {
       <div className="max-w-[1140px] w-full">
         <div className="h-full mt-10 mb-10">
           <p className="text-base">
-            {"Mua sim >"} <span className="font-semibold">Thanh toán</span>
+            {"Mua gói cước >"} <span className="font-semibold">Thanh toán</span>
           </p>
         </div>
         {loading ? (

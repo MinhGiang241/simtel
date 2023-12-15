@@ -75,25 +75,26 @@ export default function FilterPlan() {
       {/*   </button> */}
       {/* </div> */}
       <div className='flex w-full lg:justify-evenly justify-end items-center lg:h-28 lg:bg-m_gray lg:mt-20 mt-7'>
-        <div className='w-[301px] h-[62] mx-6 flex-col hidden lg:flex' >
+        <div className='mx-2 flex-col hidden lg:flex' >
           <Select
-            className=""
+            className="w-[301px] h-[62px] "
             onChange={onChangeTelco}
             allowClear
             id="branch"
             style={{ height: "3rem" }}
-            placeholder="Nhà mạng"
+            placeholder="Chọn nhà mạng"
             options={options}
           />
         </div>
 
-        <div className="w-[301px] mx-6 flex-col hidden lg:flex">
+        <div className="mx-2 flex-col hidden lg:flex">
           <Select
+            className="w-[301px] h-[62px]"
             onChange={onChangeType}
             allowClear
             id="type"
             style={{ height: "3rem" }}
-            placeholder="Loại gói cước"
+            placeholder="Chọn loại gói cước"
             options={[
               { value: "before", label: "Trả trước" },
               { value: "after", label: "Trả sau" },
@@ -101,8 +102,9 @@ export default function FilterPlan() {
           />
         </div>
 
-        <div className="w-[301px] mx-6 flex-col hidden lg:flex">
+        <div className="mx-2 flex-col hidden lg:flex">
           <Select
+            className="w-[301px] h-[62px]"
             onChange={onChangeSort}
             allowClear
             id="price"

@@ -142,126 +142,128 @@ export default function CardPage() {
   return (
     <>
       <PageWrapper>
-        <div className="flex justify-between">
-          <div>
-            <div className="mt-5 text-lg font-bold">Chọn hình thức nạp thẻ</div>
-            <Radio.Group onChange={onChange} value={value} className="pt-5">
-              <Radio value={1} checked={value === 1}>Nạp thẻ trực tiếp</Radio>
-              <Radio value={2} checked={value === 2}>Mua mã thẻ</Radio>
-            </Radio.Group>
-          </div>
-          {/* <button onClick={() => { pushPathName(router, dispatch, '/history') }}>Lịch sử giao dịch</button> */}
-        </div>
-        {value === 1 && (
-          <div>
-            <div className="mt-5 text-lg font-bold mb-4">Nhập số điện thoại nạp thẻ</div>
-            <div className="px-10">
-              <input
-                type="text"
-                className="h-10 border w-full rounded-md"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
+        <div className="px-2 lg:px-0">
+          <div className="flex justify-between">
+            <div>
+              <div className="mt-5 text-lg font-bold">Chọn hình thức nạp thẻ</div>
+              <Radio.Group onChange={onChange} value={value} className="pt-5">
+                <Radio value={1} checked={value === 1}>Nạp thẻ trực tiếp</Radio>
+                <Radio value={2} checked={value === 2}>Mua mã thẻ</Radio>
+              </Radio.Group>
             </div>
+            {/* <button onClick={() => { pushPathName(router, dispatch, '/history') }}>Lịch sử giao dịch</button> */}
           </div>
-        )}
-        <div className="mt-5 text-lg font-bold w-[137px] ">Chọn nhà mạng</div>
-        <div className="mt-5 flex items-center justify-center w-full flex-wrap">
-          {telcoImages?.map((e: string, i: number) => (
-            <Button
-              onClick={async () => {
-                dispatch(setTelcoCard(e));
-                setSelected(e);
-                getCardType(e);
-              }}
-              key={i}
-              className={`${selected == e ? "bg-[#f5f5f5] border border-m_red" : ""
-                } lg:w-[261px] lg:h-[80px] w-[106px] h-[44px] border flex items-center justify-center mr-3 mb-3 rounded-lg`}
-            >
-              {getImageTelco(e)}
-            </Button>
-          ))}
-        </div>
-        <div className="w-full">
-          <div className="mt-10 mb-6">
-            <span className="text-lg font-bold w-[137px] h-[38px]">
-              Chọn mệnh giá
-            </span>
-            <span className="text-m_red"> *</span>
+          {value === 1 && (
+            <div>
+              <div className="mt-5 text-lg font-bold mb-4">Nhập số điện thoại nạp thẻ</div>
+              <div className="px-10">
+                <input
+                  type="text"
+                  className="h-10 border w-full rounded-md"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+              </div>
+            </div>
+          )}
+          <div className="mt-5 text-lg font-bold w-[137px] ">Chọn nhà mạng</div>
+          <div className="mt-5 flex items-center justify-center w-full flex-wrap">
+            {telcoImages?.map((e: string, i: number) => (
+              <Button
+                onClick={async () => {
+                  dispatch(setTelcoCard(e));
+                  setSelected(e);
+                  getCardType(e);
+                }}
+                key={i}
+                className={`${selected == e ? "bg-[#f5f5f5] border border-m_red" : ""
+                  } lg:w-[261px] lg:h-[80px] w-[106px] h-[44px] border flex items-center justify-center mr-3 mb-3 rounded-lg`}
+              >
+                {getImageTelco(e)}
+              </Button>
+            ))}
           </div>
+          <div className="w-full">
+            <div className="mt-10 mb-6">
+              <span className="text-lg font-bold w-[137px] h-[38px]">
+                Chọn mệnh giá
+              </span>
+              <span className="text-m_red"> *</span>
+            </div>
 
-          {(selected || telco === "") && <CardList />}
-        </div>
-        <Button
-          onClick={async () => {
-            //pushPathName(router, dispatch, '/pay')
-            try {
-              setLoading(true);
-              var dataSubmit: Order = {
-                customerId: user?._id,
-                tel: phone,
-                // email: "minhgiang@gmail.com",
-                // address: `Hà Nội`,
-                items: [
-                  {
-                    type: value == 1 ? 'topup' : "phonecard",
-                    itemId: selectedCardType?._id,
-                    value: selectedCardType?.value,
-                  },
-                ],
-                total_amount: selectedCardType?.value,
-                prod_total_amount: selectedCardType?.value,
-                transport_fee: 0,
-                discount_amount: 0,
-                process_state: "WaitProcessing",
-                payment_state: "WaitToPay",
-                payment_method: "Wallet",
-                note: "note",
-                // provinceId: values.province,
-                // districtId: values.district,
-                // wardId: values.ward,
-              };
-              // pushPathName(router, dispatch, '/pay')
-              createOrder(dataSubmit)
-                .then(async (v) => {
-                  console.log("v", v);
-                  console.log("slt", selectedCardType);
+            {(selected || telco === "") && <CardList />}
+          </div>
+          <Button
+            onClick={async () => {
+              //pushPathName(router, dispatch, '/pay')
+              try {
+                setLoading(true);
+                var dataSubmit: Order = {
+                  customerId: user?._id,
+                  tel: phone,
+                  // email: "minhgiang@gmail.com",
+                  // address: `Hà Nội`,
+                  items: [
+                    {
+                      type: value == 1 ? 'topup' : "phonecard",
+                      itemId: selectedCardType?._id,
+                      value: selectedCardType?.value,
+                    },
+                  ],
+                  total_amount: selectedCardType?.value,
+                  prod_total_amount: selectedCardType?.value,
+                  transport_fee: 0,
+                  discount_amount: 0,
+                  process_state: "WaitProcessing",
+                  payment_state: "WaitToPay",
+                  payment_method: "Wallet",
+                  note: "note",
+                  // provinceId: values.province,
+                  // districtId: values.district,
+                  // wardId: values.ward,
+                };
+                // pushPathName(router, dispatch, '/pay')
+                createOrder(dataSubmit)
+                  .then(async (v) => {
+                    console.log("v", v);
+                    console.log("slt", selectedCardType);
 
-                  setLoading(false);
-                  // success('Đặt hàng thành công', "Bạn đã đặt hàng thành công ,đơn hàng của bạn đã được chuyển đến bộ phận quản lý",)
-                  // pushPathName(router, dispatch, `/cards?order=${v}`)
-                  // if (method === "Wallet") {
-                  //   return getOrderLink({ orderId: v, amount: selectedCardType?.value ?? 0, orderInfo: "test" })
-                  // } else {
-                  //   pushPathName(router, dispatch, '/pay')
-                  // }
-                  return getOrderLink({
-                    orderId: v,
-                    amount: selectedCardType?.value ?? 0,
-                    orderInfo: "test",
+                    setLoading(false);
+                    // success('Đặt hàng thành công', "Bạn đã đặt hàng thành công ,đơn hàng của bạn đã được chuyển đến bộ phận quản lý",)
+                    // pushPathName(router, dispatch, `/cards?order=${v}`)
+                    // if (method === "Wallet") {
+                    //   return getOrderLink({ orderId: v, amount: selectedCardType?.value ?? 0, orderInfo: "test" })
+                    // } else {
+                    //   pushPathName(router, dispatch, '/pay')
+                    // }
+                    return getOrderLink({
+                      orderId: v,
+                      amount: selectedCardType?.value ?? 0,
+                      orderInfo: "test",
+                    });
+                  })
+                  .then((v) => {
+                    setLoading(false);
+                    console.log("orderLoinh", v);
+                    router.push(v.paymentUrl);
+                  })
+                  .catch((er) => {
+                    setLoading(false);
+                    errorToast("Thanh toán thất bại", er as string);
                   });
-                })
-                .then((v) => {
-                  setLoading(false);
-                  console.log("orderLoinh", v);
-                  router.push(v.paymentUrl);
-                })
-                .catch((er) => {
-                  setLoading(false);
-                  errorToast("Thanh toán thất bại", er as string);
-                });
-            } catch (err) {
-              setLoading(false);
-              errorToast("Thanh toán thất bại", err as string);
-            }
-          }}
-          loading={loading}
-          className="select-none ml-auto active:opacity-70 bg-m_red text-white rounded-lg px-6 py-2 flex justify-center items-center m-auto mt-10 w-[177px] h-[48px]"
-        >
-          <p className="text-lg text-center pr-1">Thanh toán</p>
-        </Button>
-        <PaymentSelect />
-        <div className="h-20" />
+              } catch (err) {
+                setLoading(false);
+                errorToast("Thanh toán thất bại", err as string);
+              }
+            }}
+            loading={loading}
+            className="select-none ml-auto active:opacity-70 bg-m_red text-white rounded-lg px-6 py-2 flex justify-center items-center m-auto mt-10 w-[177px] h-[48px]"
+          >
+            <p className="text-lg text-center pr-1">Thanh toán</p>
+          </Button>
+          <PaymentSelect />
+          <div className="h-20" />
+        </div>
       </PageWrapper>
     </>
   );

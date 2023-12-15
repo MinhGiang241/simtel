@@ -47,7 +47,7 @@ export default function MDropdown({
 
   return (
     <div className='w-full'>
-      <div className={`flex ${action ? 'justify-between' : 'justify-start'} `}>
+      <div className={`flex ${action ? 'justify-between' : 'justify-start'} mb-1`}>
         <label className='text-base font-semibold' htmlFor={id}>{title} {required && (<span className='text-m_red'>*</span>)}</label>
         {action}
       </div>
@@ -59,7 +59,7 @@ export default function MDropdown({
             afterSetValueFunction(e)
           }
         }} value={value} placeholder={placeholder} />
-        {(error && touch) ? (<div className='text-m_red'>{error}</div>) : null}
+        {(error && touch) ? (<div className='text-m_red text-sm'>{error}</div>) : null}
       </div>
     </div>
   )

@@ -118,20 +118,20 @@ export default function PlanNoSim() {
 
   return (
     <div className=" flex lg:flex-row lg:items-start lg:justify-between flex-col items-center mb-28">
-      <div className="bg-white lg:w-7/12 w-3/4 border-m_gray border-2 rounded-lg p-5">
+      <div className="bg-white lg:w-[652px] w-3/4 border-m_gray border-2 rounded-lg p-5">
         <div className="text-base font-bold mb-3">Chọn loại gói cước</div>
         <Radio.Group
           className="flex"
-          disabled
           value={type}
+          defaultValue={0}
           onChange={(v: RadioChangeEvent) => { }}
         >
-          <Radio value={0}>
-            <h1 className="ml-3">Gói cước</h1>
+          <Radio value={0} >
+            <h1 className="ml-3 text-base">Gói cước</h1>
           </Radio>
-          <div className="w-7" />
-          <Radio value={1}>
-            <h1 className="ml-3">Gói cước kèm sim</h1>
+          <div className="lg:w-40" />
+          <Radio value={1} disabled>
+            <h1 className="ml-3 text-base">Gói cước kèm sim</h1>
           </Radio>
         </Radio.Group>
         <Divider />
@@ -143,7 +143,7 @@ export default function PlanNoSim() {
         </div>
         <Divider />
         <div className="mt-8 w-full flex flex-col items-start">
-          <h4 className="font-semibold text-lg">Thông tin gói cước</h4>
+          <h4 className="font-semibold text-xl">Thông tin gói cước</h4>
         </div>
 
         <div className="flex mt-5">
@@ -151,7 +151,7 @@ export default function PlanNoSim() {
             {simpack ? simpack.telco?.toUpperCase() : "VIETTEL99"}{" "}
           </p>
           <div className="h-5 w-0.5 bg-gray-300 mx-2 text-base" />
-          <p className="lg:text-md text-xs">30 ngày</p>
+          <p className="lg:text-base text-xs">30 ngày</p>
         </div>
         <div className="text-m_red lg:text-4xl text-2xl font-bold mt-2 mb-5">
           <FormattedNumber
@@ -174,7 +174,7 @@ export default function PlanNoSim() {
         )}
         <Divider />
         <div className="mt-8 w-full flex flex-col items-start mb-8">
-          <h4 className="font-semibold text-lg">Hình thức thanh toán</h4>
+          <h4 className="font-semibold text-xl">Hình thức thanh toán</h4>
         </div>
         <Radio.Group
           value={method}
@@ -184,7 +184,7 @@ export default function PlanNoSim() {
           <Radio
             value={"Wallet"}
             className={`${method === "Wallet" ? `bg-m_gray border-sky-700` : `border-m_gray`
-              }  border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}
+              }  border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative h-[68px]`}
           >
             <div className="flex justify-between w-full">
               <div className="lg:text-base text-xs">Thanh Toán qua VNPAYQR</div>
@@ -215,19 +215,19 @@ export default function PlanNoSim() {
           <Radio
             value={"Bank"}
             className={`${method === "Bank" ? `bg-m_gray border-sky-700` : `border-m_gray`
-              } border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative`}
+              } border-2 pl-3 w-full py-[22px] rounded-xl flex flex-row relative h-[68px]`}
           >
             <div className="lg:text-base text-sm">Thanh toán qua tài khoản ngân hàng</div>
           </Radio>
         </Radio.Group>
       </div>
 
-      <div className="bg-white lg:w-2/5  w-3/4 border-m_gray border-2 rounded-lg h-fit ">
+      <div className="bg-white lg:w-[456px] w-3/4 border-m_gray border-2 rounded-lg h-fit ">
         <div className="p-5 h-full">
-          <div className="text-base font-bold mb-3">Đơn hàng (1)</div>
+          <div className="text-xl font-semibold mb-3">Đơn hàng (1)</div>
 
           <div className="flex w-full justify-between">
-            <p className="font-bold text-lg">Cước data - {simpack?.telco}</p>
+            <p className="font-bold text-xl">Cước data - {simpack?.telco}</p>
             <CloseOutlined />
           </div>
 
@@ -248,7 +248,7 @@ export default function PlanNoSim() {
 
           <button
             onClick={() => pushPathName(router, dispatch, "/plans")}
-            className="underline underline-offset-4 text-base text-sky-700"
+            className="underline underline-offset-4 text-sm text-sky-700"
           >
             Đổi gói cước
           </button>
@@ -259,7 +259,7 @@ export default function PlanNoSim() {
             suffix={
               <button
                 onClick={() => { }}
-                className="font-bold text-sm right-0 absolute h-[42px]   text-m_red bg-[#FFF4F0] w-[86px] rounded-r-md"
+                className="font-semibold text-sm right-0 absolute h-[42px] text-m_red bg-[#FFF4F0] w-[86px] rounded-r-md"
               >
                 {" "}
                 Áp dụng
@@ -289,8 +289,8 @@ export default function PlanNoSim() {
             <Checkbox className="pr-2" />
             <div className="text-base">
               {/* Bằng việc nhấn thanh toán, Quý khách đồng ý với{" "} */}
-              <span className="">
-                Tôi xác nhận thông tin đơn hàng đã chính xác và xác nhận đồng ý với <button className="text-m_red" onClick={() => { pushPathName(router, dispatch, '/resolution?id=6555ca7968709b3551d5b141') }}>Điều khoản sử dụng</button> và các Chính sách của SimTel.vn{" "}
+              <span className="text-sm">
+                Tôi xác nhận thông tin đơn hàng đã chính xác và xác nhận đồng ý với <button className="text-m_red text-sm" onClick={() => { pushPathName(router, dispatch, '/resolution?id=6555ca7968709b3551d5b141') }}>Điều khoản sử dụng</button> và các Chính sách của SimTel.vn{" "}
               </span>
             </div>
           </div>

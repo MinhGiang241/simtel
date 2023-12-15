@@ -91,8 +91,8 @@ export default function CardList() {
         <div
           className={
             page === index
-              ? `bg-m_red text-white rounded-sm`
-              : `bg-m_gray text-black border border-m_gray rounded-sm`
+              ? `bg-m_red text-white rounded-lg`
+              : `bg-m_gray text-black border border-m_gray rounded-lg`
           }
         >
           <p>{index}</p>

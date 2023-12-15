@@ -51,7 +51,7 @@ export default function Header() {
   const carts = [
     {
       label: (
-        <MLink className="text-base" link="/plans" onClick={() => { dispatch(setIsData(true)) }}>
+        <MLink className="text-base font-semibold" link="/plans" onClick={() => { dispatch(setIsData(true)) }}>
           Gói cước thoại
         </MLink>
       ),
@@ -59,7 +59,7 @@ export default function Header() {
     },
     {
       label: (
-        <MLink className="text-base" link="/plans" onClick={() => { dispatch(setIsData(false)) }}>
+        <MLink className="text-base font-semibold" link="/plans" onClick={() => { dispatch(setIsData(false)) }}>
           Gói cước data
         </MLink>
       ),
@@ -333,7 +333,7 @@ export default function Header() {
               >
                 <button onClick={(e) => e.preventDefault()}>
                   <Space className="flex justify-center items-center">
-                    <Image className="rounded-full" src={"images/none.jpg"} alt="#" width={40} height={40} />
+                    <Image className="rounded-full" src={"/images/none.jpg"} alt="#" width={40} height={40} />
                     <div className="font-semibold text-base">{user?.full_name}</div>
                     <DownOutlined className="scale-[0.8]" />
                   </Space>
