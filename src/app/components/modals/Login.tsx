@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Button } from "antd";
+import { Button, Modal } from "antd";
 import { errorToast, successToast } from "./CustomToast";
 import { FormikErrors, useFormik } from "formik";
 import MInput from "../config/MInput";
@@ -10,6 +10,8 @@ import { setUserData } from "@/GlobalRedux/Auth/authSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "@/GlobalRedux/store";
 import { useDispatch } from "react-redux";
+import { pushPathName } from "@/services/routes";
+import { useRouter } from 'next/navigation';
 
 interface Props {
   onCancel: Function;
@@ -23,7 +25,8 @@ interface FormValues {
 
 export default function Login({ onCancel, switchSignUp }: Props) {
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const validate = (values: FormValues) => {
     const errors: FormikErrors<FormValues> = {};
     if (!values.phone) {
@@ -74,6 +77,9 @@ export default function Login({ onCancel, switchSignUp }: Props) {
     },
   });
 
+  const router = useRouter()
+  const dispatch = useDispatch()
+
   return (
     <form
       className="w-full lg:px-16"
@@ -112,28 +118,7 @@ export default function Login({ onCancel, switchSignUp }: Props) {
       />
 
       <div className="flex justify-end my-3 text-m_red underline underline-offset-2">
-        {/* <button */}
-        {/*   type="button" */}
-        {/*   onClick={() => */}
-        {/*     successToast( */}
-        {/*       "Gửi mã xác nhận thành công", */}
-        {/*       "Gửi mã OTP thành công đến email của quý khách", */}
-        {/*     ) */}
-        {/*   } */}
-        {/*   className="select-none active:opacity-70" */}
-        {/* > */}
-        {/*   Lấy mã OTP */}
-        {/* </button> */}
-        <button
-          type="button"
-          onClick={() =>
-            errorToast(
-              "Gửi mã xác nhận không thành công",
-              "Gửi mã OTP không thành công đến email của quý khách",
-            )
-          }
-          className="text-sm select-none active:opacity-70"
-        >
+        <button onClick={() => { pushPathName(router, dispatch, '/sendEmail') }} className="text-sm select-none active:opacity-70">
           Quên mật khẩu
         </button>
       </div>

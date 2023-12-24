@@ -10,7 +10,6 @@ export const customerLogin = async (phone: string, password: string) => {
     formData.append("username", phone);
     formData.append("password", password);
     formData.append("audience", "guest");
-
     var response: AxiosResponse | undefined = await axios.post(loginApi, formData)
     if (response) {
       localStorage.setItem('access_token', response?.data?.access_token)
@@ -25,7 +24,6 @@ export const customerLogin = async (phone: string, password: string) => {
     }
 
   }
-
 }
 
 export const getAccountInfo = async () => {

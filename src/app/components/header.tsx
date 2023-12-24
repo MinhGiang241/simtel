@@ -143,9 +143,15 @@ export default function Header() {
   const user_list = [
     {
       label: (<>
-        <button onClick={() => { pushPathName(router, dispatch, '/history') }}>Lịch sử đơn hàng</button>
+        <button onClick={() => { pushPathName(router, dispatch, '/accountInformation') }}>Thông tin tài khoản</button>
       </>),
       key: '1',
+    },
+    {
+      label: (<>
+        <button onClick={() => { pushPathName(router, dispatch, '/history') }}>Lịch sử đơn hàng</button>
+      </>),
+      key: '2',
     },
     {
       label: (<>
@@ -161,7 +167,7 @@ export default function Header() {
           <MenuOutlined />
         </button> */}
       </>),
-      key: '2',
+      key: '3',
     },
   ];
 
