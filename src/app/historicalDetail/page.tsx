@@ -34,7 +34,7 @@ export default function Page() {
                     <div className='border-b flex'>
                         <img className='pr-4 pb-2' width={"132px"} height={"110px"} src={`${uploadUrl}${detail?.image}`} alt="#" />
                         <div className='flex flex-col'>
-                            <div className='font-semibold text-xl'>{detail?.telco} 10.000</div>
+                            <div className='font-semibold text-xl'>{detail.telco.charAt(0).toUpperCase() + detail.telco.slice(1)} <FormattedNumber value={(detail?.prod_total_amount || 0)} style='currency' currency='VND' /></div>
                             <div className='font-thin'>Nạp thẻ trực tiếp</div>
                             <div className='text-m_red'>Đã hoàn thành</div>
                         </div>
