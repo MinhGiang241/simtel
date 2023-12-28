@@ -44,6 +44,20 @@ mutation {
 
 }
 
+export const changeInfo = async (_id: any, email: any, data: any) => {
+  var query = `
+    mutation ($_id:String,$email:String,$data:Dictionary){
+      response: customer_handle_change_info (_id: $_id,email: $email,data: $data ) {
+          code
+          message
+          data
+      }
+  }
+  `
+  var variables = { data, _id, email }
+  return await CallApi({ query, variables })
+}
+
 export const createAccount = async (data: Customer) => {
   var query = `
 mutation ($data:Dictionary){

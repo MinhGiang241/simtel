@@ -44,7 +44,7 @@ export default function Page() {
                                 {
                                     x?.shopingcarditem?.map((e: any, key1: any) => (
                                         <div key={key1}>
-                                            <div>{e.telco} {e.value}</div>
+                                            <div> {e.telco.charAt(0).toUpperCase() + e.telco.slice(1)} <FormattedNumber value={e.value ?? 0} style='currency' currency='VND' /></div>
                                             <div>Số điện thoại: {e.phoneNumber}</div>
                                         </div>
                                     ))

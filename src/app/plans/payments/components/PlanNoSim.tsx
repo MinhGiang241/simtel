@@ -25,6 +25,8 @@ export default function PlanNoSim() {
   const user = useSelector((state: RootState) => state.auth.user);
   const phone = useSelector((state: RootState) => state.simPack.phone);
   const simpack = useSelector((state: RootState) => state.simPack.selected);
+  // console.log("simpack", simpack);
+
   const searchParams = useSearchParams();
   const orderId = searchParams.get("order");
 

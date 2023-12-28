@@ -12,10 +12,13 @@ import { RootState } from "@/GlobalRedux/store";
 import { useDispatch } from "react-redux";
 import { pushPathName } from "@/services/routes";
 import { useRouter } from 'next/navigation';
+import SendMail from "./sendMail";
+import { send_mail } from "@/services/api/sendMail";
 
 interface Props {
   onCancel: Function;
   switchSignUp: Function;
+  setIsModalOpenMail: Function;
 }
 
 interface FormValues {
@@ -23,10 +26,18 @@ interface FormValues {
   password: string;
 }
 
-export default function Login({ onCancel, switchSignUp }: Props) {
+export default function Login({ onCancel, switchSignUp, setIsModalOpenMail }: Props) {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // const [isModalOpenMail, setIsModalOpenMail] = useState(false);
+  const [valueEmail, setvalueEmail] = useState<string>()
+  var token = localStorage.getItem("access_token");
+  // const handleCancel = () => {
+  //   setIsModalOpenMail(false);
+  // };
+
   const validate = (values: FormValues) => {
     const errors: FormikErrors<FormValues> = {};
     if (!values.phone) {
@@ -118,8 +129,17 @@ export default function Login({ onCancel, switchSignUp }: Props) {
       />
 
       <div className="flex justify-end my-3 text-m_red underline underline-offset-2">
-        <button onClick={() => { pushPathName(router, dispatch, '/sendEmail') }} className="text-sm select-none active:opacity-70">
+        <button onClick={() => {
+          onCancel()
+          setIsModalOpenMail(true)
+        }} className="text-sm select-none active:opacity-70">
           Quên mật khẩu
+          {/* <Modal width={721} title="Email" open={isModalOpenMail} footer={null} onCancel={handleCancel}>
+            <div className="flex flex-col items-center">
+              <input onChange={(e) => { setvalueEmail(e.target.value) }} className="w-[593px] h-[56px] border px-3 rounded-lg" type="text" placeholder="Nhập email" />
+              <button onClick={() => { send_mail(valueEmail, token); handleCancel() }} className="w-[165px] h-[48px] bg-m_red rounded-lg text-white mt-4">Tiếp tục</button>
+            </div>
+          </Modal> */}
         </button>
       </div>
 

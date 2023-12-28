@@ -27,9 +27,9 @@ export const userSlice = createSlice({
 
       return {
         ...state,
-        user: action.payload.user,
-        accessToken: action.payload.accessToken,
-        expiredAt: action.payload.expiredAt,
+        user: action.payload.user ?? state.user,
+        accessToken: action.payload.accessToken ?? state.accessToken,
+        expiredAt: action.payload.expiredAt ?? state.expiredAt,
         authState: AuthState.LOGGED,
       }
 

@@ -29,6 +29,7 @@ import { getSimFunction } from "@/services/sim/simServices";
 import { setSimTelco } from "@/GlobalRedux/Sim/SimSlice";
 import { User } from "@/interfaces/data";
 import Image from 'next/image'
+import { send_mail } from "@/services/api/sendMail";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -39,6 +40,18 @@ export default function Header() {
   const isAuth = useSelector((state: RootState) => state.auth.authState);
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const [isModalOpenMail, setIsModalOpenMail] = useState(false);
+  const [valueEmail, setvalueEmail] = useState<string>()
+  // const [isModalOpenChangePassword, setIsModalOpenChangePassword] = useState(false);
+  // const [isModalChangePassword, setIsModalChangePassword] = useState(false)
+  const handleCancel = () => {
+    setIsModalOpenMail(false);
+  };
+
+  // const handleCancelChangePassword = () => {
+  //   setIsModalChangePassword(false)
+  // }
 
   const [hidden, setHidden] = useState(false);
   const showDrawer = () => {
@@ -211,13 +224,13 @@ export default function Header() {
         </div>
       ),
     },
-    // {
-    //   key: "3",
-    //   label: "Nạp thẻ",
-    //   children: <button onClick={() => {
-    //     pushPathName(router, dispatch, "/cards");
-    //   }}>Nạp thẻ</button>,
-    // },
+    {
+      key: "3",
+      label: "Nạp thẻ",
+      children: <button onClick={() => {
+        pushPathName(router, dispatch, "/cards");
+      }}>Nạp thẻ</button>,
+    },
     {
       key: "4",
       label: "Khuyến mại",
@@ -287,7 +300,7 @@ export default function Header() {
               </button>
             </Dropdown>
           </div>
-          {/* <div className="w-[143px] h-[40px] flex justify-center items-center text-center">
+          <div className="w-[143px] h-[40px] flex justify-center items-center text-center">
             <button
               className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-semibold ${pathname === "/cards"
                 ? " text-m_red underline-offset-4 underline"
@@ -299,7 +312,7 @@ export default function Header() {
             >
               Nạp thẻ
             </button>
-          </div> */}
+          </div>
           <div className="w-[143px] h-[40px] flex justify-center items-center text-center">
             <button
               className={`w-[99px] text-base h-[24px] active:opacity-70 z-50 select-none font-semibold ${pathname === "/blog"
@@ -506,6 +519,7 @@ export default function Header() {
           <Login
             switchSignUp={() => setIslogin(false)}
             onCancel={() => setOpen(false)}
+            setIsModalOpenMail={setIsModalOpenMail}
           />
         ) : (
           <SignUp
@@ -513,6 +527,18 @@ export default function Header() {
             switchLogin={() => setIslogin(true)}
           />
         )}
+      </Modal>
+      <Modal
+        width={721}
+        title="Email"
+        open={isModalOpenMail}
+        footer={null}
+        onCancel={handleCancel}
+      >
+        <div className="flex flex-col items-center">
+          <input onChange={(e) => { setvalueEmail(e.target.value) }} className="w-[593px] h-[56px] border px-3 rounded-lg" type="text" placeholder="Nhập email" />
+          <button onClick={() => { send_mail(valueEmail); handleCancel() }} className="w-[165px] h-[48px] bg-m_red rounded-lg text-white mt-4">Tiếp tục</button>
+        </div>
       </Modal>
     </div>
   );

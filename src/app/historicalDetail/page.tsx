@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { get_detail_history } from '@/services/api/detailHistory';
 import { FormattedNumber } from 'react-intl';
 import Pay from '@/app/components/logo/pay.svg'
+import { uploadUrl } from '@/constants/apiConstant';
 
 export default function Page() {
     const [detail, setDetail] = useState<any>()
@@ -16,7 +17,7 @@ export default function Page() {
     const id = searchParams.get('id')
     useEffect(() => {
         get_detail_history(id).then((v) => {
-            // console.log("detailHistory", v);
+            console.log("detailHistory", v);
             setDetail(v)
         })
     }, [])
@@ -31,7 +32,7 @@ export default function Page() {
                 </div>
                 <div className='w-full bg-slate-50 rounded-lg lg:px-72 px-5 p-5'>
                     <div className='border-b flex'>
-                        <img width={"132px"} height={"110px"} src="" alt="#" />
+                        <img className='pr-4 pb-2' width={"132px"} height={"110px"} src={`${uploadUrl}${detail?.image}`} alt="#" />
                         <div className='flex flex-col'>
                             <div className='font-semibold text-xl'>{detail?.telco} 10.000</div>
                             <div className='font-thin'>Nạp thẻ trực tiếp</div>

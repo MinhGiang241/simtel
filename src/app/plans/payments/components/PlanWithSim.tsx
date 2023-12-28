@@ -285,6 +285,7 @@ export default function PlanWithSim() {
   const getSim = async () => {
     getRandomSimBySimpack(telco, simpack, number?.msid).then((v) => {
       if (v) {
+        // console.log(v);
         setNumber(v);
       }
     });
