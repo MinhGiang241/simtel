@@ -27,7 +27,7 @@ export default function FilterPlan() {
   const type = useSelector((state: RootState) => state.simPack.type);
   const sortBy = useSelector((state: RootState) => state.simPack.sortBy);
   const telcos = useSelector((state: RootState) => state.config.telcos);
-  const options = telcos.map((i) => ({ value: i.name, label: i.name }));
+  const options = telcos.map((i) => ({ value: i.telco, label: i.name }));
 
   const onChangeTelco = (v: any) => {
     dispatch(setPage(1));

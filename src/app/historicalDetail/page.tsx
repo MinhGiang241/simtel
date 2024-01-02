@@ -17,7 +17,7 @@ export default function Page() {
     const id = searchParams.get('id')
     useEffect(() => {
         get_detail_history(id).then((v) => {
-            console.log("detailHistory", v);
+            // console.log("detailHistory", v);
             setDetail(v)
         })
     }, [])

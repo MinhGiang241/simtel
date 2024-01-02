@@ -103,7 +103,7 @@ export default function FilterSim() {
             value={telco}
           >
             {...telcos.map((v) => (
-              <Option value={v.name} key={v._id} label={v.name}>
+              <Option value={v.telco} key={v._id} label={v.name}>
                 <Space>{v.name}</Space>
               </Option>
             ))}

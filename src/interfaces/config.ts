@@ -5,6 +5,7 @@ export interface ActiveTelco {
   isActive?: boolean;
   name?: string;
   schema?: string;
+  telco?: string;
 }
 
 export interface Config {
