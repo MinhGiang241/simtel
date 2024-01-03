@@ -38,9 +38,9 @@ export default function PlanDetailModal({
         <div className="flex justify-center mb-8 mt-1">
           <h4 className="text-2xl font-bold">Chi tiết gói cước</h4>
         </div>
-        <div className="flex justify-center">
-          <p className="text-base font-bold">
-            {simpack?.telco?.toUpperCase()}{" "}
+        <div className="flex justify-center items-center">
+          <p className="text-xl font-bold">
+            {simpack?.code}{" "}
           </p>
           <div className="h-5 w-0.5 bg-gray-300 mx-2 text-base" />
           <p className="text-base font-normal">30 ngày</p>
@@ -53,6 +53,9 @@ export default function PlanDetailModal({
           />
         </div>
 
+        <div className="flex justify-center text-base font-bold">
+          {simpack?.telco?.toUpperCase()}
+        </div>
         <Divider />
         <div className="mt-7 mb-7">
           {(simpack?.description ?? "").split("\n").map(

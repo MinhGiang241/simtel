@@ -97,7 +97,7 @@ export default function GridPlan() {
         </div>
       ) : (
         <>
-          <div className="flex flex-wrap mt-4 ">
+          <div className="flex-wrap mt-4 flex justify-center">
             {(simPacKList).map((item, index) => (
               <PlanCard key={index} simpack={item} />
             ))}

@@ -73,8 +73,9 @@ export default function FilterSim() {
   };
 
   const handleSelectBranch = (value: any) => {
-    dispatch(setSimTelco(value));
-    getSimFunction(dispatch, page, type, value, true, search, not, price);
+    var telcoName = telcos.find((x) => { return x.name === value })?.telco;
+    dispatch(setSimTelco(telcoName));
+    getSimFunction(dispatch, page, type, telcoName, true, search, not, price);
   };
 
   const handleSelectPrice = (value: any) => {
@@ -85,7 +86,9 @@ export default function FilterSim() {
   };
 
 
-  useEffect(() => { }, [telco]);
+  useEffect(() => {
+    // console.log(telco);
+  }, [telco]);
 
   return (
     <>
@@ -100,10 +103,10 @@ export default function FilterSim() {
             defaultValue={telco}
             onChange={handleSelectBranch}
             optionLabelProp="branch"
-            value={telco}
+          // value={telco}
           >
             {...telcos.map((v) => (
-              <Option value={v.telco} key={v._id} label={v.name}>
+              <Option value={v.name} key={v._id} label={v.name}>
                 <Space>{v.name}</Space>
               </Option>
             ))}

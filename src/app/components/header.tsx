@@ -30,6 +30,7 @@ import { setSimTelco } from "@/GlobalRedux/Sim/SimSlice";
 import { User } from "@/interfaces/data";
 import Image from 'next/image'
 import { send_mail } from "@/services/api/sendMail";
+import toast from "react-hot-toast";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -537,7 +538,16 @@ export default function Header() {
       >
         <div className="flex flex-col items-center">
           <input onChange={(e) => { setvalueEmail(e.target.value) }} className="w-[593px] h-[56px] border px-3 rounded-lg" type="text" placeholder="Nhập email" />
-          <button onClick={() => { send_mail(valueEmail); handleCancel() }} className="w-[165px] h-[48px] bg-m_red rounded-lg text-white mt-4">Tiếp tục</button>
+          <button onClick={async () => {
+            try {
+              await send_mail(valueEmail);
+              handleCancel()
+              toast.success("Gửi email thành công")
+            } catch (error) {
+              toast.error("Email không tồn tại trong hệ thống")
+            }
+          }}
+            className="w-[165px] h-[48px] bg-m_red rounded-lg text-white mt-4">Tiếp tục</button>
         </div>
       </Modal>
     </div>

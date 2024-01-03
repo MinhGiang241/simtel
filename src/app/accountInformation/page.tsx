@@ -49,13 +49,13 @@ export default function Page() {
 
     // const validate = (values: FormValues) => {
     //     const errors: FormikErrors<FormValues> = {};
-    //     if (!values.name) {
-    //         errors.name = "Không được để trống trường bắt buộc";
+    //     if (!values.full_name) {
+    //         errors.full_name = "Không được để trống trường bắt buộc";
     //     }
-    //     if (!values.mail) {
-    //         errors.mail = "Không được để trống trường bắt buộc";
-    //     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.mail)) {
-    //         errors.mail = "Email không đúng định dạng";
+    //     if (!values.email) {
+    //         errors.email = "Không được để trống trường bắt buộc";
+    //     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    //         errors.email = "Email không đúng định dạng";
     //     }
     //     return errors;
     // };
@@ -70,10 +70,8 @@ export default function Page() {
             // console.log({ values });
             // alert(JSON.stringify(values));
             try {
-
-                var info = await changeInfo(user?._id, user?.email, { ...user, full_name: values.full_name, email: values.email });
-                console.log("info", info);
-
+                var info = await changeInfo(user?._id, { ...user, full_name: values.full_name, email: values.email });
+                // console.log("info", info);
                 dispatch(
                     setUserData({
                         user: info
@@ -101,7 +99,7 @@ export default function Page() {
             }}>
                 <div className='border rounded-md mt-10 p-3'>
                     <div className='flex justify-between mb-2'>
-                        <button onClick={() => { pushPathName(router, dispatch, '/') }}>{"<"} Thông tin tài khoản</button>
+                        <button type='button' onClick={() => { pushPathName(router, dispatch, '/') }}>{"<"} Thông tin tài khoản</button>
                         {isEditing ? (
                             <Button className='text-m_blue flex items-center' htmlType="submit">
                                 <EditOutlined className='pr-2' />
@@ -115,12 +113,12 @@ export default function Page() {
                         )}
                     </div>
                     <div className='bg-slate-50 px-60'>
-                        <div className='flex justify-between border-b p-10'>
+                        <div className='flex justify-between items-center border-b p-10'>
                             <div>Họ và tên</div>
                             {isEditing ? (
                                 <input
                                     // error={formik.errors.name}
-                                    className='w-60 border'
+                                    className='w-60 border rounded-lg p-2 focus:outline-none focus:ring focus:border-blue-500 placeholder-opacity-50 placeholder-blue-400 transition duration-300'
                                     type="text"
                                     name="full_name"
                                     placeholder={user?.full_name}
@@ -134,11 +132,11 @@ export default function Page() {
                             <div>Số điện thoại</div>
                             <div>{user?.tel}</div>
                         </div>
-                        <div className='flex justify-between border-b p-10'>
+                        <div className='flex justify-between border-b p-10 items-center'>
                             <div>Email</div>
                             {isEditing ? (
                                 <input
-                                    className='w-80 border'
+                                    className='w-80 border rounded-lg p-2 focus:outline-none focus:ring focus:border-blue-500 placeholder-opacity-50 placeholder-blue-400 transition duration-300'
                                     type="text"
                                     name="email"
                                     placeholder={user?.email}
